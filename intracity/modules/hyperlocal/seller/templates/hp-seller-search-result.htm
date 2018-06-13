@@ -1,0 +1,938 @@
+﻿﻿<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hyperlocal </title>
+      <!--<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>-->
+      <style type="text/css">
+         .ven_det_full
+         {
+           width: 100%;
+           float: left;
+         }
+         .ven_det_fulls
+         {
+            width: 100%;
+            float: left;
+         }
+         .ven_det_fulls input
+         {
+           border: none;
+           float: right;
+         }
+         .seller_btn
+         {
+           width:100%;
+           float: left;
+         }
+         .seller_b
+         {
+          width:600px;
+          float: right;
+         }
+         .seller_b input
+         {
+            float: right;
+            margin-right: 9px;
+         }
+         .left_f input
+         {
+             float: right;
+         }
+         .book_btn{padding: 8px 10px;}
+      </style>
+   </head>
+   <body>
+      <div class="wrapper page1">
+      <div class="container-fluid">
+      <div class="row">
+      <div class="intracity_page padding_main">
+      <div class="right_section">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+      <div class="right_serch_p">
+         <div class="right_search_bar">
+            <ul class="search_bar_tab">
+               <li><a href="#">Hyperlocal</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+               <li><a href="#">Seller</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+               <li><a href="#hp-seller-search">Search</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+               <li><a href="#hp-seller-search-results" class="active_c">Results</a></li>
+            </ul>
+         </div>
+         <div class="intra_city_list">
+            <div class="intra_city_list">
+               <div class="loc_det">
+                  <div class="col-lg-9">
+                  <div class="row">
+                     <ul class="loc_list">
+                        <li ng-if="sellersearch.city.city_name">
+                           {{ sellersearch.city.city_name}}
+                        </li>
+                        <li ng-if="sellersearch.from_location.locality_name">
+                           {{ sellersearch.from_location.locality_name}}
+                        </li>
+                        <li ng-if="sellersearch.to_location.locality_name"> To &nbsp; {{ sellersearch.to_location.locality_name }}</li>
+                        <li>
+                           {{ sellersearch.date | date : "dd/MM/y" }}
+                        </li>
+                     </ul>
+                     </div>
+                  </div>
+                  <div class="col-lg-3">
+                     <div class="right_setg space_top">
+                        <div class="cell-1">
+                           <ul class="list-inline pull-right m-bottom-0">
+                              <li>
+                                 <a class="search-modify Modify-btn modify_border" data-toggle="modal" ng-click="modifySearch(sellersearch)"><span>Modify</span></a>
+                              </li>
+                              <li>
+                                 <div class="search-modify"><a href="#hp-seller-rate-card" style="text-decoration:none;"><span>Post</span></a></div>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="loc_det">
+                  <ul class="filter_s">
+                     <li>SERVICE TYPE</li>
+                     <li>CATEGORY TYPE</li>
+                     <li>RATING</li>
+                     <li>BUYER</li>
+                     <li>DATE</li>
+                  </ul>
+                  <span class="rilters_right" id="filters_click"><i class="fa fa-bars"></i> Filters </span>
+               </div>
+               <div ng-if="filterdata!=''" class="loc_det ">
+                  <ul class="partners">
+                     <li ng-click="removefilter(key,value)" ng-repeat="(key,value) in filterdata">
+                        {{value.name||value.full_name||value.value}}
+                     </li>
+                  </ul>
+                  <span class="rilters_right" ng-click="clearall()">CLEAR ALL</span>
+               </div>
+               <div class="white_bg overflow" id="filters_show" style="display: none;">
+                  <div class="fillter_div">                     
+                     <div class="scroll_div">
+                        <div class="col-lg-12">
+                           <div class="select_form_intra">
+                              <div class="text_mode">SERVICE TYPE</div>
+                           </div>
+                           <div class="input_right_box_left">
+                              <div class="admin_input margin_t" ng-repeat="value in servicetype | filter:data.service_type">
+                                 <input type="checkbox" class="check_box" ng-click="selectNewServiceType(value.id,value)" id="vl{{value.id}}">
+                                 <label for="vl{{value.id}}">{{ value.value }}</label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="scroll_div">
+                        <div class="col-lg-12">
+                           <div class="padding_15">
+                              <div class="text_mode">CATEGORY TYPE</div>
+                           </div>
+                           <div class="input_right_box_left">
+                              <div class="admin_input margin_t" ng-repeat="value in categories.data">
+                                 <input type="checkbox" ng-click="selectNewCategoryType(value.id,value)" id="v2{{value.id}}" class="check_box check_box_1">
+                                 <label for="v2{{value.id}}">{{value.name}}</label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="scroll_div">
+                        <div class="col-lg-12">
+                           <div class="padding_15">
+                              <div class="text_mode">Rating</div>
+                           </div>
+                           <div class="input_right_box_left">
+                              <div class="admin_input margin_t">
+                                 <input id="Partners" type="checkbox" class="check_box check_box_1">
+                                 <label for="Partners">Top Sellers(Order)</label>
+                              </div>
+                              <div class="admin_input margin_t">
+                                 <input id="NairTrans" type="checkbox" class="check_box check_box_1">
+                                 <label for="NairTrans">Top Sellers(Rated)</label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="scroll_div">
+                        <div class="col-lg-12">
+                           <div class="padding_15">
+                              <div class="text_mode">BUYER</div>
+                           </div>
+                           <div class="input_right_box_left buyerscroll">
+                              <div class="admin_input margin_t" ng-repeat="value in users">
+                                 <input type="checkbox" class="check_box" ng-click="selectNewBuyerType(value.id,value)" id="vl{{value.id}}">
+                                 <label for="vl{{value.id}}">{{ value.full_name }}</label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="scroll_div">
+                        <div class="col-lg-12">
+                           <div class="padding_15">
+                              <div class="text_mode">Date</div>
+                           </div>
+                           <div class="input_right_box_left">
+                              <div class="admin_input margin_t">
+                                 <input type="text" id="from_calendar" required="" ng-model="data.dispatchdate" fromcalendar class="date_p input_ani"
+                                    required="">
+                                    <lable class="lbl_text2 padg_l">Dispatch Date</lable>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="search_results_heading"></div>
+               <div class="hyperlocal_gray">
+                  <div class="col-lg-2 col-md-2 col-sm-5 col-xs-12">
+                     <div class="vendor_name_heading">Buyer Name</div>
+                  </div>
+                  <div class="col-lg-3 col-md-2 col-sm-2 col-xs-12">
+                     <div class="vendor_name_heading">Title</div>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                     <div class="vendor_name_heading">Dispatch Date</div>
+                  </div>
+                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                     <div class="vendor_name_heading">Pricing</div>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                     <div class="vendor_name_heading"></div>
+                  </div>
+               </div>
+               <div class="white_bg" ng-if="!(searchResult | filter:NewCategoryTypeFilter | filter:NewServiceTypeFilter |  filter:{last_date:data.dispatchdate} | filter:NewBuyerFilter).length" style="text-align:center">
+                  <h3 class="text-center">Data not available</h3>
+                </div>
+                <div class="data_box_100 border-bottom-p" ng-repeat="value in searchResult | filter:NewCategoryTypeFilter | filter:NewServiceTypeFilter |  filter:{last_date:data.dispatchdate} | filter:NewBuyerFilter">
+                  <div class="data_contain_100">
+               <!--  {{value.post_result.lead_type}}  -->
+                     <div class="col-lg-2 col-md-2 col-sm-5 col-xs-12">
+                        <div class="vendor_img_box">
+                           <div class="vendor_detail ven_det_full">{{ !empty(value.post_result.post_by.username) && value.post_result.post_by.username
+                              || '' }}
+                           </div>
+                        </div>
+                     </div>
+                      <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12">
+                        <div class="vendor_date">{{ !empty(value.post_result.title) && value.post_result.title || 'N/A' }}
+                        </div>
+                     </div>
+                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="vendor_date">{{ value.post_result.last_date === '0000-00-00' && 'N/A' || value.post_result.last_date | date:"dd/MM/yyyy" }}
+                        </div>
+                     </div>
+                     <!--<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" ng-if="!empty(value.depart_date)">
+                        <div class="vendor_date">{{value.depart_date}}</div>
+                        </div>-->
+                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-12" ng-if="value.price_type == 1">
+                        Negotiable
+                     </div>
+                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-12" ng-if="value.price_type == 2">
+                        Fixed
+                     </div>
+                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-12" ng-if="value.price_type == NULL">
+                        N/A
+                     </div>
+                     <!--<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <div class="vendor_date">{{ value.price_type == 1 && 'Competitive' || 'Firm' }}</div>
+                        </div>-->
+                     <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12">
+                        <!--{{value.post_result.last_date|checkDate}}-->
+                        <div class="book_box">
+                          <a href="javascript:void(0)" class="book_btn seller_btn_submit-new show_hide" data-id="{{$index+1}}" ng-show="value.quote==null && (value.post_result.last_date+''+value.post_result.last_time|checkDate)">Bid Elapsed</a>
+                          <a href="javascript:void(0)" class="book_btn seller_btn_submit-new show_hide" data-id="{{$index+1}}" ng-show="value.quote==null && (value.post_result.last_date+''+value.post_result.last_time|checkDate)==false">Quote</a>
+                          <a href="javascript:void(0)" class="book_btn seller_btn_submit-new show_hide" data-id="{{$index+1}}" ng-show="value.quote.status==1 ">Initial Quote Submitted</a>
+                          <a href="javascript:void(0)" class="book_btn seller_btn_submit-new show_hide" data-id="{{$index+1}}" ng-show="value.quote.status==2">Counter Offer Received</a>
+                          <a href="javascript:void(0)" class="book_btn seller_btn_submit-new show_hide" data-id="{{$index+1}}" ng-show="value.quote.status==3">Counter Offer Submitted</a>
+                          <a href="javascript:void(0)" class="book_btn seller_btn_submit-new show_hide" data-id="{{$index+1}}" ng-show="value.quote.status==5">Quote Declined</a>
+                          <a href="javascript:void(0)" class="book_btn seller_btn_submit-new show_hide" data-id="{{$index+1}}" ng-show="value.quote.status==6">Contract Canceled</a>
+                          <a href="javascript:void(0)" class="book_btn seller_btn_submit-new show_hide" data-id="{{$index+1}}" ng-show="value.quote.status==7">Accept Contract</a>
+                          <a href="javascript:void(0)" class="book_btn seller_btn_submit-new show_hide" data-id="{{$index+1}}" ng-show="value.quote.status==4"> Contract Accepted</a>
+                          
+                        </div>
+                     </div>
+                  </div>
+                  <div class="Milestone_100">
+                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="M_tone_100">
+                        </div>
+                     </div>
+                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="milestone_right">
+                           <a class="detail_b11 show_hide" data-id="{{$index+1}}"><i class="fa fa-plus" aria-hidden="true"></i> Details</a>
+                           <a href="javascript:void(0)" data-toggle="modal" ng-click="sendMessageModal(value)" data-target="#messageModallll" class="pull-right msg-icon">
+                              <i class="fa fa-envelope-o"></i>
+                            </a>
+                        </div>
+                     </div>
+                     <div class="subresult" id="open_show{{$index+1}}">
+                     <div class="white_bg1 detail_bg border-top-p">
+                     <div class="white_bg">
+                     <div class="col-lg-12">
+                     <div class="hyder_box">
+                     <span><i class="fa fa-map-marker"></i></span>
+                     <span class="ng-binding ng-scope"> {{value.city_name}} </span>
+                     <span class="ng-binding ng-scope"> {{value.from_localities_res.locality_name}} </span>To &nbsp;<span class="ng-binding ng-scope"> {{value.to_localities_res.locality_name}} </span>
+                     </div>
+                     </div>
+                     </div>
+                     <div class="detail_vich">
+                     <div class="col-md-3">
+                     <span class="data-head">Product Category </span>
+
+                     <span class="data-value ng-binding" ng-if="value.post_result.category=='1'">Ecommerce</span>
+                     <span class="data-value ng-binding" ng-if="value.post_result.category=='2'">Food</span>
+                     <span class="data-value ng-binding" ng-if="value.post_result.category=='3'">Documents</span>
+                     <span class="data-value ng-binding" ng-if="value.post_result.category=='4'">Grocery</span>
+                     </div>
+                     <div class="col-md-3">
+                     <span class="data-head">SERVICE TYPE </span>
+                     <span class="data-value ng-binding" ng-if="value.post_result.servicetype=='1'">Express</span>
+                     <span class="data-value ng-binding" ng-if="value.post_result.servicetype=='2'">Fast</span>
+                     <span class="data-value ng-binding" ng-if="value.post_result.servicetype=='3'">Same Day</span>
+                     </div>
+                     <div class="col-md-3">
+                     <span class="data-head">NO OF PARCEL</span>
+                     <span class="data-value ng-binding">{{ !empty(value.max_no_parcel) && value.max_no_parcel || 'NOT AVAILABLE' }}</span>
+                     </div>
+                     <div class="col-md-3">
+                     <span class="data-head">Initial Quote Price</span>
+                     <span class="data-value ng-binding">
+                       <span ng-if="value.quote.initial_quote_price">
+                        Rs </span>
+                        {{ !empty(value.quote.initial_quote_price) && value.quote.initial_quote_price || 'NOT AVAILABLE' }}  <span ng-if="value.quote.initial_quote_price">
+                        /-</span></span>
+                     </div>
+                     <div class="col-md-2">
+                     <span class="data-head">WEIGHT (In KG)</span>
+                     <span class="data-value ng-binding">{{ !empty(value.weight) && value.weight || 'NOT AVAILABLE' }}</span>
+                     </div>
+                     <div class="detail_vich">
+                     <div class="col-md-3">
+                     <span class="data-head">LAST DATE FOR QUOTE</span>
+                     <span class="data-value ng-binding">{{ !empty(value.post_result.last_date) && value.post_result.last_date | date:"dd/MM/yyyy" || 'Not Available' }} </span>
+                     </div>
+                     <div class="col-md-3">
+                     <span class="data-head">LAST TIME FOR QUOTE</span>
+                     <span class="data-value ng-binding">{{ !empty(value.post_result.last_time) && value.post_result.last_time || 'Not Available' }}</span>
+                     </div>
+                     <div class="col-md-3">
+                     <span class="data-head">PRICE TYPE </span>
+                     <span class="data-value ng-scope" ng-if="value.price_type == '1'">Negotiable</span>
+                     <span class="data-value ng-scope" ng-if="value.price_type == '2'">Fixed</span>
+                     </div>
+                     <div class="col-md-3">
+                        <span class="data-head">Price</span>
+                        <span class="data-value ng-scope">Rs {{ !empty(value.firm_price) && value.firm_price || 'Not Available' }} /-</span>
+                     </div>
+                     </div>
+                     <!-- <div class="white_bg" style="border-bottom: 4px solid #eee;">
+                     </div> -->
+                     <div class="white_bg" style="border-bottom: 2px solid #eee;" ng-show="value.quote!=null && (value.post_result.last_date|checkDate)==false && value.quote.status >= 2 && value.post_result.lead_type == 1">
+                        <div class="hyperlocal_gray">
+                           <div class="col-lg-2 col-md-3 col-sm-5 col-xs-12 ">
+                              <div class="vendor_name_heading">FROM</div>
+                           </div>
+                            
+                           <div class="col-lg-2 col-md-1 col-sm-1 col-xs-12 npl">
+                              <div class="vendor_name_heading">Service</div>
+                           </div>
+                           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                              <div class="vendor_name_heading">Category</div>
+                           </div>
+                           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                              <div class="vendor_name_heading">QUANTITY</div>
+                           </div>
+                           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                              <div class="vendor_name_heading">QUOTE</div>
+                           </div>
+                        </div>
+                           <div class="data_contain_100">
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{value.city_name}}
+                                    </div>
+                                 </div>
+                              </div>
+                              
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">
+                                  {{value.post_result.servicetype|getobjectvalue:servicetype}}     
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">
+                                 {{value.post_result.category|getName:categories.data}}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{value.max_no_parcel}} (Submitted)
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{value.quote.initial_quote_price}}
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="white_bg">
+                              <span class="data-head"><h3>Buyer Counter Offer Details </h3></span>
+                              <div class="data_contain_100">
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{value.city_name}}
+                                    </div>
+                                 </div>
+                              </div>
+                              
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{value.post_result.servicetype|getobjectvalue:servicetype}} 
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full"> {{value.post_result.category|getName:categories.data}}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{value.quote.buyer_quote_quality}} (Submitted)
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-2 col-md-2 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{value.quote.buyer_quote_price}}
+                                    </div>
+                                 </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2">
+                                 <input id="Submit1" type="submit" ng-show="value.quote.status == 2 && value.quote.status != 5" ng-click="sellerQuoteAction($index,'ACCEPTED_QUOTE')" value="Accept" class="book_btn no-border pull-right">
+                                 <input id="Submit1" type="submit" ng-show="value.quote.status==4" value="Accepted" class="book_btn no-border pull-right">
+                                </div>
+                           </div>
+                           <div class="white_bg">
+                              <span class="data-head"><h3>SELLER FINAL QUOTE DETAILS.</h3></span>
+                              <div class="data_contain_100">
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                <input ng-show="value.quote.status <= 2" type="checkbox" ng-model="value.isChecked" ng-click="isChecked($index)" id="enablefinalquote" />
+                                <span class="lbl padding-8"> {{value.city_name}} </span>
+                                 <input type="hidden" name="quote_id" id="quote_id" value="26">
+                              </div>
+                              
+                              <div class="col-lg-2 col-md-2 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{value.post_result.servicetype|getobjectvalue:servicetype}} 
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-2 col-md-2 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{value.post_result.category|getName:categories.data}}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-2 col-md-2 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{value.quote.buyer_quote_quality}} (Submitted)
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-4 col-md-4 col-xs-12">
+                                  <div class="vendor_img_box left_f" >
+                                      <div class="vendor_detail ven_det_full" ng-init="value.isDisable=true"> 
+                                      <input class="ng-pristine ng-untouched ng-invalid ng-invalid-required" ng-show="value.quote.status == 2" maxlength="7" ng-model="value.quote.sellerFinalQuotePrice"  name="" type="text"  ng-disabled="value.isDisable">
+                                       <span ng-show="value.quote.status > 2"> {{ value.quote.seller_quote_price }} </span>
+                                      </div>
+                                  </div>
+                                 
+                              </div>
+                              <div class="seller_btn">
+                                  <div class="seller_b">
+                                    <input type="button" class="book_btn no-border marg_btn" ng-show="value.quote.status != 5 && value.quote.status != 4" value="Decline" ng-click="sellerQuoteAction($index,'DENIED_QUOTE')">
+
+                                    <input  class="book_btn no-border marg_btn" ng-show="value.quote.status <= 2" type="button" value="submit" ng-click="submitFinalQuotation($index,'SELLER_FINAL_QUOTE')">
+                                    
+                                  </div>
+                              </div>
+                           </div>
+                           </div>
+                        
+
+                     </div>
+
+                     </div>
+                     <div ng-show="value.quote.status >= 4">
+                     <div class="hyperlocal_gray" >
+                           <div class="col-lg-2 col-md-3 col-sm-5 col-xs-12 ">
+                              <div class="vendor_name_heading">FROM</div>
+                           </div>
+                            
+                           <div class="col-lg-2 col-md-1 col-sm-1 col-xs-12 npl">
+                              <div class="vendor_name_heading">Service</div>
+                           </div>
+                           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                              <div class="vendor_name_heading">Category</div>
+                           </div>
+                           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                              <div class="vendor_name_heading">QUANTITY</div>
+                           </div>
+                           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                              <div class="vendor_name_heading">QUOTE</div>
+                           </div>
+                            <div ng-show="value.quote.status >= 4" class="col-lg-1 col-md-1 col-sm-1 col-xs-12 npl">
+                              <div class="vendor_name_heading">Cont. Price</div>
+                           </div>
+                            <div ng-show="value.quote.status >= 4" class="col-lg-1 col-md-1 col-sm-1 col-xs-12 npl">
+                              <div class="vendor_name_heading">Cont. QUANTITY</div>
+                           </div>
+                        </div>
+                        <div class="data_contain_100">
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{value.city_name}}
+                                    </div>
+                                 </div>
+                              </div>
+                              
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">
+                                  {{ value.post_result.servicetype|getobjectvalue:servicetype }}     
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">
+                                 {{ value.post_result.category|getName:categories.data }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{ value.max_no_parcel }} 
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-2 col-md-3 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{ value.quote.initial_quote_price }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-1 col-md-1 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{ value.quote.contract.contract_price }}
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-1 col-md-1 col-xs-12">
+                                 <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_full">{{ value.quote.contract.contract_quantity }}
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                     <div ng-show="value.quote.status == 7">
+                        <input  class="book_btn seller_btn_submit-new show_hide pull-right" type="button" value="Accept" ng-click="acceptOffer(value,$index)">
+                     </div>
+                  </div>
+                  </div>
+                     </div>
+                     <div class="white_bg1 border-bottom-p">
+                         <form name="hp_seller_search_result" novalidate>
+                     <div class="col-lg-12">
+                     <div class="row" ng-show="value.quote==null && (value.post_result.last_date|checkDate)==false && value.post_result.lead_type==1">
+                     <div class="box_shadow">
+                        <div class="white_bg1">
+                            <div ng-if="value.price_type == 2">
+                            <div class="data-head">Negotiable Offer : </div>
+                            <div class="note_value">Rs {{ value.firm_price }} /-</div>
+                            </div>
+                            <div ng-if="value.price_type == 1" class="ng-scope">
+                            <div class="data-head">Fixed Offer </div>
+                            <div class="note_vlue">Rs {{ value.firm_price }} /-
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="note_vlue">
+                            <div class="select_form_intra"> 
+                               <input class="input_ani" type="text" name="quoted_price" ng-model="value.quotedPrice" ng-minlength="quoted_price_validation_min_limit" ng-maxlength="quoted_price_validation_max_limit" maxlength="8" ng-pattern="/^[0-9]*$/" ng-required="true">
+                                <label class="lbl_text2">Quote (Price)<span> *</span></label>
+                                <span class="red-error-text" ng-show="value.tracking_type_error || hp_seller_search_result.quoted_price.$error.pattern || hp_seller_search_result.quoted_price.$error.minlength || hp_seller_search_result.quoted_price.$error.maxlength">
+                                    Invalid Quote Price {{ (hp_seller_search_result.quoted_price.$error.minlength || hp_seller_search_result.quoted_price.$error.maxlength) ? '(min 2 - max 8 length)' : '' }}
+                                </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          
+                          <div class="select_form_intra" ng-init="data.tracking_type=1">
+                            <select ng-model="value.tracking_type" class="selectpicker" selectpicker ng-options="y.id as y.value for (x,y) in tracking_type">
+                              <option value="">Select Tracking Type </option>
+                            </select>
+                             <span class="red-error-text" ng-show="value.tracking_type_error">Please Select Tracking Type</span>
+                          </div>
+                        </div>
+                        
+                        
+                        <div class="col-lg-4">
+                            <!--<input type="text" class="form-control" value="" placeholder="Transit Days *" ng-model="value.transit_days">
+                                <span ng-show="value.transit_days_error">Invalid Data</span>-->
+                            <div class="Payment_Terms"></div>
+                            <div class="select_form_intra">
+                                <select ng-model="value.payment_term" class="selectpicker" selectpicker>
+                                  <option value="">Select Payment Terms </option>
+                                  <option value="ADVANCE">Advance</option>
+                                  <option value="CREDIT">Credit</option>
+                                </select>
+                                <span class="red-error-text" class="red-error-text" ng-show="value.payment_term_error">Please Select Payment Terms</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ng-hide" ng-show="value.payment_term=='CREDIT'">
+                        <input type="text" class="form-control ng-pristine ng-untouched ng-valid" value="" placeholder="Credit Days *" ng-model="value.credit_days">
+                        <span ng-show="value.credit_days_error" class="ng-hide">Please Check Atleast One Payment Option</span>
+                        </div>
+                        
+                        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
+                        <ul class="select_inline">
+                        <li>
+                        <div class="admin_input">
+                        <!--<input id="neft{{value.id}}" type="checkbox" class="check_box" ng-click="paymentMethod($index, 'NEFT_RTGS')" ng-checked="value.payment_method=='NEFT_RTGS'">-->
+                        <input id="neft{{value.id}}" type="checkbox" class="check_box" ng-click="paymentMethod($index, 'NEFT_RTGS')">
+                        <label for="neft{{value.id}}">NEFT/RTGS</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="admin_input">
+                        <!--<input id="credit{{value.id}}" type="checkbox" class="check_box" ng-click="paymentMethod($index, 'CREDIT_CARD')" ng-checked="value.payment_method=='CREDIT_CARD'">-->
+                        <input id="credit{{value.id}}" type="checkbox" class="check_box" ng-click="paymentMethod($index, 'CREDIT_CARD')">
+                        <label for="credit{{value.id}}">Credit Card</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="admin_input">
+                        <!--<input id="debit{{value.id}}" type="checkbox" class="check_box" ng-click="paymentMethod($index, 'DEBIT_CARD')" ng-checked="value.payment_method=='DEBIT_CARD'">-->
+                        <input id="debit{{value.id}}" type="checkbox" class="check_box" ng-click="paymentMethod($index, 'DEBIT_CARD')">
+                        <label for="debit{{value.id}}">Debit Card</label>
+                        </div>
+                        </li>
+                        </ul>
+                        <span class="red-error-text" ng-show="value.payment_method_error" class="ng-hide">Please Check One of the Payment Option</span>
+                        </div>
+                        <div class="col-lg-1" ng-show="value.quote==null">
+                        <div class="row">
+                        <input type="button" class="Accept_btn marg_btn" value="Submit" ng-click="submitQuotation($index)">
+                        </div>
+                        </div>
+                      </div>
+                     </div>
+                     </div>
+                     <div class="white_bg1" ng-show="(value.quote==null && (value.post_result.last_date|checkDate)==false && value.post_result.lead_type==2) ">
+                        <div class="hyperlocal_gray" >
+                            <div class="col-lg-2 col-md-3 col-sm-5 col-xs-12 ">
+                                <div class="vendor_name_heading">FROM</div>
+                            </div>
+                              
+                            <div class="col-lg-2 col-md-1 col-sm-1 col-xs-12 npl">
+                                <div class="vendor_name_heading">Service</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                <div class="vendor_name_heading">Category</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                <div class="vendor_name_heading">QUANTITY</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                <div class="vendor_name_heading">QUOTE</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                <div class="vendor_name_heading"></div>
+                            </div>
+                          </div>
+                          <div class="data_contain_100">
+                                <div class="col-lg-2 col-md-3 col-xs-12 margin_tops">
+                                  <input type="checkbox" ng-model="value.termisChecked" ng-click="termisChecked($index)" id="termisChecked" />
+                                  <span class="lbl padding-8"> {{value.city_name}} </span>
+                                  <input type="hidden" name="quote_id" id="quote_id" value="26">
+                                </div>
+                                
+                                <div class="col-lg-2 col-md-3 col-xs-12">
+                                  <div class="vendor_img_box">
+                                      <div class="vendor_detail">{{value.post_result.servicetype|getobjectvalue:servicetype}} 
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-xs-12">
+                                  <div class="vendor_img_box">
+                                      <div class="vendor_detail">{{value.post_result.category|getName:categories.data}}
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-xs-12">
+                                  <div class="vendor_img_box">
+                                      <div class="vendor_detail">{{value.max_no_parcel}} 
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-xs-12" ng-init="value.termisDisable=true">
+                                  <div class="vendor_img_box">
+                                      <div class="vendor_detail"> 
+                                        <input class="ng-pristine ng-untouched ng-invalid ng-invalid-required" ng-model="value.quotedPrice" maxlength='7' name="" type="text"  ng-disabled="value.termisDisable">
+                                      </div>   
+                                  </div>
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-xs-12">
+                                  <div class="vendor_img_box">
+                                      <div class="vendor_detail ven_det_fulls"> 
+                                        <input  class="book_btn seller_btn_submit-new show_hide" type="button" value="submit" ng-click="termsubmitQuotation($index)">
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+                          </div>
+                      <div>
+
+                     </div>
+                       </form>
+                       </div>
+                       <!-- {{ (value.quote==null && (value.post_result.last_date|checkDate)==false && value.post_result.lead_type==2 && value.price_type != 2) }} -->
+                      
+                     </div>
+                
+               </div>
+             </div>
+             
+            
+         </div>
+      </div>
+      <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog seller-search-modal">
+      <!-- Modal content-->
+      <div class="modal-content modify_search_detail pop-pad">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="modal-body">
+      <div class="load_type intra_main activeintra" id="id1">
+      <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+      <div class="select_form_intra mb-24">
+      <input type="text" ng-model="data.city" id="city" name="city" class="input_ani" autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)"
+         placeholder="Select City*" required="" typeahead="city as (city.city_name) for city in cities | filter:$viewValue"
+         />
+      <!--  <select id="city" ng-change="onSelect(data.city)" ng-model="data.city" ng-options="y.city_name for (x, y) in cities track by y.id" class="ng-pristine ng-untouched ng-valid">
+         <option value="" class="" selected="selected"> Select City </option>
+         </select> -->
+      </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+      <div class="select_form_intra mb-24">
+      <input type="text" autocomplete="off" id="fromLocation" ng-model="data.from_location" class="input_ani ng-pristine ng-untouched ng-invalid ng-invalid-required"
+         name="from_location" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+         required="" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-12-8736">
+      <label class="lbl_text2">From location <span>*</span></label>
+      </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+      <div class="select_form_intra mb-24">
+      <input type="text" autocomplete="off" id="toLocation" ng-model="data.to_location" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+         class="input_ani ng-pristine ng-untouched ng-invalid ng-invalid-required"
+         name="to_location" required="" aria-autocomplete="list" aria-expanded="false"
+         aria-owns="typeahead-13-5658">
+      <label class="lbl_text2">To Location <span>*</span></label>
+      </div>
+      </div>
+      </div>
+      <div class="row">
+      <div class="admin_input margin_t">
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+      <div class="date_selection select_form_intra mb-24">
+      <span class="left_v_from">
+      <input type="text" autocomplete="off" id="valid_to_date" ng-model="data.date" fromcalendar class="input_ani" required="">
+      <label class="lbl_text2 padg_l">Dispatch Date<span>*</span></label>
+      <span class="tooptip_left">
+      <a href="javascript:void(0)" tooltip="Please specify atleast one of these: Delivery or Dispatch date."> <i class="glyphicon glyphicon-info-sign"></i></a></span>
+      </span>
+      </div>
+      </div>
+      </div>
+      <div class="load_type">
+      <div class="search_btn">
+      <div class="serch_vichel">
+      <input type="button" class="button_serch" id="searchSeller" ng-click="searchModified(data)" name="button" value="Search">
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      <div class="modal fade in" id="messageModallll" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" style="display: none;">
+         <div class="modal-dialog modal-dialog-2  modal-lg" role="document">
+            <div class="modal-content">
+               <form id="MessageData" class="ng-pristine ng-valid">
+                  <div class="modal-header">
+                     <h3 style="float:left" id="status">
+                     </h3>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  </div>
+                  <div class="modal-body">
+                     <h4 class="sub-head red margin-left-none margin-bottom">New Message</h4>
+                     <div>
+                        <input id="quoteObject" class="form-control" placeholder="Form Object" readonly="readonly" name="quoteObject" type="hidden" value="">
+                        <input id="from_name" class="form-control" placeholder="From: ABC co ltd PVT" readonly="readonly" name="message_from" type="text" value="">
+                     </div>
+                     <div>
+                        <input id="to_name" class="form-control" placeholder="To: XYZ co ltd PVT" readonly="readonly" name="message_to" type="text" value="">
+                     </div>
+                     <div>
+                        <input id="message_subject" class="form-control margin-bottom-4 valid" placeholder="Subject *" readonly="readonly" name="message_subject" type="text" value="message_subject">
+                     </div>
+                     <div><textarea id="message_body" class="form-control message-body" placeholder="Body *" name="message_body" cols="50" rows="10"></textarea></div>
+                     <div class="">
+                        <i class="fa fa-paperclip"></i>
+                        <label for="message_attachment" class="">Attachment </label>
+                        <div>
+                           <!--Removed [] in name attribute for below message attachment field because attachment not saving in ajax, If you need add in conditional -- Ramu-->
+                           <!--<input id="message_attachment" class="filestyle btn-file file-upload" multiple="1" name="message_attachment"  type="file">-->
+                           <!-- <input id="r_message_attachment"
+                              class="filestyle btn-file file-upload"
+                              multiple="1" name="r_message_attachment"
+                              ng-model-instant onchange="angular.element(this).scope().setDocument(this)"
+                              type="file"> -->
+                           <input id="r_message_attachment" class="filestyle btn-file file-upload ng-isolate-scope" name="message_attachment" fileread="message_attachment" type="file">
+                           <div id="message_attachment_display"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn red-btn flat-btn ok-btn message_send_button" ng-click="sendMessage(message_attachment)">Send message
+                     </button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+<div class="modal fade msgbox" id="initialquotemodel" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+          <p>initial Quote submited</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" ng-click="closeQuoteModel()" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade msgbox" id="initialquoteerrormodel" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content border_r">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+          <p>Something went wrong.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+</div>
+      <script>
+         $(document).ready(function () {
+             $("#filters_click").click(function () {
+                 $("#filters_show").toggle('fast');
+         
+             });
+         });
+      </script>
+      <script>
+         $(".subresult").hide();
+         $(document).on('click', ".show_hide", function () {
+             var id = $(this).attr('data-id');
+             $("#open_show" + id).toggle();
+             $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
+         });
+      </script>
+      <script>
+         $(document).ready(function () {
+             $(".search_i").click(function () {
+                 $(".open_search").show();
+             });
+         
+             $(".close_btn_close").click(function () {
+                 $(".open_search").hide();
+             });
+             var gwid = $(".scroll_div").width();
+             var twid = $(".loc_det").width();
+             var acwid = gwid / twid * 100;
+             var len = $(".scroll_div").length;
+             var towid = acwid * len + 9;
+             $(".fillter_div").css({ "width": "" + towid + "%" });
+         });
+        
+          
+    //blah blah
+
+      </script>
+      <style>
+         .buyerscroll {
+         height: 200px;
+         overflow-y: scroll;
+         }
+         .seller-search-modal {
+             width: 95%;
+             margin: 30px auto;
+             padding: 30px;
+         }
+         .seller-search-modal .modal-body {
+         padding: 35px 15px 15px 15px;
+         box-sizing: border-box;
+         }
+         .scroll_div {
+         margin: 0px;
+         }
+         .mb-24{ margin-bottom: 24px;width: 100%; float: left;}
+    float: left; }
+         .seller_btn_submit-new {
+         background: #ed3237;
+         border: 0 none;
+         border-radius: 0;
+         color: #fff;
+         font-family: FuturaBT-Medium;
+         font-size: 18px;
+         height: auto;
+         padding: 5px 20px;
+         text-transform: none;
+         outline: none;
+         }
+         .red-error-text {
+         color: #ed3237;
+         font-size: 12px;
+         margin: 10px 0 0 0;
+         font-weight: 600;
+         }
+         .detail_b11{padding: 0 6px 0 0; box-sizing: border-box;}
+         .modal-dialog-2{margin:40px auto 0 !important;}
+       /*  .mb-24{ margin-bottom: 24px; width: 100%; float: left; }*/
+      </style>

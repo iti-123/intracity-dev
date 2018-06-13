@@ -1,0 +1,763 @@
+<style type="text/css">
+    .has-error{ color:#ed3237; font-size: 12px; padding: 10px 0 0 0;}
+    .list_blue_100 .close_list_main .close_list_ul {
+        padding: 0;
+        margin: 0;
+    }
+    .list_blue_100 .close_list_main li {
+        display: inline-block;
+        padding: 0px 15px 7px 20px;
+        float: left;
+        font-size: 17px;
+        color: #828282;
+        position: relative;
+        font-family: FuturaBT-Book;
+        cursor: pointer;
+    }
+    .list_blue_100 .close_list_main li::before {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 10px;
+        background: #939596;
+        top: 7px;
+        left: 9px;
+        -moz-transform: rotate(135deg);
+        -ms-transform: rotate(135deg);
+        -o-transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
+    }
+    .list_blue_100 .close_list_main li:after {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 10px;
+        background: #939596;
+        top: 7px;
+        left: 9px;
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+</style>
+<div class="col-lg-12 col-md-12 col-sm-12">
+   <div class="right_serch_p">
+      <div class="right_search_bar">
+         <ul class="search_bar_tab">
+            <li><a href="#">Seller</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+            <li><a href="#">Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+            <li><a href="#">Hyperlocal</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+            <li><a href="#" class="active_c">{{post[0].post_transaction_id}}</a></li>
+         </ul>
+      </div>
+      <div class="div_100">
+         <div class="col-lg-9">
+            <div class="row">
+               <ul class="buyer_ul">
+                  <li class="tab_10 active_buyer" data-tab="Messages">
+                     <a href="javascript:void(0);">All</a>
+                  </li>
+                  <li class="tab_10" data-tab="Offers">
+                     <a href="javascript:void(0);">PUBLIC</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="col-md-3">
+            <div class="back_post">
+               <a href="#/hp-buyer-list" class="back_red_btn">Back to Post</a>
+               <a href="javascript:void(0);" class="delete_gray"><i ng-click="deletePost(post[0].id);"
+                  class="fa fa-trash" title="Delete"></i></a>
+            </div>
+         </div>
+      </div>
+      <!--{{quotedata[0].post}}-->
+      <div class="white_bg">
+          <div class="loc_det bg-white-new">
+               <div class="col-md-10">
+                  <div class="col-md-2 data-fld npl">
+                     <span class="data-head">All TYPE:</span>
+                     <span class="data-value break-word ng-binding">{{ post[0].is_private_public == 0 && 'Public' || 'Private'  }}</span>
+                  </div>
+                  <div class="col-md-2 data-fld">
+                     <span class="data-head">TITLE:</span>
+                     <span class="data-value break-word ng-binding">{{ !empty(post[0].title) && post[0].title || 'N/A' }}</span>
+                  </div>
+                  <div class="col-md-2 data-fld">
+                     <span class="data-head">VALID FROM:</span>
+                     <span class="data-value break-word ng-binding">{{ !empty(post[0].from_date) &&  post[0].from_date|datefilter|date:'dd/MM/yyyy' || 'N/A' }}</span>
+                  </div>
+                  <div class="col-md-2 data-fld">
+                     <span class="data-head">VALID TO:</span>
+                     <span class="data-value break-word ng-binding">{{ !empty(post[0].to_date) &&  post[0].to_date|datefilter|date:'dd/MM/yyyy' || 'N/A' }}</span>
+                  </div>
+                  <!--<div class="col-md-2 data-fld">
+                     <span class="data-head">NO. OF ROUTES:</span>
+                     <span class="data-value break-word ng-binding"></span>
+                  </div>-->
+                  <div class="col-md-2 data-fld">
+                     <span class="data-head">EMD :</span>
+                     <span class="data-value break-word ng-binding">{{ !empty(post[0].emd_amount) &&  post[0].emd_amount || 'N/A' }}</span>
+                  </div>
+               </div>
+               <div class="col-md-2">
+                  <div class="col-md-12 text-right">
+                     <div class="views_font">Views 0</div>
+                     <div class="a_link" id="detail_click">
+                        <a href="javascript:void"><i class="fa-plus fa" aria-hidden="true"></i>
+                        Details</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="click-data-detail" class="detail-click-data d_box">
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">EMD MODE:</span>
+                  <span class="data-value break-word ng-binding">{{ !empty(post[0].emd_mode) &&  post[0].emd_mode || 'N/A' }}</span>
+               </div>
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">AWARD CRITERIA:</span>
+                  <span class="data-value break-word ng-binding">{{ !empty(post[0].award_criteria) &&  post[0].award_criteria || 'N/A' }}</span>
+               </div>
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">CONTRACT ALLOTMENT:</span>
+                  <span class="data-value break-word ng-binding">{{ !empty(post[0].contract_allotment) &&  post[0].contract_allotment || 'N/A' }}</span>
+               </div>
+               <div class="clearfix"></div>
+                 <div class="col-md-2 data-fld npl">
+                    <span class="data-head">NO. OF OWN TRUCKS:</span>
+                    <span class="data-value break-word ng-binding">{{ !empty(post[0].no_of_trucks) &&  post[0].no_of_trucks || 'N/A'  }}</span>
+                 </div>
+                 <div class="col-md-2 data-fld npl">
+                    <span class="data-head">AVERAGE TURN OVER LAST THREE YEARS:</span>
+                    <span class="data-value break-word ng-binding">{{ !empty(post[0].average_turn_over) &&  post[0].average_turn_over || 'N/A' }}</span>
+                 </div>
+                 <div class="col-md-2 data-fld npl">
+                    <span class="data-head">NO. OF YEARS IN BUSINESS:</span>
+                    <span class="data-value break-word ng-binding">{{ !empty(post[0].no_of_years) &&  post[0].no_of_years || 'N/A' }}</span>
+                 </div>
+                 <div class="col-md-2 data-fld npl">
+                    <span class="data-head">LAST DATE/TIME FOR QUOTE:</span>
+                    <span class="data-value break-word ng-binding">{{ post[0].last_date }} {{ post[0].last_time}}</span>
+                 </div>
+                 <div class="clearfix"></div>
+                 <div class="col-md-2 data-fld npl">
+                    <span class="data-head">POST PUBLIC/PRIVATE:</span>
+                    <span class="data-value break-word ng-binding">{{ (post[0].is_private_public==0) && 'Public' || 'Private' }}</span>
+                 </div>
+               {{value}}
+               {{ !empty(value.seller) && value.seller || '' }}  
+                 <div class="col-md-2 data-fld npl">
+                    <span class="data-head">BID DOCUMENTS:</span>
+                    <span class="data-value break-word ng-binding">Private</span>
+                 </div>
+            </div>
+         <div class="cart heght_100">
+            <div class="list_blue_100">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                    <div class="close_list_main">
+                        <ul class="close_list_ul">
+                            <li ng-repeat="t in filterDatas.sellerType"
+                                ng-click="removeElem(filterDatas.sellerType, $index)">{{ getUsername(t) }}
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+             <div class="loc_det">
+                <span class="rilters_right" id="filters_click"><i class="fa fa-bars"></i> Filters </span>
+                <div class="list_blue_100">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                        <div class="close_list_main">
+                            <ul class="close_list_ul">
+                                <li ng-repeat="t in filterDatas.buyerType"
+                                    ng-click="removeElem(filterDatas.buyerType,$index)">
+                                    {{ getUsername(t) }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="clear_right" ng-show="filClearValue" ng-click="clearAll()">Clear All</div>
+                    </div>
+                </div>
+            </div>
+            <div class="loc_det" id="filters_show">
+               <div class="scroll_div">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="select_form_intra">
+                            <input type="text" class="input_ani" ng-model="data.username" required=""/>
+                            <label class="lbl_text2">Buyers</label>
+                            <span class="search_icon"><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="filter_from_location location_scroller">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <ul class="post_inline">
+                                        <li>
+                                            <div class="admin_input">
+                                                <div class="admin_input" ng-repeat="seller in sellerList | filter:data.username">
+                                                    <input type="checkbox"
+                                                           class="check_box check_box_1"
+                                                           ng-click="addFilterData(filterDatas.buyerType,seller.id)" ng-checked="checkedFilterData(filterDatas.buyerType, seller.id)" 
+                                                           id="vl{{seller.id}}">
+                                                    <label for="vl{{seller.id}}">{{
+                                                        seller.username }}</label>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="cart heght_100">        
+              <div class="loc_det">
+                  <div class="gray_bg">
+                      <div class="col-lg-9">
+                          <div class="row">
+                              <div class="col-lg-3">
+                                 <div class="heading_text">Title</div>
+                              </div>
+                              <div class="col-lg-2">
+                                  <div class="heading_text">City</div>
+                              </div>                                         
+                          </div>
+                      </div>
+                      <div class="col-lg-3">
+                          <div class="row">
+                              <div class="heading_text padding_left">NOTIFICATIONS</div>
+                          </div>
+                     </div>
+                  </div>
+              </div>
+
+              <div class="white_bg">
+                  <div ng-repeat="post in postHpLeads">
+                      <div class="col-lg-9">
+                          <div class="row">
+                              <div class="col-lg-3">
+                                  <div class="normal_text"><span>{{ !empty(post.title) && post.title }}</span>
+                                  </div>
+                              </div>
+
+                              <div class="col-lg-2">
+                                  <div class="normal_text">{{ !empty(post.city_name) &&
+                                          post.city_name }}
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                            <button data-id="{{$index+1}}" ng-show="post.status==null && (post.last_date|checkDate)" ng-click="viewFormNow(post,post.postid)" class="show_hide seller_btn_submit  col-lg-10 ">Bid Elapsed</button>
+                            <button data-id="{{$index+1}}" ng-show="post.status == null && !(post.last_date|checkDate)" ng-click="viewFormNow(post,post.postid)" class="show_hide seller_btn_submit  col-lg-10 ">Quote</button>
+                            <button data-id="{{$index+1}}" ng-show="post.status == 1" ng-click="viewFormNow(value.value.id)" class="show_hide seller_btn_submit  col-lg-10 ng-hide">Initial Quote Submitted</button>
+                            <button data-id="{{$index+1}}" ng-show="post.status == 2" ng-click="viewFormNow(value.value.id)" class="show_hide seller_btn_submit  col-lg-10 ng-hide">Counter Offer Received</button>
+                            <button data-id="{{$index+1}}" ng-show="post.status == 3" ng-click="viewFormNow(value.value.id)" class="show_hide seller_btn_submit  col-lg-10 ng-hide">Counter Offer Submitted</button>
+
+                            <button data-id="{{$index+1}}" ng-show="post.status == 5" ng-click="viewFormNow(value.value.id)" class="show_hide seller_btn_submit  col-lg-10 ng-hide">Quote Declined</button>
+
+                            <button data-id="{{$index+1}}" ng-show="post.status == 6" ng-click="viewFormNow(value.value.id)" class="show_hide seller_btn_submit  col-lg-10 ng-hide">Contract Canceled</button>
+
+                            <button data-id="{{$index+1}}" ng-show="post.status == 7" ng-click="viewFormNow(value.value.id)" class="show_hide seller_btn_submit  col-lg-10 ng-hide">Accept Contract</button>
+
+                            <button data-id="{{$index+1}}" ng-show="post.status == 4" ng-click="viewFormNow(value.value.id)" class="show_hide seller_btn_submit  col-lg-10 ng-hide">Contract Accepted</button>
+
+                            <div class="detail_100">
+                               <div class="details_align">
+                                <span class="detail_btn_plus" ng-click="openDetails($index)"><span
+                                        ng-show="!isDetailsHidden($index)">+</span><span
+                                        ng-show="isDetailsHidden($index)">-</span> Details</span>
+                                <div class="mes_icon">
+                                <!-- <i class="fa fa-envelope-o" aria-hidden="true"></i> -->
+                                <a href="javascript:void(0)" ng-click="sendMessageModal(post[0])" data-toggle="modal" data-target="#messageModal" class="pull-right msg-icon">
+                                                                <i class="fa fa-envelope-o"></i>
+                                                            </a>
+
+                                </div>
+
+
+                              </div>
+                            </div>
+                      </div>
+                      <div ng-show="isDetailsHidden($index)">
+                         
+                          <div class="row">
+                            <div class="white_bg1">
+                              <div class="padding_div">
+                              <div class="border-clr">
+                                <div ng-show="isDetailsHidden($index)">
+                                    
+                                    <div class="col-sm-3"> 
+                                        <span class="data-head">POST TO</span> {{ post.isPublic == 1 &&'Private' || 'Public'}}
+                                    </div>                 
+                                    <div class="col-sm-3"> 
+                                            <span class="data-head">PRODUCT CATEGORY</span>
+                                            <span class="data-value ng-binding">
+                                            {{post.category|getName:categories}}
+                                            </span>    
+                                    </div>  
+                                    <div class="col-sm-3">                                             
+                                        <span class="data-head">SERVICE TYPE</span>
+                                        <span class="data-value ng-binding">
+                                            {{post.servicetype|getobjectvalue:servicetype}}
+                                        </span>                                            
+                                    </div>  
+                                    <div class="col-sm-3"> 
+                                        <span class="data-head">NO OF PARCEL</span>
+                                        <span class="data-value ng-binding">
+                                            {{ post.max_no_parcel }}                
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="clearfix"> </div>                                                       
+                                    <div class="col-md-3">
+                                        <span class="data-head">WEIGHT (IN KG)</span>
+                                        <span class="data-value ng-binding">{{ post.weight }}</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="data-head">LAST DATE FOR QUOTE</span>
+                                        <span class="data-value ng-binding">  {{ post.last_date|datefilter|date:'dd/MM/yyyy' }}</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="data-head">LAST TIME FOR QUOTE</span>
+                                        <span class="data-value ng-scope">{{post.last_time}}</span>                            
+                                    </div>  
+                                                                       
+                                </div>
+                             
+                            <div class="white_bg1" ng-show="!(post.last_date|checkDate)">  
+                                                     
+                                <div class="col-md-3" ng-show="post.initial_quote_price">
+                                    <span class="data-head"> INITIAL QUOTE PRICE </span>
+                                    <span class="data-value ng-scope">RS. {{ post.initial_quote_price}} /- </span>                            
+                                </div>
+                                <div class="col-md-3" ng-show="post.buyer_quote_price">
+                                    <span class="data-head"> BUYER COUNTER PRICE </span>
+                                    <span class="data-value ng-scope">RS. {{ post.buyer_quote_price}} /- </span>                            
+                                </div>
+    
+                                <div class="col-md-3" ng-show="post.seller_quote_price && post.status == 3">
+                                    <span class="data-head"> SELLER FINAL QUOTE PRICE </span>
+                                    <span class="data-value ng-scope">RS. {{ post.seller_quote_price}} /- </span>                            
+                                </div>
+    
+                                <div class="col-md-12" ng-show="post.status == 2">
+                                        <input id="Submit1" type="submit" ng-show="post.status == 2 && post.status != 5" ng-click="sellerQuoteAction($index,'ACCEPTED_QUOTE')" value="Accept" class="book_btn no-border pull-right">
+                                        <input id="" type="submit" ng-show="post.status==4" value="Accepted" class="book_btn no-border pull-right">                  
+                                </div>
+                                 </div>
+                               
+                            
+                            <div class="white_bg" ng-show="post.status == 2 && !(post.last_date|checkDate)">
+                                <div class="col-md-3">
+                                    <span class="data-head"> SUBMIT FINAL QUOTE </span>                                
+                                    <input  ng-model="post.sellerFinalQuotePrice" class="form-control" placeholder="FINAL QUOTE PRICE" name="" type="text" >
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="align_right">  
+                                    <input type="button" class="btn_decline" ng-show="post.status != 5 && post.status != 4" value="Decline" ng-click="sellerQuoteAction($index,'DENIED_QUOTE')">
+                                    <input  class="book_btn no-border marg_btn" ng-show="post.status <= 2" type="button" value="Submit" ng-click="submitFinalQuotation($index,'SELLER_FINAL_QUOTE')">
+                  
+                                    </div>
+                                </div>
+                            </div>
+
+                            </div>
+                              </div>
+                             <div ng-show="post.status >= 4 && post.lead_type == 2">
+                              <div class="hyperlocal_gray" >
+                                 <div class="col-lg-2 col-md-3 col-sm-5 col-xs-12 ">
+                                    <div class="vendor_name_heading">FROM</div>
+                                 </div>
+                                 <div class="col-lg-2 col-md-1 col-sm-1 col-xs-12 npl">
+                                    <div class="vendor_name_heading">Service</div>
+                                 </div>
+                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                    <div class="vendor_name_heading">Category</div>
+                                 </div>
+                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                    <div class="vendor_name_heading">QUANTITY</div>
+                                 </div>
+                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                    <div class="vendor_name_heading">QUOTE</div>
+                                 </div>
+                                 <div ng-show="post.status >= 4" class="col-lg-1 col-md-1 col-sm-1 col-xs-12 npl">
+                                  <div class="vendor_name_heading">Cont. Price</div>
+                                 </div>
+                                 <div ng-show="post.status >= 4" class="col-lg-1 col-md-1 col-sm-1 col-xs-12 npl">
+                                  <div class="vendor_name_heading">Cont. QUANTITY</div>
+                                 </div>
+                              </div>
+                              <div class="data_contain_100">
+                                  <div class="col-lg-2 col-md-3 col-xs-12">
+                                     <div class="vendor_img_box">
+                                        <div class="vendor_detail ven_det_full">{{ post.city_name }}
+                                        </div>
+                                     </div>
+                                  </div>
+                                      
+                                  <div class="col-lg-2 col-md-3 col-xs-12">
+                                     <div class="vendor_img_box">
+                                        <div class="vendor_detail ven_det_full">
+                                      {{ post.servicetype|getobjectvalue:servicetype }}     
+                                        </div>
+                                     </div>
+                                  </div>
+                                  <div class="col-lg-2 col-md-3 col-xs-12">
+                                     <div class="vendor_img_box">
+                                        <div class="vendor_detail ven_det_full">
+                                     {{ post.category|getName:categories }}
+                                        </div>
+                                     </div>
+                                  </div>
+                                  <div class="col-lg-2 col-md-3 col-xs-12">
+                                     <div class="vendor_img_box">
+                                        <div class="vendor_detail ven_det_full">{{ post.max_no_parcel }} 
+                                        </div>
+                                     </div>
+                                  </div>
+                                  <div class="col-lg-2 col-md-3 col-xs-12">
+                                     <div class="vendor_img_box">
+                                        <div class="vendor_detail ven_det_full">{{ post.initial_quote_price }}
+                                        </div>
+                                     </div>
+                                  </div>
+                                  <div class="col-lg-1 col-md-1 col-xs-12">
+                                     <div class="vendor_img_box">
+                                        <div class="vendor_detail ven_det_full">{{ post.contract_price }}
+                                        </div>
+                                     </div>
+                                  </div>
+                                  <div class="col-lg-1 col-md-1 col-xs-12">
+                                     <div class="vendor_img_box">
+                                        <div class="vendor_detail ven_det_full">{{ post.contract_quantity }}
+                                        </div>
+                                     </div>
+                                  </div>
+                                </div>
+                               <div ng-show="post.status == 7">
+                                  <input  class="book_btn seller_btn_submit-new show_hide pull-right" type="button" value="Accept" ng-click="acceptOffer(post,$index)">
+                               </div>
+                            </div>  
+                             </div> 
+                            </div>
+                            <div class="white_bg1" ng-show="post.status == null &&  !(post.last_date|checkDate) && post.lead_type == 1">
+                            <div class="border-clr">                                
+                                <div class="col-lg-4">
+                                    <div class="note_vlue">
+                                        <b>Firm Price</b> : {{ !empty(post.firm_price) && post.firm_price }}                                       
+                                    </div>
+                                    <div class="note_vlue">
+                                        <input type="text" class="form-control valid-number" maxlength="6" minlength="1" value="" placeholder="Quote (Prices) *"
+                                            ng-model="post.quote.quotedPrice">
+                                        <span class="has-error" ng-show="post.quote.quoted_price_error"> Please enter Prices </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <input type="text" class="form-control  NoOfDays" placeholder="Transit Days *" ng-init="post.quote.transit_days = ''" ng-model="post.quote.transit_days">
+                                    <span class="has-error" ng-show="post.quote.transit_days_error"> Please enter Transit Days </span>
+                                    <div class="Payment_Terms"></div>
+                                </div>
+                                <div class="col-lg-4 colo-md-4">
+                                <div class="select_form_intra">
+                                        <select ng-model="post.quote.payment_term">
+                                            <option value="">Select Payment Terms</option>
+                                            <option value="ADVANCE">Advance</option>
+                                            <option value="CREDIT">Credit</option>
+                                        </select>
+                                        <span class="has-error" ng-show="post.quote.payment_term_error"> Please Select Payment Terms </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4" ng-show="post.quote.payment_term=='CREDIT'">
+                                    <input type="text" class="form-control NoOfDays" value="" placeholder="Credit Days *"
+                                        ng-model="post.quote.credit_days">
+                                    <span class="has-error" ng-show="post.quote.credit_days_error"> Please enter Credit day </span>
+                                </div>
+
+
+                                <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
+                                    <ul class="select_inline">
+                                        <li>
+                                            <div class="admin_input">
+                                                <input id="NEFT{{post.postid}}" type="checkbox" class="check_box" ng-click="paymentMethod($index,'NEFT_RTGS')"
+                                                ng-checked="post.quote.payment_method == 'NEFT_RTGS'">
+                                                <label for="NEFT{{post.postid}}">NEFT/RTGS</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="admin_input">
+                                                <input id="Credit{{post.postid}}" type="checkbox" class="check_box" ng-click="paymentMethod($index,'CREDIT_CARD')" ng-checked="post.quote.payment_method == 'CREDIT_CARD'">     
+                                                <label for="Credit{{post.postid}}">Credit Card</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="admin_input">
+                                                <input id="Debit{{post.postid}}" type="checkbox" class="check_box" ng-checked="post.quote.payment_method == 'DEBIT_CARD'" ng-click="paymentMethod($index,'DEBIT_CARD')">
+                                                <label for="Debit{{post.postid}}">Debit Card</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <span class="has-error" ng-show="post.quote.payment_method_error"> Please check atleast one payment method </span>
+                                </div>                
+                                <div class="col-lg-1">
+                                    <div class="row">
+                                        <input type="button" class="Accept_btn marg_btn" value="Submit" ng-click="submitInitialQuotation($index)">
+                                    </div>  
+                                </div>                    
+                            </div>
+                          </div>
+                          <div class="white_bg1" ng-show="post.status == null &&  !(post.last_date|checkDate) && post.lead_type == 2">
+                           <div class="border-clr">                          
+                                <div class="hyperlocal_gray" >
+                                  <div class="col-lg-2 col-md-3 col-sm-5 col-xs-12 ">
+                                      <div class="vendor_name_heading">FROM</div>
+                                  </div>
+                                    
+                                  <div class="col-lg-2 col-md-1 col-sm-1 col-xs-12 npl">
+                                      <div class="vendor_name_heading">Service</div>
+                                  </div>
+                                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                      <div class="vendor_name_heading">Category</div>
+                                  </div>
+                                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                      <div class="vendor_name_heading">QUANTITY</div>
+                                  </div>
+                                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                      <div class="vendor_name_heading">QUOTE</div>
+                                  </div>
+                                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                      <div class="vendor_name_heading"></div>
+                                  </div>
+                                </div>
+                                <div class="data_contain_100">
+                                <div class="col-lg-2 col-md-3 col-xs-12 margin_tops">
+                                  <input type="checkbox" ng-model="post.termisChecked" ng-click="termisChecked($index)" id="termisChecked" />
+                                  <span class="lbl padding-8"> {{ post.city_name }} </span>
+                                  <input type="hidden" name="quote_id" id="quote_id" value="26">
+                                </div>
+                                
+                                <div class="col-lg-2 col-md-3 col-xs-12">
+                                  <div class="vendor_img_box">
+                                      <div class="vendor_detail">{{ post.servicetype|getobjectvalue:servicetype }} 
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-xs-12">
+                                  <div class="vendor_img_box">
+                                      <div class="vendor_detail">{{ post.category|getName:categories }}
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-xs-12">
+                                  <div class="vendor_img_box">
+                                      <div class="vendor_detail">{{ post.max_no_parcel }} 
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-xs-12" ng-init="post.termisDisable=true">
+                                  <div class="vendor_img_box">
+                                      <div class="vendor_detail"> 
+                                        <input class="ng-pristine ng-untouched ng-invalid ng-invalid-required" ng-model="post.termquoteprice" maxlength="8" name="" type="text"  ng-disabled="post.termisDisable">
+                                      </div>    
+                                  </div>
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-xs-12">
+                                  <div class="vendor_img_box">
+                                      <div class="vendor_detail ven_det_fulls"> 
+                                        <input  class="book_btn seller_btn_submit-new show_hide" type="button" value="submit" ng-click="termsubmitQuotation($index)">
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                  </div>
+                </div>
+              </div> <!--end of right_search_p-->
+            </div>
+         </div>
+      </div>
+   </div>
+<div class="modal fade msgbox" id="initialquotemodel" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content border_r">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+          <p>Initial Quote given successfully.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" ng-click="closeQuoteModel()" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade msgbox" id="initialquoteerrormodel" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content border_r">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+          <p>Something went wrong.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+  <!-- Message Modal start -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form id="MessageData">
+                <div class="modal-header">
+                    <h3 style="float:left" id="status">
+
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+
+                    <h4 class="sub-head red margin-left-none margin-bottom">New Message</h4>
+                    <div>
+                        <input id="quoteObject" class="form-control form-control1" placeholder="Form Object" readonly="readonly" name="quoteObject"
+                            type="hidden" value="">
+
+                        <input id="from_name" class="form-control form-control1" placeholder="From: ABC co ltd PVT" readonly="readonly" name="message_from"
+                            type="text" value="">
+                    </div>
+                    <div>
+                        <input id="to_name" class="form-control form-control1" placeholder="To: XYZ co ltd PVT" readonly="readonly" name="message_to"
+                            type="text" value="">
+                    </div>
+
+                    <div>
+                        <input id="message_subject" class="form-control form-control1 margin-bottom-4 valid" placeholder="Subject *" readonly="readonly"
+                            name="message_subject" type="text" value="message_subject">
+
+
+                    </div>
+
+                    <div><textarea id="message_body" class="form-control form-control1 message-body" placeholder="Body *" name="message_body"
+                            cols="50" rows="10"></textarea></div>
+
+                    <div class=""><i class="fa fa-paperclip"></i>
+
+                        <label for="message_attachment" class="">Attachment </label>
+                        <div>
+                            <!--Removed [] in name attribute for below message attachment field because attachment not saving in ajax, If you need add in conditional -- Ramu-->
+                            <!--<input id="message_attachment" class="filestyle btn-file file-upload" multiple="1" name="message_attachment"  type="file">-->
+                            <!-- <input id="r_message_attachment"
+                                       class="filestyle btn-file file-upload"
+                                       multiple="1" name="r_message_attachment"
+                                       ng-model-instant onchange="angular.element(this).scope().setDocument(this)"
+                                       type="file"> -->
+                            <input id="r_message_attachment" class="filestyle btn-file file-upload" name="message_attachment" fileread="message_attachment"
+                                type="file">
+                            <div id="message_attachment_display"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn red-btn flat-btn ok-btn message_send_button" ng-click="sendMessage(message_attachment)">Send message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+   $(document).ready(function () {
+       $(".contact_click").click(function () {
+           $(".d_box").slideToggle("slow");
+       });
+   
+       $('.contact_click').click(function () {
+           $(this).next('.d_box').slideToggle('500');
+           $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
+       });
+   
+   });
+   
+   
+   $(document).ready(function () {
+       $(".contact_click1").click(function () {
+           $(".d_box1").slideToggle("slow");
+       });
+   
+       $('.contact_click1').click(function () {
+           $(this).next('.d_box1').slideToggle('500');
+   
+       });
+        $('#filters_click').click(function () {
+           $("#filters_show").slideToggle("slow");
+   
+       });
+        $('#detail_click').click(function () {
+           $("#click-data-detail").slideToggle("slow");
+   
+       });
+         $('#buyer-post-detail-btn').click(function () {
+           $("#detail-tabel-data").slideToggle();
+   
+       });
+        
+   
+   });
+</script>
+<script>
+   $(document).ready(function () {
+       var gwid = $(".scroll_div").width();
+       var twid = $(".loc_det").width();
+       var acwid = gwid / twid * 100;
+       var len = $(".scroll_div").length;
+       var towid = acwid * len + 9;
+       $(".fillter_div").css({"width": "" + towid + "%"});
+   });
+</script>
+
+<style>
+   .mb-5{ margin-bottom: 5px;}
+   .new-generate-data { position: relative;}
+   .new-generate-data input{ 
+   /*float: left;
+   width: 22%;*/
+   }
+   .generate_data-btn {float: right;}
+   .generate_data_input{width: 18%;
+   position: absolute;
+   right: 19%;}
+   .detail-table-content td{padding: 0px !important;border-top: 0px !important}
+   .border-none{ border:0px !important;}
+   .new-tabel-inner{ width: 100% }
+   .data-selection-table{ width: 100%;}
+   .tbl_padding tr td{padding:5px 8px!important;}
+   .ml5{margin-left: 5px;}
+   
+</style>

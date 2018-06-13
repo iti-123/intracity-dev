@@ -1,0 +1,906 @@
+<style>
+    .form-element-error {
+        border-bottom: 1px solid red;
+    }
+</style>
+<div class="intracity_page">
+<div class="book_main">
+<div class="col-lg-12 col-md-12 col-sm-12">
+<div class="right_serch_p">
+    <div class="right_search_bar">
+        <ul class="search_bar_tab">
+            <li><a href="javascript:void(0)">{{ getUserActiveRole }}</a><span class="crum-2"><i class="fa  fa-angle-right"></i></span></li>
+            <li><a href="#services">Services</a><span class="crum-2"><i class="fa  fa-angle-right"></i></span></li>
+            <li><a href="javascript:void(0)" class="active_c">Book Now </a></li>
+        </ul>
+    </div>
+
+    <!--Booking for intracity start-->
+    <div class="location_sec heght_100">
+
+
+        <form method="post" id="BookNowFormData" name="booking" novalidate>
+            <div ng-if="serviceIdIf == lkp_intracity_service_id || serviceIdIf == lkp_hyperlocal_service_id">
+                <div class="col-lg-3">
+                    <div class="data_head">
+                        <div class="text_box">
+                            <span class="font_normal_miduam">Routes</span>
+                            <span class="font_simple" ng-if="searchData.serviceId == lkp_intracity_service_id">
+                                <span ng-show="searchData.data.fromLocation"> {{ searchData.data.fromLocation.locality_name }} to {{ searchData.data.toLocation.locality_name }} </span>
+                                <span class="font_simple" ng-show="!searchData.data.fromLocation.locality_name">
+                                        {{ searchData.data.city.city_name}}
+                                </span>
+                            </span>
+                            <span class="font_simple" ng-if="searchData.serviceId == lkp_intracity_service_id && searchData.data.type == '1'">
+                                    {{ searchData.data.reporting.locality_name }}
+                            </span>
+                            <span class="font_simple" ng-if="cartData.lkp_service_id == lkp_hyperlocal_service_id">
+                                 <span ng-show="cartData.from_location">
+                                        {{ cartData.from_location }} to {{ cartData.to_location }}     
+                                </span> 
+                                <span ng-show="!cartData.from_location"> N/A </span>                                
+                            </span>
+                        </div>
+                        <div class="text_box">
+                            <!-- {{ cartData }} -->
+                            <span class="font_normal_miduam">PRICE</span>
+                            <span class="font_simple"> {{ cartData.price }}  /-</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="data_head">
+                        <div class="text_box">
+                            <span class="font_normal_miduam">DISPATCH DATE</span>
+                            <span class="font_simple" ng-if="cartData.lkp_service_id == lkp_intracity_service_id">
+                                {{ searchData.data.dispatchDate | date:"dd/MM/yyyy"  }}
+                            </span>
+                            <span class="font_simple" ng-if="cartData.lkp_service_id == lkp_hyperlocal_service_id">
+                                <span ng-if="searchData.data.departingDate"> {{ searchData.data.departingDate | date:"dd/MM/yyyy" }} </span> 
+                                <span ng-if="!searchData.data.departingDate"> N/A</span>
+                            </span>
+                        </div>
+                        <div class="text_box">
+                            <span class="font_normal_miduam">VEHICLE TYPE</span>
+                            <span class="font_simple" ng-show="cartData.vehicle">{{ cartData.vehicle }}</span>
+                            <span class="font_simple" ng-show="!cartData.vehicle">N/A</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="data_head">
+                        <div class="text_box">
+                            <span class="font_normal_miduam">VENDOR NAME</span>
+                            <span class="font_simple"> {{ data.seller.name }} </span>
+                        </div>
+                        <div class="text_box">
+                            <span class="font_normal_miduam">TRACKING</span>
+                            <span class="font_simple" ng-show="cartData.tracking_type"> {{ cartData.tracking_type | getobjectvalue:trackings }} </span>
+                            <span class="font_simple" ng-show="!cartData.tracking_type"> N/A </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="data_head">
+                        <div class="text_box">
+                            <span class="font_normal_miduam">TIME SLOT</span>
+                            <span class="font_simple" ng-if="searchData.data.time_slot">
+                                {{ searchData.data.time_slot }}  {{ searchData.data.period }}
+                            </span>
+                            <span class="font_simple" ng-if="!searchData.data.time_slot">
+                                    
+                                N/A
+                            </span>
+                        </div>
+                        <div class="text_box">
+                            <span class="font_normal_miduam">TRANSIT HOURS</span>
+                            <span class="font_simple" ng-show="cartData.transit_hour">{{ cartData.transit_hour }} Hrs</span>
+                            <span class="font_simple" ng-show="!cartData.transit_hour"> N/A </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+       <div class="row">
+            <div ng-if="serviceIdIf == lkp_bluecollar_service_id">
+                <div class="col-lg-3">
+                    <div class="data_head">
+                        <div class="text_box">
+                            <span class="font_normal_miduam">NAME</span>
+                            <span class="font_simple">
+                            {{ searchData.BlueCollarbookData.seller_first_name }}</span>
+                        </div>
+                        <div class="text_box">
+                            <span class="font_normal_miduam">Vehicle Type</span>
+                            <span class="font_simple" id="veh_type_list" ng-if="searchData.BlueCollarbookData.seller_vehicle_type.length > 0" ng-model='data.vehicleType' ng-repeat="vehType in searchData.BlueCollarbookData.seller_vehicle_type"> {{ vehType }} </span>
+
+                            <span class="font_simple" id="veh_type_list" ng-if="searchData.BlueCollarbookData.seller_vehicle_type.length == 0" ng-model='data.vehicleType'> {{ 'N/A' }} </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="data_head">
+                        <div class="text_box">
+                            <span class="font_normal_miduam">Experience</span>
+                            <span class="font_simple" id="experience" ng-model='data.experience'>
+                                {{ searchData.BlueCollarbookData.seller_experience }}
+                            </span>
+                        </div>
+                        <div class="text_box">
+                            <span class="font_normal_miduam">Qualification</span>
+                            <span class="font_simple" id="qualification" ng-model='data.qualification' ng-repeat="data in searchData.BlueCollarbookData.seller_qualification">{{   data}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="data_head">
+                        <div class="text_box">
+                            <span class="font_normal_miduam">Salary</span>
+                            <span class="font_simple" id="seller_salary" ng-model='data.seller_salary' > {{ searchData.BlueCollarbookData.seller_salary }} </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+           </div>
+            <div class="form_100">
+
+                <div ng-if="serviceIdIf == lkp_intracity_service_id || serviceIdIf == lkp_hyperlocal_service_id">
+                    <div class="load_type">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="select_form_intra mb-15">
+                                <select required id="locations" name="source_locations" ng-model="data.source_locations" ng-options="y.location_type_name for (x, y) in locations" class="selectpicker" selectpicker>
+                                <option value="">Source – Location Type *</option>
+                                </select>
+                            <span class="help-inline" style="color:red;" ng-show="booking.source_locations.$dirty && booking.source_locations.$invalid">Please select source – location type </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="select_form_intra mb-15">
+                                <select required id="destination"  name="destination_locations" ng-model="data.destination_locations" ng-options="y.location_type_name for (x, y) in locations" class="selectpicker" selectpicker>
+                                    <option value="">Destination – Location Type *</option>
+                                </select>
+                            <span class="help-inline" style="color:red;" ng-show="booking.destination_locations.$dirty && booking.destination_locations.$invalid">Please select destination – location type </span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="select_form_intra mb-15">
+                                <select required id="packaging" name="packaging_type_name" ng-model="data.packings" ng-options="y.packaging_type_name for (x, y) in packagingtypes" class="selectpicker" selectpicker>
+                            <option value="">Packaging Type * </option>
+                        </select>
+                            <span class="help-inline" style="color:red;" ng-show="booking.packaging_type_name.$dirty && booking.packaging_type_name.$invalid">Please select packaging type </span>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="load_type">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="date_selection select_form_intra mb-15">
+                            <span class="left_v_from">
+                        <input type="text" id="valid_to_date" name="consignment_pickup_date" required autocomplete="off" tocalendar ng-model="data.consignment_pickup_date" class="date_p input_ani" >
+                        <label class="lbl_text2 padg_l">Consignment Pickup Date<span>*</span></label>
+                            </span>
+
+                            <span class="help-inline" style="color:red;" ng-show="booking.consignment_pickup_date.$dirty && booking.consignment_pickup_date.$invalid">Please select consignment pickup date </span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <select required ng-model="data.consignment_type" name="consignment_type" ng-options="consignment_type for consignment_type in consignment" class="selectpicker" selectpicker> 
+                                <option value="">Consignment Type *</option>
+                            </select>
+                         <span class="help-inline" style="color:red;" ng-show="booking.consignment_type.$dirty && booking.consignment_type.$invalid">Please select consignment type </span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input id="consignment_value" type="text" name="consignment_value" ng-minlength="2" ng-maxlength="7" ng-required="true" ng-pattern="/^[0-9]*$/" ng-model="data.consignment_value" class="input_ani clsMobileno">
+                            <label class="lbl_text2">Consignment Value <span>*</span></label>
+                            <span class="help-inline " style="color:red;" ng-show="booking.consignment_value.$dirty && booking.consignment_value.$invalid || booking.consignment_value.$error.pattern">invalid consignment value.</span>
+                            <span class="form-error hide" ng-show="booking.consignment_value.$error.pattern">invalid consignment value.</span>
+                        </div>
+                    </div>
+
+
+                </div>
+                </div>
+               
+                <div class="col-lg-4">
+                    <h4 class="mid_heading">
+                        <div ng-if="serviceIdIf == lkp_intracity_service_id || serviceIdIf == lkp_hyperlocal_service_id">
+                                 Consignor Details
+                        </div>
+                        <div ng-if="serviceIdIf == lkp_bluecollar_service_id" class="align-ment">
+                            Employer Details 
+                        </div>
+
+                    </h4>
+                </div>
+              
+                <div class="load_type">
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15" ng-class="{true: 'error'}[submitted && formOrder.name.$invalid]">
+                            <input required id="consignor_name" type="text" ng-model="data.consignor.name" name="consignor_name" class="input_ani">
+                            <!--<label class="lbl_text2">Consignor Name <span>*</span></label>-->
+                            <span class="help-inline" style="color:red;" ng-show="booking.consignor_name.$dirty && booking.consignor_name.$invalid">Please enter consignor name</span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input required id="consignor_mobile"  type="text" ng-model="data.consignor.mobile" name="consignor_mobile" class="input_ani clsMobileno"
+                             ng-minlenth="10"  ng-maxlength="10">
+                            <!--<label class="lbl_text2">Mobile <span>*</span></label>-->
+
+                            <span class="help-inline" style="color:red;" ng-show="booking.consignor_mobile.$dirty && booking.consignor_mobile.$invalid && (booking.consignor_mobile.$error.maxlength || booking.consignor_mobile.$error.minlength)">Please enter consignor valid mobile no</span>
+
+                        </div>                 
+                         
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input required id="consignor_email" type="email" ng-model="data.consignor.email" name="consignor_email" class="input_ani clsConsignEmail">
+                            <!--<label class="lbl_text2">Email id</label>-->
+                            <span class="help-inline" style="color:red;" ng-show="booking.consignor_email.$dirty && booking.consignor_email.$invalid">Please enter consignor valid email</span>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="load_type">
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15" ng-class="{true: 'error'}[submitted && formOrder.consignee_address1.$invalid]">
+                            <input required type="text" id="consignor_address1" class="input_ani" ng-model="data.consignor.address1" name="consignor_address1">
+                            <!--<label class="lbl_text2">Address 1 <span> * </span></label>-->
+                            <span class="help-inline" style="color:red;" ng-show="booking.consignor_address1.$dirty && booking.consignor_address1.$invalid">Please enter consignor address</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input id="address2" type="text" class="input_ani" ng-model="data.consignor.address2">
+                            <!--<label class="lbl_text2">Address 2 </label>-->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input id="address3" type="text" class="input_ani" ng-model="data.consignor.address3">
+                            <!--<label class="lbl_text2">Address 3 </label>-->
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="load_type">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input type="text" id="consignorPinCode"  maxlength="6" class="input_ani {{errorClass(formError.currentAddress.pincode)}}" name="currentAddressPincode"
+                                required="" ng-model="data.consignor.pin_code"
+                                typeahead="name as (sugg.city_name +', '+ sugg.statename) for sugg in autocompCity('consignor', $viewValue)"
+                                typeahead-on-select="selectedCity($item, $model, $label, 'consignor')" autocomplete="off">
+
+
+                            <!--<label class="lbl_text2">Pin Code</label>-->
+                            <!-- <span class="form-error" >Enter pincode</span> -->
+
+                            <!--Previous City  -->
+
+                            <!-- <input required type="text" id="pin_code" class="input_ani clsPinCode" maxlength="6" ng-model="data.consignor.pin_code">
+                            <label class="lbl_text2">Pin code <span> * </span></label> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input type="text" id="consignor_city" class="input_ani" ng-model="data.consignor.city">
+                            <!--<label class="lbl_text2">City </label>-->
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input id="consignor_state" type="text" class="input_ani" ng-model="data.consignor.state">
+                            <!--<label class="lbl_text2">State </label>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <h4 class="mid_heading">
+
+                        <div ng-if="serviceIdIf == lkp_intracity_service_id || serviceIdIf == lkp_hyperlocal_service_id">
+                            Consignee Details
+                        </div>
+                        <div ng-if="serviceIdIf == lkp_bluecollar_service_id">
+                            Employee Details
+                        </div>
+
+                    </h4>
+                </div>
+
+
+                <div class="load_type">
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input required type="text" id="consignee_name" name="consignee_name" class="input_ani" ng-model="data.consignee.name" no-special-char >
+                            <label class="lbl_text2">
+
+
+                                <div ng-if="serviceIdIf == lkp_intracity_service_id || serviceIdIf == lkp_hyperlocal_service_id">
+                                    Consignee Name<span>*</span>
+                                </div>
+                                <div ng-if="serviceIdIf == lkp_bluecollar_service_id">
+                                    Employee Name<span>*</span>
+                                </div>
+
+                                 </label>
+                            <span class="help-inline" style="color:red;" ng-show="booking.consignee_name.$dirty && booking.consignee_name.$invalid">Please enter <span ng-if="serviceIdIf == lkp_intracity_service_id || serviceIdIf == lkp_hyperlocal_service_id">consignee</span><span ng-if="serviceIdIf == lkp_bluecollar_service_id">employee</span> name</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input required id="consignee_mobile" name="consignee_mobile" type="text" class="input_ani clsMobileno" maxlength="10"  minlength="10" ng-model="data.consignee.mobile">
+                            <label class="lbl_text2">Mobile <span>*</span></label>
+                            <span class="help-inline" style="color:red;" ng-show="booking.consignee_mobile.$dirty && booking.consignee_mobile.$invalid && (booking.consignee_mobile.$error.maxlength ||  booking.consignee_mobile.$error.minlength)"> 
+
+                            <span ng-if="serviceIdIf == lkp_intracity_service_id || serviceIdIf == lkp_hyperlocal_service_id">Consignee</span>
+
+                            <span ng-if="serviceIdIf == lkp_bluecollar_service_id">Employee</span> mobile should be 10 digit</span>
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input id="consignee_email_id" ng-pattern = '/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i' type="email" name="consignee_email" class="input_ani" ng-model="data.consignee.email_id">
+                            <label class="lbl_text2">Email id  </label>
+                            <span class="help-inline" style="color:red;" ng-show="booking.consignee_email.$dirty && booking.consignee_email.$invalid">Please enter <span ng-if="serviceIdIf == lkp_intracity_service_id || serviceIdIf == lkp_hyperlocal_service_id">consignee</span>
+                            <span ng-if="serviceIdIf == lkp_bluecollar_service_id">employee</span> valid email</span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="load_type">
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input required id="consignee_address1" type="text" class="input_ani" no-special-char ng-model="data.consignee.address1">
+                            <label class="lbl_text2">Address 1 <span> * </span></label>
+                            <span class="help-inline" style="color:red;" ng-show="booking.consignee_address1.$dirty && booking.consignee_address1.$invalid">Please enter <span ng-if="serviceIdIf == lkp_intracity_service_id || serviceIdIf == lkp_hyperlocal_service_id">consignee</span>
+                            <span ng-if="serviceIdIf == lkp_bluecollar_service_id">employee</span> address</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input type="text" id="consignee_address2" no-special-char class="input_ani" ng-model="data.consignee.address2">
+                            <label class="lbl_text2">Address 2 </label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input id="consignee_address3" type="text" no-special-char class="input_ani" ng-model="data.consignee.address3">
+                            <label class="lbl_text2">Address 3 </label>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="load_type">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+
+                            <input type="text" name="consignee_pin_code" id="consignee_pin_code" class="input_ani2 " name="currentAddressPincode" required="" maxlength="6"
+                                typeahead="name as (sugg.city_name +', '+ sugg.statename) for sugg in autocompCity('consignee', $viewValue)" ng-model="data.consignee.pin_code"
+                                typeahead-on-select="selectedCity($item, $model, $label, 'consignee')" autocomplete="off">
+
+                            <label class="lbl_text2">Pin code <span> * </span></label>
+                             <span class="help-inline" style="color:red;" ng-show="booking.consignee_pin_code.$dirty && booking.consignee_pin_code.$invalid">Please enter <span ng-if="serviceIdIf == lkp_intracity_service_id || serviceIdIf == lkp_hyperlocal_service_id">consignee</span>
+                             <span ng-if="serviceIdIf == lkp_bluecollar_service_id">employee</span> pin code</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input id="consigneecity_landmark" type="text" class="input_ani " ng-model="data.consignee.landmark">
+                            <label class="lbl_text2 {{activeClass}}">Landmark </label>
+                        </div>
+                    </div> 
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input id="consignee_state" type="text" class="input_ani" ng-model="data.consignee.state">
+                            <label class="lbl_text2 {{activeClass}}">State </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="load_type">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input id="consigneecity" type="text" class="input_ani " ng-model="data.consignee.city">
+                            <label class="lbl_text2 {{activeClass}}">City </label>
+                        </div>
+                    </div>                    
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input id="additional_details" type="text" class="input_ani" ng-model="data.consignee.additional_details">
+                            <label class="lbl_text2">Additional Details </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="load_type padding">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="post_public">
+                            <div class="admin_input">
+                                <input id="AcceptTermAndCond" type="checkbox" ng-model="data.need_insurance">
+                                <label for="AcceptTermAndCond"><span class="b_text">Need Insurance</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="load_type">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="div_btn">
+                            <div class="need-insurance Confirm_post_btn pull-left" style="display:none">
+                                Need Insurance
+                            </div>
+                             <input type="submit"  ng-disabled="booking.$invalid" ng-model="data.checkout" ng-click="submitBookNow(data,'checkout')" value="Checkout" class="Confirm_post_btn" ng-click="submitted=true">
+                            <!-- <input type="submit" class="button_serch" name="button" value="Float RFP" ng-click="submitted=true" /> -->
+                             <input type="submit" ng-model="data.add_to_cart"  ng-disabled="booking.$invalid" ng-click="submitBookNow(data,'add_to_cart')" value="Add To Cart" class="Add_Routes_btn" ng-click="submitted=true">
+                            <!-- <input type="submit" ng-model="data.add_to_cart" value="Add To Cart" class="Add_Routes_btn" ng-disabled="booking.$invalid"> -->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+    <!--Booking for intracity end-->
+
+
+
+    <!--end of location_sec-->
+
+
+    <!--Booking for bluecollar start-->
+    <!--Bookinf for bluecollar end-->
+
+
+
+
+</div>
+<!--end of right_search_p-->
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+<!-- Insurance Modal Start -->
+
+<div class="modal fade in" id="insurance_premium" style="display: none;" aria-hidden="false">
+<div class="modal-dialog modal-lg confirmation-message">
+<div class="modal-content">
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h4 class="modal-title">Premium Calculation</h4>
+</div>
+<div class="modal-body">
+    <form method="POST" action="#" accept-charset="UTF-8" id="insurance_premium_form" name="insurance_premium_form" class="form-inline"
+        novalidate><input name="_token" type="hidden" value="jTfr033tCkOKLvviGM3ohpfRjgBUJ3PBPk8N9hzX">
+        <div class="col-sm-12 margin-top">
+            <div class="col-sm-3 margin-top">
+                <label>Cargo Type</label>
+            </div>
+            <div class="col-sm-9 margin-top">
+                <div>
+                    Air conditioners and Chillers
+                    <input type="hidden" id="cargo_type_param" name="cargo_type_param" value="Air conditioners and Chillers">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 margin-top">
+            <div class="col-sm-3 margin-top">
+                <label>Cargo Description</label>
+            </div>
+            <div class="col-sm-9 margin-top">
+                <div>
+                    <textarea class="form-control form-control1 clsTermsConditions" id="cargo_description" rows="5" placeholder="Cargo Description"
+                        name="cargo_description" cols="50"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 margin-top">
+            <div class="col-sm-3 margin-top">
+                <label>Sum Insured</label>
+            </div>
+            <div class="col-sm-9 margin-top">
+                <div>
+                    <input class="form-control form-control1" id="sum_insured" placeholder="Sum Insured *" readonly name="sum_insured" type="text"
+                        value="">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 margin-top">
+            <div class="col-sm-3 margin-top">
+                <label>Basis of Valuation Cargo</label>
+            </div>
+            <div class="col-sm-9 margin-top">
+                <div class="error_align_div">
+                    <div class="normal-select">
+                        <div>
+                            <select class="selectpicker bs-select-hidden" id="bov" name="bov"><option value="" selected="selected">Please Select</option><option value="0">0 %</option><option value="5">5 %</option><option value="10">10 %</option><option value="15">15 %</option><option value="20">20 %</option></select>
+                            <div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown"
+                                    data-id="bov" title="Please Select"><span class="filter-option pull-left">Please Select</span>&nbsp;<span class="bg-caret"><span class="caret"></span></span></button>
+                                <div class="dropdown-menu open">
+                                    <ul class="dropdown-menu inner" role="menu">
+                                        <li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Please Select</span><span class="fa fa-check check-mark"></span></a></li>
+                                        <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">0 %</span><span class="fa fa-check check-mark"></span></a></li>
+                                        <li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">5 %</span><span class="fa fa-check check-mark"></span></a></li>
+                                        <li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">10 %</span><span class="fa fa-check check-mark"></span></a></li>
+                                        <li data-original-index="4"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">15 %</span><span class="fa fa-check check-mark"></span></a></li>
+                                        <li data-original-index="5"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">20 %</span><span class="fa fa-check check-mark"></span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 margin-top">
+            <div class="col-sm-8 margin-top" id="calculated_insurance"></div>
+            <div class="col-sm-4 margin-top">
+                <input type="hidden" id="insured_amount" name="insured_amount" value="">
+                <button class="btn theme-btn flat-btn pull-right hide-icon" name="ok" id="insurance_ok_btn" type="button" style="display: none;">Ok</button>
+                <button class="btn theme-btn flat-btn pull-right" name="getpremium" id="getpremium" type="button">Get Premium</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+</div>
+
+<!-- Insurance Modal End -->
+
+
+
+<div class="modal fade" id="booknow-popup" role="dialog">
+<div class="modal-dialog modal-lg exta-large">
+<div class="modal-content waitText" style="overflow: hidden;padding: 0 10px 10px">
+<div class="modal-body" id="responsetext">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h2 class="modal-title text-center1">General Services Agreement</h2>
+    </div>
+    <div class="modal-body-inner">
+
+        <h4>Disclaimer</h4>
+
+        <p>LogiStiks.com is acting as the market place” means the central online portal established for providing
+            logistics service offerings like but not limited to transportation, warehouse, handling, packaging
+            &amp; packers and movers services, on a pan india level. Both the parties to this GSA that means
+            the buyer and the seller should ensure that the information provided by them is accurate to do the
+            transaction on the portal</p>
+        <p>The information given by buyer and seller on the sign up page is true and fair to the best of their knowledge
+            and logistiks.com is not responsible in case of discrepancy if any.</p>
+
+        <div class="col-md-6">
+
+            <h4>Buyer Details</h4>
+
+            <ul class="list-block1i">
+
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Buyer Name: <span>{{ !empty(values.consignee.name) && values.consignee.name || 'N/A' }}</span></li>
+            <div ng-if="serviceIdIf == lkp_intracity_service_id || serviceIdIf == lkp_hyperlocal_service_id">
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignment Type: <span id="consignment_type">Commercial</span></li>
+
+                <!-- <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> From Location:
+                    <span id="from_location">Hyderabad</span>
+                </li>
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> To Location:
+                    <span id="from_location">Mumbai</span>
+                </li> -->
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Dispatch Date:
+                    <span id="pickup_con_date">{{ !empty(value.consignee.consignment_pickup_date) && value.consignee.consignment_pickup_date || 'N/A' }}</span>
+                </li>
+
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+
+                    <span>Delivery Date:</span>
+                    <span>N/A</span>
+
+                </li>
+                
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Load Type: {{ 
+                    !empty(cartData.m_type.load_type) && cartData.m_type.load_type || 'N/A' }}
+                </li>
+                <!--<li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Quantity :10</li>-->
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Vehicle Type: {{ !empty(cartData.vehicle) && cartData.vehicle || 'N/A' }}
+                </li>
+
+
+
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Source Location Type:
+                    <span id="source_location">Business with Dock or Forklift</span>
+                </li>
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Destination Location Type:
+                    <span id="destination_location">Business without Dock or Forklift</span>
+                </li>
+        </div>
+
+
+
+        <div ng-if="serviceIdIf == lkp_bluecollar_service_id">
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> 
+                    Vehicle Type: <span id="bluecollar_vehicle_type">Commercial</span></li>
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    Experience : <span id="bluecollar_experience">Commercial</span></li>
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    Qualification : <span id="bluecollar_qualification">Commercial</span></li>
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    Salary : <span id="bluecollar_seller_salary">Commercial</span></li>
+        </div>
+
+
+
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignor Name:<span id="consignor">{{ !empty(values.consignor.name) && values.consignor.name || 'N/A' }}</span></li>
+
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignor Mobile:<span id="consignor_mobile">{{ !empty(values.consignor.mobile) && values.consignor.mobile || 'N/A' }}</span></li>
+
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignor Address:<span id="consignor_adddress">{{ !empty(values.consignor.address1) && values.consignor.address1 || 'N/A' }} {{ !empty(values.consignor.address2) && values.consignor.address2 || '' }}</span></li>
+
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignee Name:<span id="consignee_name">{{ !empty(values.consignee.name) && values.consignee.name || 'N/A' }}</span></li>
+
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignee Mobile:<span id="consignee_mobile">{{ !empty(values.consignee.mobile) && values.consignee.mobile || 'N/A' }}</span></li>
+
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignee Address:<span id="consignee_address">{{ !empty(values.consignee.address1) && values.consignee.address1 || 'N/A' }} {{ !empty(values.consignee.address2) && values.consignee.address2 || '' }}</span></li>
+
+                 
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignee Landmark:<span id="consignee_address">{{ !empty(values.consignee.landmark) && values.consignee.landmark || 'N/A' }} </span></li> 
+
+
+                <!--li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Seller Details</li-->
+                <h4>Seller Details</h4>
+
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Seller Name:
+                    <span id="seller-name"> {{ !empty(values.seller.name) && values.seller.name || 'N/A' }}</span>
+
+                </li>
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Year of ESTD:
+                    <span id="seller-year-of-estd"> {{ !empty(values.seller.established_in) && values.seller.established_in || 'N/A' }}</span>
+                </li>
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Seller Address:
+                    <span id="seller-address">{{ !empty(values.seller.address1) && values.seller.address1 || 'N/A' }} {{ !empty(values.seller.address2) && values.seller.address2 || 'N/A' }}</span>
+                </li>
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> GTA Number:
+                    <span id="seller-gta">{{ values.seller.gta && values.seller.gta || 'N/A' }}</span>
+                </li>
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Service Tax Number:
+                    <span id="seller-stn-number">{{ !empty(values.seller.service_tax_number) && values.seller.service_tax_number || 'N/A' }}</span>
+                </li>
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> TIN Number:
+                    <span id="seller-tin-number">{{ values.seller.tin && values.seller.tin || 'N/A' }}</span>
+
+                </li>
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Place of Business:<span id="seller-place-of-business">{{ !empty(values.seller.principal_place) && values.seller.principal_place || 'N/A' }}</span>
+                </li>
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Landline Number:
+                    <span id="seller-landline">{{ !empty(values.seller.contact_landline) && values.seller.contact_landline || 'N/A' }}</span>
+                </li>
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Mobile Number:<span id="seller-mobile">{{ !empty(values.seller.contact_mobile) && values.seller.contact_mobile || 'N/A' }}</span></li>
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Email ID: <span id="seller-email">{{ !empty(values.seller.contact_email) && values.seller.contact_email || 'N/A' }}</span>
+                </li>
+
+                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Order Total:Rs.{{cartPrice.payload.price}}
+                    <span id="seller-order-total"></span>
+
+                </li>
+
+
+
+            </ul>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <h4>Seller Terms &amp; Conditions</h4>
+
+            <strong>Documentation</strong>
+
+            <p>Any commercial shipment picked up for transit on Indian Ground network should have the following
+                documents:<br>
+
+                <br> 1. TIN / CST no. of shipper &amp; consignee in case of commercial transaction is mandatory
+                in all states<br>
+
+                <br> 2. Shipper is under obligation to mention valid TIN / CST no of self and consignee on the
+                commercial invoice and regulatory paperwork at the time of handing over the shipment to Transport
+                service provider<br>
+
+                <br> 3. Shipments consigned to individuals who do not have TIN no, a declaration from consignee
+                / shipper that the goods are not for sale and for personal consumption apart from other conditions
+                as laid down in respective States VAT Regulations.<br>
+
+                <br> 4. E-waybill generation has been implemented in most of the states. Consignee/ shipper is
+                expected to comply registration process and follow online process for e-waybill generation</p>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <p>
+                Any commercial shipment picked up for transit on Indian Ground network should have the following documents: <br>                            1. TIN / CST no. of shipper &amp; consignee in case of commercial transaction is mandatory in
+                all states<br> 2. Shipper is under obligation to mention valid TIN / CST no of self and consignee
+                on the commercial invoice and regulatory paperwork at the time of handing over the shipment to
+                Transport service provider<br> 3. Shipments consigned to individuals who do not have TIN no,
+                a declaration from consignee / shipper that the goods are not for sale and for personal consumption
+                apart from other conditions as laid down in respective States VAT Regulations.
+                <br> 4. E-waybill generation has been implemented in most of the states. Consignee/ shipper is
+                expected to comply registration process and follow online process for e-waybill generation
+                <br></p>
+            <h4>Disclaimer:</h4>
+            <p>
+                State VAT Rules &amp; Regulations are subject to change from time to time. Shippers / Consignees are, therefore, advised
+                to seek independent verification before tendering any consignment Regulatory paperwork is based
+                on the Rules and Regulations of the State concerned. Practice could be different than the Rules
+                &amp; Regulations in some of the States
+            </p>
+
+            <p>For this transaction from
+                <span>Hyderabad</span> to
+
+                <span>Mumbai</span> following documents are needed :</p>
+
+        </div>
+
+
+
+        <div class="clearfix"></div>
+
+        <div class="col-md-6">
+
+
+
+            <input type="hidden" name="from_location_id" id="from_location_id" value="790">
+            <input type="hidden" name="to_location_id" id="to_location_id" value="517">
+            <input type="hidden" name="buyerQuoteId" id="buyerQuoteId" value="249">
+
+            <ul class="popup-list list-block1i" id="gsa_documents_list">
+                <li>
+                    <h4>To be provided by seller:</h4>
+                </li>
+                <li><i class="fa fa-check"></i> Lorry Receipt
+                </li>
+                <li>
+                    <h4>To be provided by buyer:</h4>
+                </li>
+                <li><i class="fa fa-check"></i> Seller Invoice
+                </li>
+                <li><i class="fa fa-check"></i> Form 49A mandatory
+                </li>
+                <li><i class="fa fa-check"></i> 1)For saleable goods tax invoice with TIN no. and form 8F. 2) Stock
+                    Transfer - Delivery note( Form 15) and Form 8F. Personal transaction requires certificate
+                    of ownership(Form 16 ). Job work transaction- customer should meet the local STO and obtain
+                    permis
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="col-md-12 padding-none text-right">
+
+            <div class="modal-footer">
+                <input type="hidden" name="toggle_seller_to_role_id" id="toggle_seller_to_role_id">
+                <input type="hidden" name="alldata" id="alldata" value="">
+                <input type="hidden" name="ajaxurl" id="ajaxurl" value="/setbuyerbooknow">
+                <input type="hidden" name="ischeckout" id="ischeckout" value="1">
+                <input type="hidden" name="service_id" id="service_id" value="1">
+                <button type="button" class="btn flat-btn red-btn" id="acceptterms" name="acceptterms">I Accept</button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+<!--General Services Agreement end -->
+
+
+<div class="modal fade" id="cartModal" role="dialog">
+<div class="modal-dialog modal-lg">
+<div class="modal-content waitText" style="overflow: hidden;padding: 0 10px 10px">
+<div class="modal-body popup">
+    Item is added to cart successfully
+</div>
+<div>
+    <button type="button" class="add_btn_cart pull-right" data-dismiss="modal" ng-click="closeCartModel()">OK</button>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript" src="bootstrap/js/common.js"></script>
+
+<style type="text/css">
+.align-ment.ng-scope {
+padding-left: 13px;
+}
+html input[type="text"],input[type="email"][disabled]{
+opacity: 0.85;
+/* border: none; */
+background-color: #fff;
+}
+
+.input_ani:valid~label {
+top: 20px;
+font-size: 13px;
+-moz-transition: .3s;
+-o-transition: .3s;
+-webkit-transition: .3s;
+transition: .3s;
+color: #696767;
+font-size: 16px;
+}  
+</style>
+<script>
+ $(document).ready(function(){
+    $(".input_ani2").focusin(function(){
+        $(this).next().addClass("active");
+        $(this).next().next().addClass("active");
+
+
+    });
+     $(".input_ani2").focusout(function(){
+   if($(this).val()==""){
+    $(this).next().next().removeClass("active");
+     $(this).next().removeClass("active");
+    }
+    else{
+       $(this).next().next().addClass("active");
+        $(this).next().addClass("active");
+    }
+
+
+    });
+    
+    
+    
+  });
+ </script>

@@ -1,0 +1,309 @@
+<style type="text/css">
+.logo {
+float: left;
+padding: 8px 0px;
+}
+.logo img {
+max-width: 108px;
+}
+.logo_base {
+display: table-cell;
+width: 127px;
+vertical-align: middle;
+}
+.t_nav {
+display: table-cell;
+vertical-align: middle;
+}
+.right_notification {
+display: table-cell;
+vertical-align: middle;
+}
+.dis_table {
+display: table;
+width: 100%;
+}
+</style>
+<div class="container-fluid" ng-controller="HeaderCtrl">
+    <div class="row">
+        <div class="dis_table">
+            <div class="logo_base">
+                <div class="logo">
+                    <a href="index.html"><img src="images/logo.jpg" alt="logistiks logo"></a>
+                </div>
+            </div>
+            <div class="t_nav">
+                <div class="top_nav">
+                    <div class="top_menu" style="position:relative;">
+                        <ul>
+                            <li><a href="#">Market Place</a></li>
+                            <li><a href="#community-profile">Community</a></li>
+                            <li><a href="#">Dealers</a></li>
+                            <li><a href="#">Tools</a></li>
+                            <li>
+                                <div class="search_i"><i class="glyphicon glyphicon-search"></i></div>
+                            </li>
+                        </ul>
+                        <div class="open_search">
+                            <div class="search_div">
+                                <input id="" placeholder="Search" name="search_key" value="" type="search"
+                                class="serach_contarol">
+                                <button type="button" class="close_btn_close">×</button>
+                            </div>
+                            <ul class="search_menu">
+                                <li><a search_type="messages"><span class="fa fa fa-bars"></span>Messages</a></li>
+                                <li><a search_type="posts"><span class="fa fa fa-area-chart"></span>Posts</a>
+                            </li>
+                            <li><a search_type="orders"><span class="fa fa fa-bank"></span>Orders</a></li>
+                            <li><a search_type="community"><span class="fa fa fa-apple"></span>Community</a></li>
+                            <li><a search_type="dealers"><span class="fa fa fa-beer"></span>Dealers</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="search"></div> -->
+            </div>
+        </div>
+        <div class="right_notification">
+            <div class="top_notification">
+                <div class="log-div-inner">
+                    <ul class="nav pull-right log-dropdown" id="masterModalType" data-type="">
+                        <li class="plain-menu"><a href="#message">
+                            <span> <i class="fa fa-envelope-o log-icon"></i>
+                                <span class="count" ng-if="count != 0">{{count}}</span>
+                                <span class="count" ng-if="count == 0"></span>
+                            </span> <span
+                        class="log-name">Messages</span> </a>
+                        <div class="message-dropdown" ng-if="messages != ''">
+                            <ul class="messag">
+                                <li>
+                                    <table class="table message-area">
+                                        <tr ng-repeat="(key, value) in messages">
+                                            <td class="message-pic">
+                                                <i class="fa fa-user"></i>
+                                            </td>
+                                            <td class="message-content">
+                                                <p class="messagesender">MINDZ<span class="message-date">{{ value.created_at | dateStringFormat }}</span></p>
+                                                <p class="message-title"><a href="#getmessagedetails" ng-click="updateMessage(value)">{{value.subject}}</a></p>
+                                                <p class="dashboard_read">{{ value.message | limitTo:30 }} </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- {{totalCount.payload.count.postCount}} -->
+                    <li class="plain-menu">
+                        <a href="javascript:void(0)" class="" ng-click="showHeaderModal('post-master')" > <span> <i
+                        class="fa fa-clipboard log-icon"></i> 
+                        <span class="count"> {{ totalCount.payload.count.postCount }} </span>
+                        <!-- <span class="count" ng-if="getUserActiveRole == 'Seller'">{{ sellerPostCount }}</span> </span>  -->
+                        <span class="log-name">Posts </span>
+                    </a>
+                    <div class="post-pre-dropdown">
+                        <ul>
+                            <li>
+                                <table class="table post-area">
+                                    <!-- {{postMasterCounts}} -->
+                                    <tbody ng-repeat="(key, value) in postMasterCounts">
+                                        {{value.imagePath}}
+                                        <tr>
+                                            <td class="post-pic">
+                                                <img src="{{serviceImage}}{{value.imagePath}}" width="50" title="{{value.name}}">
+                                            </td>
+                                            <td class="post-content">
+                                                <div class="info-links" style="display: block;">
+                                                    <a href="#message"><i class="fa fa-envelope-o" title="Messages"></i> <span class="badge">{{value.msg_count}}</span></a>
+                                                    <a ng-click="service_redirect(value.url,value.serviceId);" href="javascript:void(0)"><i class="fa fa-file" title="Enquiries"></i> <span class="badge">{{enquiries_quotes}}</span></a>
+                                                    <a ng-click="service_redirect(value.url,value.serviceId);" href="javascript:void(0)"><i class="fa fa-thumbs-o-up" title="Leads"></i> <span class="badge">{{value.leads}}</span></a>
+                                                    <a ng-click="service_redirect(value.url,value.serviceId);" href="javascript:void(0)"><i class="fa fa-line-chart" title="Market Analytics"></i> <span class="badge hide" style="display: block;">0</span></a>
+                                                    <a ng-click="service_redirect(value.url,value.serviceId);" href="javascript:void(0)"><i class="fa fa-file-text-o" title="Documentation"></i> <span class="badge hide" style="display: block;">{{value.doc_count}}</span></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                             
+                                    </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                    </div>
+                
+            </li>
+            
+            <li class="plain-menu order"><a href="javascript:void(0)" ng-click="showHeaderModal('order-master')">
+                <span> <i class="fa fa-rupee log-icon"></i>  <span class="count">{{totalCount.payload.count.orderCount}}</span> 
+                <span class="count"></span> </span> <span
+            class="log-name">Orders</span> </a>
+            <div class="post-pre-dropdown">
+                <ul>
+                    <li>
+                        <table class="table post-area">
+                            <tbody ng-repeat="(key, value) in orderMasterCounts">
+                                <tr>
+                                    <td class="post-pic">
+                                        <img src="{{serviceImage}}/{{value.imagePath}}" width="50" title="{{value.name}}">
+                                    </td>
+                                    <td class="post-content">
+                                        <div class="info-links" style="display: block;">
+                                            <a href="#message"><i class="fa fa-envelope-o" title="Messages"></i> <span class="badge">{{value.msgc}}</span></a>
+                                            <a ng-click="service_redirect_ord(value.url,value.serviceId);" href="javascript:void(0)"><i class="fa fa-file-text-o" title="Documentation"></i> <span class="badge hide" style="display: block;">{{value.docs}}</span></a> 
+                                        </div>
+                                    </td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="plain-menu"><a href="javascript:void(0)"> <span> <i
+            class="fa fa-users log-icon"></i> <span class="count"></span> </span> <span
+        class="log-name">Networks</span> </a>
+    </li>
+    <li class="dropdown user_last">
+        <a class="dropdown-toggle" data-toggle="dropdown"> <span> <i
+        class="fa fa-user log-icon"></i> <b class="caret"></b> </span> <span
+        class="log-name">
+        
+        {{ UserName }}
+        
+    </span> </a>
+    <ul class="dropdown-menu home-dropdown-menu">
+        <li><a href="javascript:void(0)">{{ UserName }}</a></li>
+        <li><a href="#profile-edit">My Profle</a></li>
+        <li><a href="javascript:void(0)">Change Password</a></li>
+        <li><a href="javascript:void(0)">Search History</a></li>
+        <li><a href="javascript:void(0)" ng-click="logout()">Logout</a></li>
+    </ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div ng-include="'templates/elements/post-master-popup.html'"></div>
+<script type="text/javascript">
+$(document).ready(function () {
+$(".user_last").hover(function () {
+$(".home-dropdown-menu").fadeIn();
+}, function () {
+$(".home-dropdown-menu").hide();
+});
+$(".search_i").click(function () {
+$(".open_search").show();
+});
+$(".close_btn_close").click(function () {
+$(".open_search").hide();
+});
+});
+</script>
+
+<style type="text/css">
+.post-pre-dropdown{
+position: absolute;
+left: 0;
+top: 100%;
+height: auto;
+width: 100%;
+z-index: 99999;
+display: none;
+}
+.post-pre-dropdown ul {
+    left: -150px;
+    position: relative;
+    width: 380px;
+    max-height: 285px;
+    overflow: auto;
+    border: solid #c6c6c6;
+    border-width: 1px;
+    border-top-color: #efefef;
+    min-height: 150px;
+    background-color: #fff;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+.post-pre-dropdown ul li{ width: 100%; padding:0px; }
+.post-pre-dropdown ul li .post-area {
+    display: table;
+    width: 100%;
+    margin: 0 !important;
+    border: solid #ffffff;
+    border-width: 0 0 5px;
+}
+.post-pre-dropdown ul li .post-area tr:hover {
+    background-color: #f6f6f6;
+}
+.post-pre-dropdown ul li .post-area td {
+    padding: 2px 14px !important;
+    border-top: 0 !important;
+    border-bottom: 1px solid #e2e2e2;
+    vertical-align: middle !important;
+}
+.post-pre-dropdown ul li tr:first-child td {
+    padding-top: 0 !important;
+}
+.post-pre-dropdown ul li .post-area td.post-pic {
+    padding-right: 0px !important;
+    width: 50px !important;
+}
+.post-pre-dropdown ul li .post-area td.post-content .info-links {
+    margin: 12px 0;
+        float: left;
+    text-align: left;
+}
+.post-pre-dropdown ul li .post-area td.post-content .info-links > a {
+    color: #666666;
+    padding: 0px 23px 0 5px;
+    position: relative;
+    line-height: 30px;
+}
+.info-links > a i {
+    margin-right: 4px;
+}
+.post-pre-dropdown ul li .post-area td.post-content .info-links > a:hover {
+    text-decoration: none;
+    color: #cc0000
+    }
+.post-pre-dropdown ul li .post-area td.post-content .badge {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 3px;
+    color: #ed3237;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    height: 13px;
+    line-height: 13px;
+    margin-left: 0;
+    min-width: 15px;
+    padding: 0;
+    position: absolute;
+    right: 3px;
+    text-align: center;
+    top: -6px;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+.plain-menu:hover .post-pre-dropdown{ display: block; }
+
+.plain-menu.order .post-pre-dropdown ul {
+    left: -150px;
+    position: relative;
+    width:220px;
+    max-height: 285px;
+    overflow: auto;
+    border: solid #c6c6c6;
+    border-width: 1px;
+    border-top-color: #efefef;
+    min-height: 150px;
+    background-color: #fff;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+</style>

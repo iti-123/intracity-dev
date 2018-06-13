@@ -1,0 +1,617 @@
+<style type="text/css">
+   .upload-fld
+   {
+     text-overflow: ellipsis;
+     width: 255px;
+   }
+</style>
+<div class="col-lg-12 col-md-12 col-sm-12">
+   <div class="right_serch_p">
+      <div class="right_search_bar">
+         <ul class="search_bar_tab">
+            <li><a href="#">{{getUserActiveRole}}</a><i class="fa  fa-angle-right"></i></li>
+            <li><a href="#">Services</a><i class="fa  fa-angle-right"></i></li>
+            <li><a href="javascript:void(0)" style="text-transform: capitalize;"> {{ setBreadCrumb }} Order Master Details</a><!-- <i class="fa  fa-angle-right"></i> --></li>
+         </ul>
+      </div>
+      <div class="div_100">
+         <div class="col-lg-9">
+            <div class="row">
+               <ul class="buyer_ul">
+                  <li class="tab_10 active_buyer" data-tab="Messages">
+                     <a href="javascript:void(0);">All</a>
+                  </li>
+                  <li class="tab_10" data-tab="Offers">
+                     <a href="javascript:void(0);">PUBLIC</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="col-md-3">
+            <div class="back_post">
+            </div>
+         </div>
+      </div>
+      <!-- {{post}} -->
+      <div class="white_bg">
+         <div class="c_8">
+            <div class="col-md-2 data-fld">
+               <span class="data-head">POST TO:</span>
+               <!-- {{ orderlist }} -->
+               <span class="data-value break-word">
+               {{ order.isPublic==0 && 'Public' || 'Private' }} 
+               </span>
+            </div>
+            <div ng-if="filterData.serviceType != 23" class="col-md-2 data-fld">
+               <span class="data-head">VALID FROM</span>
+               <span class="data-value break-word" ng-show="showIntraHyper">
+               {{ order.valid_from != '0000-00-00' && (order.valid_from | date:"dd/MM/yyyy") || 'N/A'}}
+               </span>
+               <span class="data-value break-word" ng-show="showBlueCollar">
+               {{ order.bcLicenceValidFrom }}
+               </span>
+            </div>
+            <div ng-if="filterData.serviceType != 23" class="col-md-2 data-fld">
+               <span class="data-head">VALID TO</span>
+               <span class="data-value break-word" ng-show="showIntraHyper">
+               {{ order.valid_to != '0000-00-00' && (order.valid_to | date:"dd/MM/yyyy") || 'N/A'}}
+            </span>
+               <span class="data-value break-word" ng-show="showBlueCollar">
+               {{ order.bcLicenceValidTo }}
+               </span>
+            </div>
+            <div class="col-md-2 data-fld">
+               <span class="data-head">TRACKING</span>
+               <span class="data-value break-word">
+               N/A
+            </div>
+            <div class="col-md-4 data-fld">
+               <span class="data-head">ROUTES</span>
+               <span class="data-value break-word" ng-show="order.from_location && showIntraHyper">
+               {{ order.from_location +' to '+ order.to_location }} 
+               </span>
+               <span class="data-value break-word" ng-show="!order.from_location && showBlueCollar">
+                N/A
+               </span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-2 data-fld">
+               <span class="data-head">Type </span> 
+               <span class="data-value break-word" ng-show="order.postType && showIntraHyper">
+               <span ng-show="order.postType == '2'"> Distance </span>
+               <span ng-show="order.postType == '1'"> Hour </span>
+               </span>
+               <span class="data-value break-word" ng-show="!order.postType && showIntraHyper">
+               N/A
+               </span>
+               <span class="data-value break-word" ng-show="order.bcProfileType && showBlueCollar">
+               {{ order.bcProfileType }}
+               </span>
+            </div>
+            <div class="col-md-4 data-fld">
+               <span class="data-head">Post No.</span>
+               <span class="data-value break-word">
+               {{ order.order_no }} 
+               </span>                                               
+            </div>
+         </div>
+         <div class="c_2">
+            <div class="col-lg-12">
+               <div class="data-head text-right">ORDER</div>
+               <div class="data-value break-all text-right">NOTIFICATIONS</div>
+            </div>
+            <div class="info_links padding_top">
+               <a href=""><i class="fa fa-envelope-o"></i></a>
+               <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">0</span></a>
+               <a href=""><i class="fa fa-bullseye"></i><span class="vlue">0</span></a>
+               <a href=""><i class="fa fa-line-chart"><span class="vlue">0</span></i></a>
+               <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">0</span></a>
+            </div>
+         </div>
+         <div class="div_100 space10" ng-if="getUserActiveRole == 'Seller'">
+            <div class="c_8">
+               <ul class="filter_list">
+                  <li>City</li>
+                  <li ng-show="showIntraHyper">FROM LOCATION</li>
+                  <li ng-show="showIntraHyper">TO LOCATION</li>
+                  <li ng-show="showIntraHyper">Vehicle Type</li>
+                  <li>Post Type</li>
+                  <li>Seller Name</li>
+                  <li>Order Date</li>
+                  <li>ORDER NO.</li>
+               </ul>
+            </div>
+            <div class="c_2">
+               <span id="filters_click" class="rilters_click click_a contact_click1"><i class="fa fa-bars"></i> Filters </span>
+            </div>
+         </div>
+      </div>
+      <div class="white_bg overflow" id="filters_show" style="display: none;">
+         <div class="fillter_div">
+            <div class="scroll_div">
+               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                     <div class="select_form_intra">
+                        <input type="text" id="buyer" class="input_ani" autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)"
+                           ng-model="data.city" required="" typeahead="city as (city.city_name) for city in cities | filter:$viewValue"
+                           />
+                        <label class="lbl_text2">City</label>
+                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="scroll_div" ng-show="showIntraHyper">
+               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                     <div class="select_form_intra">
+                        <input type="text" class="input_ani" ng-model="data.from_location" required="">
+                        <label class="lbl_text2">FROM LOCATION</label>
+                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                     </div>
+                     <div class="filter_from_location scrollable">
+                        <div class="col-lg-6">
+                           <div class="row">
+                              <ul class="post_inline">
+                                 <li ng-repeat="(key,value) in locations |filter:data.from_location">
+                                    <div class="admin_input">
+                                       <input ng-click="addFilterData(filterData.fromLocation,value)" id="from{{value.id}}" name="value.id" autocomplete="off" type="checkbox"
+                                          value="{{value.id}}" class="check_box check_box_1">
+                                       <label for="from{{value.id}}">  {{value.locality_name}}</label>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="scroll_div" ng-show="showIntraHyper">
+               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                     <div class="select_form_intra">
+                        <input type="text" class="input_ani" ng-model="data.to_location" required="">
+                        <label class="lbl_text2">TO LOCATION</label>
+                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                     </div>
+                     <div class="filter_from_location scrollable">
+                        <div class="col-lg-12">
+                           <div class="row">
+                              <ul class="post_inline">
+                                 <li ng-repeat="(key,value) in locations |filter:data.to_location">
+                                    <div class="admin_input">
+                                       <input ng-click="addFilterData(filterData.toLocation,value)" id="to{{value.id}}" name="value.id" autocomplete="off" type="checkbox"
+                                          value="{{value.id}}" class="check_box check_box_1">
+                                       <label for="to{{value.id}}"> {{value.locality_name}}</label>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="scroll_div" ng-show="showIntraHyper">
+               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                     <div class="select_form_intra">
+                        <input type="text" class="input_ani" ng-model="data.vehicle_type" required="">
+                        <label class="lbl_text2">VEHICLE TYPE</label>
+                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                     </div>
+                     <div class="filter_from_location scrollable">
+                        <div class="col-lg-12">
+                           <div class="row">
+                              <ul class="post_inline">
+                                 <li>
+                                    <div class="admin_input" ng-repeat="vehicle in vehicles | filter:data.vehicle_type">
+                                       <input type="checkbox" ng-click="addFilterData(filterData.vehicleType,vehicle)" class="check_box"  id="vl{{vehicle.id}}">
+                                       <label for="vl{{vehicle.id}}">{{ vehicle.vehicle_type }}</label>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="scroll_div">
+               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                     <div class="select_form_intra">
+                        <input type="text" class="input_ani" required="">
+                        <label class="lbl_text2">Post Type</label>
+                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                     </div>
+                     <div class="filter_from_location">
+                        <div class="col-lg-12">
+                           <div class="row">
+                              <ul class="post_inline">
+                                 <li ng-repeat="(key,value) in post_type">
+                                    <div class="admin_input">
+                                       <input id="{{ value.post_type }}" ng-click="addFilterData(filterData.postType,value)" type="checkbox" class="check_box">
+                                       <label for="{{ value.post_type }}"> {{ value.post_type }} </label>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- </div> -->
+            <!--  <div class="fillter_div"> -->
+            <div class="scroll_div">
+               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                     <div class="select_form_intra">
+                        <input type="text" class="input_ani" required="" ng-model="data.selllerName">
+                        <label class="lbl_text2">SELLER NAME</label>
+                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                     </div>
+                     <div class="filter_from_location scrollable">
+                        <div class="col-lg-12">
+                           <div class="row">
+                              <ul class="post_inline">
+                                 <li ng-repeat="(key,value) in sellerList |filter:data.selllerName">
+                                    <div class="admin_input">
+                                       <input ng-click="addFilterData(filterData.sellerType,value)" id="s{{value.id}}" name="value.id" ng-model="data.username[key].username"
+                                          type="checkbox" value="{{value.id}}" class="check_box check_box_1">
+                                       <label for="s{{value.id}}">
+                                       {{value.username}}</label>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="scroll_div">
+               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                     <div class="date_selection select_form_intra">
+                        <span class="left_v_from">
+                        <input type="text" id="departing" ng-model="data.dispatchDate" class="date_p input_ani hasDatepicker" required="">
+                        <label class="lbl_text2 padg_l">Order Date</label>
+                        </span>
+                     </div>
+                     <div class="filter_from_location scrollable">
+                        <div class="col-lg-12">
+                           <div class="row">
+                              <ul class="post_inline">
+                                 <li ng-repeat="(key,value) in dispatchDate |filter:data.dispatchDate">
+                                    <div class="admin_input">                                                            
+                                       <input ng-click="addFilterData(filterData.orderDate,value.dispatch_date)" id="s{{value.dispatch_date}}" name="value.dispatch_date"
+                                          type="checkbox" value="{{value.dispatch_date}}" class="check_box check_box_1">
+                                       <label for="s{{value.dispatch_date}}">
+                                       {{value.dispatch_date | date:"dd/MM/yyyy" }}</label>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="scroll_div">
+               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="row">
+                     <div class="select_form_intra">
+                        <input type="text" class="input_ani" ng-model="data.orderNo" required="">
+                        <label class="lbl_text2">Order No</label>
+                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                     </div>
+                     <div class="filter_from_location scrollable">
+                        <div class="col-lg-12">
+                           <div class="row">
+                              <ul class="post_inline">
+                                 <li ng-repeat="(key,value) in orderNumber |filter:data.orderNo">
+                                    <div class="admin_input">
+                                       <input ng-click="addFilterData(filterData.orderNumber,value)" id="s{{value.id}}" name="value.id"
+                                          type="checkbox" value="{{value.id}}" class="check_box check_box_1">
+                                       <label for="s{{value.id}}">
+                                       {{value.order_no}}</label>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <style>
+      .filter_list li a{
+          color:#a5a5a5;
+          position: relative;
+      }
+      .filter_list li a i{
+          margin-right:4px;
+      }
+      .filter_list li.active a{
+          color:#444;
+
+      }
+      .filter_list li a .noti_no{
+      position: absolute;
+      left: 15px;
+      top: -12px;
+      color: #f00;
+      font-size: 12px;
+
+      }
+      </style>
+      <div class="white_bg">
+         <div class="">
+            <!-- {{ orderlists }} -->
+            <ul class="filter_list">
+               <li>NOTIFICATIONS</li>
+               <li ng-class="{'active':section == 'messages'}" ng-click="navigateTo('messages')"> <a href="javascript:void(0)" > <i class="fa fa-envelope-o"> </i> MESSAGES <span class="noti_no"></span></a> </li>
+               <li ng-class="{'active':section == 'indent'}" ng-click="navigateTo('indent')"> <a href="javascript:void(0)"> <i class="fa fa-file-text-o">  </i><span> </span> INDENT  <span class="noti_no"> {{ countIndent.length ? countIndent.length:'' }} </span> </a> </li>
+               <li ng-class="{'active':section == 'status'}" ng-click="navigateTo('status')"> <a href="javascript:void(0)"> <i class="fa fa-thumbs-o-up"> </i> <span> </span> STATUS <span class="noti_no"> {{ countStatus.length ? countStatus.length: '' }} </span></a> </li>
+               <li ng-class="{'active':section == 'billing'}" ng-click="navigateTo('billing')"> <a href="javascript:void(0)" > <i class="fa fa-line-chart"> </i>  BILLING <span class="noti_no"></span></a> </li>
+               <li ng-class="{'active':section == 'document'}" ng-click="navigateTo('document')"> <a href="javascript:void(0)" > <i class="fa fa-file-text-o"> </i> DOCUMENTS <span class="noti_no"></span></a> </li>
+            </ul>
+         </div>
+      </div>
+      <div class="cart heght_100">
+         <div class="loc_det" ng-if="section == 'messages'" ng-include="'templates/order/message.html'"> </div>
+         <div class="loc_det" ng-if="section == 'indent'" ng-include="'templates/order/indent.html'"> </div>
+         <div class="loc_det" ng-if="section == 'status'" ng-include="'templates/order/status.html'"> </div>
+         <div class="loc_det" ng-if="section == 'billing'" ng-include="'templates/order/billing.html'"> </div>
+         <div class="loc_det" ng-if="section == 'document'" ng-include="'templates/order/document.html'"> </div>
+         
+         
+      </div>
+      <!--end of location_sec-->
+   </div>
+   <!--end of right_search_p-->
+</div>
+<div class="modal fade" id="booknow-popup" role="dialog">
+   <div class="modal-dialog modal-lg exta-large">
+      <div class="modal-content waitText" style="overflow: hidden;padding: 0 10px 10px">
+         <div class="modal-body" id="responsetext">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">×</button>
+               <h2 class="modal-title text-center1">General Services Agreement</h2>
+            </div>
+            <div class="modal-body-inner">
+               <h4>Disclaimer</h4>
+               <p>LogiStiks.com is acting as the market place” means the central online portal established for providing
+                  logistics service offerings like but not limited to transportation, warehouse, handling, packaging
+                  &amp; packers and movers services, on a pan india level. Both the parties to this GSA that means
+                  the buyer and the seller should ensure that the information provided by them is accurate to do the
+                  transaction on the portal
+               </p>
+               <p>The information given by buyer and seller on the sign up page is true and fair to the best of their knowledge
+                  and logistiks.com is not responsible in case of discrepancy if any.
+               </p>
+               <div class="col-md-6">
+                  <h4>Buyer Details</h4>
+                  <ul class="list-block1i">
+                     <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Buyer Name: <span>{{ !empty(values.buyer_name) && values.buyer_name || 'N/A' }}</span></li>
+                     <div ng-if="serviceIdIf == lkp_intracity_service_id || serviceIdIf == lkp_hyperlocal_service_id">
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignment Type: <span id="consignment_type">Commercial</span></li>
+                        <!-- <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> From Location:
+                           <span id="from_location">Hyderabad</span>
+                           </li>
+                           <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> To Location:
+                           <span id="from_location">Mumbai</span>
+                           </li> -->
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Dispatch Date:
+                           <span id="pickup_con_date">{{ order.valid_from | date:'dd/MM/yyyy'}}</span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                           <span>Delivery Date:</span>
+                           <span>{{ !empty(values.deliveryDetail.date) && values.deliveryDetail.date || 'N/A' }}</span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Load Type: {{ values.loadType }}
+                        </li>
+                        <!--<li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Quantity :10</li>-->
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Vehicle Type: {{ !empty(values.vehicleType) && values.vehicleType || 'N/A' }}
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Source Location Type:
+                           <span id="source_location">Business with Dock or Forklift</span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Destination Location Type:
+                           <span id="destination_location">Business without Dock or Forklift</span>
+                        </li>
+                     </div>
+                     <!--<div ng-if="serviceIdIf == lkp_bluecollar_service_id">
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> 
+                           Vehicle Type: <span id="bluecollar_vehicle_type">Commercial</span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                           Experience : <span id="bluecollar_experience">Commercial</span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                           Qualification : <span id="bluecollar_qualification">Commercial</span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                           Salary : <span id="bluecollar_seller_salary">Commercial</span>
+                        </li>
+                     </div>-->
+                     <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignor Name:<span>{{ !empty(values.consignor_name) && values.consignor_name || 'N/A' }}</span></li>
+                     <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignor Mobile:<span>{{ !empty(values.consignor_mobile) && values.consignor_mobile || 'N/A' }}</span></li>
+                     <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignor Address:<span>{{ !empty(values.consignor_address1) && values.consignor_address1 || 'N/A' }} </span></li>
+                     <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignee Name:<span>{{ !empty(values.consignee_name) && values.consignee_name || 'N/A' }}</span></li>
+                     <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignee Mobile:<span>{{ !empty(values.consignee_mobile) && values.consignee_mobile || 'N/A' }}</span></li>
+                     <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignee Address:<span>{{ !empty(values.consignee_address1) && values.consignee_address1 || 'N/A' }}</span></li>
+                  </ul>
+                  <!--li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Seller Details</li-->
+                  </div>
+                  <div class="col-md-6">
+                     <h4>Seller Details</h4>
+                     <ul class="list-block1i">
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Seller Name:
+                           <span>{{ !empty(values.seller_name) && values.seller_name || 'N/A' }}</span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Year of ESTD:
+                           <span id="seller-year-of-estd">{{ !empty(values.sellerEstablished) && values.sellerEstablished || 'N/A' }}</span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Seller Address:
+                           <span id="seller-address"></span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> GTA Number:
+                           <span id="seller-gta">{{ !empty(values.sellerGta) && values.sellerGta || 'N/A' }}</span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Service Tax Number:
+                           <span id="seller-stn-number">{{ !empty(values.sellerTaxNumber) && values.sellerTaxNumber || 'N/A' }}</span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> TIN Number:
+                           <span id="seller-tin-number">{{ !empty(values.sellerTin) && values.sellerTin || 'N/A' }}</span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Place of Business:<span>{{ !empty(values.placeOfBusiness) && values.placeOfBusiness || 'N/A' }}</span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Landline Number:
+                           <span>{{ !empty(values.landline) && values.landline || 'N/A' }}</span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Mobile Number:<span>{{ !empty(values.sellerMobile) && values.sellerMobile || 'N/A' }}</span></li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Email ID: <span id="seller-email">{{ !empty(values.sellerEmail) && values.sellerEmail || 'N/A' }}</span>
+                        </li>
+                        <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Order Total:Rs.
+                           <span id="seller-order-total">{{ !empty(values.price) && values.price || 'N/A' }}</span>
+                        </li>
+                     </ul>
+                  </div>               
+               <div class="col-md-12">
+                  <h4>Seller Terms &amp; Conditions</h4>
+                  <strong>Documentation</strong>
+                  <p>Any commercial shipment picked up for transit on Indian Ground network should have the following
+                     documents:<br>
+                     <br> 1. TIN / CST no. of shipper &amp; consignee in case of commercial transaction is mandatory
+                     in all states<br>
+                     <br> 2. Shipper is under obligation to mention valid TIN / CST no of self and consignee on the
+                     commercial invoice and regulatory paperwork at the time of handing over the shipment to Transport
+                     service provider<br>
+                     <br> 3. Shipments consigned to individuals who do not have TIN no, a declaration from consignee
+                     / shipper that the goods are not for sale and for personal consumption apart from other conditions
+                     as laid down in respective States VAT Regulations.<br>
+                     <br> 4. E-waybill generation has been implemented in most of the states. Consignee/ shipper is
+                     expected to comply registration process and follow online process for e-waybill generation
+                  </p>
+               </div>
+               <div class="col-md-12">
+                  <p>
+                     Any commercial shipment picked up for transit on Indian Ground network should have the following documents: <br>                            1. TIN / CST no. of shipper &amp; consignee in case of commercial transaction is mandatory in
+                     all states<br> 2. Shipper is under obligation to mention valid TIN / CST no of self and consignee
+                     on the commercial invoice and regulatory paperwork at the time of handing over the shipment to
+                     Transport service provider<br> 3. Shipments consigned to individuals who do not have TIN no,
+                     a declaration from consignee / shipper that the goods are not for sale and for personal consumption
+                     apart from other conditions as laid down in respective States VAT Regulations.
+                     <br> 4. E-waybill generation has been implemented in most of the states. Consignee/ shipper is
+                     expected to comply registration process and follow online process for e-waybill generation
+                     <br>
+                  </p>
+                  <h4>Disclaimer:</h4>
+                  <p>
+                     State VAT Rules &amp; Regulations are subject to change from time to time. Shippers / Consignees are, therefore, advised
+                     to seek independent verification before tendering any consignment Regulatory paperwork is based
+                     on the Rules and Regulations of the State concerned. Practice could be different than the Rules
+                     &amp; Regulations in some of the States
+                  </p>
+                  <p>For this transaction from
+                     <span>Hyderabad</span> to
+                     <span>Mumbai</span> following documents are needed :
+                  </p>
+               </div>
+               <div class="clearfix"></div>
+               <div class="col-md-12">
+                  <input type="hidden" name="from_location_id" id="from_location_id" value="790">
+                  <input type="hidden" name="to_location_id" id="to_location_id" value="517">
+                  <input type="hidden" name="routeDetail" id="routeDetail" value="249">
+                  <ul class="popup-list list-block1i" id="gsa_documents_list">
+                     <li>
+                        <h4>To be provided by seller:</h4>
+                     </li>
+                     <li><i class="fa fa-check"></i> Lorry Receipt
+                     </li>
+                     <li>
+                        <h4>To be provided by buyer:</h4>
+                     </li>
+                     <li><i class="fa fa-check"></i> Seller Invoice
+                     </li>
+                     <li><i class="fa fa-check"></i> Form 49A mandatory
+                     </li>
+                     <li><i class="fa fa-check"></i> 1)For saleable goods tax invoice with TIN no. and form 8F. 2) Stock
+                        Transfer - Delivery note( Form 15) and Form 8F. Personal transaction requires certificate
+                        of ownership(Form 16 ). Job work transaction- customer should meet the local STO and obtain
+                        permis
+                     </li>
+                  </ul>
+               </div>
+               <div class="col-md-12 padding-none text-right">
+                  <div class="modal-footer">
+                     <input type="hidden" name="toggle_seller_to_role_id" id="toggle_seller_to_role_id">
+                     <input type="hidden" name="alldata" id="alldata" value="">
+                     <input type="hidden" name="ajaxurl" id="ajaxurl" value="/setbuyerbooknow">
+                     <input type="hidden" name="ischeckout" id="ischeckout" value="1">
+                     <input type="hidden" name="service_id" id="service_id" value="1">
+                     <button type="button" class="btn flat-btn red-btn" id="acceptTruckGSA" name="acceptTruckGSA">I Accept</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<script>
+   $(document).ready(function () {
+       $(".contact_click").click(function () {
+           $(".d_box").slideToggle("slow");
+       });
+   
+       $('.contact_click').click(function () {
+           $(this).next('.d_box').slideToggle('500');
+           $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
+       });
+   
+   });
+   
+   
+   
+   
+   $(document).ready(function () {
+       $(".contact_click1").click(function () {
+           $(".d_box1").slideToggle("slow");
+       });
+   
+       $('.contact_click1').click(function () {
+           $(this).next('.d_box1').slideToggle('500');
+          
+       });
+   
+   });
+</script>
+<script>
+   $(document).ready(function() {
+     var gwid = $(".scroll_div").width();
+       var twid = $(".loc_det").width();
+       var acwid = gwid / twid * 100;
+       var len = $(".scroll_div").length;
+       var towid = acwid * len + 15;
+       $(".fillter_div").css({"width":""+towid+"%"});
+   
+        $("#filters_click").click(function () {
+           $("#filters_show").toggle('fast');
+       });
+   
+      
+   });
+</script>
+
+<style>
+    .bg-green {
+        background: #2b912b;
+    }
+   }
+</style>

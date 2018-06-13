@@ -1,0 +1,53 @@
+<dataConfig>
+      
+    <dataSource driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/logistiks" user="root"
+                password="k33p0urd@t@$@f3"/>
+      
+      
+    <document>
+
+            
+        <entity
+                name="buyerposts"
+                query="select concat('bp-', id) as id, entity, postId, serviceId as service,
+            concat(buyerId, '-',buyerName) as buyer, leadType, title, loadPort, dischargePort, serviceSubType,
+            originLocation, destinationLocation, commodity, containerType, cargoReadyDate, containerQuantity,
+            grossWeight, weightUnit, priceType, lastDateTimeForQuote, validFrom, validTo, isPublic,
+            concat(visibleToSellerId, '-',visibleToSellerName) as visibleToSeller, status,
+            created_at, updated_at  from shp_buyer_post_index where isDeleted = 0"
+                deltaQuery="select id from shp_buyer_post_index where updated_at > '${dataimporter.last_index_time}' and isDeleted=0 "
+                deltaImportQuery="select concat('bp-', id) as id, entity, postId, serviceId as service,
+            concat(buyerId, '-',buyerName) as buyer, leadType, title, loadPort, dischargePort, serviceSubType,
+            originLocation, destinationLocation, commodity, containerType, cargoReadyDate, containerQuantity,
+            grossWeight, weightUnit, priceType, lastDateTimeForQuote, validFrom, validTo, isPublic,
+            concat(visibleToSellerId, '-',visibleToSellerName) as visibleToSeller, status,
+            created_at, updated_at  from shp_buyer_post_index where id='${dataimporter.delta.id}'"
+
+        >
+        </entity>
+          
+        <entity
+                name="sellerposts"
+                query="select concat('sp-', id) as id, entity, postId, serviceId as service,
+               concat(sellerId, '-',sellerName) as seller, title, loadPort, dischargePort, serviceSubType,
+               containerType, containerQuantity,
+               tracking,   freightCharges, freightChargesCurrency,localChargesCurrency,localCharges,transitDays, concat(discountBuyerId, '-',discountBuyerName) as visibleToBuyer, discountBuyerId, discountBuyerName,discountType,discount,
+  creditDays ,carrierName, validFrom, validTo, isPublic, status,
+               created_at, updated_at from shp_seller_post_index where isDeleted = 0"
+                deltaQuery="select id from shp_seller_post_index where updated_at > '${dataimporter.last_index_time}' and isDeleted=0 "
+                deltaImportQuery="select concat('sp-', id) as id, entity, postId, serviceId as service,
+               concat(sellerId, '-',sellerName) as seller, title, loadPort, dischargePort, serviceSubType,
+               containerType, containerQuantity,
+               tracking,   freightCharges, freightChargesCurrency,localChargesCurrency,localCharges,transitDays, concat(discountBuyerId, '-',discountBuyerName) as visibleToBuyer, discountBuyerId, discountBuyerName,discountType,discount,
+  creditDays ,carrierName,  validFrom, validTo, isPublic, status,
+               created_at, updated_at from shp_seller_post_index where id='${dataimporter.delta.id}'"
+
+        >
+        </entity>
+
+
+          
+    </document>
+      
+</dataConfig>
+

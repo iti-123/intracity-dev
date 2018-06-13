@@ -1,0 +1,252 @@
+.loc_det1 {
+    width: 100%;
+    float: left;
+    background-color: #fff;
+    border-bottom: 3px solid #f7f8f8;
+}
+
+.loc_det1 ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.loc_det1 ul li {
+    display: inline-block;
+    padding: 13px 18px;
+    float: left;
+    font-size: 16px;
+    color: #848688;
+    font-family: FuturaBT-Medium;
+    text-transform: uppercase;
+}
+
+.loc_det1 ul li a {
+    font-family: FuturaBT-Medium;
+    font-size: 16px;
+    padding-right: 7px;
+    position: relative;
+    text-transform: uppercase;
+    color: #8a8a8a;
+}
+
+.rilters_right {
+    float: right;
+    padding: 13px 17px;
+    font-size: 16px;
+    color: #000;
+    cursor: pointer;
+}
+
+.gray_bg1 {
+    width: 100%;
+    float: left;
+    background-color: #fff;
+    padding: 10px;
+}
+
+.gray_bg1 table {
+    width: 100%;
+    float: left;
+}
+
+.gray_bg1 table th {
+    color: #fff !important;
+    background: #666 !important;
+    font-family: FuturaBT-Medium;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 45px;
+    padding: 0px 15px;
+}
+
+.gray_bg1 table tr {
+}
+
+.gray_bg1 table td {
+    padding: 15px 9px;
+    font-size: large;
+}
+
+.red {
+    color: #ed3237;
+}
+
+#from_name1 {
+    background-color: #f6f6f6 !important;
+    padding-left: 8px;
+    font-size: 16px !important;
+    border: 0;
+    height: 38px;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+input[readonly] {
+    background-color: white !important;
+    cursor: text !important;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px;
+    width: 100%;
+    float: left;
+}
+
+.form-control:focus {
+    border-color: #000;
+}
+
+.pop1 {
+    width: 100%;
+    float: left;
+    color: #ed3237;
+    font-size: 19px;
+
+}
+
+.form_popu {
+    width: 100%;
+    float: left;
+    background-color: #f6f6f6;
+
+}
+
+.form_popu input {
+    background-color: #f6f6f6 !important;
+    color: #555;
+    padding-left: 8px;
+}
+
+.form_popu1 {
+    width: 100%;
+    float: left;
+
+    padding: 5px 0px;
+}
+
+.form_popu1 input {
+    color: #555;
+    padding-left: 8px;
+}
+
+.form_popu1 input:focus {
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.height_auto {
+    height: auto !important;
+    margin-left: 8px;
+}
+
+.height_auto textarea:focus {
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.border_none {
+    border-bottom: 0px solid #e5e5e5 !important;
+}
+
+.border__none {
+    border-top: 1px solid #fff !important;
+}
+
+.atteche {
+    width: 100%;
+    float: left;
+    padding: 15px 0px;
+}
+
+.atteche i {
+    color: #666666;
+    font-size: 21px;
+}
+
+.atteche input {
+    padding: 10px 0px;
+    font-size: 18px;
+}
+
+/*-----------------------message page-------------------*/
+.blucoller_message_detail {
+    width: 100%;
+    float: left;
+    background: #fff;
+    display: table;
+}
+
+.blucoller_message_detail .inner-block-bg {
+    background-color: #ffffff;
+    display: table;
+    width: 100%;
+    border-bottom: 0;
+    padding: 20px 0;
+}
+
+.blucoller_message_detail .inner-block-bg .tab-modal-head h3 {
+    color: #555555;
+    margin: 15px 0;
+    font-size: 18px;
+}
+
+.blucoller_message_detail .padding-none {
+    padding: 0px;
+}
+
+.blucoller_message_detail .red-btn {
+    background-color: #ed3237;
+    border: 1px solid #ed3237;
+    color: #ffffff;
+    font-family: FuturaBT-Medium;
+    font-size: 17px;
+    font-weight: 500;
+    padding: 10px 15px;
+    text-transform: capitalize;
+    border-radius: 0px;
+}
+
+.blucoller_message_detail .data-fld {
+    margin-bottom: 15px;
+}
+
+.padding-left-none {
+    padding-left: 0px;
+}
+
+.blucoller_message_detail .data-head {
+    clear: both;
+    color: #000000;
+    display: block;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+.blucoller_message_detail .data-value {
+    font-size: 16px;
+}
+
+.blucoller_message_detail .inner-block-bg1 {
+    margin-bottom: 12px;
+    padding: 10px;
+    border: 1px solid #e2e2e2;
+}
+
+.blucoller_message_detail .detail-head:hover {
+    background-color: #ffffff;
+    border-color: #ffaeb3;
+    box-shadow: 0 0 10px 0 #dedede inset;
+}
+
+.blucoller_message_detail .open-data-head {
+    clear: both;
+    color: #000000;
+    display: block;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+.blucoller_message_detail .detail-data {
+    display: none;
+}

@@ -1,0 +1,135 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">{{ getUserActiveRole }}</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#services">Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#" class="active_c">Search</a></li>
+            </ul>
+        </div>
+
+
+        <div class="blue_section">
+            <div class="blue_form no_space">
+                <div class="blue_form_one">
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <select class="selectpicker" selectpicker ng-model="formData.profileType">
+                                <option value=""> Profile Type <span> *</span></option>
+                                <option ng-repeat="e in profileTypes" value="{{e.value}}">{{e.key}}</option>
+                            </select>
+                            <span class="form-error" ng-show="formError.profileType">Enter Profile Type</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-4 col-md-4 col-sm-2 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <input type="text" class="input_ani" required="" ng-model="formData.locationPH" id="location" maxlength="30"
+                            typeahead="location.city_name+', '+ location.state_name for location in searchLocations($viewValue)"
+                            typeahead-on-select="selectedLocation($item, $model, $label)" autocomplete="off">
+                            <label class="lbl_text2">Location<span>*</span></label>
+                            <span class="form-error" ng-show="formError.location">Enter Proper Location</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra" ng-show="formData.profileType != 'SKILLED'">
+
+                            <!-- <select class="select_line" ng-disabled="formData.profileType != 'DRIVER'" ng-model="formData.vehicleType">
+                              <option ng-repeat="e in vehicleTypes" value="{{e.value}}">{{e.key}}</option>
+                            </select> -->
+                            <!-- <select class="select_line" ng-model="formData.vehicleType">
+                              <option ng-repeat="e in vehicleTypes" value="{{e.value}}">{{e.key}}</option>
+                            </select> -->
+                            <select class="selectpicker" selectpicker ng-model="formData.vehicleType">
+                                <option ng-repeat="type in vehicleTypes"
+                                        value="{{type.name=='Vehicle Type' && 'Vehicle Type' || type.name}}">
+                                    {{ type.name }}
+                                </option>
+                            </select>
+                            <span class="form-error" ng-show="formError.vehicleType">Invalid Type</span>
+                        </div>
+                        <div class="select_form_intra" ng-show="formData.profileType == 'SKILLED'">
+                            <select class="select_line selectpicker" selectpicker ng-model="formData.machineType">
+                                <option ng-repeat="type in machineTypes"
+                                        value="{{type.name=='Machine Type' && 'Machine Type' || type.name}}">
+                                    {{type.name}}
+                                </option>
+                            </select>
+                            <span class="form-error" ng-show="formError.machineType">Invalid Type</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <select class="selectpicker" selectpicker ng-model="formData.employmentType">
+                                <option value=""> Employment Type <span> *</span></option>
+                                <option ng-repeat="e in employmentTypes" value="{{e.value}}">{{e.key}}</option>
+                            </select>
+                            <span class="form-error"
+                                  ng-show="formError.employmentType">Employment Type is required.</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-2 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <input type="text" class="input_ani" required="" ng-model="formData.experience1"
+                                   maxlength="2"
+                                   onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                            <label class="lbl_text2">Experience<span> *</span></label>
+                            <span class="form-error" ng-show="formError.experience1">Experience is required.</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-2 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <select class="selectpicker" selectpicker ng-model="formData.salaryType">
+                                <option value=""> Salary Type <span> *</span></option>
+                                <option ng-repeat="e in salaryTypes" value="{{e.value}}">{{e.key}}</option>
+                            </select>
+                            <span class="form-error" ng-show="formError.salaryType">Enter Proper Salary Type</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-10 col-xs-12 margin_input">
+                        <div class="vehicle_main">
+                            <div class="vehicle_box">
+                                <div class="vehicle_img_box"><img src="../images/vehicle.jpg" alt="logistiks logo"/>
+                                </div>
+                                <div class="vehicle_img_box_contain">
+                                    <span>Vehicle Dimensions *</span>
+                                    <span>20x8x12</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- <div class="blue_form_one">
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12"></div>
+
+                </div> -->
+
+                <div class="blue_form_one">
+                    <div class="col-lg-12">
+                        <div class="submit_btn_blue">
+                            <input type="submit" value="SEARCH" class="submit_btn" ng-click="search()">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div> <!--blue_form-->
+        </div> <!--end of blue_section-->
+
+
+        <div class="space_100"></div>
+    </div>
+</div>

@@ -1,0 +1,218 @@
+<?php
+
+namespace ApiV2\Transformers;
+
+use ApiV2\Model\BuyerPost as BuyerPost;
+use ApiV2\Model\SelectedSellers as SelectedSellers;
+use ApiV2\Utils\EmailService;
+use ApiV2\Utils\GenericMethods;
+use ApiV2\Utils\LoggingServices;
+use DB;
+use League\Fractal\TransformerAbstract;
+use Log;
+
+class BuyerPostTransformer extends TransformerAbstract
+{
+
+    public static function get_attributes_json($value)
+    {
+        $value = str_replace(array("\n", "\r", "\t"), '', $value);
+        $attributesObj = json_decode($value, true);
+        return $attributesObj;
+    }
+
+    public static function get_buyer_post($response = '')
+    {
+        $seller_post = '';
+        if (empty($response))
+            $buyerPost = BuyerPost::all();
+        else
+            $buyerPost = BuyerPost::all()->where('id', (int)$response)->first();
+        $getJsonResponse = GenericMethods::convert_db_object_to_json($buyerPost);
+        return response()->json($getJsonResponse);
+    }
+
+    /*
+     * For Index all items
+     *
+     */
+
+    public static function save_buyer_post($request)
+    {
+
+        $validJson = GenericMethods::convert_json_to_db_object($request);
+        $saveDBObj = BuyerPostTransformer::save_json_to_db_object($validJson);
+        return $saveDBObj;
+
+
+        /*// validatevalidate
+        $rules  = unserialize(BUYER_POST_RULES);
+        // process the  login
+        if ($validJson->fails()) {
+            return response()->json($validJson);
+        } else {
+            // store
+            $saveDBObj = BuyerPostTransformer::save_json_to_db_object($validJson);
+            return $saveDBObj;
+        }*/
+    }
+
+    /*
+     * For Store JSON items
+     *
+     */
+
+    private static function save_json_to_db_object($validJsonObj)
+    {
+
+        $postData = $validJson = $visibleToSellers = array();
+        $serviceId = $message = '';
+
+
+        /*Start sending mail*/
+
+        /*$email_sent =  EmailService::send_email(BUYER_CREATED_POST_FOR_SELLERS);
+        if($email_sent){Log::info("Email sent successfully");}else{Log::info('Mail cannot be sent');}*/
+
+        DB::beginTransaction(); //Start transaction!
+        try {
+            $commonFlatFields = unserialize(BUYER_POST_FLAT_FIELDS);
+            $buyerPost = new BuyerPost;
+            $validJson = get_object_vars($validJsonObj);
+            $postData = json_encode($validJson);
+            $visibleToSellers = $validJson["visibleToSellers"];
+
+            $serviceId = $validJson['serviceId'];
+            foreach ($commonFlatFields as $key => $map) {
+                $buyerPost->$key = $validJson[$map];
+                unset($validJson[$map]);
+            }
+            unset($validJson["visibleToSellers"]);
+            unset($validJson["postId"]);
+            $buyerPost->attributes = json_encode($validJson);
+
+            if ($buyerPost->save()) {
+
+                if (BuyerPostTransformer::save_selected_sellers($visibleToSellers, $buyerPost->id)) {
+
+                    //$buyers_selected_sellers_email = DB::table('users')->where('id', $visibleToSellers[$i])->get();
+                    // $buyers_selected_sellers_email[0]->randnumber = $trans_randid;
+                    // $buyers_selected_sellers_email[0]->buyername = Auth::User()->username;
+
+                    //CommonComponents::auditLog(BUYER_ADDED_NEW_QUOTE, $serviceId, $buyerPost);
+
+                    LoggingServices::auditLog($buyerPost->id, BUYER_ADDED_NEW_QUOTE, $postData);
+                    Log::info("data logged in successfully");
+                    $message = response()->json("Successfully created Rate Card!");
+                    DB::commit();
+                } else
+                    $message = response()->json("Could not create Rate Card.");
+            } else
+                $message = response()->json("Could not create Rate Card.");
+
+
+            return $message;
+        } catch (\Exception $e) {
+            //Log::info($e);
+            //failed logic here
+            DB::rollback();
+            //echo 'Caught exception: ', CustomException::getCustomException($e), "\n";
+        }
+    }
+
+    public static function save_selected_sellers($visibleToSellers, $buyerPost_id)
+    {
+        $sellectedSeller = array();
+        try {
+            for ($i = 0; $i < sizeof($visibleToSellers); $i++) {
+
+                $sellectedSeller[$i]['post_id'] = $buyerPost_id;
+                $sellectedSeller[$i]['seller_id'] = $visibleToSellers[$i];
+                $sellectedSeller[$i]['created_at'] = time();
+                $sellectedSeller[$i]['updated_at'] = time();
+                //$sellectedSeller->save();
+            }
+            SelectedSellers::insert($sellectedSeller);
+            //dd("DOne");
+            return true;
+        } catch (\Exception $e) {
+            //Log::info("$e");
+            //failed logic here
+            DB::rollback();
+            //echo 'Caught exception: ', CustomException::getCustomException($e), "\n";
+            return false;
+        }
+
+
+        // TODO: Change the autogenerated stub
+    }
+
+    /*
+     * Saving Buyer Selected Sellers
+     *
+     */
+
+    public static function update_buyer_post($request, $id)
+    {
+        $validJson = GenericMethods::convert_json_to_db_object($request);
+        $dbObj = BuyerPostTransformer::update_json_to_db_object($validJson, $id);
+        return $dbObj;
+    }
+
+    /*
+     * For Update
+     *
+     */
+
+    private static function update_json_to_db_object($request, $id)
+    {
+
+        $requestObj = json_decode($request);
+        $commonFlatFields = unserialize(BUYER_POST_FLAT_FIELDS);
+        $rateCard = BuyerPost::find($id);
+        foreach ($commonFlatFields as $key => $map) {
+            $rateCard->$key = $requestObj->$map;
+            unset($requestObj->$map);
+        }
+        $rateCard->attributes = json_encode($requestObj);
+        if ($rateCard->save())
+            return response()->json("Successfully updated Rate Card!");
+        else
+            return response()->json("Could not updated Rate Card.");
+
+    }
+
+    public function transform(BuyerPost $in)
+    {
+        $data_buyerpost = array(
+
+            // 'id' => $in->
+            'postId' => $in->postId,
+            'buyerId' => $in->buyerId,
+            'serviceId' => $in->serviceId,
+            'leadType' => $in->leadType,
+            'serviceSubType' => $in->serviceSubType,
+            'originLocation' => $in->originLocation,
+            'destinationLocation' => $in->destinationLocation,
+            'lastDateOfQuoteSubmission' => $in->lastDateOfQuoteSubmission,
+            'lastTimeOfQuoteSubmission' => $in->lastTimeOfQuoteSubmission,
+            'visibleToSellers' => $in->visibleToSellers,
+            'viewCount' => $in->viewCount,
+            'isPublic' => $in->isPublic,
+            'sysSolrSync' => $in->sysSolrSync,
+            'attributes' => $in->attribuutes,
+            /*     'createdBy' => $in->,
+                 'updatedBy' => $in->,
+                 'createdIP' => $in->,
+                 'updatedIP' => $in->,
+                 'createdAt' => $in->,
+                 'updatedAt' => $in->, */
+            'isTermAccepted' => $in->isTermAccepted,
+            'isHazardous' => $in->isHazardous,
+        );
+        return $data_buyerpost;
+
+        // $fclOutputJson = GenericMethods::convert_db_object_to_json($BuyerPost);
+        // return $fclOutputJson;
+    }
+}

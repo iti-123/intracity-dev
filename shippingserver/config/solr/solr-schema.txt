@@ -1,0 +1,59 @@
+////////////////////////////////////////////////////////////////////////////////////
+
+This file captures the necessary field definitions for the SOLR schema for all shipping services.
+Please dont edit SOLR schema "managed-schema" by hand. They will be overwritten
+ by the contents of this file always. YOU HAVE BEEN WARNED.
+
+
+The tables buyerpost_index and buyerpost_index_deletes act as the staging gateways
+to push additions and deletions to SOLR.
+
+////////////////////////////////////////////////////////////////////////////////////
+
+<field name="entity" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="postId" type="long" multiValued="false" indexed="true" stored="true"/>
+<!-- service = serviceId-serviceName eg:- 22-FCL -->
+<field name="service" type="string" multiValued="false" indexed="true" stored="true"/>
+<!-- buyer = buyerId-buyerName eg;- 10440-Anusha -->
+<field name="buyer" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="visibleToBuyer" type="string" multiValued="false" indexed="true" stored="true"/>
+<!-- seller = sellerId-sellerName eg;- 10440-Anusha -->
+<field name="seller" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="leadType" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="title" type="text_en" multiValued="false" indexed="true" stored="true"/>
+<field name="loadPort" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="dischargePort" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="serviceSubType" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="originLocation" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="destinationLocation" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="commodity" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="containerType" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="cargoReadyDate" type="long" multiValued="false" indexed="true" stored="true"/>
+<field name="containerQuantity" type="int" multiValued="false" indexed="true" stored="true"/>
+<field name="grossWeight" type="int" multiValued="false" indexed="true" stored="true"/>
+<field name="weightUnit" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="priceType" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="lastDateTimeForQuote" type="long" multiValued="false" indexed="true" stored="true"/>
+<field name="validFrom" type="long" multiValued="false" indexed="true" stored="true"/>
+<field name="validTo" type="long" multiValued="false" indexed="true" stored="true"/>
+<field name="isPublic" type="boolean" multiValued="false" indexed="true" stored="true"/>
+<field name="visibleToSeller" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="tracking" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="status" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="carrierName" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="freightCharges" type="float" multiValued="false" indexed="true" stored="true"/>
+<field name="freightChargesCurrency" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="localChargesCurrency" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="localCharges" type="float" multiValued="false" indexed="true" stored="true"/>
+<field name="transitDays" type="int" multiValued="false" indexed="true" stored="true"/>
+<!-- discountBuyer = buyerId-BuyerName 1067-Karthik -->
+<field name="discountBuyer" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="discountType" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="discount" type="float" multiValued="false" indexed="true" stored="true"/>
+<field name="creditDays" type="int" multiValued="false" indexed="true" stored="true"/>
+<field name="created_at" type="tdate" multiValued="false" indexed="true" stored="true"/>
+<field name="updated_at" type="tdate" multiValued="false" indexed="true" stored="true"/>
+
+<field name="airFreightType" type="string" multiValued="false" indexed="true" stored="true"/>
+<field name="roroCondition" type="string" multiValued="false" indexed="true" stored="true"/>
+

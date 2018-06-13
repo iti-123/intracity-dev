@@ -1,0 +1,376 @@
+<style>
+    .gray_bg .heading_text{ font-size: 13px; }
+        .white_bg .normal_text{ font-size: 13px; }
+</style>
+
+
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">Seller</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#">Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#">Blue Collar</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+            </ul>
+        </div>
+
+
+        <div class="div_100">
+            <div class="col-lg-9">
+                <div class="row">
+                    <ul class="buyer_ul">
+                        <li class="tab_10 active_buyer" data-tab="Messages">
+                            <a href="javascript:void(0);">All</a>
+                        </li>
+                        <li class="tab_10" data-tab="Offers">
+                            <a href="javascript:void(0);">PUBLIC</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="back_post">
+                    <a href="#/bluecollar-seller-post-list" class="back_red_btn">Back to Post</a>
+                    <!-- <a href="#/seller-rate-card-edit/{{post[0].id}}" class="back_edit">Edit</a> -->
+                    <!--  <a href="javascript:void(0);" class="delete_gray"><i ng-click="deletePost(post[0].id);"
+                                                                          class="fa fa-trash" title="Delete"></i></a> -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- {{post}} -->
+        <div class="white_bg">
+
+            <div class="c_6">
+                <div class="col-md-6 data-fld">
+                    <span class="data-head">POST FOR : {{postDetail.profile_type}}</span>
+                    <span class="data-value break-word"></span>
+                </div>
+
+                <div class="col-md-6 data-fld">
+                    <span class="data-head">CREATED ON : {{postDetail.created_at.slice(0,10) }}</span>
+                    <span class="data-value break-word"></span>
+                </div>
+
+
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="c_2">
+                <div class="col-lg-12">
+                    <div class="data-head text-right">ORDER</div>
+                    <div class="data-value break-all text-right">NOTIFICATIONS</div>
+                </div>
+
+                <div class="info_links padding_top">
+                    <a href=""><i class="fa fa-envelope-o"></i></a>
+                    <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                    <a href=""><i class="fa fa-bullseye"></i><span class="vlue">0</span></a>
+                    <a href=""><i class="fa fa-line-chart"><span class="vlue">0</span></i></a>
+                    <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                </div>
+            </div>
+            <div class="c_2">
+                <div class="col-md-12 text-right">
+                    <div class="views_font">Views 0</div>
+                    <!--<div class="a_link contact_click">-->
+                        <!--<a href="javascript:void(0)"><i class="fa-plus fa" aria-hidden="true"></i> Details</a>-->
+                    <!--</div>-->
+                </div>
+            </div>
+
+
+            <!--<div class="d_box" style="display: none;">-->
+                <!--<div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">-->
+                    <!--<span class="data-head">Discounts</span>-->
+                    <!--<div class="table_heading_one">-->
+                        <!--<div class="col-md-3">Name</div>-->
+                        <!--<div class="col-md-3">Discount Type</div>-->
+                        <!--<div class="col-md-3">Discount</div>-->
+                        <!--<div class="col-md-3">Credit Days</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash; ngRepeat: (key,value) in discount &ndash;&gt;<div class="table_heading_one ng-scope" ng-repeat="(key,value) in discount">-->
+                    <!--<div class="col-md-3 ng-binding">suguna bonam</div>-->
+                    <!--<div class="col-md-3 ng-binding">Percent</div>-->
+                    <!--<div class="col-md-3 ng-binding">66</div>-->
+                    <!--<div class="col-md-3 ng-binding">66</div>-->
+                <!--</div>&lt;!&ndash; end ngRepeat: (key,value) in discount &ndash;&gt;<div class="table_heading_one ng-scope" ng-repeat="(key,value) in discount">-->
+                    <!--<div class="col-md-3 ng-binding">suguna bonam</div>-->
+                    <!--<div class="col-md-3 ng-binding">Flat</div>-->
+                    <!--<div class="col-md-3 ng-binding">666</div>-->
+                    <!--<div class="col-md-3 ng-binding">666</div>-->
+                <!--</div>&lt;!&ndash; end ngRepeat: (key,value) in discount &ndash;&gt;-->
+
+
+                    <!--<div class="table_data_one">-->
+                        <!--&lt;!&ndash; ngIf: discount=='' &ndash;&gt;-->
+
+                    <!--</div>-->
+
+
+                <!--</div>-->
+            <!--</div>-->
+
+            <!-- <div class="div_100 space10">
+                <div class="c_8">
+                    <ul class="filter_list">
+                        <li>FROM</li>
+                        <li>LOCATION</li>
+                        <li>Service Type</li>
+                        <li>Category</li>
+
+                        <li>Valid From</li>
+                        <li>Valid To</li>
+                    </ul>
+                </div>
+                <div class="c_2">
+                    <span class="rilters_click click_a contact_click1"><i class="fa fa-bars"></i> Filters </span>
+                </div>
+            </div> -->
+        </div>
+
+        <div class="white_bg overflow open_a d_box1" style="display:none;">
+            <div class="scroller-div">
+                <div class="fillter_div">
+
+
+
+                    <!--<div class="scroll_div">
+                        <div class="col-lg-12">
+                            <div class="select_form_intra">
+                                <div class="text_mode padding_tb_15">SERVICE TYPE</div>
+                            </div>
+                            <div class="input_right_box_left">
+                                <div class="admin_input margin_t" ng-repeat="value in servicetype | filter:data.service_type">
+                                    <input type="checkbox" class="check_box" ng-click="selectNewServiceType(value.id)" id="vl{{value.id}}">
+                                    <label for="vl{{value.id}}">{{ value.value }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <!--<div class="scroll_div">
+                        <div class="col-lg-12">
+                            <div class="text_mode padding_tb_15">CATEGORY TYPE</div>
+
+                            <div class="input_right_box_left">
+                                <div class="admin_input margin_t" ng-repeat="value in categories">
+                                    <input type="checkbox" ng-click="selectNewCategoryType(value.id)" id="v2{{value.id}}" class="check_box check_box_1">
+                                    <label for="v2{{value.id}}">{{value.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <div class="date_selection select_form_intra">
+                                <span class="left_v_from">
+                            <input type="text" id="from_calendar" ng-model="data.from_date" fromcalendar
+                                   class="date_p input_ani" required="">
+                            <label class="lbl_text2 padg_l">Valid From </label>
+                            </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <div class="date_selection select_form_intra">
+                                <span class="left_v_from">
+                            <input type="text" id="to_date" ng-model="data.to_date" tocalendar
+                                   class="date_p input_ani" required="">
+                            <label class="lbl_text2 padg_l">Valid To</label>
+                            </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+
+                                <div class="select_form_intra">
+                                    <input type="text" class="input_ani" ng-model="data.vehicle_type" required=""/>
+                                    <label class="lbl_text2">VEHICLE TYP</label>
+                                    <span class="search_icon"><i class="fa fa-search"></i></span>
+                                </div>
+
+                                <div class="filter_from_location">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <ul class="post_inline">
+                                                <li>
+                                                    <div class="admin_input">
+                                                       <div class="admin_input" ng-repeat="vehicle in vehicles | filter:data.vehicle_type">
+                                    <input type="checkbox" class="check_box check_box_1"  ng-click="selectNewVehicleType(vehicle.vehicle_type)"  id="vl{{vehicle.id}}">
+                                    <label for="vl{{vehicle.id}}">{{ vehicle.vehicle_type }}</label>
+                                </div>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="cart heght_100">
+
+        <div class="loc_det">
+            <div class="gray_bg">
+
+                <div class="col-lg-9">
+                    <div class="row">
+
+
+                        <div class="col-lg-2">
+                            <div class="heading_text">qualification</div>
+                        </div>
+
+
+                        <div class="col-lg-2">
+                            <div class="heading_text">post type</div>
+                        </div>
+
+
+                        <div class="col-lg-2">
+                            <div class="heading_text">employment type</div>
+                        </div>
+
+
+                        <div class="col-lg-2">
+                            <div class="heading_text">experience</div>
+                        </div>
+
+
+                        <div class="col-lg-2">
+                            <div class="heading_text">salary type</div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="heading_text">salary</div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="row">
+                        <div class="heading_text padding_left">NOTIFICATIONS</div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="white_bg">
+            <!--<div ng-repeat="(key, val) in value.get_all_route |filter:fromFilter|filter:toFilter">-->
+            <div class="col-lg-9">
+                <div class="row">
+
+
+                    <div class="col-lg-2">
+                        <div class="normal_text">{{ postDetail.qualification }}</div>
+                    </div>
+
+
+                    <div class="col-lg-2">
+                        <div class="normal_text">{{ postDetail.post_type }}</div>
+                    </div>
+
+
+                    <div class="col-lg-2">
+                        <div class="normal_text">{{ postDetail.employment_type }}</div>
+                    </div>
+
+
+                    <div class="col-lg-2">
+                        <div class="normal_text">{{ postDetail.experience }}</div>
+                    </div>
+
+
+                    <div class="col-lg-2">
+                        <div class="normal_text">{{ postDetail.salary_type }}</div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="normal_text">{{ postDetail.salary }}</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+
+                <div class="info_links">
+                    <a href=""><i class="fa fa-envelope-o"></i></a>
+                    <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                    <a href=""><i class="fa fa-bullseye"></i><span class="vlue">0</span></a>
+                    <a href=""><i class="fa fa-line-chart"><span class="vlue">0</span></i></a>
+                    <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                </div>
+                <!--</div>-->
+            </div>
+        </div>
+
+
+    </div> <!--end of location_sec-->
+</div> <!--end of right_search_p-->
+</div>
+
+<script>
+
+
+    $(document).ready(function () {
+        $(".contact_click").click(function () {
+            $(".d_box").slideToggle("slow");
+        });
+
+        $('.contact_click').click(function () {
+            $(this).next('.d_box').slideToggle('500');
+            $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
+        });
+
+    });
+
+
+    $(document).ready(function () {
+        $(".contact_click1").click(function () {
+            $(".d_box1").slideToggle("slow");
+        });
+
+        $('.contact_click1').click(function () {
+            $(this).next('.d_box1').slideToggle('500');
+
+        });
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var gwid = $(".scroll_div").width();
+        var twid = $(".loc_det").width();
+        var acwid = gwid / twid * 100;
+        var len = $(".scroll_div").length;
+        var towid = acwid * len + 9;
+        $(".fillter_div").css({"width": "" + towid + "%"});
+    });
+</script>
+<style>
+    .padding_tb_15{padding:15px 0 15px 0;}
+</style>

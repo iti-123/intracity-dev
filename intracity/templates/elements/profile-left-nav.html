@@ -1,0 +1,46 @@
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="row">
+
+                <div class="user_block">
+                    <div class="user_box">
+                        <div class="user_pic">
+                            <img src="images/kapil.png">
+                            <button id="clickme" class="edit-image" onclick="changeImage();"><img src="../images/user-detail.png"></button>
+                        </div>
+                        <span class="created_noral">  {{ profile.username }} </span>
+                    </div>
+
+                    <div class="user_box_main">
+                       
+                        <div class="follow_acount">{{ profile.followers.length }} Followers</div>
+                        <div class="follow_acount">{{ profile.partners.length }} Partners</div>
+                        <div class="Recommendations_accout">{{ profile.connections.length }} Connections</div>
+                    </div>
+
+                    <div class="admin_list" ng-if="getUserActiveRole=='Seller'">
+                        <ul>
+                            <li><a href="javascript:void(0)">Business Type<span><b> {{ profile.seller.business.type }} </b></span></a></li>
+                            <li><a href="javascript:void(0)">Industry<span><b> {{ profile.seller.industry.type }}  </b></span></a></li>
+                            <li><a href="javascript:void(0)">Location<span><b> {{ profile.seller.city.location }}  </b></span></a></li>
+                            <li><a href="javascript:void(0)">Year Established<span><b> {{ profile.seller.establishedIn }} </b></span></a></li>
+                            <li><a href="javascript:void(0)">Emloyees<span><b>  {{ profile.seller.emp_strength.total }} + </b></span></a></li>
+                            <li><a href="javascript:void(0)">Annual Turnover<span><b>INR. {{ profile.seller.turnover }}  crores+</b></span></a></li>
+                            <li><a href="javascript:void(0)">Main Markets<span><b> {{ profile.seller.mainMarket }} </b></span></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="admin_list" ng-if="getUserActiveRole=='Buyer'">
+                        <ul>
+                            <li><a href="javascript:void(0)">PrincipalPlace<span><b> {{ profile.buyer.principalPlace}}  </b></span></a></li>
+                            <li><a href="javascript:void(0)">Location<span><b> {{ profile.buyer.city.location }}  </b></span></a></li>
+                            
+                        </ul>
+                    </div>
+
+                </div>
+                <!--End of left_side_services-->
+            </div>
+        </div>
+   
+

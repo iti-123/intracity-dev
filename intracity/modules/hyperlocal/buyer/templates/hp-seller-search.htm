@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hyperlocal</title>
+
+    <style>
+        .fragile_bg {
+            background: rgba(255, 255, 255, 0.57);
+            padding: 10px 0;
+            float: left;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body ng-app="hyperlocal" ng-controller="searching">
+<div class="wrapper padding_main ng-scope">
+    <div class="container-fluid">
+        <div class="wrapper">
+            <div class="hyperlocal_index">
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243647.31697966583!2d78.2679615687059!3d17.41229980306334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C+Telangana!5e0!3m2!1sen!2sin!4v1490178589784"
+                            frameborder="0" style="border:0;width:100%;height:750px;" allowfullscreen></iframe>
+                </div>
+
+                <div class="hyperlocal_search_form">
+                    <form id="searchForm" name="searchForm" method="post" ng-submit="StartSearch()">
+                        <div class="row">
+                            <div class="h_form_input">
+                                <div class="col-lg-9 form-group">
+
+                                    <input type="text" id="city" name="city" autocomplete="off" class="input_ani"
+                                           typeahead-on-select="onSelect($item, $model, $label)"
+                                           ng-model="data.city_id.id" required=""
+                                           typeahead="city as (city.city_name) for city in cities | filter:$viewValue"
+                                           placeholder="Select City"/>
+                                </div>
+                            </div>
+                            <div class="h_form_input form-group">
+                                <div class="col-lg-9">
+                                <span class="left_v_from">
+                                   
+                                    <input type="text" id="departingDate" fromcalendar="" ng-model="data.departingDate"
+                                           name="departingDate" class="form_input" placeholder="Date">
+                                    
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="h_form_input">
+                                <div class="col-lg-9 col-md-9 form-group">
+                                    <input type="text" autocomplete="off" name="fromLocation" id="from_location"
+                                           ng-model="data.from_location"
+                                           class="input_ani"
+                                           typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+                                           required="" placeholder="From Location">
+
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="m-left">
+                                        <!--<div class="add_location">Add<br />Location</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h_form_input">
+                                <div class="col-lg-9 col-md-9 form-group">
+                                    <input type="text" autocomplete="off" name="tolocation" id="to_location"
+                                           ng-model="data.to_location"
+                                           class="input_ani"
+                                           typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+                                           required="" placeholder="To Location">
+
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="m-left">
+                                        <!--<div class="add_location">Add<br />Location</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h_form_input">
+
+                                <div class="col-lg-3">
+                                    <button type="button" id="search" class="submit_btn">Search</button>
+                                    <!--                        <input  ng-bind = "searchFormSubmit" type="submit" class="submit_btn" />-->
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+</html>
+<style>
+    .page_div {
+        background: #fff;
+        display: table;
+        width: 100%;
+        float: left;
+    }
+</style>

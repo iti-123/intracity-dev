@@ -1,0 +1,177 @@
+<div class="left_menu_space"></div>
+        <div class="col-md-12 col-sm-8 col-xs-12">
+            <div class="row">
+                <div class="right_serch_p titile_gray">
+                    <div class="right_search_bar">
+                        <ul class="search_bar_tab">
+                            <li><a href="#community-profile">Community</a><i class="fa  fa-angle-right"></i></li>
+                            <li><a href="javascript:void(0);" class="active_c">Connections</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="row">
+                <div class="right_serch_p">
+                    <div class="main-right">
+                        <style>
+                            .con_tab {
+                                float: left;
+                                width: 100%;
+                                text-align: center;
+                                padding-top: 15px;
+                                margin-bottom: 15px;
+                            }
+
+                                .con_tab ul {
+                                    margin: 0px;
+                                    padding: 0px;
+                                    margin-left:30px;
+                                    float:left;
+                                    list-style-type: none;
+                                }
+
+                                    .con_tab ul li {
+                                        display: inline-block;
+                                        font-size: 18px;
+                                        padding: 5px 12px;
+                                        padding-bottom: 8px;
+                                        border-bottom: solid 3px transparent;
+                                        color: #333;
+                                        cursor: pointer;
+                                    }
+
+                                        .con_tab ul li.active {
+                                            color: #f00;
+                                            border-bottom: solid 3px #f00;
+                                        }
+                                        .tab_box.active_box {
+                                            display: block;
+                                        }
+                        </style>
+                        <div class="table_div_100">
+                            <div class="con_tab">
+                                <ul>
+                                    <!-- <li tab-data="individual" class="tab_class active">Individual &amp; Connections</li>
+                                    <li tab-data="Partner" class="tab_class">Partner &amp; Connections</li>
+                                    <li tab-data="Groups" class="tab_class">Groups &amp; Connections</li> -->
+
+                                    <li class="tab_class" ng-class="{'active':tab.Individual}"><a href="javascript:void(0);" ng-click="getTab('Individual')">Individual &amp; Connections </a></li>
+                                    <li class="tab_class" ng-class="{'active':tab.Partner}"><a href="javascript:void(0);" ng-click="getTab('Partner')"> Partner &amp; Connections </a></li>
+                                    <li class="tab_class" ng-class="{'active':tab.Groups}"><a href="javascript:void(0);" ng-click="getTab('Groups')"> Groups &amp; Connections </a></li>
+
+                                </ul>
+                            </div>
+                            <div class="table_div_row tab_box" ng-class="{'active_box':tab.Individual}">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                                    <!--<div class="Mutual_heading1">Individual &amp; Connections</div>-->
+                                    <div class="col-lg-3 col-sm-6" ng-repeat="(key, value) in profile.connections">
+                                        <div class="profile-sidebar marginB_8">
+                                            <!-- SIDEBAR USERPIC -->
+                                            <div class="profile-userpic">
+                                                <img src="../images/profile_pic.jpg" class="img-responsive" alt="">
+                                            </div>
+
+                                            <div class="profile-usertitle">
+                                                <div class="profile-usertitle-name bold">
+                                                        <a href="#/community/profile/{{ value.user | getSlug }}">  {{ value.user.username }} </a>
+                                                </div>
+                                                <div class="profile-usertitle-job">
+                                                    {{ value.user.designation && value.user.designation || 'N/A' }}
+                                                </div>
+                                                <div class="profile-usertitle-job">
+                                                        <a href="#/community/profile/{{ value.user | getSlug }}">  More description here </a>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                    
+
+                                </div>
+                            </div>
+                            <div class="table_div_row tab_box" ng-class="{'active_box':tab.Partner}">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <!--<div class="Mutual_heading1">Partner &amp; Connections</div>-->
+                                    <div class="col-lg-3 col-sm-6" ng-repeat="(key, value) in profile.partners">
+                                        <div class="profile-sidebar marginB_8">
+                                            <!-- SIDEBAR USERPIC -->
+                                            <div class="profile-userpic">
+                                                <img src="../images/profile_pic.jpg" class="img-responsive" alt="">
+                                            </div>
+
+                                            <div class="profile-usertitle">
+                                                <div class="profile-usertitle-name bold">
+                                                    <a href="#/community/profile/{{ value.user | getSlug }}"> {{ value.user.username }} </a>
+                                                </div>
+                                                <div class="profile-usertitle-job">
+                                                    {{ value.user.designation && value.user.designation || 'N/A' }}
+                                                </div>
+                                                <div class="profile-usertitle-job">
+                                                    <a href="#/community/profile/{{ value.user | getSlug }}">  More description here </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                   
+
+                                </div>
+                            </div>
+                            <div class="table_div_row tab_box" ng-class="{'active_box':tab.Groups}">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <!--<div class="Mutual_heading1">Groups &amp; Connections</div>-->
+                                    <div class="col-lg-3 col-sm-6" ng-repeat="(key, value) in profile.groups">
+                                        <div class="profile-sidebar marginB_8">
+                                            <!-- SIDEBAR USERPIC -->
+                                            <div class="profile-userpic">
+                                                <img src="{{storagePath+''+value.group.image}}" class="img-responsive" alt="">
+                                            </div>
+
+                                            <div class="profile-usertitle">
+                                                <div class="profile-usertitle-name bold">
+                                                   {{ value.group.name }}
+                                                </div>
+                                                <div class="profile-usertitle-job">
+                                                    Admin : <strong> {{ value.user.username }} </strong>
+                                                </div>
+                                                <div class="profile-usertitle-job">
+                                                    More description here
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6" ng-repeat="(key, value) in profile.created_by">
+                                        <div class="profile-sidebar marginB_8">
+                                            <!-- SIDEBAR USERPIC -->
+                                            <div class="profile-userpic">
+                                                <img src="{{storagePath+''+value.image}}" class="img-responsive" alt="">
+                                            </div>
+
+                                            <div class="profile-usertitle">
+                                                <div class="profile-usertitle-name bold">
+                                                   {{ value.name }}
+                                                </div>
+                                                <div class="profile-usertitle-job">
+                                                    Admin : <strong> {{ value.user.username }} </strong>
+                                                </div>
+                                                <div class="profile-usertitle-job">
+                                                    More description here
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Table Starts Here -->
+                </div>
+            </div> <!--end of right_search_p-->
+        </div>
+    </div>

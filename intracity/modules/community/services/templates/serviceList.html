@@ -1,0 +1,216 @@
+<script type="text/javascript">                                                 
+ $(document).ready(function(){
+    $(".butt-on").click(function(){
+       alert("hello");
+    $(".show-div-fi").toggle(1000);
+     });
+
+      $(".butt-on2").click(function(){
+       alert("hello");
+    $(".show-div-fi2").toggle(1000);
+     });
+
+       $(".butt-on3").click(function(){
+    $(".show-div-fi3").toggle(1000);
+     });
+
+
+    $(".list-inline1").click(function(){
+    $(".displye").toggle(1000);
+     });
+ });
+</script>
+
+<div class="col-lg-12 col-md-12 col-sm-12">
+   <div class="row">
+      <div class="right_serch_p">
+         <div class="main-right">
+            <!-- Search Block Starts Here -->
+            <div class="search-block inner-block-bg">
+               <div class="cell-1 cell-1-80">
+                  <ul class="list-inline m-bottom-0 m-top-5 font-bold-black">
+                     <li><a href="javascript:void(0);">FULL TRUCK LOAD (95)</a></li>
+                  </ul>
+               </div>
+            </div>
+            <div class="search-block inner-block-bg">
+               <div class="col-lg-11 col-md-11 col-sm-11">
+                  <div class="filter_100 overflow displye">
+                     <div class="fillter_div_scro">
+                        <div class="filder_widht">
+                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                              <div class="row">
+                                 <div class="select_form_intra">
+                                    <input type="text" class="input_ani" required="">
+                                    <label class="lbl_text2">POST</label>
+                                    <span class="search_icon"><i class="fa fa-search"></i></span>
+                                 </div>
+                                 <div class="commny_chack_box">
+                                    <div class="admin_input margin_t">
+                                       <input id="Partners" type="checkbox" class="check_box check_box_1">
+                                       <label for="Partners">Spot</label>
+                                    </div>
+                                    <div class="admin_input margin_t">
+                                       <input id="NairTrans" type="checkbox" class="check_box check_box_1">
+                                       <label for="NairTrans">Term</label>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="filder_widht">
+                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                              <div class="row">
+                                 <div class="select_form_intra">
+                                    <input type="text" class="input_ani" required="">
+                                    <label class="lbl_text2">STATES</label>
+                                    <span class="search_icon"><i class="fa fa-search"></i></span>
+                                 </div>
+                                 <div class="commny_chack_box">
+                                    <div class="admin_input margin_t">
+                                       <input id="Partners" type="checkbox" class="check_box check_box_1">
+                                       <label for="Partners">Hyderabad</label>
+                                    </div>
+                                    <div class="admin_input margin_t">
+                                       <input id="NairTrans" type="checkbox" class="check_box check_box_1">
+                                       <label for="NairTrans">Mumbai</label>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="filder_widht">
+                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                              <div class="row">
+                                 <div class="select_form_intra">
+                                    <input type="text" class="input_ani" required="">
+                                    <label class="lbl_text2">NO. OF VEHICLE </label>
+                                    <span class="search_icclass="butt-on2"on"><i class="fa fa-search"></i></span>
+                                 </div>
+                                 <div class="commny_chack_box">
+                                    <div class="admin_input margin_t">
+                                       <input id="Partners" type="checkbox" class="check_box check_box_1">
+                                       <label for="Partners">Product 1</label>
+                                    </div>
+                                    <div class="admin_input margin_t">
+                                       <input id="NairTrans" type="checkbox" class="check_box check_box_1">
+                                       <label for="NairTrans">Product 2</label>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="filder_widht">
+                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                              <div class="row">
+                                 <div class="select_form_intra">
+                                    <input type="text" class="input_ani" required="">
+                                    <label class="lbl_text2">VEHICLE TYPES</label>
+                                    <span class="search_icon"><i class="fa fa-search"></i></span>
+                                 </div>
+                                 <div class="commny_chack_box">
+                                    <div class="admin_input margin_t">
+                                       <input id="Partners" type="checkbox" class="check_box check_box_1">
+                                       <label for="Partners">Vehicle 1</label>
+                                    </div>
+                                    <div class="admin_input margin_t">
+                                       <input id="NairTrans" type="checkbox" class="check_box check_box_1">
+                                       <label for="NairTrans">Vehicle 2</label>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+     
+            <div ng-repeat="x in sellerdata" class="bg-block">
+               <div class="linkdin_pro">
+                  <div class="col-md-6 padding-left-none">
+                     <img src="../images/rahul.png" class="pull-left m-r-10">
+                     <div class="pull-left col-md-10 padding-none">
+                        <div class="down-link">
+                           <strong style="font-size:16px;padding: 0px 5px;"><a style="color:#333; text-decoration:none;" href="javascript:void(0)">{{x.name}}</a></strong>
+                           <div class="grey1">
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                           </div>
+                           <p>States Operated<span> - 145</span></p>
+                           <div><a href="javascript:void(0)" ng-click="x.isDisplay != true ? x.isDisplay = true:x.isDisplay=false;">View More</a></div>
+                           <div ng-show="x.isDisplay" class="show-div-fi2">
+                              <p>Vehicle Types<span> - 56</span></p>
+                              <p>Own Vehicles<span> - 23</span></p>
+                              <p>Gps Operated<span> - 23</span></p>
+                              <p>Recommend<span> - 23</span></p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6 padding-left-none">
+                     <div  class="right-side-div">
+                        <button ng-click="cmtToServiceRedirect(x.serviceIx,x.serviceUrl)" class="add_btn_Register" data-ember-action="">+ Post</button>
+                        <div class="follows-s1">
+                           <p>
+                              <a href="" data-toggle="modal"  ng-click="replyMessageModal(x)"><i class="fa fa-envelope-o log-icon" aria-hidden="true"></i></a>
+                           </p>
+                           <p>Recommend <span> 154</span></p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>    
+            <!-- Table Starts Here -->
+         </div>
+      </div>
+      <!--end of right_search_p-->
+   </div>
+</div>
+<!-- Message Modal start -->
+<div class="modal fade" id="messageReplyModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form id="MessageReplyData">
+                <div class="modal-header">
+                    <h3 style="float:left" id="replyStatus"></h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="sub-head red margin-left-none margin-bottom">Reply Message</h4>
+                    <div>
+                        <input id="message_from" class="form-control form-control1" readonly="readonly" name="message_from" ng-model="formData.message_from" type="text" value=""/>
+                     </div>
+                     <div>
+                        <input id="message_to" class="form-control form-control1" readonly="readonly" name="message_to" ng-model="formData.message_to" type="text" value=""/>
+                     </div>
+
+                     <div>
+                        <input id="message_subject" class="form-control form-control1 margin-bottom-4 valid" placeholder="Message Subject *" name="message_subject" ng-model="formData.message_subject" type="text"/>
+                     </div>
+                     <div>
+                         <textarea id="message_body" class="form-control form-control1 message-body"
+                         placeholder="Body *" ng-model="formData.message_body" name="message_body" cols="50" rows="10"></textarea>
+                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn red-btn flat-btn ok-btn"
+                        ng-click="replyMessages();">Send message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+.red{
+   color:red;
+}
+</style>
+
+

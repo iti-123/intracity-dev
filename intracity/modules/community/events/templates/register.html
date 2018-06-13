@@ -1,0 +1,72 @@
+<style>
+        .page_div {
+           display: inherit;
+           /* width: 100%; */
+           /* float: left; */
+        }
+        .right_section {
+            display: inherit;
+        }
+    </style>
+<div class="event_register">
+     <h1>Register</h1>
+  <div class="register_event">
+    <div class="time_s">
+        <p>{{eventDetails.community_post.title}}</p>
+        <div class="col-md-6"><span class="time_1">Start <strong>{{ eventDetails.community_post.event_start_date}} | {{ eventDetails.community_post.event_start_time}}</strong></span></div>
+        <div class="col-md-6"><span class="time_2">End <strong>{{eventDetails.community_post.event_end_date}} | {{eventDetails.community_post.event_end_time}}</strong></span></div>
+    </div>
+  	 <div class="class-form">
+        <form name="myForm" ng-submit="myForm.$submitted && myForm.$valid && createEventRegister()" novalidate>
+            <div class="col-md-12">
+                <div class="select_form_intra margin-bottm">
+                    <input type="text"  class="input_ani border_regi" autocomplete="off" name="name" ng-model="event.name"  required="">
+                    <label class="lbl_text2">Name*</label>
+                    <span  class="help-inline ng-hide" style="color:red" ng-show="myForm.$submitted && myForm.name.$error.required">
+                            Name is required.
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                    <div class="select_form_intra margin-bottm">
+                    <input type="Email"  class="input_ani border_regi" autocomplete="off" ng-model="event.email" name="email"  required="">
+                    <label class="lbl_text2">Email Id*</label>
+                    <span  class="help-inline ng-hide" style="color:red" ng-show="myForm.$submitted && myForm.email.$error.required">
+                            Email is required.
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="select_form_intra margin-bottm">
+                    <input type="Phone" maxlength="10" class="input_ani valid-number border_regi" autocomplete="off" ng-model="event.mobile" name="mobile" required=""> 
+                    <label class="lbl_text2">Mobile Number</label>
+                    <span  class="help-inline ng-hide" style="color:red" ng-show="myForm.$submitted && myForm.mobile.$error.required">
+                            Enter your Mobile.
+                    </span>
+                </div>
+            </div> 
+
+            <div class="col-md-12">
+                <div class="select_form_intra margin-bottm">
+                    <input type="text"  class="input_ani border_regi" autocomplete="off" ng-model="event.address" name="address"  required="">
+                    <label class="lbl_text2">Address*</label>
+                    <span  class="help-inline ng-hide" style="color:red" ng-show="myForm.$submitted && myForm.address.$error.required">
+                            Address is required.
+                    </span>
+                </div>
+            </div>
+
+            <div class="btns">
+                <div class="register_btns">
+                    <input type="submit" name="register" value="Register">
+                </div>
+                <div class="cancel-btns">
+                    <input type="button" name="register" value="Cancel">
+                </div>
+            </div>
+        </form>        
+  	 </div>
+  </div>
+</div>

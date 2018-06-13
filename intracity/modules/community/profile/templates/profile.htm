@@ -1,0 +1,256 @@
+<div class="left_menu_space">
+    <div class="col-lg-3 col-md-3 col-sm-3" class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="row">
+                <div class="user_block">
+                    <div class="user_box">
+                        <div class="user_pic">
+                            <img src="images/kapil.png">
+                            
+                        </div>
+                        <span class="created_noral">  {{ profile.username }} </span>
+                    </div>
+                    <div class="user_box_main">
+                        
+                        <div class="follow_acount"> {{ profile.followers.length }} Followers</div>
+                        <div class="follow_acount"> {{ profile.partners.length }} Partners</div>
+                        <div class="Recommendations_accout">{{ profile.connections.length }} Connections</div>
+                    </div>
+                    <div class="admin_list" ng-if="profile.isSeller">
+                        <ul>
+                            <li><a href="javascript:void(0)">Business Type<span><b> {{ profile.seller.business.type }} </b></span></a></li>
+                            <li><a href="javascript:void(0)">Industry<span><b> {{ profile.seller.industry.type }}  </b></span></a></li>
+                            <li><a href="javascript:void(0)">Location<span><b> {{ profile.seller.city.location }}  </b></span></a></li>
+                            <li><a href="javascript:void(0)">Year Established<span><b> {{ profile.seller.establishedIn }} </b></span></a></li>
+                            <li><a href="javascript:void(0)">Emloyees<span><b>  {{ profile.seller.emp_strength.total }} + </b></span></a></li>
+                            <li><a href="javascript:void(0)">Annual Turnover<span><b>INR. {{ profile.seller.turnover }}  crores+</b></span></a></li>
+                            <li><a href="javascript:void(0)">Main Markets<span><b> {{ profile.seller.mainMarket }} </b></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="admin_list" ng-if="profile.isBuyer && !profile.isSeller">
+                        <ul>
+                            <li><a href="javascript:void(0)">PrincipalPlace<span><b> {{ profile.buyer.principalPlace}}  </b></span></a></li>
+                            <li><a href="javascript:void(0)">Location<span><b> {{ profile.buyer.city.location }}  </b></span></a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <!--End of left_side_services-->
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 col-sm-9 col-xs-9">
+        <div class="row">
+            <div class="right_serch_p titile_gray">
+                <div class="right_search_bar">
+                    <ul class="search_bar_tab">
+                        <li><a href="javascript:void(0)">Community</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                        <li><a href="javascript:void(0)">Members</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                        <li><a href="javascript:void(0)">Individuals</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                        <li><a href="javascript:void(0)" class="active_c"> {{ profile.username }} </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9">
+        <div class="row">
+            <div class="right_serch_p">
+                <div class="main-right">
+                    <div class="bg_socail_box">
+                        
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="socail_box1">
+                                <ul>
+                                    <li><a href="javascript:void(0)">Followers <span> {{ profile.followers.length }} </span> </a>
+                                    <ul class="count-list">
+                                        <li>Sandeep</li>
+                                        <li>Himanshu</li>
+                                        <li>Prashant</li>
+                                    </ul>
+                                </li>
+                                <li><a href="javascript:void(0)">Partners <span>{{ profile.partners.length }}</span> </a></li>
+                                <li><a href="javascript:void(0)">Recommend</a></li>
+                                <li><a href="javascript:void(0)">Messages</a></li>
+                                <li><a href="javascript:void(0)" ng-click="activeButton()">Contact Details</a></li>
+                                
+                                <div class="request_det" ng-class="{'actives': isActive}">
+                                    <span>Request</span>
+                                </div>
+                                
+                                <li class="so-icon">
+                                    <a ng-href="{{ profile.fb_identifier }}" target="_blank" title="Facebook" rel="nofollow" class="facebook"><i class="fa fa-facebook"></i></a>
+                                    <a ng-href="{{ profile.google_identifier }}" target="_blank" title="Google plus" rel="nofollow" class="google"><i class="fa fa-google"></i></a>
+                                    <a ng-href="{{ profile.linkedin_identifier }}" target="_blank" title="Linkedin" rel="nofollow" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-block">
+                    <div class="about_heading">
+                        <span class="about_heading_span">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+                    </div>
+                </div>
+                <!-- Table Starts Here -->
+                <div class="table_div_100">
+                    <div class="table_div_row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="total_availab">
+                                <div class="totoa-cost"> {{ profileDetail.services.length }} </div>
+                                <div class="down-ded bold">Services</div>
+                                <div class="all-datat too">
+                                    <ul>
+                                        <li ng-repeat="service in profileDetail.services" ><a href="javascript:void(0)"> {{ service.service_name }} </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="total_availab2">
+                                <div class="totoa-cost">
+                                    {{ profile.followers.length+profile.partners.length+profile.connections.length }}
+                                </div>
+                                <div class="down-ded bold">Networks</div>
+                                <div class="all-datat too2">
+                                    <ul>
+                                        <li>Partnerships</li>
+                                        <li>Connections</li>
+                                        <li>Follows</li>
+                                        <li>Followers</li>
+                                        <li>Groups</li>
+                                        <li>Recommendations</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            
+                            <div class="total_availab3">
+                                <div class="totoa-cost">28</div>
+                                <div class="down-ded bold">Jobs</div>
+                                
+                                
+                                <div class="all-datat too3">
+                                    <ul>
+                                        <li><a href="#">My jobs(Full time,Contract )</a></li>
+                                        <li><a href="#">Interested Jobs(Jobs in which i am interested)</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="total_availab4">
+                                <div class="totoa-cost">140</div>
+                                <div class="down-ded bold">Events</div>
+                                <div class="all-datat too4">
+                                    <ul>
+                                        <li><a href="#">My events</a></li>
+                                        <li><a href="#">Upcoming events</a></li>
+                                        <li><a href="#">Attended events</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table_div_row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="Mutual_heading1">Partners &amp; Connections</div>
+                            <!-- Partner -->
+                            <div class="col-lg-3 col-sm-6" ng-repeat="partner in profile.partners">
+                                <div class="profile-sidebar">
+                                    <!-- SIDEBAR USERPIC -->
+                                    <div class="profile-userpic">
+                                        <img src="../images/profile_pic.jpg" class="img-responsive" alt="">
+                                    </div>
+                                    <div class="profile-usertitle">
+                                        <div class="profile-usertitle-name bold">
+                                            <a href="#/community/profile/{{ partner.user | getSlug }}">{{ partner.user.username }}</a>
+                                        </div>
+                                        <div class="profile-usertitle-job">
+                                            {{ partner.user.designation && partner.user.designation || 'N/A'  }}
+                                        </div>
+                                        <div class="profile-usertitle-job">
+                                            <a href="#/community/profile/{{ partner.user | getSlug }}"> More description here </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6"ng-repeat="connection in profile.connections" >
+                                <div class="profile-sidebar">
+                                    <!-- SIDEBAR USERPIC -->
+                                    <div class="profile-userpic">
+                                        <img src="../images/profile_pic.jpg" class="img-responsive" alt="">
+                                    </div>
+                                    <div class="profile-usertitle">
+                                        <div class="profile-usertitle-name bold">
+                                            <a href="#/community/profile/{{connection.user | getSlug }}"> {{ connection.user.username }} </a>
+                                        </div>
+                                        <div class="profile-usertitle-job">
+                                            {{ connection.user.designation && connection.user.designation || 'N/A'  }}
+                                        </div>
+                                        <div class="profile-usertitle-job">
+                                            <a href="#/community/profile/{{connection.user | getSlug }}"> More description here </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+            $(document).ready(function(){
+            $(".total_availab").click(function(){
+            $(".too").toggle(1000);
+            });
+            });
+            
+            $(document).ready(function(){
+            $(".total_availab2").click(function(){
+            $(".too2").toggle(1000);
+            });
+            });
+            
+            $(document).ready(function(){
+            $(".total_availab3").click(function(){
+            $(".too3").toggle(1000);
+            });
+            });
+            
+            $(document).ready(function(){
+            $(".total_availab4").click(function(){
+            $(".too4").toggle(1000);
+            });
+            });
+            </script>                        <!-- Table Starts Here -->
+        </div>
+        </div> <!--end of right_search_p-->
+    </div>
+</div>
+<style>
+.socail_box1 > ul > li a span{ color: #ed3237;}
+.socail_box1 > ul > li{ position: relative; }
+.socail_box1 ul li ul.count-list{
+display:none;
+transition: 0.8s;
+position: absolute;
+left: 0px;
+right: 0px;
+width: 100%;
+top: 29px;
+margin: 0 auto;
+background: #f3f3f3;
+}
+.socail_box1 > ul > li > ul.count-list li{width: 100%;
+float: left;
+cursor: pointer;
+color: #393939;
+padding: 5px 0;
+font-size: 13px;
+border-bottom: 1px solid #ddd;}
+.socail_box1 ul li:hover ul.count-list{ display: block;}
+</style>

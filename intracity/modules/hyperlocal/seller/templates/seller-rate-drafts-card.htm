@@ -1,0 +1,524 @@
+<style>
+    .modal-content {
+        border-radius: 0;
+    }
+
+    .modal-body {
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
+    }
+
+    .modal-body {
+        display: table;
+        width: 100%;
+        padding: 50px 15px 20px;
+        font-size: 17px;
+        font-family: FuturaBT-Book !important;
+        word-spacing: 3px;
+        text-align: justify;
+    }
+
+    .form-error {
+        color:red;
+    }
+    .form-element-error {
+        border-bottom: 1px solid red;
+    }
+</style> 
+<link rel="stylesheet" type="text/css" href="css/hyperlocal_new.css">
+
+<form name="rateCard" action="" method="post" ng-app novalidate>
+    <div class="hyperlocal-rate-card">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                    <div class="row">
+                        <div class="col-lg-12 col-xs-12">
+                            <div class="right_search_bar">
+                                <ul class="search_bar_tab">
+                                    <li><a href="javascript:void(0)">Seller </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                    <li><a href="#services">Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                    <li><a href="javascript:void(0)" class="active_c">Hyperlocal Post</a></li>
+                                </ul>
+                          
+                                <ul class="list-inline pull-right m-bottom-0 ptblr">
+
+                                    <li><a href="http://115.124.98.243/~honeymoney/testfolder/Hyper_local_ratecard_upload.xlsx" target="_blank"  data-toggle="#" ng-click= "downloadTemplate()" data-target="#" data-toggle="tooltip" 
+                                                       title="Now upload your multiple seller rate card through CSV/Excel File!. Download Sample file, filled it & upload" class="link-zindex">
+                                            <img src="./images/download-icon.png" class="pull-left p-right-5">Download</a>
+                                    </li>
+
+                                    <li><a href data-toggle="modal" data-target="#uploadModal"  class="link-zindex upload_excel">
+                                            <img src="./images/upload-icon.png" class="pull-left p-right-5"> Upload</a>
+                                    </li>
+
+                                </ul>
+                            
+                            </div>
+                        </div>
+                    </div>
+                 
+                    <div class="hyperlocal-rc-flow"> 
+                        
+                        <div class="col-lg-12 col-md-12 col-sm-12category">
+                            <div class="right-form-flow">
+                                <div class="load_type"> 
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="select_form_hyperlocal" id="title">
+                                            <input type="text" class="input_ani" name="title" ng-model="formData.title" required>
+                                            <label class="lbl_text2">Title<span>*</span></label>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                         <div class="select_form_hyperlocal btn-none" id="service">
+                                            <select name="service_type" ng-model="formData.service_type" id="service_type" ng-selected="y.id == formData.service_type" class="selectpicker" selectpicker 
+                                                    ng-options="y.id as y.value for (x,y) in servicetype">
+                                                <option value="">Service type <span>*</span></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="select_form_hyperlocal" id="city">
+                                          <input type="text" ng-model="formData.city" name="city"
+                                                   class="input_ani cityLocation" autocomplete="off" 
+                                                   typeahead-on-select="onSelect($item, $model, $label)" required=""
+                                                   typeahead="city as (city.city_name) for city in cities | filter:$viewValue"
+                                            />
+                                            <label class="lbl_text2">Select City<span>*</span> </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="date_selection select_form_hyperlocal" id="departing">
+                                            <span class="left_v_from">
+                                                <input type="text" name="fromDate" readonly
+                                                       ng-model="formData.fromdate" fromCalendar
+                                                       class="date_p input_ani" required>
+                                                <label class="lbl_text2 active">Valid From<span>*</span></label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="load_type">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="date_selection select_form_hyperlocal" id="returning1">
+                                            <span class="left_v_from">
+                                                        <input type="text" name="toDate" readonly
+                                                               ng-model="formData.todate" toCalendar
+                                                               class="date_p input_ani" required>
+                                                        <label class="lbl_text2 active">To Date<span>*</span></label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="select_form_hyperlocal btn-none" id="product">
+                                            <select name="category" ng-model="formData.category" ng-selected="y.id == formData.category" ng-options="y.id as y.name for (x,y) in categories" id="product_category" class="selectpicker" selectpicker>
+                                                <option value="">Select Product<span>*</span></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                               
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="select_form_hyperlocal {{ (rateCard.line_items.$error.minlength || rateCard.line_items.$error.maxlength) ? 'form-element-error' : ''}}" id="line_items" >
+                                            <input type="text" name="line_items"
+                                                   ng-model="formData.line_items" class="input_ani valid-number" minlength="1" maxlength="8" ng-pattern="/^[0-9]*$/" ng-required="true" >
+                                            <label class="lbl_text2">Line items (1 price for each service type)
+                                                <span>*</span>
+                                            </label>
+                                            <span class="form-error" ng-show="rateCard.line_items.$error.pattern">invalid price.</span>
+                                            <span class="form-error" ng-show="formError.lineItems">Enter value more than 0.</span>
+                                       </div>
+                                    </div>
+                                </div>
+                                <div class="load_type">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="select_form_hyperlocal {{ (rateCard.basePrice.$error.minlength || rateCard.basePrice.$error.maxlength) ? 'form-element-error' : ''}}" id="base_price">
+                                            <input type="text" class="input_ani valid-number" name="basePrice" ng-model="formData.base_price" minlength="1" maxlength="8" ng-pattern="/^[0-9]*$/" ng-required="true"
+                                            />
+                                            <label class="lbl_text2">Base Price (selected service type)<span>*</span>
+                                            </label>
+                                            <span class="form-error" ng-show="formError.basePrice">Enter value more than 0.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="select_form_hyperlocal {{ (rateCard.fragile_addtnl_charges.$error.minlength || rateCard.fragile_addtnl_charges.$error.maxlength) ? 'form-element-error' : ''}}" id="fragile">
+                                            <input type="text" class="input_ani valid-number"name="fragile_addtnl_charges" ng-model="formData.fragile_addtnl_charges" minlength="1" maxlength="8" ng-pattern="/^[0-9]*$/" ng-required="true"/>
+                                            <label class="lbl_text2">Fragile - Additional Charges</label>
+                                            <span class="form-error" ng-show="formError.fragileAddtnlCharges">Enter value more than 0.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="select_form_hyperlocal {{ (rateCard.distance_included.$error.minlength || rateCard.distance_included.$error.maxlength) ? 'form-element-error' : ''}}" id="distance_included">
+                                            <input type="text" name="distance_included" ng-model="formData.distance_included" minlength="1" maxlength="8" ng-pattern="/^[0-9]*$/" ng-required="true" class="input_ani valid-number"/>
+                                            <label class="lbl_text2">Dis.included (Max dist covered for base
+                                                price)<span>*<span></label>
+                                            <span class="form-error" ng-show="formError.distanceIncluded">Enter value more than 0.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="load_type">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="select_form_hyperlocal {{ (rateCard.rate_per_extra_km.$error.minlength || rateCard.rate_per_extra_km.$error.maxlength) ? 'form-element-error' : ''}}" id="rate_per_ext_km">
+                                            <input type="text" class="input_ani valid-number"
+                                            name="rate_per_extra_km" ng-model="formData.rate_per_extra_km" minlength="1" maxlength="8" ng-pattern="/^[0-9]*$/" ng-required="true"/>
+                                            <label class="lbl_text2">Rate per extra km.<span>*</span></label>
+                                            <span class="form-error" ng-show="formError.ratePerExtraKm">Enter value more than 0.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="select_form_hyperlocal {{ (rateCard.weight_included.$error.minlength || rateCard.weight_included.$error.maxlength) ? 'form-element-error' : ''}}" id="weight_included">
+                                            <input type="text" class="input_ani valid-number"
+                                            name="weight_included" ng-model="formData.weight_included"
+                                            minlength="1" maxlength="8" ng-pattern="/^[0-9]*$/" ng-required="true"/>
+                                            <label class="lbl_text2">Weight included(Max weight for base
+                                                price)<span>*</span></label>
+                                             <span class="form-error" ng-show="formError.weightIncluded">Enter value more than 0.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="select_form_hyperlocal {{ (rateCard.rate_pre_extra_kg.$error.minlength || rateCard.rate_pre_extra_kg.$error.maxlength) ? 'form-element-error' : ''}}" id="rate_per_ext_kg">
+                                            <input type="text" class="input_ani valid-number" name="rate_pre_extra_kg" ng-model="formData.rate_pre_extra_kg" minlength="1" maxlength="8" ng-pattern="/^[0-9]*$/" ng-required="true"/>
+                                            <label class="lbl_text2">Rate per extra kg<span>*</span></label>
+                                            <span class="form-error" ng-show="formError.ratePerExtkg">Enter value more than 0.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="load_type">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="select_form_hyperlocal {{ (rateCard.num_of_parcel.$error.minlength || rateCard.num_of_parcel.$error.maxlength) ? 'form-element-error' : ''}}" id="no_of_parcel">
+                                        <input type="text" class="input_ani valid-number"
+                                            name="num_of_parcel" ng-model="formData.num_of_parcel" 
+                                            minlength="1" maxlength="8" ng-pattern="/^[0-9]*$/" ng-required="true"/>
+                                            <label class="lbl_text2">Number of Parcels included</label>
+                                            <span class="form-error" ng-show="formError.numOfParcel">Enter value more than 0.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="select_form_hyperlocal {{ (rateCard.addtn_cost_per_ext_parcel.$error.minlength || rateCard.addtn_cost_per_ext_parcel.$error.maxlength) ? 'form-element-error' : ''}}" id="addtn_cost_per_ext_parcel">
+                                            <input type="text" class="input_ani valid-number" name="addtn_cost_per_ext_parcel" ng-model="formData.addtn_cost_per_ext_parcel" minlength="1" maxlength="8" ng-pattern="/^[0-9]*$/" required="" />
+                                            <label class="lbl_text2">Additional cost per extra parcel</label>
+                                            <span class="form-error" ng-show="formError.addtnCostExtParcel">Enter value more than 0.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="select_form_hyperlocal btn-none" id="time_for_selected_services">
+                                            <select ng-model="formData.time_for_selected_services"
+                                            id="time_for_selected_services" class="selectpicker" ng-selected="formData.time_for_selected_services == x" selectpicker ng-options="x for x in transitHour">
+                                                <option value=""> Time in Hours</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="load_type">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="select_form_hyperlocal btn-none" id="extra_time_per_km">
+                                            <select id="extra_time_per_km" ng-model="formData.extra_time_per_km" ng-selected="formData.extra_time_per_km == x" ng-options="x for x in transitHour" class="selectpicker" selectpicker>
+                                                <option value=""> Extra time per km (In Hours)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="select_form_hyperlocal {{ (rateCard.pricing.$error.minlength || rateCard.pricing.$error.maxlength) ? 'form-element-error' : ''}}" id="pricing">
+                                            <input type="text" class="input_ani valid-number" name="pricing" ng-model="formData.pricing"  
+                                            minlength="1" maxlength="8" ng-pattern="/^[0-9]*$/" ng-required="true"/>
+                                            <label class="lbl_text2"> Pricing for above service types</label>
+                                             <span class="form-error" ng-show="formError.addtnPricing">Enter value more than 0.</span>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="load_type"> 
+                                <!--     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                                         
+                                        <div class="file-upload">
+                                 
+                                            <input type="file" /> 
+                                            <input type="file" ng-model="excel_data" fileread="excel_data" />
+                                            <i class="fa fa-arrow-up"></i>
+                                        </div>
+                                        <label class="lbl_text3">Upload File </label>
+                                    </div> -->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <!-- <a data-toggle="tooltip" 
+                                           title="Now upload your multiple seller rate card through CSV/Excel File!. Download Sample file, filled it & upload">
+                                            <label class="lbl_text3" ></label>
+                                            Download Sample File
+                                        </a>   -->                                      
+                                        <!-- <div class="file-download">
+                                            <i class="fa fa-arrow-down"></i>
+                                        </div> -->
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-right">
+                                        <div class="select_form_hyperlocal">
+                                            <a class="Discounts_btn" id="Discounts_id_1" data-toggle="collapse"
+                                               data-target="">Discounts</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="load_type" id="Discounts_oepn"
+                                     ng-init="fddata.discountType=1">
+                                    <div class="post_public">
+                                          <div class="admin_input spot_t">
+                                            <ul class="select_inline width_cal">
+                                            <li>
+                                                <input name="Accepts" ng-click="showDiscountType(fddata.discountType)" ng-model="fddata.discountType" value="1" id="Accepts" type="radio" class="ng-untouched ng-valid ng-dirty ng-valid-parse">
+                                                <label for="Accepts">Service Level</label>
+                                                <span></span>
+                                            </li>
+                                            <li>
+                                                <input name="Accepts" ng-click="showDiscountType(fddata.discountType)" ng-model="fddata.discountType" value="2" id="Acceptb" type="radio" class="ng-untouched ng-valid ng-dirty">
+                                                <label for="Acceptb">Buyer Level</label>
+                                                <span></span>
+                                                </li>
+                                                <li>
+                                                    <input name="Accepts" ng-click="showDiscountType(fddata.discountType)" ng-model="fddata.discountType" value="3" id="Acceptr" type="radio" class="ng-pristine ng-untouched ng-valid">
+                                                <label for="Acceptr">Rate Card Level</label>
+                                                <span></span>
+                                                </li>
+                                                </ul>
+                                              </div>
+                                        </div>
+                                    <div ng-show="true">
+                                        <div class="checked-data" ng-show="showDiscountType" id="Accepts">
+                                            <div class="col-lg-4 col-md-4 col-sm-2 col-xs-12"
+                                                 ng-show="fddata.discountType == 2">
+                                                <div class="select_form_hyperlocal">
+                                                    <input type="text" id="name" class="input_ani" id="fdbuyer"
+                                                           autocomplete="off" ng-model="fddata.buyer"
+                                                           name="discount_name"
+                                                           typeahead="user as (user.full_name) for user in users | filter:$viewValue"
+                                                           required>
+                                                    <label class="lbl_text2">Name (Auto Fill)<span>*</span></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"
+                                                 ng-show="fddata.discountType == 1">
+                                                <div class="select_form_hyperlocal btn-none">
+                                                    <select name="service_type" ng-model="fddata.service_type"
+                                                            id="service_type" class="selectpicker" selectpicker
+                                                            ng-options="y.id as y.value for (x,y) in servicetype"
+                                                            disabled>
+                                                        <option value="">Service type</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-2 col-xs-12">
+                                                <div class="select_form_hyperlocal btn-none">
+                                                    <select name="fddiscount_type" ng-model="fddata.discount_type"
+                                                            ng-options="y.id as y.value for (x,y) in discount_list"
+                                                            id="discount_type" class="selectpicker" selectpicker>
+                                                        <option value="">Select Discount Type<span>*<span></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-3 col-sm-2 col-xs-12">
+                                                <div class="select_form_hyperlocal">
+                                                    <input type="text" class="input_ani valid-number fdbuyer_discount"
+                                                           name="fdbuyer_discount" id="fdbuyer_discount"
+                                                           ng-model="fddata.buyer_discount" min="0" maxlength="2"
+                                                           required>
+                                                    <label class="lbl_text2">Discount<span>*<span></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-3 col-sm-2 col-xs-12">
+                                                <div class="select_form_hyperlocal">
+                                                    <input type="text" class="input_ani valid-number credit_days"
+                                                           ng-model="fddata.credit_day" id="fdcredit_day"
+                                                           name="credit_days" ng-model="credit_days" min="0" maxlength="2"
+                                                           required>
+                                                    <label class="lbl_text2">Credit Days<span>*<span></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-2 col-md-2 col-sm-1 col-xs-12">
+                                                <input type="button" ng-click="addDiscount(fddata)"
+                                                       id="item_add_discounts" value="Add" class="add_btn_gray">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add_hide">
+                                <div class="table_heading" id="table_heading">
+                                    <div class="col-md-3"> Discount Level</div>
+                                    <div class="col-md-2">Discount type</div>
+                                    <div class="col-md-2">Discount</div>
+                                    <div class="col-md-2">Credit days</div>
+                                    <div class="col-md-2">Notifications</div>
+                                </div>
+                                <div class="white_bg gray_border_3"
+                                     ng-repeat="(key, value) in discountLists track by $index">
+                                    <div class="col-lg-3">
+                                        <div class="normal_text" ng-if="value.discountType==1">SERVICE</div>
+                                        <div class="normal_text" ng-if="value.discountType==2">BUYER</div>
+                                        <div class="normal_text" ng-if="value.discountType==3">RATE CARD</div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="normal_text">
+
+                                            {{ value.discount_type | getobjectvalue:discount_list}}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <div class="normal_text">{{value.buyer_discount}}</div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="normal_text">{{value.credit_day}}</div>
+                                    </div>
+
+                                    <div class="col-lg-1">
+                                        <div class="row">
+                                            <div class="edit_fontawesome"><i class="fa fa-pencil-square-o"
+                                                                             aria-hidden="true"
+                                                                             ng-click="editDiscount(value,$index)"></i>
+                                            </div>
+                                            <div class="delete_fontawesome"><i class="fa fa-trash" aria-hidden="true"
+                                                                               ng-click="deleteDiscount($index)"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="load_type">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="spot_t" ng-init="formData.post_type=0">
+                                        <ul class="select_inline">
+                                            <li>
+                                                <input type="radio" ng-checked="true" id="PostPublic"
+                                                       ng-model="formData.post_type" name="post_type" value="0"
+                                                       ng-click="showHideBuyer('public')">
+                                                <label for="PostPublic" class="ab_c">Post Public</label>
+                                                <span></span>
+                                            </li>
+
+                                            <li>
+                                                <input type="radio" name="post_type" id="PostPrivate"
+                                                       ng-model="formData.post_type" ng-click="showHideBuyer('private')"
+                                                       value="1">
+                                                <label for="PostPrivate" class="ab_c">Post Private</label>
+                                                <span></span>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 padding-none">
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-4 m-top-10 typeahed-search" ng-show="isSellerVisible">
+                                        <input type="text" class="form-control form-control1" id="sellerList"
+                                               ng-model="formData.selectseledata" name="seller_list"
+                                               placeholder="Buyer Name (Auto Search)"
+                                               ng-required="formData.isPublic=='private'"/>
+                                        <label ng-show="!data.visibleToSellers && errorRaised" class="error">Seller is
+                                            required</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="load_type">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="post_public">
+                                        <div class="admin_input">
+                                            <input ng-model="formData.terms_condition" name="terms_condition"
+                                                   id="Accept" type="checkbox" class="check_box">
+                                            <label for="Accept">Accept Terms & Conditions (Digital Contract)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="div_btn">
+                                        <input type="button" id="save" ng-click="createPost(formData,1)" value="Confirm"
+                                               class="Confirm_post_btn" invalids="0">
+                                        <input type="button" ng-click="createPost(formData,0)" id="draft"
+                                               value="Save as Draft" class="Add_Routes_btn" invalids="0">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="modal fade" id="uploadModal" role="dialog">
+        <div class="modal-dialog" style="width: 31%;">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-body">
+    
+                    <input ng-model-instant type="file" class="upload" onchange="angular.element(this).scope().setTaskFiles(this,'Others')"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal" id="btnConfirmOK"
+                            ng-click="uploadFileRecord()">Upload
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="uploadMsgModal" role="dialog">
+        <div class="modal-dialog" style="width: 31%;">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-body" id="uploadModalBody">
+    
+                    <input ng-model-instant type="file" class="upload" onchange="angular.element(this).scope().setTaskFiles(this,'Others')"/>
+                </div>
+                <div class="modal-footer">
+                    
+                </div>
+            </div>
+        </div>
+    </div>   
+    
+<!--    </div>-->
+</form>
+<div class="modal fade" id="myRateCardModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content waitText statusText" style="overflow: hidden;padding: 0 10px 10px">
+            <div class="modal-body popup" id="responsetext">
+            </div>
+            <div>
+                <button type="button" class="btn btn-default pull-right" data-type="" data-dismiss="modal"
+                        ng-click="closeSellerCard()">OK
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#Discounts_id_1").click(function () {
+            $("#Discounts_oepn").slideToggle();
+        });
+        $("#myRateCardModal").modal({ 
+            show: false,   
+            backdrop: 'static'    
+        });
+        $('.upload_excel').click(function(){
+           $('.upload_excel').val(''); 
+        });
+    });
+</script>
+<script>
+    $(".fdbuyer_discount,.credit_days").on("keyup", function () {               
+        if ($(this).val() == 0) {
+            $(this).val(null);                                     
+        }                
+    });
+</script>

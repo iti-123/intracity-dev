@@ -1,0 +1,78 @@
+<style type="text/css">
+ .commenttxt{border: 0px none; background-color:#f5f5f5;}
+</style>
+<div class="col-md-12 col-sm-8 col-xs-12">
+
+	<div class="right_serch_p titile_gray">
+		<div class="right_search_bar">
+			<ul class="search_bar_tab">
+				<li><a href="#">Community</a><i class="fa  fa-angle-right"></i></li>
+				<li><a href="#">Article</a><i class="fa  fa-angle-right"></i></li>
+				<li><a href="#/article-list" class="active_c">View Article</a></li>
+			</ul>
+		</div>
+	</div>
+
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="row">
+        <div class="right_serch_p">
+            <div class="main-right">
+                <div class="art-block">
+                    <div class="artical_pro">
+                        <div class="view_article">
+                            <div class="article_title">
+                                {{articles.title}}
+                                <div class="auther_name">
+                                    <span class="author_n"> <span class="author">Author :</span> {{articles.postedby.username}}</span> <span class="author_date">{{articles.created_at|dateStringFormat}}</span>
+                                </div>
+                            </div>
+                            <div class="article_content">
+                                <h2>{{articles.heading}}</h2>
+                                <div class="article_text">
+                                    <div class="col-md-4">
+                                        <img src="{{ storagePath +'/'+articles.file_path }}" class="left_img img-responsive"/>
+                                    </div>
+                                    <div class="col-md-8">
+                                            {{articles.description}}
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                        <div class="col-md-8 padding-left-none">
+                            
+                            <div class="art_like_share">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-thumbs-o-up"></i>  {{ articles.article_likes.length }} </a></li>
+                                    <li><a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i> 0</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4 padding-left-none">
+                            <div class="right-side-div">
+                            
+                                <div class="art_follows-section">
+                                    <div class="info-links font-six">
+                                        <a href="#">Follow</a>
+                                        <a href="#">Like</a>
+                                        <a href="#">Comment</a>
+                                        <a href="#">Share</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+
+                <!-- Table Starts Here -->
+            </div>
+        </div> <!--end of right_search_p-->
+    </div>
+</div>
+
+
+			

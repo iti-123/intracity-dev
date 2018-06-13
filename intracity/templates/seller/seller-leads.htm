@@ -1,0 +1,809 @@
+<style>
+    .seller_btn_submit-new {
+        background: #ed3237;
+        border: 0 none;
+        border-radius: 0;
+        color: #fff;
+        font-family: FuturaBT-Medium;
+        font-size: 18px;
+        height: auto;
+        padding: 5px 20px;
+        text-transform: none;
+        outline: none;
+        float: right;
+    }
+</style>
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">Seller</a><i class="fa  fa-angle-right"></i></li>
+                <li><a href="#">Services</a><i class="fa  fa-angle-right"></i></li>
+                <li><a href="#">Intracity</a><i class="fa  fa-angle-right"></i></li>
+                <li><a href="#" class="active_c">{{post[0].post_transaction_id}}</a></li>
+            </ul>
+        </div>
+
+
+        <div class="div_100">
+            <div class="col-lg-9">
+                <div class="row">
+                    <ul class="buyer_ul">
+                        <li class="tab_10 active_buyer" data-tab="Messages">
+                            <a href="javascript:void(0);">All</a>
+                        </li>
+                        <li class="tab_10" data-tab="Offers">
+                            <a href="javascript:void(0);">PUBLIC</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="back_post">
+                    <a href="#/seller-post-list" class="back_red_btn">Back to Post</a>
+                    <a href="javascript:void(0);" class="delete_gray"><i ng-click="deletePost(post[0].id);" class="fa fa-trash" title="Delete"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="white_bg">
+            <div class="c_6">
+                <div class="col-md-4 data-fld">
+                    <span class="data-head">Title</span>
+                    <span class="data-value break-word">
+                        {{ !empty(post[0].title) ? post[0].title : '' }}
+                    </span>
+                </div>
+                <div class="col-md-3 data-fld">
+                    <span class="data-head">City</span>
+                    <span class="data-value break-word">{{post[0].city_name}}</span>
+                </div>
+                <div class="col-md-3 data-fld">
+                    <span class="data-head">Post Type</span>
+                    <span class="data-value break-word">
+                        {{ post[0].is_private_public==0 && 'Public' || 'Private' }}
+                    </span>
+                </div>
+                <div class="col-md-2 data-fld">
+                    <span class="data-head">Type Basis</span>
+                    <span class="data-value break-word">{{post[0].type_basis == 1 ? 'Hours' : 'Distance' }}</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-4 data-fld">
+                    <span class="data-head">Vehicle Type</span>
+                    <span class="data-value break-word">{{post[0].vehicle}}</span>
+                </div>
+                <div class="col-md-3 data-fld">
+                    <span class="data-head">Valid From</span>
+                    <span class="data-value break-word">{{post[0].valid_from | date: "dd/MM/yyyy" }}</span>
+                </div>
+                <div class="col-md-3 data-fld">
+                    <span class="data-head">Valid To</span>
+                    <span class="data-value break-word">{{post[0].valid_to | date: "dd/MM/yyyy" }}</span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="c_2">
+                <div class="col-lg-12">
+                    <div class="data-head text-right">ORDER</div>
+                    <div class="data-value break-all text-right">NOTIFICATIONS</div>
+                </div>
+
+                <div class="info_links padding_top">
+                    <a href=""><i class="fa fa-envelope-o"></i></a>
+                    <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                    <a href=""><i class="fa fa-bullseye"></i><span class="vlue">0</span></a>
+                    <a href=""><i class="fa fa-line-chart"><span class="vlue">0</span></i></a>
+                </div>
+            </div>
+
+
+            <div class="c_2">
+                <div class="col-md-12 text-right">
+                    <div class="views_font">Views 0</div>
+                        <div class="a_link contact_click">
+                        <a href="javascript:void"><i class="fa-plus fa" aria-hidden="true"></i> Details</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="d_box">
+                <div class="col-lg-12 col-md-12 col-sm-7 col-xs-12">
+                    <span class="data-head">Discounts</span>
+                    <div class="table_heading_one">
+                        <div class="col-md-3">Name</div>
+                        <div class="col-md-3">Discount Type</div>
+                        <div class="col-md-3">Discount</div>
+                        <div class="col-md-3">Credit Days</div>
+                    </div>
+                    <div class="table_heading_one" ng-repeat="(key,value) in discount">
+                        <div class="col-md-3">{{value.buyer}}</div>
+                        <div class="col-md-3">{{ value.disc_type==1 && 'Percent' || 'Flat' }}</div>
+                        <div class="col-md-3">{{value.disc_amt}}</div>
+                        <div class="col-md-3">{{value.credit_days}}</div>
+                    </div>
+
+                    <div class="table_data_one">
+                        <span class="data-head" ng-if="discount==''">No Discounts</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="div_100 space10">
+
+                <div class="c_8">
+                    <ul class="filter_list">
+                        <li>City</li>
+                        <li>Vehicle Type</li>
+                        <li>Valid FROM</li>
+                        <li>Valid To</li>
+                        <li>Buyer Name</li>
+                    </ul>
+                </div>
+                <div class="c_2">
+
+                    <span class="rilters_click click_a contact_click1"><i class="fa fa-bars"></i> Filters </span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="white_bg overflow open_a d_box1" style="display:none;">
+            <div class="scroller-div">
+                <div class="fillter_div">
+                    <div class="scroll_div">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="select_form_intra">
+                                    <div class="select_form_intra">
+                                        <input type="text" ng-model="data.city" class="input_ani" required="">
+                                        <label class="lbl_text2">City</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+                                    <div class="filter_from_location sellers_det">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <ul class="post_inline">
+                                                    <li>
+                                                        <div class="admin_input"
+                                                             ng-repeat="value in cities |filter:data.city">
+                                                            <input type="checkbox" ng-click="selectCity(value.id);"
+                                                                   class="check_box" id="vl{{value.id}}">
+                                                            <label for="vl{{value.id}}">{{ value.city_name }}</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+
+                                <div class="select_form_intra">
+                                    <input type="text" class="input_ani" ng-model="data.vehicle_type" required=""/>
+                                    <label class="lbl_text2">VEHICLE TYPE</label>
+                                    <span class="search_icon"><i class="fa fa-search"></i></span>
+                                </div>
+
+                                <div class="filter_from_location">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <ul class="post_inline">
+                                                <li>
+                                                    <div class="admin_input">
+                                                        <div class="admin_input"
+                                                             ng-repeat="vehicle in vehicles | filter:data.vehicle_type">
+                                                            <input type="checkbox" class="check_box check_box_1"
+                                                                   ng-click="selectNewVehicleType(vehicle.vehicle_type)"
+                                                                   id="vl{{vehicle.id}}">
+                                                            <label for="vl{{vehicle.id}}">{{ vehicle.vehicle_type
+                                                                }}</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <div class="date_selection select_form_intra">
+                                    <span class="left_v_from">
+                                <input type="text" id="from_calendar" ng-model="data.from_date" fromcalendar
+                                        class="date_p input_ani" required="">
+                                <label class="lbl_text2 padg_l">Valid From </label>
+                                </span><span class="search_icon"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <div class="date_selection select_form_intra">
+                                    <span class="left_v_from">
+                                <input type="text" id="to_date" ng-model="data.to_date" tocalendar
+                                        class="date_p input_ani" required="">
+                                <label class="lbl_text2 padg_l">Valid To</label>
+                                </span><span class="search_icon"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scroll_div">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="select_form_intra">
+                                        <input type="text" class="input_ani" ng-model="data.name" required=""/>
+                                        <label class="lbl_text2">Buyer Name</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+
+                                    <div class="filter_from_location">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <ul class="post_inline sellers_det">
+                                                    <li>
+                                                        <div class="admin_input"
+                                                             ng-repeat="user in users | filter:data.full_name">
+                                                            <input type="checkbox" ng-click="selectBuyer(user.id)"
+                                                                   id="s{{user.id}}" class="check_box">
+                                                            <label for="s{{user.id}}">{{ user.full_name }}</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="cart heght_100">
+        <div class="loc_det">
+            <div class="gray_bg">
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="heading_text">Name</div>
+                        </div>
+                         <div class="col-lg-2">
+                            <div class="heading_text">Title</div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="heading_text">From</div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="heading_text">To</div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="heading_text">LOAD TYPE</div>
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="row">
+                        <div class="heading_text padding_left">NOTIFICATIONS</div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="white_bg border-bottom-p" ng-repeat="(key,value) in leads">
+                <div class="col-lg-9">
+                    <div class="col-lg-2">
+                        <div class="normal_text ng-binding">
+                            {{ !empty(value.username) && value.username || 'N/A'}}
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="normal_text ng-binding">
+                            {{ !empty(value.title) && value.title || 'N/A'}}
+                        </div>
+                    </div>
+                    <!-- {{value.attribute[0]}} -->
+                    <div class="col-lg-2">
+                        <div class="normal_text ng-binding">{{ !empty(value.attribute[0].d_from_location.locality_name) && value.attribute[0].d_from_location.locality_name || !empty(value.attribute[0].from_location.locality_name) && value.attribute[0].from_location.locality_name || 'N/A' }}
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="normal_text ng-binding">{{ !empty(value.attribute[0].d_to_location.locality_name) && value.attribute[0].d_to_location.locality_name || !empty(value.attribute[0].to_location.locality_name) && value.attribute[0].to_location.locality_name || 'N/A' }}</div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="normal_text ng-binding">{{ !empty(value.attribute[0].d_material_type.name) && value.attribute[0].d_material_type.name || !empty(value.attribute[0].material_type_dTerm.name) && value.attribute[0].material_type_dTerm.name || 'N/A' }}</div>
+                    </div>
+                    </div>
+                    
+                    <div class="col-lg-3">
+                        <button data-id="{{$index+1}}" ng-show="!(value|isBidElapsed) && value.status == null" ng-click="viewFormNow(value,value.id)" class="show_hide seller_btn_submit  col-lg-10 ">Quote</button>
+                        <button data-id="{{$index+1}}" ng-show="(value|isBidElapsed)" ng-click="viewFormNow(value.value.id)" class="show_hide seller_btn_submit  col-lg-10 ng-hide">Bid Elapsed</button>
+                        <button data-id="{{$index+1}}" ng-show="!(value|isBidElapsed) && value.status == 1" ng-click="viewFormNow(value.value.id)" class="show_hide seller_btn_submit  col-lg-10 ng-hide">Initial Quote Submitted</button>
+                        <button data-id="{{$index+1}}" ng-show="!(value|isBidElapsed) && value.status == 2" ng-click="viewFormNow(value.value.id)" class="show_hide seller_btn_submit  col-lg-10 ng-hide">Accept</button>
+                        <button data-id="{{$index+1}}" ng-show="!(value|isBidElapsed) && value.status == 3" ng-click="viewFormNow(value.value.id)" class="show_hide seller_btn_submit  col-lg-10 ng-hide">Final Quote Submitted</button>
+                        <button data-id="{{$index+1}}" ng-show="!(value|isBidElapsed) && value.status == 4 && value.lead_type == 1" ng-click="viewFormNow(value.value.id)" class="show_hide seller_btn_submit  col-lg-10 ng-hide">Quote Accepted</button>
+                        <button data-id="{{$index+1}}" ng-show="!(value|isBidElapsed) && value.status == 7 && value.lead_type == 2" class="show_hide seller_btn_submit  col-lg-10">Accept Contract</button>
+                        <button data-id="{{$index+1}}" ng-show="value.lead_type == 2 && value.status == 4 && value.contract_status == 2" class="book_btn seller_btn_submit-new show_hide"> Contract Accepted</button>
+                        
+                        <div class="details_box">
+                            <a class="show_hide" data-id="{{$index+1}}"><i class="fa-plus fa" aria-hidden="true"></i>
+                            Details</a>
+                            <a href="javascript:void(0)" ng-click="sendMessageModal(value)" data-toggle="modal" data-target="#messageModal" class="pull-right msg-icon">
+                                <i class="fa fa-envelope-o"></i>
+                            </a>
+                        </div>
+                    </div>
+                
+            <!-- {{value.attribute[0]}} -->
+                <div class="subresult" id="open_show{{$index+1}}">
+                    <div class="white_bg1 detail_bg">
+                            <div class="white_bg">
+                                <div class="col-lg-12">
+                                    <div class="hyder_box"><span>
+                                    <i class="fa fa-map-marker"></i></span>
+                                    <span class="ng-binding ng-scope">{{ !empty(value.attribute[0].city.city_name) && value.attribute[0].city.city_name || value.attribute[0].term_distance_city_id.city_name }} </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail_vich">
+                            <div class="col-md-3">
+                                <span class="data-head">LOAD TYPE </span>
+                                <span class="data-value">
+                                    {{ !empty(value.attribute[0].d_material_type.name) && value.attribute[0].d_material_type.name || !empty(value.attribute[0].material_type_dTerm.name) && value.attribute[0].material_type_dTerm.name || 'N/A' }}
+
+                                </span>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="data-head">VEHICLE TYPE </span>
+                                <span class="data-value">
+                                    {{ !empty(value.attribute[0].d_vehicle_type_any.vehicle_type) && value.attribute[0].d_vehicle_type_any.vehicle_type || !empty(value.attribute[0].vehicle_type_any_dTerm.vehicle_type) && value.attribute[0].vehicle_type_any_dTerm.vehicle_type || 'N/A' }}
+
+                            </span>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="data-head">QUANTITY</span>
+                                <span class="data-value">{{ !empty(value.estimated_quanity) && value.estimated_quanity || 'N/A' }}</span>
+                            </div>
+                            <div class="col-md-1">
+                                <!--<span class="data-head">DELIVERY DATE</span>
+                                <span class="data-value">09/06/2017</span>-->
+                            </div>
+                            <div class="col-md-3">
+                                <span class="data-head">NO. OF LOAD</span>
+                                <span class="data-value ng-binding">{{ !empty(value.estimated) && value.ernhlsdanlask || 'N/A' }}</span>
+                            </div>
+                        </div>
+                        <div class="detail_vich">
+                            <div class="col-md-3">
+                                <span class="data-head">DISPATCH DATE</span>
+                                <span class="data-value ng-binding">{{ (value.valid_from != "0000-00-00") && (value.valid_from != "1970-01-01") && (value.valid_from | date:"dd/MM/yyyy") || 'N/A' }}</span>
+                            </div>    
+                            <div class="col-md-3">
+                                <span class="data-head">DELIVERY DATE</span>
+                                <span class="data-value ng-binding">{{ value.last_date && (value.last_date | date:"dd/MM/yyyy") || 'N/A' }}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="data-head">LAST DATE FOR QUOTE</span>
+                                <span class="data-value ng-binding">{{ value.last_date && (value.last_date | date:"dd/MM/yyyy") || 'N/A' }} {{ !empty(value.last_time) && value.last_time || 'N/A' }}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="data-head"> PRICE TYPE </span>
+                                <span class="data-value ng-scope">{{ !empty(value.attribute[0].price_type.value) && value.attribute[0].price_type.value || 'N/A' }}</span>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-3" ng-show="value.initial_quote_price">
+                                <span class="data-head"> INITIAL QUOTE PRICE </span>
+                                <span class="data-value ng-scope"> RS. {{ !empty(value.initial_quote_price) && value.initial_quote_price || 'N/A' }} /- </span>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="data-head">EMD AMOUNT</span>
+                                <span class="data-value ng-binding">{{ value.emd_amount && ('RS '+value.emd_amount + ' /-') || 'N/A' }}</span>
+                            </div>
+                            
+                        </div>
+                        <div class="detail_vich">
+                            
+                        </div>
+                    </div>
+                    <div ng-show="value.lead_type == 1" class="on_time filter-result" id="detail-{{ value.id }}">
+                        <div class="white_bg1 border-bottom-p" ng-show="!(value|isBidElapsed)">    
+                            <div class="col-lg-12">
+                                <div class="row" ng-show = "value.status==null || value.status < '1'">
+                                    <div class="box_shadow">
+                                        <div class="col-lg-4">
+                                            <div ng-if="value.price_type == 2">
+                                                <div class="data-head">Firm Offer :</div>
+                                                <div class="note_vlue">Rs {{value.firm_price}} /-</div>
+                                            </div>
+
+                                            <div ng-if="value.price_type == 1">
+                                                <div class="data-head">Competitive Offer</div>
+                                                <!--<div class="note_vlue">Rs {{value.firm_price}} /-</div>-->
+                                            </div>
+
+                                            <div class="note_vlue">
+                                                <input type="text" class="form-control valid-number" maxlength="6" minlength="1" value="" placeholder="Quote (Price) *"
+                                                    ng-model="value.quote.quotedPrice">
+                                                <span class="has-error" ng-show="value.quote.quoted_price_error"> Please Enter Quote Price  </span>
+                                            </div>
+                                            <div class="select_form_intra" ng-init="value.tracking_type=1">
+                                                <select ng-model="value.quote.tracking_type" ng-options="y.id as y.value for (x,y) in tracking_type">
+                                                    <option value="">Select Tracking Type</option>
+                                                </select>
+                                                <span class="has-error" ng-show="value.quote.tracking_type_error"> Please Select  Tracking Type  </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control  NoOfDays" placeholder="Transit Days *" ng-init="value.quote.transit_days = ''" ng-model="value.quote.transit_days">
+                                            <span class="has-error" ng-show="value.quote.transit_days_error"> Please enter Transit Days </span>
+                                            <div class="Payment_Terms"></div>
+                                        </div>
+                                        <div class="col-lg-4 colo-md-4">
+                                            <div class="select_form_intra">
+                                                <select ng-model="value.quote.payment_term">
+                                                    <option value="">Select Payment Terms</option>
+                                                    <option value="ADVANCE">Advance</option>
+                                                    <option value="CREDIT">Credit</option>
+                                                </select>
+                                                <span class="has-error" ng-show="value.quote.payment_term_error"> Please Select Payment Terms </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4" ng-show="value.quote.payment_term=='CREDIT'">
+                                            <input type="text" class="form-control NoOfDays" value="" placeholder="Credit Days *" ng-model="value.quote.credit_days">
+                                            <span class="has-error" ng-show="value.quote.credit_days_error"> Please enter Credit day </span>
+                                        </div>
+
+
+                                        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
+                                            <ul class="select_inline">
+                                                <li>
+                                                    <div class="admin_input">
+                                                        <input id="NEFT{{ key }}" type="checkbox" class="check_box"
+                                                            ng-click="paymentMethod(key, 'NEFT_RTGS')"
+                                                            ng-checked="value.quote.payment_method=='NEFT_RTGS'">
+                                                        <label for="NEFT{{ key }}">NEFT/RTGS</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="admin_input">
+                                                        <input id="Credit{{ key }}" type="checkbox" class="check_box"
+                                                            ng-click="paymentMethod(key,'CREDIT_CARD')"
+                                                            ng-checked="value.quote.payment_method=='CREDIT_CARD'">
+                                                            
+                                                        <label for="Credit{{ key }}">Credit Card</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="admin_input">
+                                                        <input id="Debit{{ key }}" type="checkbox" class="check_box" ng-click="paymentMethod(key,'DEBIT_CARD')"
+                                                        ng-checked="value.quote.payment_method == 'DEBIT_CARD'">
+                                                        <label for="Debit{{ key }}">Debit Card</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <span class="has-error" ng-show="value.quote.payment_method_error"> Please check atleast one payment method </span>
+                                        </div>                
+                                        <div class="col-lg-1">
+                                            <div class="row">
+                                                <input type="button" class="Accept_btn marg_btn" value="Submit" ng-click="submitInitialQuotation(key)">
+                                            </div>  
+                                        </div>                    
+                                    </div>
+                                </div>
+
+                                <div class="row" ng-show = "value.quote.status=='2'">
+                                    <div class="box_shadow">
+                                        <div class="col-lg-4">
+                                            <div class="note_vlue">
+                                                <input type="text" class="form-control valid-number" maxlength="6" minlength="1" value="" placeholder="Final Quote (Price) *"
+                                                    ng-model="value.quote.sellerFinalQuotePrice">
+                                                <span ng-show="value.quote.sellerFinalQuotePriceError"> Please enter price * </span>
+                                            </div>                    
+                                        </div>  
+                                        <div class="col-lg-4">                    
+                                            <div class="select_form_intra">
+                                                <input type="text" class="form-control valid-number" maxlength="3" minlength="1" value="" placeholder="Final Transit Day"
+                                                ng-model="value.quote.sellerFinalTransitDay">                        
+                                            </div>
+                                        </div>        
+                                        <div class="col-lg-2">
+                                            <div class="note_vlue">
+                                                <input type="button" class="Accept_btn marg_btn" value="Submit" ng-click="submitQuotation(key,valueKey,'SELLER_FINAL_QUOTE')">
+                                            </div>  
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="note_vlue">
+                                                <input type="button" class="book_btn no-border marg_btn" value="Decline " ng-click="sellerQuoteAction(key,valueKey,'DENIED_QUOTE')">
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <!-- Start quote for term post -->
+                    <div ng-init= "isSubmitContract = (value.status == 7 && value.contract_status == 1)" class="white_bg1 border-bottom-p" ng-show="!(value|isBidElapsed) && value.lead_type == 2">
+                        <div class="hyperlocal_gray" ng-show="!isSubmitContract && value.contract_status == null">
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 ">
+                                <div class="vendor_name_heading">FROM</div>
+                            </div>
+                            <div class="col-lg-2 col-md-1 col-sm-1 col-xs-12 npl">
+                                <div class="vendor_name_heading">Average Turn Over</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                <div class="vendor_name_heading">No Of Trucks</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                <div class="vendor_name_heading">No Of Years</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                <div class="vendor_name_heading">QUOTE</div>
+                            </div>
+                            
+                        </div>
+                        <div class="data_contain_100" ng-show="!isSubmitContract && value.contract_status == null">
+                            <div class="col-lg-2 col-md-3 col-xs-12 margin_tops">
+                                <input ng-hide="isSubmitContract" type="checkbox" ng-model="value.termisChecked" ng-click="termisChecked($index)" id="termisChecked" />
+                                    <span class="lbl padding-8"> {{value.cityName}} </span>
+                                <input type="hidden" name="quote_id" id="quote_id" value="26">
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-xs-12">
+                                <div class="vendor_img_box">
+                                    <div class="vendor_detail">{{ value.average_turn_over }} 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-xs-12">
+                                <div class="vendor_img_box">
+                                    <div class="vendor_detail">{{ value.no_of_trucks }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-xs-12">
+                                <div class="vendor_img_box">
+                                    <div class="vendor_detail">{{ value.no_of_years }} 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-xs-12" ng-init="value.termisDisable=true">
+                                
+                                <div class="vendor_detail"> 
+                                    <input class="ng-pristine ng-untouched ng-invalid ng-invalid-required"   ng-model="value.termquoteprice" maxlength='7' name="" type="text"  ng-disabled="value.termisDisable">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-xs-12">
+                                <div class="vendor_img_box">
+                                    <div class="vendor_detail ven_det_fulls"> 
+                                        <input  class="book_btn seller_btn_submit-new show_hide" type="button" value="submit" ng-click="termsubmitQuotation($index)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hyperlocal_gray" ng-show="isSubmitContract || value.contract_status == 2">
+                            <div class="col-lg-2 col-md-2 col-sm-3">
+                                <div class="vendor_name_heading">FROM</div>
+                            </div>
+                            <div class="col-lg-2 col-md-1 col-sm-1 col-xs-12 npl">
+                                <div class="vendor_name_heading">Average Turn Over</div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-12 npl">
+                                <div class="vendor_name_heading">No Of Trucks</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                <div class="vendor_name_heading">No Of Years</div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-12 npl">
+                                <div class="vendor_name_heading">QUOTE</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                <div class="vendor_name_heading">COUNT. PRICE</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 npl">
+                                <div class="vendor_name_heading">COUNT. QTY</div>
+                            </div>
+                        </div>
+                        <div class="data_contain_100" ng-show="isSubmitContract || value.contract_status == 2">
+                            <div class="col-lg-2 col-md-3 col-xs-12 margin_tops">
+                                <span class="lbl padding-8"> {{value.cityName}} </span>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-xs-12">
+                                <div class="vendor_img_box">
+                                    <div class="vendor_detail">{{ value.average_turn_over }} 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-xs-12">
+                                <div class="vendor_img_box">
+                                    <div class="vendor_detail">{{ value.no_of_trucks }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-xs-12">
+                                <div class="vendor_img_box">
+                                    <div class="vendor_detail">{{ value.no_of_years }} 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-xs-12">
+                                <div class="vendor_img_box">
+                                    <div class="vendor_detail"> 
+                                        {{ value.initial_quote_price }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-xs-12">
+                                <div class="vendor_img_box">
+                                    <div class="vendor_detail"> 
+                                        {{ value.contract_price }} 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-xs-12">
+                                <div class="vendor_img_box">
+                                    <div class="vendor_detail"> 
+                                        {{ value.contract_quantity }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="isSubmitContract && value.contract_status == 1">
+                            <input class="book_btn seller_btn_submit-new show_hide pull-right" type="button" value="Accept" ng-click="acceptOffer(value,$index)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal fade msgbox" id="initialquotemodel" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content border_r">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+          <p>Initial Quote given successfully.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" ng-click="closeQuoteModel()" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message Modal start -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form id="MessageData">
+                <div class="modal-header">
+                    <h3 style="float:left" id="status">
+
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+
+                    <h4 class="sub-head red margin-left-none margin-bottom">New Message</h4>
+                    <div>
+                        <input id="quoteObject" class="form-control form-control1" placeholder="Form Object" readonly="readonly" name="quoteObject"
+                            type="hidden" value="">
+
+                        <input id="from_name" class="form-control form-control1" placeholder="From: ABC co ltd PVT" readonly="readonly" name="message_from"
+                            type="text" value="">
+                    </div>
+                    <div>
+                        <input id="to_name" class="form-control form-control1" placeholder="To: XYZ co ltd PVT" readonly="readonly" name="message_to"
+                            type="text" value="">
+                    </div>
+
+                    <div>
+                        <input id="message_subject" class="form-control form-control1 margin-bottom-4 valid" placeholder="Subject *" readonly="readonly"
+                            name="message_subject" type="text" value="message_subject">
+
+
+                    </div>
+
+                    <div><textarea id="message_body" class="form-control form-control1 message-body" placeholder="Body *" name="message_body"
+                            cols="50" rows="10"></textarea></div>
+
+                    <div class=""><i class="fa fa-paperclip"></i>
+
+                        <label for="message_attachment" class="">Attachment </label>
+                        <div>
+                            <!--Removed [] in name attribute for below message attachment field because attachment not saving in ajax, If you need add in conditional -- Ramu-->
+                            <!--<input id="message_attachment" class="filestyle btn-file file-upload" multiple="1" name="message_attachment"  type="file">-->
+                            <!-- <input id="r_message_attachment"
+                                       class="filestyle btn-file file-upload"
+                                       multiple="1" name="r_message_attachment"
+                                       ng-model-instant onchange="angular.element(this).scope().setDocument(this)"
+                                       type="file"> -->
+                            <input id="r_message_attachment" class="filestyle btn-file file-upload" name="message_attachment" fileread="message_attachment"
+                                type="file">
+                            <div id="message_attachment_display"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn red-btn flat-btn ok-btn message_send_button" ng-click="sendMessage(message_attachment)">Send message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $(".contact_click").click(function () {
+            $(".d_box").slideToggle("slow");
+        });
+
+        $('.contact_click').click(function () {
+            $(this).next('.d_box').slideToggle('500');
+            $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
+        });
+
+    });
+
+
+    $(document).ready(function () {
+        $(".contact_click1").click(function () {
+            $(".d_box1").slideToggle("slow");
+        });
+
+        $('.contact_click1').click(function () {
+            $(this).next('.d_box1').slideToggle('500');
+
+        });
+    
+    });
+</script>
+<script>
+    $(".subresult").hide();
+    $(document).on('click', ".show_hide", function () {
+    var id = $(this).attr('data-id');
+    $("#open_show" + id).toggle();
+    $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var gwid = $(".scroll_div").width();
+        var twid = $(".loc_det").width();
+        var acwid = gwid / twid * 100;
+        var len = $(".scroll_div").length;
+        var towid = acwid * len + 7;
+        $(".fillter_div").css({"width": "" + towid + "%"});
+    });
+</script>
+<style type="text/css">
+    .table_heading_one{ border-bottom: 0px; }
+    .has-error{ color:#ed3237; font-size: 12px; padding: 10px 0 0 0;}
+    .detail-data-form-4{width: 100%;float: left;}
+</style>

@@ -1,0 +1,341 @@
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">Buyer</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                <li><a href="#">Services</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                <li><a href="#" class="active_c">Intra City Search List</a></li>
+
+            </ul>
+        </div>
+
+        <div class="intra_city_list">
+            <div class="loc_det">
+                <ul class="loc_list">
+                    <li>{{!empty(sellersearch.city.city_name) && sellersearch.city.city_name || ''}}</li>
+                    <!--  <li>AMERPET-BHEL</li> -->
+                    <li>{{!empty(sellersearch.valid_to_date) && sellersearch.valid_to_date || '' }}</li>
+                    <!--  <li>2 Pm-4 Pm</li> -->
+                    <li>
+                        {{!empty(sellersearch.vehicle_type.vehicle_type) && sellersearch.vehicle_type.vehicle_type || ''
+                        }}
+                    </li>
+                </ul>
+                <div class="right_setg space_top">
+                    <div class="cell-1">
+                        <ul class="list-inline pull-right m-bottom-0">
+                            <li>
+                                <div class="search-modify"><span>Modify</span></div>
+                            </li>
+                            <li>
+                                <div class="search-modify"><span>Post</span></div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="loc_det">
+                <ul class="filter_s">
+                    <li>SELLER</li>
+                    <li>RATING</li>
+                    <li>VEHICLE TYPE</li>
+                    <li>PRICE Rs.</li>
+                    <li>TRANSIT HOURS</li>
+                    <li>TRACKING</li>
+                </ul>
+                <span class="rilters_right">Filters |||</span>
+            </div>
+            <div class="loc_det">
+                <ul class="partners">
+                    <li>Nair Trans</li>
+
+                    <li>Placement</li>
+                    <li>Quality</li>
+
+
+                    <li>Tata Ace</li>
+                    <li>Rs.1000 - 15000</li>
+                    <li>3-5 Hours</li>
+                    <li>Real Time</li>
+                </ul>
+                <span class="rilters_right">CLEAR ALL</span>
+            </div>
+
+            <div class="loc_det">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="sellr_field">
+                        <input type="text" class="search_i" required="" ng-model="data.user">
+                        <label class="sel_text">BUYERS</label>
+                    </div>
+                    <div class="sellers_det">
+                        <div class="state_dist">
+
+                            <div class="col-lg-12 col-md-6 col-sm-8">
+                                <div class="row">
+                                    <div class="admin_input margin_t"
+                                         ng-repeat="(key,value) in buyers |filter:data.user">
+                                        <input ng-click="selectBuyer(value.full_name);" id="b{{value.id}}"
+                                               ng-model="data.buyer[key]" value="{{value.id}}" type="checkbox"
+                                               class="check_box check_box_1">
+                                        <label for="b{{value.id}}">{{ value.full_name}}</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="sellr_field">
+                        <input type="text" class="search_i" required="" ng-model="data.vehicle">
+                        <label class="sel_text">VEHICLE TYPE</label>
+                    </div>
+                    <div class="sellers_det">
+                        <div class="state_dist">
+
+                            <div class="col-lg-12 col-md-6 col-sm-8">
+                                <div class="row">
+                                    <div class="admin_input margin_t"
+                                         ng-repeat="(key,value) in vehicles |filter:data.vehicle">
+                                        <input ng-click="selectNewVehicleType(value.vehicle_type);" id="v{{value.id}}"
+                                               name="value.id" ng-model="data.vehicle_type[key]" type="checkbox"
+                                               value="{{value.id}}" class="check_box check_box_1">
+                                        <label for="v{{value.id}}">{{value.vehicle_type}}</label>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="sellr_field">
+                        <input type="text" ng-model="data.dispatchdate"
+                               ng-change="selectdispatchdate(data.dispatchdate);" calender class="search_i" required=""
+                               ng-model="data.vehicle">
+                        <label class="sel_text">Dispatch date</label>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="sellr_field">
+                        <input type="text" ng-change="selectquotedate(data.quotedate)" class="search_i" calender
+                               ng-model="data.quotedate" required="" ng-model="data.vehicle">
+                        <label class="sel_text">Quote Date</label>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="vechile_list_main">
+                <div class="v_list_bar">
+                    <div class="v_name">
+                        <span>BUYER</span>
+                    </div>
+                    <div class="v_type1">
+                        <span>VEHICLE TYPE</span>
+                        <span></span>
+                        <span class="drop_d"></span>
+                    </div>
+                    <div class="v_type1">
+                        <span>DISPATCH DATE</span>
+                        <span></span>
+                        <span class="drop_d"></span>
+                    </div>
+                    <div class="v_type1">
+                        <span></span>
+                        <span></span>
+                        <span class="drop_d"></span>
+                    </div>
+                </div>
+            </div> <!--End of intra_city_list-->
+
+            <!-- {{searchBuyers.payload.length}} -->
+            <div class="vechile_list_main"
+                 ng-repeat="value in searchBuyers.payload|filter:NewBuyersFilter |filter:NewVehicleTypeFilter|filter:NewdispatchdateFilter|filter:NewdispatchdateFilter">
+
+                <div class="list_trans ng-scope">
+                    <div class="nair_trns">
+                        <span class="logo_t">{{!empty(value.buyer) && value.buyer || ''}}</span>
+
+                    </div>
+                    <div class="nairs_v">
+                        <div class="vech_ts">
+                            <div><span class="ng-binding"> {{value.vehicle}} </span></div>
+                            <div><span>{{value.last_date}}</span></div>
+
+                            <div><span class="b_strng ng-binding">2( For 20 Km)</span><span class="line_t ng-binding">
+                                2</span></div>
+                            <div>
+                                <div class="sep_div1">
+                                    <input id="Submit1" type="submit" value="Book Now" class="book_btn">
+                                </div>
+                                <div class="detail_b1" data-id="3">Detail</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detail here -->
+                    <div class="on_time" style="display:none" id="detail-3">
+                        <div class="p_details">
+                            <div class="pro_img">
+                                <span><img src="images/elephant_ig.png"></span>
+                                <div class="bottom_img">
+                                    <ul>
+                                        <li><img src="images/g_icons.png"></li>
+                                        <li><img src="images/man_icon.png"></li>
+                                        <li><img src="images/b_icon.png"></li>
+                                    </ul>
+                                    <div class="text_pr">
+                                        <span>30</span><span>145</span><span>1195</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pro_disc">
+                                <ul>
+                                    <li class="red_c">
+                                        <span>On time Placement</span>
+                                        <span class="star-cb-group">
+                                                                <input type="radio" id="rating-5" name="rating"
+                                                                       value="5"><label for="rating-5">5</label>
+                                                                <input type="radio" id="rating-4" name="rating"
+                                                                       value="4"><label for="rating-4">4</label>
+                                                                <input type="radio" id="rating-0" name="rating"
+                                                                       value="0" class="star-cb-clear"><label
+                                                for="rating-0">0</label>
+                                                            </span>
+                                    </li>
+                                    <li class="orang_c">
+                                        <span>On time Delivery </span>
+                                        <span class="star-cb-group">
+                                                                <input type="radio" id="rating-5" name="rating"
+                                                                       value="5"><label for="rating-5">5</label>
+                                                                <input type="radio" id="rating-4" name="rating"
+                                                                       value="4"><label for="rating-4">4</label>
+                                                                <input type="radio" id="rating-3" name="rating"
+                                                                       value="3"><label for="rating-3">3</label>
+                                                                <input type="radio" id="rating-1" name="rating"
+                                                                       value="1"><label for="rating-1">1</label>
+                                                                <input type="radio" id="rating-0" name="rating"
+                                                                       value="0" class="star-cb-clear"><label
+                                                for="rating-0">0</label>
+                                                            </span>
+                                    </li>
+                                    <li class="lighto_c">
+                                        <span>Milestone Update </span>
+                                        <span class="star-cb-group">
+                                                                <input type="radio" id="rating-5" name="rating"
+                                                                       value="5"><label for="rating-5">5</label>
+                                                                <input type="radio" id="rating-2" name="rating"
+                                                                       value="2"><label for="rating-2">2</label>
+                                                                <input type="radio" id="rating-1" name="rating"
+                                                                       value="1"><label for="rating-1">1</label>
+                                                                <input type="radio" id="rating-0" name="rating"
+                                                                       value="0" class="star-cb-clear"><label
+                                                for="rating-0">0</label>
+                                                            </span>
+                                    </li>
+                                    <li class="pa_c">
+                                        <span>Documentation </span>
+                                        <span class="star-cb-group">
+                                                                <input type="radio" id="rating-5" name="rating"
+                                                                       value="5"><label for="rating-5">5</label>
+                                                                <input type="radio" id="rating-4" name="rating"
+                                                                       value="4"><label for="rating-4">4</label>
+                                                                <input type="radio" id="rating-3" name="rating"
+                                                                       value="3"><label for="rating-3">3</label>
+                                                                <input type="radio" id="rating-2" name="rating"
+                                                                       value="2"><label for="rating-2">2</label>
+                                                                <input type="radio" id="rating-0" name="rating"
+                                                                       value="0" class="star-cb-clear"><label
+                                                for="rating-0">0</label>
+                                                            </span>
+                                    </li>
+                                    <li class="green_c">
+                                        <span>Delivery Quality </span>
+                                        <span class="star-cb-group">
+                                                                <input type="radio" id="rating-5" name="rating"
+                                                                       value="5"><label for="rating-5">5</label>
+                                                                <input type="radio" id="rating-4" name="rating"
+                                                                       value="4"><label for="rating-4">4</label>
+                                                                <input type="radio" id="rating-3" name="rating"
+                                                                       value="3"><label for="rating-3">3</label>
+                                                                <input type="radio" id="rating-2" name="rating"
+                                                                       value="2"><label for="rating-2">2</label>
+                                                                <input type="radio" id="rating-1" name="rating"
+                                                                       value="1"><label for="rating-1">1</label>
+                                                                <input type="radio" id="rating-0" name="rating"
+                                                                       value="0" class="star-cb-clear"><label
+                                                for="rating-0">0</label>
+                                                            </span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <!--end of p_details-->
+
+                        <div class="p_discerption">
+                            <div class="p_disc_sub">
+                                <p class="price_t"><b>Base Price</b> Rs 150000 ( For 20 Km), Charge per extra Km +
+                                    Waiting Charges, Inclusive of Toll,Exclusive Of Service Tax. </p>
+
+
+                                <div class="table_detail">
+                                    <div class="p_terms_t">
+                                        <h2>PAYMENT TERM</h2>
+                                        <p>Credit 15 days </p>
+                                        <p>PayStiks (Online)</p>
+                                    </div>
+                                    <div class="p_terms_t">
+                                        <h2>Labor Charges</h2>
+                                        <p></p>
+                                        <p></p>
+                                    </div>
+                                    <div class="p_terms_t">
+                                        <h2>Vehicle Reporting Time</h2>
+                                        <p>Before 8 AM</p>
+                                        <p></p>
+                                    </div>
+                                    <div class="p_terms_t">
+                                        <h2>VEHICLE TYPE</h2>
+                                        <p>Tata Ace</p>
+                                        <p></p>
+                                    </div>
+                                    <div class="p_terms_t">
+                                        <h2>TRACKING</h2>
+                                        <p>Realtime</p>
+                                        <p></p>
+                                    </div>
+                                    <div class="p_terms_t">
+                                        <h2>DISCOUNT</h2>
+                                        <p>Flat Rs.5000.00</p>
+                                        <p></p>
+                                    </div>
+
+                                    <div class="p_terms_t">
+                                        <h2>Additional charges for higher floors without lift</h2>
+                                        <p>100</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--p_discerption-->
+                    </div>
+                    <!-- Detail end here-->
+                </div>
+
+
+            </div>
+        </div> <!--end of right_search_p-->
+    </div>

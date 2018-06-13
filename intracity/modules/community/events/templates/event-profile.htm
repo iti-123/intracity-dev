@@ -1,0 +1,220 @@
+
+<style>
+        .page_div {
+           display: inherit;
+           /* width: 100%; */
+           /* float: left; */
+        }
+        .right_section {
+            display: inherit;
+        }
+    </style>
+       
+    <div class="left_section_community left">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="row">
+                <div class="main-left1">
+                    <div class="head1 col-md-12">
+                        <p>Events</p>
+                    </div>
+                </div>
+                <div class="user_block">
+                    <div class="user_box">
+                        <div class="user_pic"><img src="{{ storagePath +'/'+event.file_path }}" class="img-responsive"></div>
+                        <span class="user_Group"> {{ event.title }} </span>
+                        <span class="user_Group" style="font-size:13px;"><span style="margin-right:8px;color:#c2c2c2;">Start</span> {{ event.event_start_date | date:'dd MMM yyyy' }} |  {{ event.event_start_time | date:'h:mma' }} </span>
+                        <span class="user_Group" style="font-size:13px;"><span style="margin-right:8px;color:#c2c2c2;">End</span>{{ event.event_end_date | date:'dd MMM yyyy' }} | {{ event.event_end_time | date:'h:mma' }}</span>
+                        <!--<span class="created_noral">Created - 2015</span>-->
+                    </div>
+
+                    <div class="user_box_main">
+                        <div class="follow_acount">Location : {{ event.event_location }} </div>
+                        <div class="follow_acount "> 0 Followers</div>
+                    </div>
+
+                    <div class="user_box_main">
+                        <div class="follow_acount">Event Type</div>
+                        <div class="follow_acount bold">
+                            <span ng-if="event.articletype == 1" > Free </span>
+                            <span ng-if="event.articletype == 2" > Paid </span>
+                        </div>
+                    </div>
+
+                    <div class="user_box_main">
+                        <div class="follow_acount">No. of seats</div>
+                        <div class="follow_acount bold">
+                            {{ event.seats_available }}
+                        </div>
+                    </div>
+
+                    <div class="user_box_main">
+                        <div class="follow_acount">Conducted By</div>
+                        <div class="follow_acount bold"> 
+                            {{ event.postedby.username }}
+                        </div>
+                    </div>
+
+
+                    <!--<div class="user_box_main">
+                        <div class="follow_acount">Industry</div>
+                        <div class="follow_acount bold">IT</div>
+                    </div>
+
+                        <div class="user_box_main">
+                        <div class="follow_acount">For Whom</div>
+                        <div class="follow_acount bold">CIO/Sr.Manager</div>
+                    </div>-->
+
+
+
+                </div>
+                <!--End of left_side_services-->
+            </div>
+        </div>
+    </div>
+
+    <div class="right_section_community right left_menu_space">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="row">
+                <div class="right_serch_p titile_gray">
+                    <div class="right_search_bar">
+                        <ul class="search_bar_tab">
+                            <li><a href="javascript:void(0)">Community</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                            <li><a href="javascript:void(0)">Events </a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                            <li><a href="javascript:void(0)" class="active_c">{{ event.title }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="row">
+                <div class="right_serch_p">
+                    <div class="main-right">
+                        <!-- Search Block Starts Here -->
+
+                        <div class="search-block inner-block-bg">
+                            <div class="cell-1 cell-1-80 ">
+                                <ul class="list-inline m-bottom-0 m-top-5 font-bold-black">
+                                    <li><a href="javascript:void(0)"> EVENTS </a></li>
+                                </ul>
+                            </div>
+
+
+                        </div>
+
+                        <div class="bg_socail_box">
+
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="socail_box1">
+                                    <ul>
+                                        <li><a href="javascript:void(0)">Follow</a></li>
+
+
+                                        <li><a href="javascript:void(0)">Message</a></li>
+                                        <li><a href="javascript:void(0)">Contact Details</a></li>
+                                        <li><a href="javascript:void(0)"><button class="btn_Register1">Register</button></a></li>
+                                        <li><a href="javascript:void(0)">Seats Available</a></li>
+                                        <li class="so-icon">
+                                            <a href="javascript:void(0)" target="_blank" title="Facebook" rel="nofollow" class="facebook"><i class="fa fa-facebook"></i></a>
+                                            <a href="javascript:void(0)" target="_blank" title="Google plus" rel="nofollow" class="google"><i class="fa fa-google"></i></a>
+                                            <a href="javascript:void(0)" target="_blank" title="Linkedin" rel="nofollow" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="bg-block">
+                            <div class="about_heading">
+                                <span class="about_heading_span1"><a tab-data="Brief" class="tab_class" href="javascript:void(0)">Brief...</a></span>
+                                <span class="about_heading_span1"><a tab-data="workshop_agenda" class="tab_class" href="javascript:void(0)">Workshop Agenda</a></span>
+                                <span class="about_heading_span1"><a tab-data="Why-attend" class="tab_class" href="javascript:void(0)">Why you should attend</a></span>
+
+                            </div>
+                        </div>
+                        <div class="bg-block tab_box active_box" id="Brief">
+                            
+                                <div class="Mutual_heading" style="font-size:18px;margin-bottom:8px;">Brief Of Event 
+                                </div>
+                                <p ng-bind-html="$sce.trustAsHtml(event.description)"></p>
+                               
+                        </div>
+                        <div class="bg-block tab_box" id="workshop_agenda">
+                            <div>
+                                <div class="Mutual_heading" style="font-size:18px;margin-bottom:8px;">Workshop Agenda</div>
+                                <p ng-bind-html="$sce.trustAsHtml(event.workshop_agenda)"></p>
+                            </div>
+                        </div>
+                        <div class="bg-block tab_box" id="Why-attend">
+                            <div>
+                                <div class="Mutual_heading" style="font-size:18px;margin-bottom:8px;">Why you should attend</div>
+                                <p ng-bind-html="$sce.trustAsHtml(event.why_attend)"></p>                                
+                            </div>
+                        </div>
+
+
+                        <!-- Table Starts Here -->
+
+                        <div class="table_div_100 bg-block">
+                            <div class="table_div_row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="Mutual_heading">Who's Going</div>
+                                    <div class="list_right">
+                                        <ul>
+                                            <li><a href="#"><img src="../images/rahul.png" class="pull-left"><span><b>Rahul Sharma</b><br> Partners</span></a></li>
+                                            <li><a href="#"><img src="../images/dinesh.png" class="pull-left"><span><b>Dinesh</b><br> Partners</span></a></li>
+                                            <li><a href="#"><img src="../images/kapil.png" class="pull-left"><span><b>Kapil</b><br> Partners</span></a></li>
+                                            <li><a href="#"><img src="../images/kamal.png" class="pull-left"><span><b>Kamal</b><br> Partners</span></a></li>
+                                            <li><a href="#"><img src="../images/pawan.png" class="pull-left"><span><b>Pawan</b><br> Partners</span></a></li>
+
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="bg-block">
+                            <div class="about_heading">
+                                <span class="about_heading_span2"><a href="javascript:void(0)">Terms and Conditions</a></span>
+
+
+                                <div class="down-worde-con">
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <script>
+                            $(document).ready(function () {
+                                $(".about_heading_span2").click(function () {
+                                    $(".down-worde-con").toggle(1000);
+                                });
+                                $(".tab_class").click(function () {
+                                    var x = $(this).attr("tab-data");
+                                    $(".tab_box").removeClass("active_box");
+                                    $("#" + x).addClass("active_box");
+                                });
+
+                            });
+
+                        </script>
+
+
+                        <!-- Table Starts Here -->
+                    </div>
+                </div> <!--end of right_search_p-->
+            </div>
+        </div>
+    </div>
+

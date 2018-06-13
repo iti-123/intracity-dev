@@ -1,0 +1,913 @@
+<style type="text/css">
+    .filter-result {
+        display: none;
+    }
+
+    .no-border {
+        border: 0px;
+    }
+
+    .mb15 {
+        margin-bottom: 15px;
+        width: 100%;
+        float: left;
+    }
+
+    .filter-result-toggle {
+        cursor: pointer;
+    }
+
+    .no-padding {
+        padding: 0px;
+    }
+
+    .pop-edit-btn,
+    .pop-delete-btn {
+        cursor: pointer;
+    }
+</style>
+<style>
+    .Modify-btn {
+        background: none;
+        border: none;
+    }
+
+    .modal-dialog {
+        width: 95%;
+        margin: 30px auto;
+        padding: 30px;
+    }
+
+    .padlr-5 {
+        padding: 0 5px;
+        box-sizing: border-box;
+    }
+
+    .Modify-btn {
+        background-color: #fff;
+        border: 2px solid #ed3237;
+        border-radius: 5px;
+        color: #555;
+        cursor: pointer;
+        display: block;
+        font-size: 20px;
+        font-weight: 500;
+        margin: auto 0 auto auto;
+        padding: 2px 19px;
+        position: relative;
+        width: auto;
+        z-index: 9;
+        font-size: 15px;
+    }
+
+    .Modify-btn:hover {
+        background: #ed3237;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .vi_text {
+        padding-top: 13px;
+    }
+
+    .modify_search_detail .modal-header {
+        border-bottom: 0px;
+    }
+    /*.modify_search_detail .modal-body {padding: 40px 30px 20px;}*/
+
+    .pop-pad {
+        padding: 40px 30px 20px;
+        border-radius: 0px;
+    }
+
+    .mb-24 {
+        margin-bottom: 24px;
+        width: 100%;
+        float: left;
+    }
+
+    .pop-pad .vi_text {
+        font-size: 16px;
+    }
+
+    .user_search_result {
+        width: 100%;
+        float: left;
+        font-size: 16px;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+    }
+
+    .user_search_result_modify {
+        width: 100%;
+        float: left;
+        margin-top: 15px;
+    }
+
+    .user_search_result_modify li {
+        margin-bottom: 10px;
+    }
+
+
+    @charset "utf-8";
+    /* CSS Document */
+
+    .right_search_bar {
+        width: 100%;
+        float: left;
+        padding: 10px 0;
+    }
+
+    .right_search_bar .search_bar_tab {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .right_search_bar .search_bar_tab li {
+        display: inline-block;
+        padding: 10px 19px;
+        position: relative;
+    }
+
+    .right_search_bar .search_bar_tab li a {
+        text-decoration: none;
+        font-size: 18px;
+        color: #616161;
+    }
+
+    .right_search_bar .search_bar_tab li a.active_c {
+        color: #333;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .hyperlocal-rc-flow {
+        width: 100%;
+        float: left;
+        background: #fff;
+        margin: 0 0 15px 0;
+    }
+
+    .hyperlocal-rate-card {
+        width: 100%;
+        float: left;
+    }
+
+    .select_form_hyperlocal {
+        width: 100%;
+        float: left;
+        padding: 6px 0;
+        position: relative;
+    }
+
+    .select_form_hyperlocal select {
+        width: 100%;
+        float: left;
+        padding: 13px 2px;
+        border-radius: 3px;
+        font-size: 14px;
+        color: #666;
+        border: none;
+        border-bottom: #ccc solid 1px;
+        outline: none;
+    }
+
+    .select_form_hyperlocal input {
+        border: none;
+        width: 100%;
+        float: left;
+        position: relative;
+        padding: 13px 38px;
+        outline: none;
+        border-bottom: solid 1px #e0e0e0;
+    }
+
+    .select_form_hyperlocal .input_ani:focus~label,
+    .input_ani:valid~label {
+        top: 0px;
+        font-size: 12px;
+        color: #666;
+    }
+
+    .select_form_hyperlocal .input_ani {
+        padding: 20px 0 5px 5px;
+        border: none;
+        outline: none;
+        border-bottom: solid 1px #e0e0e0;
+        font-size: 16px;
+        -moz-transition: .3s;
+        -o-transition: .3s;
+        -webkit-transition: .3s;
+        transition: .3s;
+        width: 100%;
+        float: left;
+    }
+
+    .select_form_hyperlocal .lbl_text2 {
+        position: absolute;
+        font-size: 14px;
+        left: 5px;
+        pointer-events: none;
+        top: 20px;
+        -moz-transition: .3s;
+        -o-transition: .3s;
+        -webkit-transition: .3s;
+        transition: .3s;
+        font-weight: 400;
+        color: #666;
+    }
+
+    .select_form_hyperlocal input.date_p {
+        background: url(images/datepicker.png) no-repeat left -3px;
+        background-position: 0 13px;
+    }
+
+    .select_form_hyperlocal .padg_l {
+        padding: 0 35px;
+    }
+
+    .hyperlocal-rate-card .load_type {
+        width: 100%;
+        float: left;
+        margin: 5px 0;
+    }
+
+    .hyperlocal-rate-card .file-upload,
+    .hyperlocal-rate-card .file-download {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 4px solid #FFFFFF;
+        overflow: hidden;
+        background-image: linear-gradient(to bottom, #ed3237 50%, #FFFFFF 50%);
+        background-size: 100% 200%;
+        transition: all 1s;
+        color: #FFFFFF;
+        font-size: 15px;
+        float: left;
+    }
+
+    .hyperlocal-rate-card input[type='file'] {
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .hyperlocal-rate-card .lbl_text3 {
+        float: left;
+        color: #666;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 45px;
+    }
+
+    .hyperlocal-rate-card .Discounts_btn {
+        display: block;
+        color: #3c3c3c;
+        border: none;
+        outline: none;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px 15px;
+        float: right;
+        cursor: pointer;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .hyperlocal-rate-card .add_btn_gray {
+        background-color: #747474;
+        color: #fff;
+        font-size: 17px;
+        padding: 6px 10px;
+        text-transform: capitalize;
+        border: 1px solid #6c6c6c;
+        margin-top: 15px;
+        outline: none;
+    }
+
+    .on_time {
+        width: 100%;
+        float: left;
+    }
+
+    .on_time .p_details {
+        width: 30%;
+        float: left;
+        padding: 8px 0;
+    }
+
+    .on_time .p_details .pro_img {
+        width: 30%;
+        float: left;
+    }
+
+    .on_time .p_details .pro_img span {
+        width: 100%;
+        float: left;
+        padding: 0 10px;
+    }
+
+    .on_time .p_details .pro_img .bottom_img {
+        width: 100%;
+        float: left;
+    }
+
+    .on_time .p_details .pro_img .bottom_img ul {
+        list-style: none;
+        margin: 0;
+        padding: 0 10px;
+        width: 100%;
+        float: left;
+    }
+
+    .on_time .p_details .pro_img .bottom_img ul li {
+        display: inline-block;
+        padding: 4px 1px;
+    }
+
+    .on_time .p_details .pro_img .bottom_img .text_pr {
+        width: 100%;
+        float: left;
+    }
+
+    .on_time .p_details .pro_img .bottom_img .text_pr span {
+        width: 23px;
+        float: left;
+        padding: 0 10px;
+        font-size: 10px;
+        color: #8b8b8e;
+    }
+
+    .on_time .p_details .pro_disc {
+        width: 70%;
+        float: left;
+    }
+
+    .on_time .p_details .pro_disc ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .on_time .p_details .pro_disc ul li {
+        padding: 0 14px;
+        display: block;
+        float: left;
+        width: 100%;
+        color: #747578;
+        font-size: 14px;
+        position: relative;
+    }
+
+    .on_time .p_details .pro_disc ul li span {
+        width: 100%;
+        float: left;
+    }
+
+    .on_time .p_details .pro_disc ul li span {
+        width: 100%;
+        float: left;
+    }
+
+    .on_time .p_discerption {
+        width: 70%;
+        float: right;
+    }
+
+    .on_time .p_discerption .p_disc_sub {
+        width: 100%;
+        float: left;
+        padding: 4px 0;
+        margin-top: 6px;
+        margin-bottom: 20px;
+    }
+
+    .on_time .p_discerption .p_disc_sub .price_t {
+        padding: 0;
+        margin: 0;
+        color: #747578;
+        font-size: 16px;
+        line-height: 22px;
+        margin: 0 0 8px 0;
+    }
+
+    .on_time .p_discerption .table_detail {
+        width: 100%;
+        float: left;
+    }
+
+    .on_time .p_discerption .table_detail .p_terms_t {
+        width: 25%;
+        float: left;
+        min-height: 80px;
+    }
+
+    .on_time .p_discerption .table_detail .p_terms_t h2 {
+        display: block;
+        font-weight: bold;
+        color: #000;
+        font-size: 15px;
+        line-height: 22px;
+        text-transform: uppercase;
+        padding: 5px 0;
+    }
+
+    .on_time .p_discerption .table_detail .p_terms_t p {
+        font-size: 13px;
+        color: #a2a1a1;
+        padding: 0;
+        margin: 0;
+    }
+
+    .p_terms_t {
+        width: 25%;
+        float: left;
+        min-height: 80px;
+    }
+
+    .p_terms_t h2 {
+        display: block;
+        font-weight: bold;
+        color: #000;
+        font-size: 15px;
+        line-height: 22px;
+        text-transform: uppercase;
+        padding: 5px 0;
+    }
+
+.detail-minus:after {
+        content: "";
+        display: none;
+}
+    .p_terms_t p {
+        font-size: 13px;
+        color: #a2a1a1;
+        padding: 0;
+        margin: 0;
+    }
+
+    .detail_b1 {
+        float: left;
+        margin-top: 1px;
+        padding: 4px 0px 0 62px;
+        font-size: 17px;
+        cursor: pointer;
+        position: relative;
+        width: 85%;
+        margin-right: 0;
+    }
+
+    .detail_b1:before {
+        content: "";
+        position: absolute;
+        left: 40px;
+        top: 14px;
+        width: 12px;
+        height: 1px;
+        background: #808080;
+    }
+
+    .detail_b1:after {
+        content: "";
+        position: absolute;
+        left: 46px;
+        top: 9px;
+        height: 12px;
+        width: 1px;
+        background: #808080;
+    }
+
+    .msg-icon {
+        outline: none;
+        line-height: 35px;
+        float: left;
+        width: 15%;
+    }
+
+    .msg-icon .fa {
+        font-size: 16px;
+        padding: 0 0 0 5px;
+        border-left: 1px solid #bfbfbf;
+
+    }
+</style>
+
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">Buyer</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#">Hyperlocal</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#">Post Master</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+              
+
+            </ul>
+        </div>
+
+        <div class="intra_city_list">
+
+          
+
+            <div class="loc_det">
+
+                <div class="col-lg-9">
+                    
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="right_setg space_top">
+                        <div class="cell-1">
+                            <ul class="list-inline pull-right m-bottom-0">
+                               
+                                <li>
+                                    <a href="#/hp-buyer-post">
+                                        <div class="search-modify"><span>Post</span></div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="loc_det filter-result-toggle">
+                <ul class="filter_s">
+                    <li>Category</li>
+                    <li>Service</li>
+                    <li>RATING</li>
+                    <li>Post Status</li>
+                </ul>
+                <span class="rilters_right"><i class="fa fa-bars"></i>Filters</span>
+            </div>
+
+            <div class="loc_det">
+                <div class="loc_det padding_30 filter-result">
+                    <div class="col-lg-3">
+                        <div class="sellr_field mb15">
+                            <input type="text" class="ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                            <label class="sel_text">Category</label>
+                        </div>
+                        <div class="filter_from_location">
+                                 <div class="col-lg-12">
+                                    <div class="row">
+                                       <ul class="post_inline">
+                                          <li ng-repeat="type in categories">
+                                             <div class="admin_input">
+                                                <input type="checkbox"  
+                                                ng-click="addFilterData(filterData.category,type.id)"
+                                                id="type{{type.id}}" class="check_box">
+                                                <label class="text-capitalize" for="type{{type.id}}">{{type.name}}</label>
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="sellr_field mb15">
+                            <input type="text" class="ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                            <label class="sel_text">Service</label>
+                        </div>
+                        <div class="filter_from_location">
+                                 <div class="col-lg-12">
+                                     <div class="row">
+                                       <ul class="post_inline">
+                                          <li ng-repeat="type in servicetype">
+                                             <div class="admin_input">
+                                                <input type="checkbox" ng-click="addFilterData(filterData.service,type.id)" id="service{{type.id}}" class="check_box">
+                                                <label for="service{{type.id}}">{{type.value}}</label>
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="sellr_field mb15">
+                            <input type="text" class="ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                            <label class="sel_text">Rating</label>
+                        </div>
+
+                        <div class="input_right_box_left">
+
+                            <div class="admin_input margin_t">
+                                <input id="Partners" type="checkbox" class="check_box check_box_1">
+                                <label for="Partners">Top Sellers(Order)</label>
+                            </div>
+                            <div class="admin_input margin_t">
+                                <input id="NairTrans" type="checkbox" class="check_box check_box_1">
+                                <label for="NairTrans">Top Sellers(Rated)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="sellr_field mb15">
+                            <input type="text" class="ng-pristine ng-untouched ng-invalid ng-invalid-required">
+                            <label class="sel_text">Post Status</label>
+                        </div>
+                        <div class="filter_from_location">
+                                 <div class="col-lg-12">
+                                     <div class="row">
+                                       <ul class="post_inline">
+                                          <li ng-repeat="status in post_Status" ng-show="status.id==3 || status.id==1">
+                                             <div class="admin_input" >
+                                                <input type="checkbox"  ng-click="addFilterData(filterData.postStatus,status.id)" id="statuss{{status.id}}"  class="check_box">
+                                                <label for="statuss{{status.id}}">{{status.value}}</label>
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                    </div>
+                    
+                    <!-- <div class="col-lg-3 ">
+                        <div class="sellr_field mb15">
+                            <input type="text" class="ng-pristine ng-untouched ng-invalid ng-invalid-required" ng-model="data.username">
+                            <label class="sel_text">Seller</label>
+                        </div>
+                    
+                        <div class="input_right_box_left ">
+                            
+                            <div class="admin_input margin_t scrollable" ng-repeat="(key,value) in sellerList |  filter:data.username">
+                                <input id="{{ value.username|removeSpace }}" type="checkbox" ng-click="selectSeller(value.id,value)" class="check_box check_box_1">
+                                <label for="{{ value.username|removeSpace }}"> {{ value.username }} </label>
+                            </div>
+                           
+                        </div>
+                    </div> -->
+                  
+                </div>
+              
+                <div class="hyperlocal_gray">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="vendor_name_heading">From </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="vendor_name_heading">Title</div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="vendor_name_heading">Valid From</div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="vendor_name_heading">Valid To</div>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <div class="vendor_name_heading">Notification</div>
+                    </div>
+                     
+                </div>
+              <!-- {{listdata}} -->
+                <div class="data_box_bg" ng-repeat="value in listdata">
+                    <div class="white_bg" >
+                       
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="vendor_img_box ">
+                                <div class="vendor_detail text-capitalize"><img src="images/download-icon.png" alt="IN">  {{value.vendor}}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="vendor_date text-capitalize">
+                                 {{value.title}}
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="vendor_date">
+                              {{value.from_date|dateStringFormat}}
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="vendor_date"> {{value.to_date|dateStringFormat}}
+                            </div>
+                        </div>
+                        
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="sep_div1">
+                                <input id="Submit1" type="submit" ng-click="showHideDetail($index)" value="Book Now" class="book_btn no-border pull-right">
+                                
+                            </div>
+                            <div class="detail_b1 toggle-minus-{{$index}}" ng-click="showHideDetail($index)" data-id="1">Detail
+                            </div>
+                            <a href="javascript:void(0)" ng-click="" data-toggle="" data-target="#messageModal" class="pull-right msg-icon">
+                                <i class="fa fa-envelope-o"></i>
+                            </a>
+                        </div>
+
+
+                        <div class="on_time" id="detail-{{$index}}" style="display:none;">
+                                <div class="detail-data-info" id="info-detail-data">
+                           <div class="col-md-12 padding-none moreDetails-toggle">
+                              <div class="col-md-12 data-div padding-none">
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                    <span class="data-head">POST FROM :</span>
+                                       <span class="data-value">
+                                          <img src="http://stagenew.logistiks.com/images/down-icon-1.png" alt="" class="pull-left p-right-5">&nbsp; {{value.vendor}}
+                                       </span>
+                                 </div>
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                    <span class="data-head">VALID FROM :</span>
+                                       <span class="data-value">
+                                          {{value.from_date|dateStringFormat}}
+                                       </span>
+                                 </div>
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                    <span class="data-head">VALID TO :</span>
+                                       <span class="data-value">
+                                        {{value.to_date|dateStringFormat}}
+                                       </span>
+                                 </div>
+                                 
+                                  <div class="col-md-3 padding-left-none data-fld">
+                                    <span class="data-head">BASE PRICE</span> 
+                                    <span class="data-value">Rs. {{value.base_price}}</span>
+                                 </div>
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                    <span class="data-head"> City</span>
+                                    <span class="data-value" ng-repeat="city in cities | filter: {id:value.city_id}">
+                                        {{city.city_name}}
+                                     </span>
+                                    
+                                 </div>
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                     <span class="data-head">SERVICE TYPE</span> 
+                                   {{value.service_type|getobjectvalue:servicetype}}
+                                 </div>
+                                 <div class="col-md-3 padding-left-none data-fld">
+
+                                     <span class="data-head">PRODUCT CATEGORY</span>
+                                    {{value.product_category|getName:categories}}
+                                 </div>
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                      <span class="data-head">CHARGE PER EXTRA KM </span>
+                                       <span class="data-value">Rs. 
+                                       {{value.rate_per_extra_kms}}
+                                       </span>
+                                 </div>
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                   <span class="data-head">NUMBER OF PARCELS INCLUDED</span>
+                                      <span class="data-value">
+                                       {{value.num_parcels_included}}
+                                       </span>
+                                 </div>
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                   <span class="data-head">ADDITIONAL COST PER EXTRA PARCEL</span>
+                                       <span class="data-value">
+                                        {{value.additional_cost_per_ext_parcel}}
+                                       </span>
+                                 </div>
+                                  
+                                 
+                                                         
+                              </div>
+                           </div>
+                        </div>
+                        <div class="detail-data-form">
+                           <form class="buyer_booknow_form buyer_booknow_form_1" method="post">
+                              <div class="col-md-12  padding-none moreDetails-toggle initial-quote-1 shadow-div">
+                                 <div class="col-md-4 form-control-fld">
+                                       <div class="input-prepend">
+                                          <span class="data-head spnlable selectBorder">QUANTITY</span><input type="text" id="quantity_id_250" name="quantity_id" maxlength="10" class="clsFTLTQuantity input_ani js-placeholder  selectBorder" value="">
+                                       </div>
+                                 </div>
+                                 <div class="col-md-2 form-control-fld">
+                                    <div class="select_form_intra">
+                                       <span class="data-head spnlable">Weight</span>                                   
+                                    <select  id = "weight" name="weight" ng-model="data.location.parcelweight" ng-options="y.value for (x,y) in weight">
+                                <option value="">Total Weight</option>
+                            </select>
+                                 </div>
+                              </div>
+                                 <div class="col-md-3 form-control-fld">
+                                    <div class="select_form_intra">
+                                       <span class="data-head spnlable">Material</span>
+                                     <select name="category" ng-model="data.category" ng-options="y.name for (x,y) in categories" id="product_category">
+                                <option value="">Material</option>
+                            </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-12  padding-none moreDetails-toggle initial-quote-1 shadow-div">   
+                              
+                                
+                                 <div class="col-md-6 form-control-fld"></div>
+                                 <div class="col-md-6 form-control-fld">
+                                    <div class="input-prepend">
+                                         <input type="button" ng-click="bookNow(value,value.id)" class="pull-right buyer_book_now_inbound btn add-btn initial_quote_submit spnlable-btn" value="Submit" style="display:block">
+                                    </div>
+                                 </div>
+                              
+                              </div>
+                           </form>
+                        </div>
+                           </form>
+                        </div>
+                        </div>
+                    </div>
+                
+                <div class="page-data-loader">
+               <!--  <img src="images/page-loader.gif" /> -->
+            </div>
+
+                </div>
+                <div class="white_bg" ng-if="listdata == ''" style="text-align:center">
+                    <h3>Data not available</h3>
+                </div>
+                
+
+            </div>
+            
+        </div>
+     
+        </div>
+
+        </div>
+
+    </div>
+</div>
+<!--model box end here-->
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.filter-result-toggle').click(function () {
+            $(".filter-result").slideToggle();
+        });
+    });
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#filters_click").click(function () {
+            $("#filters_show").toggle('fast');
+
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $(".click-detail-data").load("click", function () {
+
+            $("#detail-0").slideToggle('fast');
+        });
+    });
+
+</script>
+
+
+<script>
+    $(".subresult").hide();
+    $(document).on('click', ".show_hide", function () {
+
+        var id = $(this).attr('data-id');
+
+
+        $("#open_show" + id).toggle();
+        $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
+    });
+
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $(".search_i").click(function () {
+            $(".open_search").show();
+        });
+
+        $(".close_btn_close").click(function () {
+            $(".open_search").hide();
+        });
+        var gwid = $(".scroll_div").width();
+        var twid = $(".loc_det").width();
+        var acwid = gwid / twid * 100;
+        var len = $(".scroll_div").length;
+        var towid = acwid * len + 9;
+        $(".fillter_div").css({ "width": "" + towid + "%" });
+    });
+
+</script>

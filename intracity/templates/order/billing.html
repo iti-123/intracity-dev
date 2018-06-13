@@ -1,0 +1,29 @@
+<table class="table tbl_t orderMaster">
+        <thead>
+            <tr>
+                <th> Date </th>
+                
+                <th><span ng-if="filterData.serviceType != 23">From Location </span></th>
+                <th><span ng-if="filterData.serviceType != 23">To Location</span></th>
+                <th><span> CONSIGNER </span> </th>
+                <th>CONSIGNEE</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody  ng-repeat="(key,order) in orderlists" ng-if="billingStatus.length">
+            <td>{{ order.updated_at | dateStringFormat }} </td>
+            
+            <td>{{ !empty(order.from_location) && order.from_location || 'N/A' }}</td>
+            <td>{{ !empty(order.to_location) && order.to_location || 'N/A' }}</td>
+            <td>{{ order.consignee_name }} </td>
+            <td>{{ order.consignor_name }}</td>
+            <td> Billing Complete   </td>
+        </tbody>
+        <tbody ng-if="!billingStatus.length">
+           <tr>
+              <td colspan="5" style="text-align:center">
+                 No Records Found
+              </td>
+           </tr>
+        </tbody>
+    </table>

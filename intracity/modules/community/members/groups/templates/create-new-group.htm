@@ -1,0 +1,116 @@
+<div class="right_section left_menu_space right_section_community ">    
+    <div class="col-md-12 col-sm-8 col-xs-12">
+        <div class="row">
+            <div class="right_serch_p titile_gray">
+                <div class="right_search_bar">
+                    <ul class="search_bar_tab">
+                        <li><a href="#">Community</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                        <li><a href="#">Members</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                        <li><a href="#">Groups</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                        <li><a href="#" class="active_c">New Group</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="row">
+            <div class="right_serch_p">
+                <div class="main-right">
+                    <!-- Search Block Starts Here -->
+                    <div class="search-block inner-block-bg">
+                        <div class="cell-1 cell-1-80">
+                            <ul class="list-inline m-bottom-0 m-top-5 font-bold-black">
+                                <li><a href="#">CREATE NEW GROUP</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Search Block Ends Here -->
+                    <!-- Table Starts Here -->
+                    <div class="table-div">
+                        <div class="invitation_bg">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <form name="groupForm" ng-submit="groupForm.$valid && newGroup(group)" novalidate>
+                                    <p ng-show="groupResponse.payload.message" class="text-info"> {{ groupResponse.payload.message }} </p>
+                                    <div class="form-group">
+                                        <input class="form-control" name="name" ng-model="group.name" type="text" placeholder="Group Name" required>
+                                        <span class="has-error" ng-show="groupForm.$submitted && groupForm.name.$error.required">
+                                            Please enter group name
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="radio-block">                                                
+                                            <div class="radio_inline">
+                                                <input type="radio" id="document" name="isPublic" ng-click="showMember('public')" checked>
+                                                <label for="document"><span></span>Public</label>
+                                            </div>
+
+                                            <div class="radio_inline">
+                                                <input type="radio" id="parcel" name="isPublic" ng-click="showMember('private')">
+                                                <label for="parcel"><span></span>Private</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-if="isMemberShow">
+                                        <select class="form-control" chosen multiple name="members" placeholder-text-multiple="Select members" ng-required="isMemberShow" options="allusers" ng-model="group.members" required ng-options="a.id as a.username for a in allusers">
+                                        </select>
+                                        <span class="has-error" ng-show="groupForm.$submitted && groupForm.members.$error.required">
+                                            Please select atleast one member
+                                        </span>                                        
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input class="form-control valid-number" name="total_member_limit" ng-model="group.total_member_limit" type="text" placeholder="Member Limit" required>
+                                        <span class="has-error" ng-show="groupForm.$submitted && groupForm.total_member_limit.$error.required">
+                                            Please enter total number  of member to be joined
+                                        </span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <textarea rows="10" name="description" ng-model="group.description" required class="form-control textarea" placeholder="Brief Writeup"></textarea>
+                                        <span class="has-error" ng-show="groupForm.$submitted && groupForm.description.$error.required">
+                                            Write group description in brief 
+                                        </span>
+                                    </div>
+                            
+                                    <div class="form-group">
+                                        <input type="file" name="picture" ng-model="group.picture" upload-file="group.picture" required/>
+                                        <span class="has-error" ng-show="groupForm.$submitted && groupForm.picture.$error.required">
+                                            Choose file 
+                                        </span>                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="admin_input chose-file-ckbox">
+                                            <input name="is_accept_terms_cond" class="check_box" id="Accept" type="checkbox">
+                                            <label for="Accept">“I acknowledge and agree that the logo/image I am uploading does not infringe upon any third party copyrights, trademarks, or other proprietary rights or otherwise violate the User Agreement </label>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="share_btn">
+                                                <a href="javascript:void(0)">Share an update</a>
+                                                <a href="javascript:void(0)">Upload (Picture)</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="add_btn_center">
+                                                <button type="submit" class="add-btn">Create</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>                                    
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Table Starts Here -->
+                </div>
+            </div> <!--end of right_search_p-->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="admin_input" ng-show="!order.isGSA" ng-if="getUserActiveRole == 'Seller'">
+        <input ng-click="acceptPlaceTruckGSA(order,$index)" type="checkbox" id="gsa-{{ $index }}" class="gsa_accept check_box" value="{{ $index }}">
+        <label for="gsa-{{ $index }}" class="lbl padding-8"> Accept GSA </label>
+     </div>
+     <span ng-show="order.isGSA && order.orderItemStatus==1">
+     <span> GSA Accepted </span>
+     </span>
+     <span ng-show="order.isGSA && order.orderItemStatus==2">
+          <div class="status-bar"></div>
+          <span> Pick Due </span>
+     </span>
+     <span ng-show="order.isGSA && order.orderItemStatus ==3">
+        <div class="status-bar">
+           <div class="status-bar-left"></div>
+        </div>
+        <span> Intransit </span>
+     </span>
+
+     <span ng-show="order.isGSA && order.orderItemStatus ==4">
+          <div class="status-bar">
+          <div class="status-bar-left"></div>
+          </div>
+          <span> Reached destination </span>
+      </span>
+
+      <span ng-show="order.isGSA && order.orderItemStatus ==5">
+          <div class="status-bar bg-green">
+             <div class="status-bar-left"></div>
+          </div>
+          <span> Delivered </span>
+      </span>
+      <span ng-show="order.isGSA && order.orderItemStatus ==6">
+         <div class="status-bar bg-green"> </div>
+         <span> Delivery Confirmed </span>
+     </span>

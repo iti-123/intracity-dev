@@ -1,0 +1,504 @@
+<div class="right_section">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="right_serch_p">
+            <div class="right_search_bar">
+                <ul class="search_bar_tab">
+                <li><a href="#">{{getUserActiveRole}}</a><span class="crum-2"><i class="fa  fa-angle-right"></i></span></li>
+                <li><a href="#">Services</a><span class="crum-2"><i class="fa  fa-angle-right"></i></span></li>
+                <li><a href="#" class="active_c" style="text-transform: capitalize;"> {{ setBreadCrumb }} Order Master</a>
+                </li>
+
+                </ul>
+            </div>
+
+            <div class="intra_city_list heght_100">
+                <div class="loc_det">
+                    <ul class="loc_list">
+                        <li>ORDER MASTER</li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="buyer_tab">
+
+
+                    <ul class="buyer_ul">
+
+                        <li class="tab_10 active_buyer" data-tab="Messages">
+                            <a href="javascript:void(0);">All</a>
+                        </li>
+
+                        <li class="tab_10" data-tab="Offers">
+                            <a href="javascript:void(0);">Spot (4)</a>
+                        </li>
+
+                        <li class="tab_10" data-tab="terms">
+                            <a href="javascript:void(0);">Terms(0)</a>
+                        </li>
+
+                    </ul>
+
+
+                    <div class="buyer_main">
+                        <div class="buyer_box buyer_activetab" id="Messages">
+                            <!--a-->
+
+                        </div>
+
+                        <div class="buyer_box" id="Offers">
+
+
+                        </div>
+                        <div class="buyer_box" id="terms">
+                            <!--b-->
+
+                        </div>
+
+
+                    </div>
+                    <!--End of message_b_main-->
+                </div>
+
+
+
+
+
+                <div class="loc_det">
+                    <div class="col-lg-10">
+                        <div class="row">
+                            <ul class="filter_s">
+                                <li>City</li>
+                                <li ng-show="showIntraHyper">FROM LOCATION</li>
+                                <li ng-show="showIntraHyper">TO LOCATION</li>
+                                <li ng-show="showIntraHyper">Vehicle Type</li>
+                                <li ng-show="showIntraHyper && showHyperlocal">Post Type</li>
+                                <li>Seller Name</li>
+                                <li>Order Date</li>
+                                <li>ORDER NO.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="row">
+                            <span class="rilters_right" id="filters_click"><i class="fa fa-bars"></i> Filters </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="white_bg overflow" id="filters_show" style="display: none;">
+
+                    <div class="fillter_div">
+                        <div class="scroll_div">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="select_form_intra">
+                                        <input type="text" id="buyer" class="input_ani" autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)"
+                                            ng-model="filterData.city" required="" typeahead="city as (city.city_name) for city in cities | filter:$viewValue"
+                                        />
+                                        <label class="lbl_text2">City</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="scroll_div" ng-show="showIntraHyper">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="select_form_intra">
+                                        <input type="text" class="input_ani" ng-model="data.from_location" required="">
+                                        <label class="lbl_text2">FROM LOCATION</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+
+                                    <div class="filter_from_location scrollable">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <ul class="post_inline">
+
+                                                    <li ng-repeat="(key,value) in locations |filter:data.from_location">
+                                                        <div class="admin_input">
+                                                            <input ng-click="addFilterData(filterData.fromLocation,value)" id="from{{value.id}}" name="value.id" autocomplete="off" type="checkbox"
+                                                                value="{{value.id}}" class="check_box check_box_1">
+                                                            <label for="from{{value.id}}">  {{value.locality_name}}</label>
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="scroll_div" ng-show="showIntraHyper">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="select_form_intra">
+                                        <input type="text" class="input_ani" ng-model="data.to_location" required="">
+                                        <label class="lbl_text2">TO LOCATION</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+
+                                    <div class="filter_from_location scrollable">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <ul class="post_inline">
+                                                    <li ng-repeat="(key,value) in locations |filter:data.to_location">
+                                                        <div class="admin_input">
+                                                            <input ng-click="addFilterData(filterData.toLocation,value)" id="to{{value.id}}" name="value.id" autocomplete="off" type="checkbox"
+                                                                value="{{value.id}}" class="check_box check_box_1">
+                                                            <label for="to{{value.id}}"> {{value.locality_name}}</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="scroll_div" ng-show="showIntraHyper">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="select_form_intra">
+                                        <input type="text" class="input_ani" ng-model="data.vehicle_type" required="">
+                                        <label class="lbl_text2">VEHICLE TYPE</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+
+                                    <div class="filter_from_location scrollable">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <ul class="post_inline">
+                                                    <li>
+                                                        <div class="admin_input" ng-repeat="vehicle in vehicles | filter:data.vehicle_type">
+                                                            <input type="checkbox" ng-click="addFilterData(filterData.vehicleType,vehicle)" class="check_box"  id="vl{{vehicle.id}}">
+                                                            <label for="vl{{vehicle.id}}">{{ vehicle.vehicle_type }}</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="scroll_div" ng-show="showIntraHyper && showHyperlocal">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="select_form_intra">
+                                        <input type="text" class="input_ani" required="">
+                                        <label class="lbl_text2">Post Type</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+
+                                    <div class="filter_from_location">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                               
+                                                <ul class="post_inline">
+                                                    <li ng-repeat="(key,value) in post_type">
+                                                        <div class="admin_input">
+                                                            <input id="{{ value.post_type }}" ng-click="addFilterData(filterData.postType,value)" type="checkbox" class="check_box">
+                                                            <label for="{{ value.post_type }}"> {{ value.post_type }} </label>
+                                                        </div>
+                                                    </li>                                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                    
+
+                        <div class="scroll_div">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="select_form_intra">
+                                        <input type="text" class="input_ani" required="" ng-model="data.selllerName">
+                                        <label class="lbl_text2">SELLER NAME</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+
+                                    <div class="filter_from_location scrollable">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <ul class="post_inline">
+                                                    <li ng-repeat="(key,value) in sellerList |filter:data.selllerName">
+                                                        <div class="admin_input">
+                                                            <input ng-click="addFilterData(filterData.sellerType,value)" id="s{{value.id}}" name="value.id" ng-model="data.username[key].username"
+                                                                type="checkbox" value="{{value.id}}" class="check_box check_box_1">
+                                                            <label for="s{{value.id}}">
+                                                            {{value.username}}</label>
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="scroll_div">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+
+                                    <div class="date_selection select_form_intra">
+                                        <span class="left_v_from">
+                                            <input type="text" id="departing" ng-model="data.dispatchDate" class="date_p input_ani hasDatepicker" required="">
+                                            <label class="lbl_text2 padg_l">Order Date</label>
+                                        </span>
+                                    </div>
+
+                                    <div class="filter_from_location scrollable">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <ul class="post_inline">
+                                                    <li ng-repeat="(key,value) in dispatchDate |filter:data.dispatchDate">
+                                                        <div class="admin_input" ng-if="value.dispatch_date != '0000-00-00'">                                                            
+                                                            <input ng-click="addFilterData(filterData.orderDate,value.dispatch_date)" id="s{{value.dispatch_date}}" name="value.dispatch_date"
+                                                                type="checkbox" value="{{value.dispatch_date}}" class="check_box check_box_1">
+                                                            <label for="s{{value.dispatch_date}}">
+                                                            {{ value.dispatch_date != '0000-00-00' && (value.dispatch_date | date : "dd/MM/yyyy") || '' }}</label>
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="scroll_div">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="select_form_intra">
+                                        <input type="text" class="input_ani" ng-model="data.orderNo" required="">
+                                        <label class="lbl_text2">Order No</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+                                    <div class="filter_from_location scrollable">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <ul class="post_inline">
+                                                    <li ng-repeat="(key,value) in orderNumber |filter:data.orderNo">
+                                                        <div class="admin_input">
+                                                            <input ng-click="addFilterData(filterData.orderNumber,value)" id="s{{value.id}}" name="value.id"
+                                                                type="checkbox" value="{{value.id}}" class="check_box check_box_1">
+                                                            <label for="s{{value.id}}">
+                                                            {{value.order_no}}</label>
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+
+                <div class="loc_det">
+
+                    <table class="table tbl_t orderMaster m_top" ng-show="showIntraHyper">
+                        <thead>
+                            <tr>
+                                <th> To </th>
+                                <th>Title</th>
+                                <th>Pickup Date</th>
+                                <th colspan="4">
+                                    <div class="info_links"> NOTIFICATIONS</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           <tr ng-repeat="order in orderlists" ng-click="orderDetails(order)">
+                                <td>
+                                    <span>
+                                        <img src="../images/upload-icon.png" alt="IN" class="align">    
+                                    </span>  
+                                    <span ng-show="getUserActiveRole == 'Buyer'">
+                                        <span class="font" ng-show="order.seller_name"> {{ order.seller_name }}</span>
+                                        <span class="font" ng-show="order.sellerName"> {{ order.sellerName }}</span>
+                                    </span>
+                                    <span ng-show="getUserActiveRole == 'Seller'">
+                                        <span class="font" ng-show="order.buyer_name"> {{ order.buyer_name }}</span>
+                                    </span>
+                                    <p ng-show="order.from_location" class="small-text">
+                                        {{ order.from_location+ ' to ' + order.to_location}}
+                                    </p>
+                                </td>
+                                
+                                <td>{{order.rateCardTitle}}</td>
+                                <td>{{order.pickUpDate != '0000-00-00' && (order.pickUpDate | date : "dd/MM/yyyy") || 'N/A' }}</td>
+                                <td>
+                                    <div class="info_links">
+                                        <a href=""><i class="fa fa-envelope-o"></i></a>
+                                        <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                                        <a href=""><i class="fa fa-bullseye"></i><span class="vlue">0</span></a>
+                                        <a href=""><i class="fa fa-line-chart"><span class="vlue">0</span></i></a>
+                                        <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                        <tbody ng-if="!orderlists.length">
+                            <tr>
+                                <td colspan="4" style="text-align:center">
+                                    No Records Found
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <table class="table tbl_t orderMaster m_top" ng-show="showBlueCollar">
+                        <thead>
+                            <tr>
+                                <th> Name </th>
+                                <!-- <th> Type </th> -->
+                                <th ng-if="filterData.serviceType != 23"> From (Date) </th>
+                                <th ng-if="filterData.serviceType != 23"> To (Date) </th>
+                                <th ng-if="filterData.serviceType == 23"></th>
+                                <th ng-if="filterData.serviceType == 23">Order Date</th>
+                                <!-- <th> Pick Up Date </th> -->
+                                <th>
+                                    <div class="info_links"> NOTIFICATIONS</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <tr ng-repeat="order in orderlists" ng-click="orderDetails(order)">
+                                <td>
+                                     <span>
+                                                            <img src="../images/upload-icon.png" alt="IN" class="align">    
+                                                        </span>  
+                                   <span class="font"> {{ order.bcFirstName+ ' ' + order.bcLasttName}}</span>
+                                    <p ng-show="order.from_location" class="small-text">
+                                        {{ 'Profile ' + order.bcProfileType}}
+                                    </p>
+                                </td>
+                                <!-- <td>
+                                    <span ng-show="order.postType == '2'"> Distance </span>
+                                    <span ng-show="order.postType == '1'"> Hour </span>
+                                </td> -->
+                                <td ng-if="filterData.serviceType != 23"> {{ order.bcLicenceValidFrom }} </td>
+                                 <td ng-if="filterData.serviceType != 23"> {{ order.bcLicenceValidTo }} </td>
+                                <td ng-if="filterData.serviceType == 23"></td>
+                                <td ng-if="filterData.serviceType == 23"> {{ order.created_at.slice(0,10) }} </td>
+
+                                <td>
+                                    <div class="info_links">
+                                        <a href=""><i class="fa fa-envelope-o"></i></a>
+                                        <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                                        <a href=""><i class="fa fa-bullseye"></i><span class="vlue">0</span></a>
+                                        <a href=""><i class="fa fa-line-chart"><span class="vlue">0</span></i></a>
+                                        <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                        <tbody ng-if="!orderlists.length">
+                            <tr>
+                                <td colspan="4" style="text-align:center">
+                                    No Records Found
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <!--End of vechile_list_main-->
+
+
+            </div>
+            <!--End of intra_city_list-->
+        </div>
+        <!--end of right_search_p-->
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        // $('#example').DataTable();
+
+        $("#filters_click").click(function () {
+            $("#filters_show").toggle('fast');
+        });
+
+
+        var a = $(".service_left parent").html();
+
+    });
+
+</script>
+<style type="text/css">
+.small-text {
+    font-size: 13px;
+}
+table.dataTable td {
+    font-size: 16px;
+}
+span.font.ng-binding {
+    font-size: 16px;
+    vertical-align: middle;
+}
+td.ng-binding {
+    font-size: 16px;
+}
+th {
+    font-size: 16px;
+    font-family: FuturaBT-Medium;
+    color: #fff;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+.scroll_div {
+    width: 310px;
+    float: left;
+    margin-right: 6px;
+}
+.filter_from_location::-webkit-scrollbar {
+    width: 6px;
+}
+ 
+.filter_from_location::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 0px;
+}
+ 
+.filter_from_location::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+    
+</style>
+<script>
+    $(document).ready(function () {
+        var gwid = $(".scroll_div").width();
+        var twid = $(".loc_det").width();
+        var acwid = gwid / twid * 100;
+        var len = $(".scroll_div").length;
+        var towid = acwid * len +7;
+        $(".fillter_div").css({"width": "" + towid + "%"});
+    });
+</script>

@@ -1,0 +1,747 @@
+<style>
+    .modal-content {
+        border-radius: 0;
+    }
+
+    .modal-body {
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
+    }
+
+    .modal-body {
+        display: table;
+        width: 100%;
+        padding: 50px 15px 20px;
+        font-size: 17px;
+        font-family: FuturaBT-Book !important;
+        word-spacing: 3px;
+        text-align: justify;
+    }
+    .notification-popup{ width: 450px;}
+    .notification-popup .modal-content{border-radius: 0px;}
+    .notification-popup .modal-content .popup{padding: 42px 20px;}
+    .has-error {
+        color: red;
+    }
+
+    .select_form_intra input {
+        box-shadow: none;
+
+    }
+    .ptblr{ padding:20px 10px;}
+
+</style>
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="javascript:void(0)">{{getUserActiveRole}} </a><i class="fa  fa-angle-right"></i></li>
+                <li><a href="#services">Services</a><i class="fa  fa-angle-right"></i></li>
+                <li><a href="javascript:void(0)" class="active_c">Intracity Post</a></li>
+            </ul>
+        </div>
+
+        <form name="seller_rate_card" id="seller_rate_card" />
+        <div class="location_sec heght_100">
+            <div class="row">
+                <div class="col-md-6">
+                        <div class="spot_t" ng-init="data.type=2">
+                            <ul>
+                                <li>
+                                    <input type="radio" ng-click="showHide(data.type)" value="2" id="spot" ng-model="data.type" data-target="id1" name="type"
+                                        ng-checked="true">
+                                    <label for="spot">Distance</label>
+                                    <span></span>
+                                </li>
+                                <li>
+                                    <input type="radio" ng-click="showHide(data.type)" id="term" value="1" ng-model="data.type" data-target="id2" name="type">
+                                    <label for="term">Hour</label>
+                                    <span></span>
+                                </li>
+                            </ul>
+                        </div>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-inline pull-right m-bottom-0 ptblr">
+                        <li><a data-toggle="#" data-target="#" class="link-zindex"><img src="./images/download-icon.png" class="pull-left p-right-5">Download</a></li>\
+                        <li><a href data-toggle="modal" data-target="#uploadModal" id="upload_excel" class="link-zindex"><img src="./images/upload-icon.png" id="upload_excel" class="pull-left p-right-5"> Upload</a></li>
+                    </ul>
+                </div>
+        </div>
+        <div class="load_type">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="select_form_intra mb-15">
+                    <input type="text" id="title" ng-model="data.title" class="input_ani" required="">
+                    <label class="lbl_text2">Title<span> *</span></label>
+                    <span class="has-error" ng-show="error.title"> Please select title </span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="select_form_intra mb-15">
+                    <input type="text" id="city" class="input_ani" autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)" no-special-char ng-model="data.city"
+                        required="" typeahead="city as (city.city_name) for city in cities | filter:$viewValue"  />
+                    <label class="lbl_text2">Select City<span> *</span></label>
+                    <span class="has-error" ng-show="error.city"> Please select city </span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="date_selection select_form_intra mb-15">
+                    <span class="left_v_from">
+                        <input type="text" ng-model="data.valid_from_date"  fromcalendar id="valid_from_date" class="date_p input_ani" readonly required="">
+                        <label id="RateCardValidFromdate" class="lbl_text2 padg_l active">Valid From<span> *</span></label>
+                    </span>
+                    <span class="has-error" ng-show="error.validFromDate"> Please select valid from date </span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="date_selection select_form_intra mb-15">
+                    <span class="left_v_from">
+                        <input type="text" tocalendar ng-model="data.valid_to_date" id="buyerPostValidTo" class="date_p input_ani" readonly required="">
+                        <label id ="Ratecardvalidtilldate" class="lbl_text2 padg_l active">Valid To<span> *</span></label>
+
+                    </span>
+                    <span class="has-error" ng-show="error.validToDate"> Please select valid to date </span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="load_type intra_main activeintra" id="id1">
+            <div class="load_type">                    
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="select_form_intra mb-15">
+                        <select class="selectpicker" selectpicker id="tracking_type" ng-model="data.tracking_type" ng-selected="{{ y.id == data.tracking_type }}" ng-options="y.id as y.value for (x,y) in tracking_type">
+                           <option value=""> Tracking Type Available <span> *</span></option>
+                        </select>
+                        <span class="has-error" ng-show="error.trackingType"> Please select tracking type </span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <div class="time_slot_text">Available Time</div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12">
+                    <div class="select_form_intra mb-15">
+                        <select class="select selectpicker" selectpicker id="from_time" ng-model="data.from_time" ng-selected="{{ y.id == data.from_time }}" ng-options="y.id as y.value for (x,y) in sellerTimeSlot">
+                            <option value=""> From <span> *</span></option>
+                        </select>
+                        <span class="has-error" ng-show="error.fromTime"> Please select from time </span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12">
+                    <div class="select_form_intra mb-15">
+                        <select class="select to_time selectpicker" selectpicker id="from_to" ng-model="data.from_to" ng-selected="{{ y.id == data.from_to }}" ng-options="y.id as y.value for (x,y) in sellerTimeSlot">
+                            <option value=""> To <span> *</span></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load_type">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="select_form_intra mb-15">
+                        <input type="text" min = '0' maxlength="5" id="base_distance" ng-model="data.base_distance" class="distance_rate input_ani base_distance" required="">
+                        <label class="lbl_text2">Base distance (In KM)<span> *</span></label>
+                        <span class="has-error" ng-show="error.baseDistance"> Please enter Base distance (In KM) </span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="select_form_intra mb-15">
+                        <input type="text" min = '0' maxlength="5" id="rate_base_distance" ng-model="data.rate_base_distance" class="distance_rate input_ani rate_base_distance"
+                            required="">
+                        <label class="lbl_text2">Rate per KM for base distance<span> *</span></label>
+                        <span class="has-error" ng-show="error.rateBaseDistance"> Please enter rate  </span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="select_form_intra mb-15">
+                        <input type="text" min = '0' maxlength="5" ng-model="data.extra_hour" class="distance_rate input_ani extra_hour" required="">
+                        <label class=" lbl_text2">Cost per extra KM</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load_type">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="distan_vehicle_type">
+                    <div class="select_form_intra  mb-15">
+                    <select class="selectpicker" selectpicker id="vehicle_type" ng-model="data.vehicle_types" ng-click="selectbox(data.vehicle_type)" ng-selected="{{ y.id == data.vehicle_types }}" ng-options="y.id as y.vehicle_type for (x,y) in vehicles">
+                      <option value=""> Vehicle type  <span> *</span></option>
+                    </select>
+                        <span class="has-error" ng-show="error.vechileType"> Please select vehicle type  </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="load_type intra_main" id="id2">
+                <div class="load_type">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra  mb-15">
+                          <select class="selectpicker" selectpicker id="vehicle_type_h" ng-model="data.vehicle_types" ng-click="selectbox(data.vehicle_type)" ng-selected="{{ y.id == data.vehicle_types }}" ng-options="y.id as y.vehicle_type for (x,y) in vehicles">
+                             <option value=""> Vehicle types  <span> *</span></option>
+                          </select>
+                          <span class="has-error" ng-show="error.vechileTypeH"> Please select vehicle type  </span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra  mb-15">
+                            <select class="selectpicker" selectpicker ng-selected="{{ y.id == data.base_time }}" required="" id="base_time" ng-model="data.base_time" ng-options="y.id as y.distance_hour for (x,y) in hourDistanceSlabs track by y.id">
+                                <option value="">Base Time / Base Distance <span> *</span> </option>
+                            </select>                            
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input type="text" minlength='2' maxlength="6" id="cost_base_time" ng-model="data.cost_base_time" class="distance_rate input_ani" required="">
+                            <label class="lbl_text2">Base cost for each base time<span> *</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="load_type">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input type="text" id="houre_charge" min="0" maxlength="6" class="distance_rate input_ani" ng-model="data.houre_charge" required="">
+                            <label class="lbl_text2">Additional hour charge</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra mb-15">
+                            <input type="text" min ="0" maxlength="5" class="distance_rate input_ani" id="km_charge" ng-model="data.km_charge" required="">
+                            <label class="lbl_text2">Additional km charge</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load_type">
+                <div class="col-lg-12">
+                    <div class="font_normal_b">Additional common costs</div>
+                </div>
+            </div>
+            <div class="load_type">
+                <div class="col-lg-12">
+                    <div class="font_normal_Labour">Waiting charges</div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="select_form_intra  mb-15">
+                       <select class="selectpicker" selectpicker id="vehicle_type" ng-model="data.vehicle_types" ng-click="selectbox(data.vehicle_type)" ng-selected="{{ y.id == data.vehicle_types }}" ng-options="y.id as y.vehicle_type for (x, y) in vehicles" disabled>
+                          <option value=""> Vehicle types  <span> *</span></option>
+                      </select>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="select_form_intra mb-15">
+                        <input type="text" min='0' maxlength="5" class="distance_rate input_ani extracost_wait" ng-model="data.extracost_wait" required="">
+                        <label class="lbl_text2">Cost per extra hour</label>
+                    </div>
+                </div>
+            </div>
+            <div class="load_type">
+
+                <div class="col-lg-12">
+                    <div class="font_normal_Labour">Over dimension charges</div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="select_form_intra mb-15">                       
+                      <select class="selectpicker" selectpicker id="vehicle_type" ng-model="data.vehicle_types" ng-click="selectbox(data.vehicle_type)" ng-selected="{{ y.id == data.vehicle_types }}" ng-options="y.id as y.vehicle_type for (x, y) in vehicles" disabled>
+                          <option value=""> Vehicle types  <span> *</span></option>
+                      </select>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+                    <div class="select_form_intra mb-15">
+                        <input type="text" min = '0'  maxlength="5" class="distance_rate input_ani dimension_volume" ng-model="data.dimension_volume" required="">
+                        <label class="lbl_text2">Base volume</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+                    <div class="select_form_intra mb-15">                        
+                        <input type="text" min = '0' name="material_type"  maxlength="3" class="distance_rate input_ani material_type" ng-model="data.material_type" required="">
+                        <label class="lbl_text2">Over Dimension Charges</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="load_type">
+                <div class="col-lg-12">
+                    <div class="font_normal_Labour">Labour charges</div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+                    <div class="select_form_intra mb-15">
+                        <input type="text" min = '0' maxlength="5" ng-model="data.helpers" class="distance_rate input_ani helpers" required="">
+                        <label class="lbl_text2">No. of helpers</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+                    <div class="select_form_intra mb-15">
+                        <input type="text" min = '0' maxlength="5" numbers-Only class="distance_rate input_ani labour_charge" ng-model="data.labour_charge" required="">
+                        <label class="lbl_text2">Base charge per Labour</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="select_form_intra mb-15">
+                        <input type="text" min = '0' maxlength="5" class="distance_rate input_ani addition_labour_charge" ng-model="data.addition_labour_charge" required="">
+                        <label class="lbl_text2 ellipse_text">Additional Charges per Labour for higher floor pick up..</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load_type">
+                <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+                    <div class="select_form_intra mb-15">
+                        <input type="text" min = '0' maxlength="5" ng-model="data.toll_charge" class="distance_rate input_ani toll_charge" required="">
+                        <label class="lbl_text2">Octroi/Toll charges</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+                    <div class="select_form_intra mb-15">
+                        <input type="text" min = '0' maxlength="5" ng-model="data.other" class="distance_rate input_ani other" required="">
+                        <label class="lbl_text2">Others at actuals</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="load_type">
+               <!-- <div class="col-md-3 pull-right text-right">
+                    <a class="Discounts_btn" id="Discounts" data-toggle="collapse" data-target="">Discounts</a>
+                </div> -->
+                <div class="load_type" id="Discounts_oepn">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" id="buyer" class="input_ani" ng-model="pddata.buyer" required="" typeahead="user as (user.full_name) for user in users | filter:$viewValue"/>
+                            <label class="lbl_text2">Name (Auto Fill)</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="select_form_intra">
+                            <select class="selectpicker" selectpicker name="discount_type" ng-change="netprice();" id="discount_type" ng-model="pddata.discount_type" ng-options="y.id as y.value for (x,y) in discount_list">
+                                <option value="">Discount type</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" min="0" maxlength="3" max="" id="buyer_discount" ng-blur="netprice();" ng-model="pddata.buyer_discount" class="distance_rate input_ani valid-number buyer_discount"
+                                required="">
+                            <input type="hidden" name="netprice" ng-model="pddata.netprice">
+                            <label class="lbl_text2">Discount</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" min="0" maxlength="2" id="credit_day" class="emdmaxlimitfour_lmtVal input_ani valid-number credit_day" ng-model="pddata.credit_day" required="">
+                            <label class="lbl_text2">Credit Days</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <input type="button" id="item_add_discounts" ng-click="validateDiscount(pddata,data.type);" value="Add" class="add_btn_gray">
+                    </div>
+                    <div class="add_hide">
+                        <div class="table_heading">
+                            <div class="col-md-3">Name</div>
+                            <div class="col-md-2">Discount type</div>
+                            <div class="col-md-2">Discount</div>
+                            <div class="col-md-2">Net price</div>
+                            <div class="col-md-2">Credit days</div>
+                        </div>
+                        <!--    {{discountdata}} -->
+                        <div class="white_bg gray_border_3" ng-repeat="(key, value) in discountdata track by $index">
+                            <div class="col-lg-3">
+                                <div class="normal_text">{{value.buyer.full_name}}</div>
+                            </div>
+
+                            <div class="col-lg-2">
+
+                                <div class="normal_text">
+
+                                    {{ value.discount_type | getobjectvalue:discount_list}}</div>
+                                </div>
+
+                            <div class="col-lg-2">
+                                <div class="normal_text">{{value.buyer_discount}}</div>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <div class="normal_text">{{value.netprice |number}}</div>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <div class="normal_text">{{value.credit_day}}</div>
+                            </div>
+
+                            <div class="col-lg-1">
+                                <div class="row">
+                                    <div class="edit_fontawesome"><i class="fa fa-pencil-square-o" aria-hidden="true" ng-click="editDiscount(value,$index)"></i></div>
+                                    <div class="delete_fontawesome"><i class="fa fa-trash" aria-hidden="true" ng-click="deleteDiscount($index)"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="load_type">
+                    <div class="col-md-3 pull-right text-right">
+                        <input type="button" id="add_routes" ng-click="validateroutes(data,discountdata,data.type)" value="Add" class="Add_Routes_btn"
+                            invalids="0">
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="font_normal">Rate Card (Routes)</div>
+                    </div>
+
+                </div>
+
+                <div class="table_heading">
+                    <div class="col-md-2">Title</div>
+                    <div class="col-md-2">From</div>
+                    <div class="col-md-2">Vehicle Type </div>
+                    <div class="col-md-2">
+                        Distance Price
+                    </div>
+                    <div class="col-md-2">Hour Price</div>
+                    <div class="col-md-2"></div>
+                </div>
+                <!-- {{ addroutedata }} -->
+                <div class="white_bg gray_border_3" ng-repeat="x in addroutedatas track by $index">
+                    <div class="col-lg-2">
+                        <div class="normal_text">
+                            {{x.route.title}}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="normal_text">
+                            {{x.route.city}}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="normal_text" ng-if="x.route.type == 2">
+                            {{ getVehicle(x.route.vehicle_types) }}
+                        </div>
+                        <div class="normal_text" ng-if="x.route.type == 1">
+                            {{ getVehicle(x.route.vehicle_types) }}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="normal_text">
+                            {{ !empty(x.route.base_distance) && x.route.base_distance*x.route.rate_base_distance || 'N/A' }}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="normal_text">
+                            {{ !empty(x.route.base_time) && getBaseTime(x.route.base_time) || 'N/A' }}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1">
+                        <div class="row">
+                            <div class="edit_fontawesome"><i ng-click="editRoute(x,$index)" class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
+                            <div class="delete_fontawesome"><i class="fa fa-trash" ng-click="deleteRoute($index)" aria-hidden="true"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="load_type margin0">
+                    <div class="col-md-3 pull-right text-right">
+                        <a class="Discounts_btn" id="postDiscounts" data-toggle="collapse" data-target="">Discounts</a>
+                    </div>
+                </div>
+
+
+                <div class="load_type margin0" id="Discounts_show">
+                   <div class="col-lg-12 col-md-12 margin-bottm-disc">
+                       <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="select_form_intra">
+                                    <input id="fdbuyer" autocomplete="off" type="text" class="input_ani" ng-model="fddata.buyer" required="" typeahead="user as (user.full_name) for user in users | filter:$viewValue"
+                                    />
+                                    <label class="lbl_text2">Name (Auto Fill)</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="select_form_intra">
+                                    <select class="selectpicker" selectpicker name="fddiscount_type" id="fddiscount_type" ng-model="fddata.discount_type" ng-options="y.id as y.value for (x,y) in discount_list">
+                                        <option value="">Discount type </option>       
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="select_form_intra">
+                                    <input id="fdbuyer_discount" ng-blur="finaldiscountprice();" type="text" class="distance_rate input_ani selectpicker" selectpicker ng-model="fddata.buyer_discount">
+                                    <label class="lbl_text2">Discount</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="select_form_intra">
+                                    <input type="text" id="fdcredit_day" ng-model="fddata.credit_day" class="distance_rate input_ani" required="">
+                                    <label class="lbl_text2">Credit Days</label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                <input type="button" ng-click="validatePostdiscount(fddata)" value="Add" class="add_btn_gray">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table_heading">
+                        <div class="col-md-3">Name</div>
+                        <div class="col-md-2">Discount type</div>
+                        <div class="col-md-2">Discount</div>
+                        <div class="col-md-2">Credit days</div>
+                    </div>
+                    <!-- {{ postDetails[0].discount }} -->
+                    <div class="white_bg gray_border_3" ng-repeat="(key,value) in postDiscountdatas track by $index">
+
+                        <div class="col-lg-3">
+                            <div class="normal_text">{{value.buyer.full_name}}</div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="normal_text">{{ value.discount_type | getobjectvalue:discount_list}}</div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="normal_text">{{value.buyer_discount}}</div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="normal_text">{{value.credit_day}}</div>
+                        </div>
+
+                        <div class="col-lg-1">
+                            <div class="row">
+                                <div class="edit_fontawesome"><i class="fa fa-pencil-square-o" aria-hidden="true" ng-click="editpostDiscount(value,$index)"></i></div>
+                                <div class="delete_fontawesome"><i class="fa fa-trash" aria-hidden="true" ng-click="deletepostDiscount($index)"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="load_type">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <textarea id="notes" class="textarea" ng-model="data.notes" id="" cols="150" rows="10" maxlength="500" placeholder="Notes/ Terms &amp; Conditions (Optional)-Max 500 words"
+                            name="terms_conditions"></textarea>
+                    </div>
+                </div>
+
+                <div class="load_type">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="spot_t" ng-init="data.post_type=0">
+                            <ul class="select_inline">
+                                <li>
+                                    <input type="radio" ng-checked="true" id="PostPublic" ng-model="data.post_type" name="post_type" value="0" ng-click="showHideBuyer('public')">
+                                    <label for="PostPublic" class="ab_c">Post Public</label>
+                                    <span></span>
+                                </li>
+
+                                <li>
+                                    <input type="radio" name="post_type" id="PostPrivate" ng-model="data.post_type" ng-click="showHideBuyer('private')" value="1">
+                                    <label for="PostPrivate" class="ab_c">Post Private</label>
+                                    <span></span>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 padding-none">
+                        <div class="clearfix"></div>
+                        <div class="col-md-4 m-top-10 typeahed-search" ng-show="isSellerVisible">
+                            <input type="text" class="input_ani" id="sellerList" ng-model="data.selectseledata" name="seller_list" placeholder="buyer Name (Auto Search)"
+                                ng-required="data.isPublic=='private'" />
+                            <label ng-show="!data.visibleToSellers && errorRaised" class="error">Seller is required</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="load_type">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="post_public">
+                            <div class="admin_input">
+                                <input ng-model="data.accept" id="Accept" type="checkbox" class="check_box">
+                                <label for="Accept">Accept Terms & Conditions (Digital Contract)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="div_btn">
+                            <input type="button" id="save" ng-click="createPost(data,addroutedatas,1)" value="Confirm" class="Confirm_post_btn" invalids="0">
+                            <input type="button" ng-click="createPost(data,addroutedatas,0)" id="draft" value="Save as Draft" class="Add_Routes_btn" invalids="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end of location_sec-->
+            </form>
+        </div>
+        <!--end of right_search_p-->
+    </div> 
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content statusText" style="overflow: hidden;padding: 0 10px 10px">
+                <div class="modal-body popup" id="responsetext">
+
+                </div>
+                <div>
+                    <button type="button" class="btn btn-default pull-right" data-type="" ng-click="closeMyModalPopup()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addRoutePopup" role="dialog">
+        <div class="modal-dialog modal-lg notification-popup">
+            <div class="modal-content statusText" style="overflow: hidden;padding: 0 10px 10px">
+                <div class="modal-body popup" id="responsetext">
+                    Please add one Route 
+                </div>
+                <div>
+                    <button type="button" class="btn btn-default pull-right" data-type="" ng-click="closeRoutePopup()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addDiscountBuyerPopup" role="dialog">
+        <div class="modal-dialog modal-lg notification-popup">
+            <div class="modal-content statusText" style="overflow: hidden;padding: 0 10px 10px">
+                <div class="modal-body popup" id="responsetext">
+                    Please select another Buyer.
+                </div>
+                <div>
+                    <button type="button" class="btn btn-default pull-right" data-type="" ng-click="closeDiscountBuyerPopup()">OK</button>
+                </div>
+             </div> 
+        </div> 
+    </div>    
+
+    <div class="modal fade" id="addDiscountPopup" role="dialog">
+        <div class="modal-dialog modal-lg notification-popup">
+            <div class="modal-content statusText" style="overflow: hidden;padding: 0 10px 10px">
+                <div class="modal-body popup" id="responsetext">
+                    Please check your discount
+                </div>
+                <div>
+                    <button type="button" class="btn btn-default pull-right" data-type="" ng-click="closeDiscountPopup()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addpercentageDiscountPopup" role="dialog">
+        <div class="modal-dialog modal-lg notification-popup">
+            <div class="modal-content statusText" style="overflow: hidden;padding: 0 10px 10px">
+                <div class="modal-body popup" id="responsetext">
+                    Please check your discount(should be less than 100%)
+                </div>
+                <div>
+                    <button type="button" class="btn btn-default pull-right" data-type="" ng-click="closepercentageDiscountPopup()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="modal fade" id="addVehiclePopup" role="dialog">
+        <div class="modal-dialog modal-lg notification-popup">
+            <div class="modal-content statusText" style="overflow: hidden;padding: 0 10px 10px">
+                <div class="modal-body popup" id="responsetext">
+                   Vehicle type already exist..!!Please choose another 
+                </div>
+                <div>
+                    <button type="button" class="btn btn-default pull-right" data-type="" ng-click="closeVehiclePopup()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="uploadModal" role="dialog">
+        <div class="modal-dialog" style="width: 31%;">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-body">
+    
+                    <input ng-model-instant type="file" class="upload" onchange="angular.element(this).scope().setTaskFiles(this,'Others')"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal" id="btnConfirmOK"
+                            ng-click="uploadFileRecord()">Upload
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="uploadMsgModal" role="dialog">
+        <div class="modal-dialog" style="width: 31%;">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-body" id="uploadModalBody">
+    
+                    <input ng-model-instant type="file" class="upload" onchange="angular.element(this).scope().setTaskFiles(this,'Others')"/>
+                </div>
+                <div class="modal-footer">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    $(".base_distance,.rate_base_distance,.extra_hour,.extracost_wait,"+
+    ".dimension_volume,.material_type,.helpers,.labour_charge,.addition_labour_charge,"+
+    ".toll_charge,.other,.buyer_discount,.credit_day").on("keyup", function () {               
+        if ($(this).val() == 0) {
+            $(this).val(null);                                     
+        }                
+    });
+</script>
+<script type="text/javascript">      
+        $("#addRoutePopup").modal({
+            show: false,   
+        backdrop: 'static'    
+    });
+    $("#myModal").modal({
+        show: false,   
+        backdrop: 'static'    
+    });
+	
+	    $("#upload_excel").click(function(){
+			$('.modal-footer').show();
+		});
+	
+</script>
+<script>
+    $('#to_time').change(function() {
+        $("#from_time").prop('selectedIndex', 0);
+    });
+</script>

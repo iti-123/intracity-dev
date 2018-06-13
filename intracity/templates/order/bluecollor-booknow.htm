@@ -1,0 +1,838 @@
+<style>
+    html input[disabled] {
+        cursor: not-allowed;
+        opacity: 0.85;
+    }
+</style>
+<div class="intracity_page padding_main">
+    <div class="book_main">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="right_serch_p">
+                <div class="right_search_bar">
+                    <ul class="search_bar_tab">
+                        <li><a href="javascript:void(0)">{{ getUserActiveRole }}</a><span
+                                class="glyphicon glyphicon-chevron-right"></span></li>
+                        <li><a href="#services">Services</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                        <li><a href="javascript:void(0)" class="active_c">Book Now</a></li>
+                    </ul>
+                </div>
+                <div class="location_sec heght_100">
+                    <form method="post" id="BookNowFormData" name="booking" novalidate>
+                        <div class="col-lg-3">
+                            <div class="data_head">
+                                <div class="text_box">
+                                    <span class="font_normal_miduam">Routes</span>
+                                    <span class="font_simple">
+                                    {{ searchData.data.fromLocation.locality_name }} to {{ searchData.data.toLocation.locality_name }}</span>
+                                </div>
+                                <div class="text_box">
+                                    <span class="font_normal_miduam">PRICE</span>
+                                    <span class="font_simple"> {{ cartData.price }}  /-</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="data_head">
+                                <div class="text_box">
+                                    <span class="font_normal_miduam">DISPATCH DATE</span>
+                                    <span class="font_simple">
+                                        {{ searchData.data.dispatchDate }}
+                                    </span>
+                                </div>
+                                <div class="text_box">
+                                    <span class="font_normal_miduam">VEHICLE TYPE</span>
+                                    <span class="font_simple">{{ cartData.vehicle }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="data_head">
+                                <div class="text_box">
+                                    <span class="font_normal_miduam">VENDOR NAME</span>
+                                    <span class="font_simple"> {{ data.seller.name }} </span>
+                                </div>
+                                <div class="text_box">
+                                    <span class="font_normal_miduam">TRACKING</span>
+                                    <span class="font_simple"> {{ cartData.tracking_type | getobjectvalue:trackings }} </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="data_head">
+                                <div class="text_box">
+                                    <span class="font_normal_miduam">TIME SLOT</span>
+                                    <span class="font_simple" ng-if="searchData.data.time_slot">
+                                         {{ searchData.data.time_slot }}  {{ searchData.data.period }}                                       
+                                    </span>
+
+
+                                </div>
+                                <div class="text_box">
+                                    <span class="font_normal_miduam">TRANSIT HOURS</span>
+                                    <span class="font_simple">{{ cartData.transit_hour }} Hrs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_100">
+                            <div class="load_type">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <select required id="locations" name="source_locations"
+                                                ng-model="data.source_locations"
+                                                ng-options="y.location_type_name for (x, y) in locations">
+                                            <option value="">Source – Location Type *</option>
+                                        </select>
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.source_locations.$dirty && booking.source_locations.$invalid">Please select source – location type </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <select required id="destination" name="destination_locations"
+                                                ng-model="data.destination_locations"
+                                                ng-options="y.location_type_name for (x, y) in locations">
+                                            <option value="">Destination – Location Type *</option>
+                                        </select>
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.destination_locations.$dirty && booking.destination_locations.$invalid">Please select destination – location type </span>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <select required id="packaging" name="packaging_type_name"
+                                                ng-model="data.packings"
+                                                ng-options="y.packaging_type_name for (x, y) in packagingtypes">
+                                            <option value="">Packaging Type *</option>
+                                        </select>
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.packaging_type_name.$dirty && booking.packaging_type_name.$invalid">Please select packaging type </span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="load_type">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="date_selection select_form_intra">
+                                        <span class="left_v_from">
+                                    <input type="text" id="valid_to_date" name="consignment_pickup_date" required
+                                           autocomplete="off" tocalendar ng-model="data.consignment_pickup_date"
+                                           class="date_p input_ani">
+                                    <label class="lbl_text2 padg_l">Consignment Pickup Date<span>*</span></label>
+                                        </span>
+
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.consignment_pickup_date.$dirty && booking.consignment_pickup_date.$invalid">Please select consignment pickup date </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <select required ng-model="data.consignment_type" name="consignment_type"
+                                                ng-options="consignment_type for consignment_type in consignment">
+                                            <option value="">Consignment Type *</option>
+                                        </select>
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.consignment_type.$dirty && booking.consignment_type.$invalid">Please select consignment type </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input required id="consignment_value" type="text" name="consignment_value"
+                                               ng-model="data.consignment_value" class="input_ani clsMobileno">
+                                        <label class="lbl_text2">Consignment Value <span>*</span></label>
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.consignment_value.$dirty && booking.consignment_value.$invalid">Please enter Consignment Value</span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-lg-4">
+                                <h4 class="mid_heading">Consignor Details</h4>
+                            </div>
+
+                            <div class="load_type">
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra"
+                                         ng-class="{true: 'error'}[submitted && formOrder.name.$invalid]">
+                                        <input required id="consignor_name" type="text" ng-model="data.consignor.name"
+                                               name="consignor_name" class="input_ani">
+                                        <label class="lbl_text2">Consignor Name <span>*</span></label>
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.consignor_name.$dirty && booking.consignor_name.$invalid">Please enter consignor name</span>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input required id="consignor_mobile" type="text"
+                                               ng-model="data.consignor.mobile" name="consignor_mobile"
+                                               class="input_ani clsMobileno"
+                                               maxlength="10">
+                                        <label class="lbl_text2">Mobile <span>*</span></label>
+
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.consignor_mobile.$dirty && booking.consignor_mobile.$invalid">Please enter consignor mobile</span>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input required id="consignor_email" type="email"
+                                               ng-model="data.consignor.email" name="consignor_email"
+                                               class="input_ani clsConsignEmail">
+                                        <label class="lbl_text2">Email id</label>
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.consignor_email.$dirty && booking.consignor_email.$invalid">Please enter consignor valid email</span>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="load_type">
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra"
+                                         ng-class="{true: 'error'}[submitted && formOrder.consignee_address1.$invalid]">
+                                        <input required type="text" id="consignor_address1" class="input_ani"
+                                               ng-model="data.consignor.address1" name="consignor_address1">
+                                        <label class="lbl_text2">Address 1 <span> * </span></label>
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.consignor_address1.$dirty && booking.consignor_address1.$invalid">Please enter consignor address</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input id="address2" type="text" class="input_ani"
+                                               ng-model="data.consignor.address2">
+                                        <label class="lbl_text2">Address 2 </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input id="address3" type="text" class="input_ani"
+                                               ng-model="data.consignor.address3">
+                                        <label class="lbl_text2">Address 3 </label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="load_type">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input type="text" id="consignorPinCode" maxlength="6"
+                                               class="input_ani {{errorClass(formError.currentAddress.pincode)}}"
+                                               name="currentAddressPincode"
+                                               required="" ng-model="data.consignor.pin_code"
+                                               typeahead="name as (sugg.city_name +', '+ sugg.statename) for sugg in autocompCity('consignor', $viewValue)"
+                                               typeahead-on-select="selectedCity($item, $model, $label, 'consignor')"
+                                               autocomplete="off">
+
+
+                                        <label class="lbl_text2">Pin Code</label>
+                                        <!-- <span class="form-error" >Enter pincode</span> -->
+
+                                        <!--Previous City  -->
+
+                                        <!-- <input required type="text" id="pin_code" class="input_ani clsPinCode" maxlength="6" ng-model="data.consignor.pin_code">
+                                        <label class="lbl_text2">Pin code <span> * </span></label> -->
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input type="text" id="consignor_city" class="input_ani"
+                                               ng-model="data.consignor.city">
+                                        <label class="lbl_text2">City </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input id="consignor_state" type="text" class="input_ani"
+                                               ng-model="data.consignor.state">
+                                        <label class="lbl_text2">State </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <h4 class="mid_heading">Consignee Details</h4>
+                            </div>
+
+
+                            <div class="load_type">
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input required type="text" id="consignee_name" name="consignee_name"
+                                               class="input_ani" ng-model="data.consignee.name">
+                                        <label class="lbl_text2">Consignee Name <span>*</span></label>
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.consignee_name.$dirty && booking.consignee_name.$invalid">Please enter consignee name</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input required id="consignee_mobile" name="consignee_mobile" type="text"
+                                               class="input_ani clsMobileno" maxlength="10"
+                                               ng-model="data.consignee.mobile">
+                                        <label class="lbl_text2">Mobile <span>*</span></label>
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.consignee_mobile.$dirty && booking.consignee_mobile.$invalid">Please enter consignee mobile</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input id="consignee_email_id" type="email" name="consignee_email"
+                                               class="input_ani" required ng-model="data.consignee.email_id">
+                                        <label class="lbl_text2">Email id * </label>
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.consignee_email.$dirty && booking.consignee_email.$invalid">Please enter consignee valid email</span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="load_type">
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input required id="consignee_address1" type="text" class="input_ani"
+                                               ng-model="data.consignee.address1">
+                                        <label class="lbl_text2">Address 1 <span> * </span></label>
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.consignee_address1.$dirty && booking.consignee_address1.$invalid">Please enter consignee address</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input type="text" id="consignee_address2" class="input_ani"
+                                               ng-model="data.consignee.address2">
+                                        <label class="lbl_text2">Address 2 </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input id="consignee_address3" type="text" class="input_ani"
+                                               ng-model="data.consignee.address3">
+                                        <label class="lbl_text2">Address 3 </label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="load_type">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+
+                                        <input type="text" name="consignee_pin_code" id="consignee_pin_code"
+                                               class="input_ani " name="currentAddressPincode" required="" maxlength="6"
+                                               typeahead="name as (sugg.city_name +', '+ sugg.statename) for sugg in autocompCity('consignee', $viewValue)"
+                                               ng-model="data.consignee.pin_code"
+                                               typeahead-on-select="selectedCity($item, $model, $label, 'consignee')"
+                                               autocomplete="off">
+
+                                        <label class="lbl_text2">Pin code <span> * </span></label>
+                                        <span class="help-inline" style="color:red;"
+                                              ng-show="booking.consignee_pin_code.$dirty && booking.consignee_pin_code.$invalid">Please enter consignee pin code</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input id="consigneecity" type="text" class="input_ani "
+                                               ng-model="data.consignee.city">
+                                        <label class="lbl_text2">City </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input id="consignee_state" type="text" class="input_ani"
+                                               ng-model="data.consignee.state">
+                                        <label class="lbl_text2">State </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="load_type">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra">
+                                        <input id="additional_details" type="text" class="input_ani"
+                                               ng-model="data.consignee.additional_details">
+                                        <label class="lbl_text2">Additional Details </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="load_type padding">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="post_public">
+                                        <div class="admin_input">
+                                            <input id="AcceptTermAndCond" type="checkbox"
+                                                   ng-model="data.need_insurance">
+                                            <label for="AcceptTermAndCond"><span
+                                                    class="b_text">Need Insurance</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="load_type">
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="div_btn">
+                                        <div class="need-insurance Confirm_post_btn pull-left" style="display:none">
+                                            Need Insurance
+                                        </div>
+                                        <input type="submit" ng-disabled="booking.$invalid" ng-model="data.checkout"
+                                               ng-click="submitBookNow(data,'checkout')" value="Checkout"
+                                               class="Confirm_post_btn" ng-click="submitted=true">
+                                        <!-- <input type="submit" class="button_serch" name="button" value="Float RFP" ng-click="submitted=true" /> -->
+                                        <input type="submit" ng-model="data.add_to_cart" ng-disabled="booking.$invalid"
+                                               ng-click="submitBookNow(data,'add_to_cart')" value="Add To Cart"
+                                               class="Add_Routes_btn" ng-click="submitted=true">
+                                        <!-- <input type="submit" ng-model="data.add_to_cart" value="Add To Cart" class="Add_Routes_btn" ng-disabled="booking.$invalid"> -->
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+                <!--end of location_sec-->
+            </div>
+            <!--end of right_search_p-->
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Insurance Modal Start -->
+
+<div class="modal fade in" id="insurance_premium" style="display: none;" aria-hidden="false">
+    <div class="modal-dialog modal-lg confirmation-message">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Premium Calculation</h4>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="#" accept-charset="UTF-8" id="insurance_premium_form"
+                      name="insurance_premium_form" class="form-inline"
+                      novalidate><input name="_token" type="hidden" value="jTfr033tCkOKLvviGM3ohpfRjgBUJ3PBPk8N9hzX">
+                    <div class="col-sm-12 margin-top">
+                        <div class="col-sm-3 margin-top">
+                            <label>Cargo Type</label>
+                        </div>
+                        <div class="col-sm-9 margin-top">
+                            <div>
+                                Air conditioners and Chillers
+                                <input type="hidden" id="cargo_type_param" name="cargo_type_param"
+                                       value="Air conditioners and Chillers">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 margin-top">
+                        <div class="col-sm-3 margin-top">
+                            <label>Cargo Description</label>
+                        </div>
+                        <div class="col-sm-9 margin-top">
+                            <div>
+                                <textarea class="form-control form-control1 clsTermsConditions" id="cargo_description"
+                                          rows="5" placeholder="Cargo Description"
+                                          name="cargo_description" cols="50"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 margin-top">
+                        <div class="col-sm-3 margin-top">
+                            <label>Sum Insured</label>
+                        </div>
+                        <div class="col-sm-9 margin-top">
+                            <div>
+                                <input class="form-control form-control1" id="sum_insured" placeholder="Sum Insured *"
+                                       readonly name="sum_insured" type="text"
+                                       value="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 margin-top">
+                        <div class="col-sm-3 margin-top">
+                            <label>Basis of Valuation Cargo</label>
+                        </div>
+                        <div class="col-sm-9 margin-top">
+                            <div class="error_align_div">
+                                <div class="normal-select">
+                                    <div>
+                                        <select class="selectpicker bs-select-hidden" id="bov" name="bov">
+                                            <option value="" selected="selected">Please Select</option>
+                                            <option value="0">0 %</option>
+                                            <option value="5">5 %</option>
+                                            <option value="10">10 %</option>
+                                            <option value="15">15 %</option>
+                                            <option value="20">20 %</option>
+                                        </select>
+                                        <div class="btn-group bootstrap-select">
+                                            <button type="button" class="btn dropdown-toggle btn-default"
+                                                    data-toggle="dropdown"
+                                                    data-id="bov" title="Please Select"><span
+                                                    class="filter-option pull-left">Please Select</span>&nbsp;<span
+                                                    class="bg-caret"><span class="caret"></span></span></button>
+                                            <div class="dropdown-menu open">
+                                                <ul class="dropdown-menu inner" role="menu">
+                                                    <li data-original-index="0" class="selected"><a tabindex="0"
+                                                                                                    class="" style=""
+                                                                                                    data-tokens="null"><span
+                                                            class="text">Please Select</span><span
+                                                            class="fa fa-check check-mark"></span></a></li>
+                                                    <li data-original-index="1"><a tabindex="0" class="" style=""
+                                                                                   data-tokens="null"><span
+                                                            class="text">0 %</span><span
+                                                            class="fa fa-check check-mark"></span></a></li>
+                                                    <li data-original-index="2"><a tabindex="0" class="" style=""
+                                                                                   data-tokens="null"><span
+                                                            class="text">5 %</span><span
+                                                            class="fa fa-check check-mark"></span></a></li>
+                                                    <li data-original-index="3"><a tabindex="0" class="" style=""
+                                                                                   data-tokens="null"><span
+                                                            class="text">10 %</span><span
+                                                            class="fa fa-check check-mark"></span></a></li>
+                                                    <li data-original-index="4"><a tabindex="0" class="" style=""
+                                                                                   data-tokens="null"><span
+                                                            class="text">15 %</span><span
+                                                            class="fa fa-check check-mark"></span></a></li>
+                                                    <li data-original-index="5"><a tabindex="0" class="" style=""
+                                                                                   data-tokens="null"><span
+                                                            class="text">20 %</span><span
+                                                            class="fa fa-check check-mark"></span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 margin-top">
+                        <div class="col-sm-8 margin-top" id="calculated_insurance"></div>
+                        <div class="col-sm-4 margin-top">
+                            <input type="hidden" id="insured_amount" name="insured_amount" value="">
+                            <button class="btn theme-btn flat-btn pull-right hide-icon" name="ok" id="insurance_ok_btn"
+                                    type="button" style="display: none;">Ok
+                            </button>
+                            <button class="btn theme-btn flat-btn pull-right" name="getpremium" id="getpremium"
+                                    type="button">Get Premium
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Insurance Modal End -->
+
+
+<div class="modal fade" id="booknow-popup" role="dialog">
+    <div class="modal-dialog modal-lg exta-large">
+        <div class="modal-content waitText" style="overflow: hidden;padding: 0 10px 10px">
+            <div class="modal-body" id="responsetext">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h2 class="modal-title text-center1">General Services Agreement</h2>
+                </div>
+                <div class="modal-body-inner">
+
+                    <h4>Disclaimer</h4>
+
+                    <p>LogiStiks.com is acting as the market place” means the central online portal established for
+                        providing
+                        logistics service offerings like but not limited to transportation, warehouse, handling,
+                        packaging
+                        &amp; packers and movers services, on a pan india level. Both the parties to this GSA that means
+                        the buyer and the seller should ensure that the information provided by them is accurate to do
+                        the
+                        transaction on the portal</p>
+                    <p>The information given by buyer and seller on the sign up page is true and fair to the best of
+                        their knowledge
+                        and logistiks.com is not responsible in case of discrepancy if any.</p>
+
+                    <div class="col-md-6">
+
+                        <h4>Buyer Details</h4>
+
+                        <ul class="list-block1i">
+
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Buyer Name: <span
+                                    id="buyer_user">ABC co ltd PVT</span></li>
+
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignment Type: <span
+                                    id="consignment_type">Commercial</span></li>
+
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> From Location:
+                                <span id="from_location">Hyderabad</span>
+                            </li>
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> To Location:
+                                <span id="from_location">Mumbai</span>
+                            </li>
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Dispatch Date:
+                                <span id="pickup_con_date">17/06/2017</span>
+                            </li>
+
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+
+                                <span>Delivery Date:</span>
+                                <span>N/A</span>
+
+                            </li>
+
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Load Type: Air conditioners
+                                and Chillers
+                            </li>
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Quantity :10</li>
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Vehicle Type: Tata 207
+                            </li>
+
+
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Source Location Type:
+                                <span id="source_location">Business with Dock or Forklift</span>
+                            </li>
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Destination Location Type:
+                                <span id="destination_location">Business without Dock or Forklift</span>
+                            </li>
+
+
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignor Name:<span
+                                    id="consignor">ABC co ltd PVT</span></li>
+
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignor Mobile:<span
+                                    id="consignor_mobile">9849656430</span></li>
+
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignor Address:<span
+                                    id="consignor_adddress">9-4-86/305 Flat 402 Salarjung Colony Tolichowki </span></li>
+
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignee Name:<span
+                                    id="consignee_name">Nakjnh</span></li>
+
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignee Mobile:<span
+                                    id="consignee_mobile">6948694685</span></li>
+
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Consignee Address:<span
+                                    id="consignee_address">JHBkjhb kjhbkjhb kjhbkjhb</span></li>
+
+
+                            <!--li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Seller Details</li-->
+                            <h4>Seller Details</h4>
+
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Seller Name:
+                                <span id="seller-name"> ABC co ltd PVT</span>
+
+                            </li>
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Year of ESTD:
+                                <span id="seller-year-of-estd"> ABC co ltd PVT</span>
+                            </li>
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Seller Address:
+                                <span id="seller-address">Flat 103 Shaikpet</span>
+                            </li>
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> GTA Number:
+                                <span id="seller-gta"></span>
+                            </li>
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Service Tax Number:
+                                <span id="seller-stn-number">JEEPS6956NSD001</span>
+                            </li>
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> TIN Number:
+                                <span id="seller-tin-number">TIN6956NSD001</span>
+
+                            </li>
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Place of Business:<span
+                                    id="seller-place-of-business">Hydrabad</span>
+                            </li>
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Landline Number:
+                                <span id="seller-landline">0925-1212121</span>
+                            </li>
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Mobile Number:<span
+                                    id="seller-mobile">98745632101</span></li>
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Email ID: <span
+                                    id="seller-email">venkat@ok.com</span>
+                            </li>
+
+                            <li><i class="fa fa-angle-double-right" aria-hidden="true"></i> Order Total:Rs.
+                                <span id="seller-order-total">20,000</span>
+
+                            </li>
+
+
+                        </ul>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <h4>Seller Terms &amp; Conditions</h4>
+
+                        <strong>Documentation</strong>
+
+                        <p>Any commercial shipment picked up for transit on Indian Ground network should have the
+                            following
+                            documents:<br>
+
+                            <br> 1. TIN / CST no. of shipper &amp; consignee in case of commercial transaction is
+                            mandatory
+                            in all states<br>
+
+                            <br> 2. Shipper is under obligation to mention valid TIN / CST no of self and consignee on
+                            the
+                            commercial invoice and regulatory paperwork at the time of handing over the shipment to
+                            Transport
+                            service provider<br>
+
+                            <br> 3. Shipments consigned to individuals who do not have TIN no, a declaration from
+                            consignee
+                            / shipper that the goods are not for sale and for personal consumption apart from other
+                            conditions
+                            as laid down in respective States VAT Regulations.<br>
+
+                            <br> 4. E-waybill generation has been implemented in most of the states. Consignee/ shipper
+                            is
+                            expected to comply registration process and follow online process for e-waybill generation
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <p>
+                            Any commercial shipment picked up for transit on Indian Ground network should have the
+                            following documents: <br> 1. TIN / CST no. of shipper &amp; consignee in case of commercial
+                            transaction is mandatory in
+                            all states<br> 2. Shipper is under obligation to mention valid TIN / CST no of self and
+                            consignee
+                            on the commercial invoice and regulatory paperwork at the time of handing over the shipment
+                            to
+                            Transport service provider<br> 3. Shipments consigned to individuals who do not have TIN no,
+                            a declaration from consignee / shipper that the goods are not for sale and for personal
+                            consumption
+                            apart from other conditions as laid down in respective States VAT Regulations.
+                            <br> 4. E-waybill generation has been implemented in most of the states. Consignee/ shipper
+                            is
+                            expected to comply registration process and follow online process for e-waybill generation
+                            <br></p>
+                        <h4>Disclaimer:</h4>
+                        <p>
+                            State VAT Rules &amp; Regulations are subject to change from time to time. Shippers /
+                            Consignees are, therefore, advised
+                            to seek independent verification before tendering any consignment Regulatory paperwork is
+                            based
+                            on the Rules and Regulations of the State concerned. Practice could be different than the
+                            Rules
+                            &amp; Regulations in some of the States
+                        </p>
+
+                        <p>For this transaction from
+                            <span>Hyderabad</span> to
+
+                            <span>Mumbai</span> following documents are needed :</p>
+
+                    </div>
+
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6">
+
+
+                        <input type="hidden" name="from_location_id" id="from_location_id" value="790">
+                        <input type="hidden" name="to_location_id" id="to_location_id" value="517">
+                        <input type="hidden" name="buyerQuoteId" id="buyerQuoteId" value="249">
+
+                        <ul class="popup-list list-block1i" id="gsa_documents_list">
+                            <li>
+                                <h4>To be provided by seller:</h4>
+                            </li>
+                            <li><i class="fa fa-check"></i> Lorry Receipt
+                            </li>
+                            <li>
+                                <h4>To be provided by buyer:</h4>
+                            </li>
+                            <li><i class="fa fa-check"></i> Seller Invoice
+                            </li>
+                            <li><i class="fa fa-check"></i> Form 49A mandatory
+                            </li>
+                            <li><i class="fa fa-check"></i> 1)For saleable goods tax invoice with TIN no. and form 8F.
+                                2) Stock
+                                Transfer - Delivery note( Form 15) and Form 8F. Personal transaction requires
+                                certificate
+                                of ownership(Form 16 ). Job work transaction- customer should meet the local STO and
+                                obtain
+                                permis
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div class="col-md-12 padding-none text-right">
+
+                        <div class="modal-footer">
+                            <input type="hidden" name="toggle_seller_to_role_id" id="toggle_seller_to_role_id">
+                            <input type="hidden" name="alldata" id="alldata" value="">
+                            <input type="hidden" name="ajaxurl" id="ajaxurl" value="/setbuyerbooknow">
+                            <input type="hidden" name="ischeckout" id="ischeckout" value="1">
+                            <input type="hidden" name="service_id" id="service_id" value="1">
+                            <button type="button" class="btn flat-btn red-btn" id="acceptterms" name="acceptterms">I
+                                Accept
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--General Services Agreement end -->
+
+
+<div class="modal fade" id="cartModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content waitText" style="overflow: hidden;padding: 0 10px 10px">
+            <div class="modal-body popup">
+                Item is added to cart successfully
+            </div>
+            <div>
+                <button type="button" class="add_btn_cart pull-right" data-dismiss="modal" ng-click="closeCartModel()">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

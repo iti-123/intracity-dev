@@ -1,0 +1,38 @@
+<tr>
+                                        <td>
+                                            
+                                    <span class="logo_t">
+                                            {{ !empty(value.value[0].buyer.username) && value.value[0].buyer.username || 'N/A' }}
+                                        <!--{{ !empty(value.post.post_by.username) && value.post.post_by.username || '' }}-->
+                                        <!-- <img src="images/nair_logo.png"> -->
+                                    </span>
+                                            <!-- <span class="text_trns">Sponsered</span> -->
+                                        </td>
+                                        <td>
+                                    <span>
+                                        {{ !empty(value.title) && value.title || '' }}
+                                    <!--{{typeBasis(value.route.type_basis)}} {{leadBasis(value.post.lead_type)}}-->
+                                    </span>
+                                        </td>
+                                        <td>
+                                            <span> {{ !empty(value.value[0].routes[0].valid_from) && value.value[0].routes[0].valid_from || 'N/A' }} </span>
+                                        </td>
+                                        <td>
+                                    <span>
+
+                                        <!--{{  !empty(value.routes.valid_to) && value.routes.valid_to || '' }}-->
+                                        {{ !empty(value.value[0].last_date) && value.value[0].last_date || 'N/A' }}
+                                    </span>
+                                        </td>
+                                        <td ng-if="show=='inbound'" class="text-right custom-btns">
+                                            <a href="#sellerDetails/{{value.id}}"><i class="fa fa-envelope-o"></i></a>
+                                            <a href="#sellerDetails/{{value.id}}"><i class="fa fa-file-text-o"></i><span
+                                                    class="vlue">1</span></a>
+                                            <a href="#sellerDetails/{{value.id}}"><i class="fa fa-bullseye"></i><span
+                                                    class="vlue">0</span></a>
+                                            <a href="#sellerDetails/{{value.id}}"><i class="fa fa-line-chart"><span class="vlue">0</span></i></a>
+                                                <!-- <a href=""><i class="fa fa fa-file"></i><span class="vlue"></span></a> -->
+                                            <a href="#sellerDetails/{{value.id}}"><i class="fa fa fa-file"></i><span
+                                                    class="vlue">1</span></a>
+                                        </td>
+                                    </tr>

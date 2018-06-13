@@ -1,0 +1,212 @@
+<table class="table tbl_t orderMaster">
+        <thead>
+           <tr>
+              <th  ng-show="showIntraHyper"> To </th>
+              <th  ng-show="showBlueCollar"> Name </th>
+              <th> ORDER NUMBER </th>
+              <!-- <th> Pick Up Date </th> -->
+              <th><span ng-if="filterData.serviceType != 23">From Location </span></th>
+              <th><span ng-if="filterData.serviceType != 23">To Location</span></th>
+              <th><span ng-if="filterData.serviceType != 23"> Dispatch Date </span> </th>
+             <th></th>
+              <th>
+                 <div class="info_links"> NOTIFICATIONS</div>
+              </th>
+           </tr>
+        </thead>
+        <tbody  ng-repeat="(key,order) in orderlists">
+           <tr>
+              <td  ng-show="showIntraHyper">
+                 <span ng-show="order.seller_name"> {{ order.seller_name }} </span>
+                 <span ng-show="order.sellerName"> {{ order.sellerName }} </span>
+              </td>
+              <td ng-show="showBlueCollar">
+                 <span class="font"> {{ order.bcFirstName+ ' ' + order.bcLasttName}}</span>
+              </td>
+              <td>
+                 {{ order.order_no }}
+              </td>
+              <td>
+                 <span class="data-value break-word" ng-show="showIntraHyper">
+                    {{ !empty(order.from_location) && order.from_location || 'N/A' }}
+                 </span>
+                 <span class="data-value break-word" ng-show="showBlueCollar">
+                 <span ng-if="filterData.serviceType != 23">   {{ order.bcLicenceValidFrom }} </span>
+                 </span>
+              </td>
+              <td> 
+                 <span class="data-value break-word" ng-show="showIntraHyper">
+                    {{ !empty(order.to_location) && order.to_location || 'N/A' }}
+                 </span>
+                 <span class="data-value break-word" ng-show="showBlueCollar">
+                 <span ng-if="filterData.serviceType != 23">
+                 {{ order.bcLicenceValidTo }}
+                 </span>
+                 </span>
+              </td>
+              <td>
+                     <span ng-if="filterData.serviceType != 23"> {{ order.valid_from }} </span>
+              </td>
+              <td>
+                    <div class="seller"  ng-if="getUserActiveRole == 'Seller' || getUserActiveRole == 'Buyer'">
+                         <div ng-include="'templates/order/templates/display-status.html'"> </div>
+                    </div>
+              </td>
+              <td>
+                 <div class="seller">
+                    <div class="contract-data">
+                        <div class="sep_div1" ng-if="getUserActiveRole == 'Buyer'">
+                            <input ng-disabled="!order.isGSA" ng-show="order.orderItemStatus == 5" type="submit" ng-click="confirmDelivery(order,$index)" class="book_btn" value="Confirm Delivery">
+                         </div>
+                       <div class="main-over-lap-1">
+                          <div class="detail_b1" ng-click="showHideDetail(order,$index)" data-id="{{ $index }}">Detail </div>
+                          <!-- <a href="javascript:void(0)" class="pull-right msg-icon">
+                          <i class="fa fa-envelope-o"></i>
+                          </a> -->
+                       </div>
+                    </div>
+                 </div>
+              </td>
+           </tr>
+           <tr class="bg-gray addVehicle-{{ key }}" style="display:none">
+              <td colspan="7">
+                 <div class="col-md-12 shadow-div data-div pull-right">
+                    <div class="col-md-3 npl data-fld"> 
+                       <span class="data-head">CONSIGNOR</span> 
+                       <span class="data-value"> {{ order.consignor_name }} </span> 
+                    </div>
+                    <div class="col-md-3 npl data-fld"> 
+                       <span class="data-head">CONSIGNEE</span> 
+                       <span class="data-value"> {{ order.consignee_name }} </span> 
+                    </div>
+                    <div class="col-md-3 npl data-fld"> 
+                       <span class="data-head">LOAD tYPE</span> 
+                       <span class="data-value"> {{ order.loadType && order.loadType || 'N/A' }} </span> 
+                    </div>
+                    <div class="col-md-3 npl data-fld"> 
+                       <span class="data-head">VEHICLE TYPE</span> 
+                       <span class="data-value">{{ order.vehicleType && order.vehicleType || 'N/A' }}</span> 
+                    </div>
+                    <div class="col-md-3 npl data-fld"> 
+                       <span class="data-head">PRICE</span> 
+                       <span class="data-value"> RS: {{ order.price }} /- </span> 
+                    </div>
+                 </div>
+                 
+              </td>
+           </tr>
+           <tr class="addVehicle-{{ key }}" style="display:none">
+              <td colspan="7" ng-if="order.isGSA">
+                 <table class="table" ng-show="order.multipleVehicle">
+                    <tr>
+                       <th>VEHICLE NUMBER</th>
+                       <th>DRIVER NAME</th>
+                       <th>DRIVER MOBILE NUMBER</th>
+                    </tr>
+                    <tr ng-repeat="(keyV, value) in order.multipleVehicle">
+                       <td> {{ value.vehicleNumber }} </td>
+                       <td> {{ value.driverName }} </td>
+                       <td> {{ value.driverMobileNo }} </td>
+                    </tr>
+                 </table>
+                 <table class="table" ng-if="order.orderItemStatus >= 3">
+                    <tr>
+                       <th colspan="6">CONSIGNMENT PICKUP DETAILS</th>
+                    </tr>
+                    <tr>
+                       <td>
+                          <h5 class="data-head">PICKUP DATE</h5>
+                          {{ order.consignmentPickupDetails.consignmentPickupDate }} 
+                       </td>
+                       <td>
+                          <h5 class="data-head">LR NUMBER</h5>
+                          {{ order.consignmentPickupDetails.lrNo }} 
+                       </td>
+                       <td>
+                          <h5 class="data-head">LR DATE</h5>
+                          {{ order.consignmentPickupDetails.lrDate }} 
+                       </td>
+                       <td>
+                          <h5 class="data-head">TRANSPORTER BILL NO</h5>
+                          {{ order.consignmentPickupDetails.billNumber }} 
+                       </td>
+                       <td>
+                          <h5 class="data-head">CUSTOMER DOCUMENT 1 (OPTIONAL)</h5>
+                          {{ order.consignmentPickupDetails.customerDoc1 }} 
+                       </td>
+                       <td>
+                          <h5 class="data-head">CUSTOMER DOCUMENT 2 (OPTIONAL)</h5>
+                          {{ order.consignmentPickupDetails.customerDoc2 }} 
+                       </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="6">
+                            <div  ng-if="order.transitDetails">
+                                <table class="table">
+                                    <tr>
+                                        <td colspan= "6"> Transit Detail </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3"> 
+                                                Location
+                                        </th>
+                                        <th colspan="3"> 
+                                                Date
+                                        </th>
+                                        
+                                    </tr>
+                                    
+                                    <tr ng-repeat="(tKey, transit) in order.transitDetails">
+                                        
+                                        <td colspan="3"> 
+                                            {{ transit.location }}
+                                        </td>
+                                        <td colspan="3"> 
+                                            {{ transit.date }}
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+                             </div>
+                        </td>
+                    </tr>
+
+                    <tr ng-if="order.orderItemStatus == 5 && order.isGSA">
+                         <th colspan="6">CONSIGNMENT DELIVERY DETAILS</th>
+                     </tr>
+                     <tr ng-if="order.orderItemStatus == 5 && order.isGSA">
+                         <td>
+                             <h5 class="data-head">DELIVERY DATE</h5>
+                             {{ order.deliveryDetail.date }} 
+                         </td>
+                         <td>
+                             <h5 class="data-head">RECIPIENT NAME</h5>
+                             {{ order.deliveryDetail.recipientName }} 
+                         </td>
+                         <td>
+                             <h5 class="data-head">RECIPIENT MOBILE</h5>
+                             {{ order.deliveryDetail.recipientMobileNumber }} 
+                         </td>
+                         <td>
+                             <h5 class="data-head">FREIGHT AMOUNT</h5>
+                             {{ order.deliveryDetail.freightAmount }} 
+                         </td>
+                         <td>
+                             <h5 class="data-head">ADDITIONAL INFORMATION</h5>
+                             {{ order.deliveryDetail.additionalInformation }} 
+                         </td>
+                     </tr>
+                 </table>
+              </td>
+           </tr>
+           
+        </tbody>
+        <tbody ng-if="!orderlists.length">
+           <tr>
+              <td colspan="4" style="text-align:center">
+                 No Records Found
+              </td>
+           </tr>
+        </tbody>
+     </table>

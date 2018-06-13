@@ -1,0 +1,1267 @@
+<style>
+    .notify_text {
+        font-size: 17px;
+        color: #666666;
+    }
+
+    .modal-body {
+        display: table;
+        width: 100%;
+        padding: 40px 15px 20px;
+    }
+
+    .modal-dialog {
+        width: 95%;
+        color: #666666;
+    }
+
+    .popup-check-1 ul {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+    }
+
+    .popup-check-1 ul li {
+        margin: 0px;
+        padding: 5px 0px;
+        line-height: 30px;
+        list-style: none;
+        font-size: 18px;
+    }
+
+    button.close {
+        background: transparent none repeat scroll 0 0;
+        border: 0 none;
+        cursor: pointer;
+        line-height: 15px;
+        padding: 5px;
+        position: absolute;
+        right: 5px;
+        top: 2px;
+        z-index: 10;
+        font-size: 30px;
+        opacity: 0.2;
+    }
+
+    input[type=checkbox] {
+        opacity: 0;
+        position: absolute;
+        z-index: 12;
+        width: 18px;
+        height: 18px;
+    }
+
+    input[type=checkbox] + .lbl {
+        position: relative;
+        z-index: 11;
+        display: inline-block;
+        margin: 0;
+        line-height: 30px;
+        min-height: 14px;
+        min-width: 14px;
+        font-weight: normal;
+        margin: 0 10px 0 0;
+
+    }
+
+    input[type=checkbox] + .lbl::before {
+        font-family: fontAwesome;
+        font-weight: normal;
+        font-size: 12px;
+        color: #222222;
+        content: "\a0";
+        background-color: #FAFAFA;
+        border: 1px solid #999999;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        border-radius: 0;
+        text-align: center;
+        vertical-align: middle;
+        height: 16px;
+        line-height: 16px;
+        width: 16px;
+        margin-right: 1px;
+        margin-top: -3px;
+        display: inline-block;
+    }
+
+    input[type=checkbox]:checked + .lbl::before {
+        display: inline-block;
+        content: '\f00c';
+        background-color: #F5F8FC;
+        border-color: #adb8c0;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    }
+
+    .modal-content {
+        border-radius: 0px;
+    }
+
+    .modal-footer {
+        border: 0px none;
+    }
+
+    .flat-btn {
+        font-size: 18px;
+        padding: 4px 10px;
+        text-transform: capitalize;
+        margin-left: 10px;
+        height: 35px;
+        font-family: FuturaBT-Medium;
+    }
+
+    .red-btn {
+        background-color: #ed3237;
+        border: 1px solid #ed3237;
+        color: #ffffff;
+        font-family: FuturaBT-Medium;
+        font-size: 18px;
+        font-weight: 500;
+        height: 35px;
+        padding: 0 10px;
+        text-transform: capitalize;
+        border-radius: 0px;
+    }
+
+    .red-btn:hover {
+        color: #fff;
+    }
+
+    .page_div {
+        background: none;
+        display: table;
+        width: 100%;
+    }
+
+    .intra-home-login .main-inner {
+        padding: 0px 0px;
+    }
+
+    .prsnname_text {
+        font-size: 17px;
+    }
+
+
+</style>
+<div class="intra_user_login" ng-controller="HomeCtrl">
+    <br>
+    <div class="intra-home-login">
+        <div class="container-fluid">
+            <div class="main-inner left-menu-none">
+                <div class="main-right">
+                    <div class="notifications-block">
+                        <div class="col-md-9 padding-left-none">
+                            <div class="main-right">
+                                <div class="inner-block-bg">
+                                    <div class="p-info col-md-6">
+                                        <div class="imgstr">
+                                            <div class="img-imgstr"><img src="images/icon.png" class="pull-left"></div>
+                                            <div class="red m-top-10">
+                                                <!--  <i class="fa fa-star"></i>
+                                                 <i class="fa fa-star"></i>
+                                                 <i class="fa fa-star"></i>
+                                                 <i class="fa fa-star"></i>
+                                                 <i class="fa fa-star"></i> -->
+                                            </div>
+                                        </div>
+                                        <div class="prsnname">
+                                            <div class="prsnname_text">United Industries</div>
+                                            <div class="destion">Owner,United Industries</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 p-col">
+                                        <div class="posts">
+                                            <div class="posts-text">1<span>Posts</span></div>
+                                            <div class="posts-text">2 <span>Orders</span></div>
+                                        </div>
+                                        <p class="text-14 text-17">1 Followers<br>
+                                            1 Partners+<br>
+                                            Recommendations
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="home-block notfi-block">
+                                    <div class="tabs notsettingsTabs">
+                                        <ul class="nav nav-tabs">
+                                            <li class="ntsearch">
+                                                <a ng-click="getSelectedTabMenu('Search and Book')" title="#search">
+                                                    <i class="fa fa-search"></i> {{ headingSearch }} </a>
+                                            </li>
+                                            <li class="ntpost">
+                                                <a ng-click="getSelectedTabMenu('Post and Get Quote')" title="#post">
+                                                    <i class="fa fa-envelope-o"></i> {{ headingPost }} </a>
+                                            </li>
+                                            <li class="li-desables">
+                                                <a ng-click="getSelectedTabMenu('Market Feeds')">
+                                                    <i class="fa fa-rss"></i> Market Feeds</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div id="search" class="tab-pane fade">
+                                                <div class="home-menu">
+                                                    <h3>Transportation</h3>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Road</div>
+                                                        <div id="ftl"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return subcriptionuserservice(1,'/sellersearchbuyers')">
+                                                                <img src="images/FTL.png" title="FTL">
+                                                                FTL
+                                                            </a>
+                                                        </div>
+                                                        <div id="ltl"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return subcriptionuserservice(2,'/sellersearchbuyers')">
+                                                                <img src="images/LTL.png" title="LTL">
+                                                                LTL
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Rail</div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/rail.png" title="RAIL">
+                                                                Parcel
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Air</div>
+                                                        <div id="airdomestic"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;"><img src="images/air_dom.png"
+                                                                                            title="AIR DOMESTIC">Domestic</a>
+                                                        </div>
+                                                        <div id="airinternational"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/air_intl.png"
+                                                                     title="AIR INTERNATIONAL">
+                                                                Intl
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Ocean</div>
+                                                        <div id="ocean"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/ocean.png" title="OCEAN">
+                                                                Parcel
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Intracity</div>
+                                                        <div id="hyper_local" class="service-div service-icon-div ">
+                                                            <a href="javascript:void(0)" ng-click="getNavigation(_HYPERLOCAL_)">
+                                                                <img src="images/hyper_local.png"
+                                                                     title="INTRACITY HYPER LOCAL">
+                                                                Hyper Local
+                                                            </a>
+                                                        </div>
+                                                        <div id="intracity" class="service-div service-icon-div">
+                                                            <a ng-click="getNavigation(_INTRACITY_)">
+                                                                <img src="images/intracity.png" title="INTRACITY">
+                                                                Intracity
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Courier</div>
+                                                        <div id="courier"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/courier.png" title="COURIER">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="home-menu">
+                                                    <h3>Vehicle</h3>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Truck</div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/truck_haul.png" title="TRUCK HAUL">
+                                                                Haul
+                                                            </a>
+                                                        </div>
+                                                        <div id="trucklease"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/truck_lease.png" title="TRUCK LEASE">
+                                                                Lease
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <h3 class="panel-title m-t-25">
+                                                        Warehouse
+                                                    </h3>
+                                                    <div class="service-div-block m-t-15">
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a href="#.">
+                                                                <img src="images/warehouse.png" title="Warehouse">
+                                                                Warehouse
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <h3 class="panel-title m-t-25">
+                                                        Handling Services
+                                                    </h3>
+                                                    <div class="service-div-block m-t-15">
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a href="#."
+                                                               onclick="return subcriptionuserservice(11,'/sellersearchbuyers')">
+                                                                <img src="images/handling-services.png"
+                                                                     title="Handling Services">
+                                                                Handling Services
+                                                            </a>
+                                                            <!--<a onclick="homeServiceLogin(5,'search')">
+                                                               <img src="images/handling-services.png" title="" >
+                                                               Handling Services
+                                                               </a>-->
+                                                        </div>
+                                                    </div>
+                                                    <h3 class="panel-title m-t-25">
+                                                        Blue Collar Services
+                                                    </h3>
+
+                                                    <div class="service-div-block m-t-15">
+                                                        <div class="service-div service-icon-div ">
+                                                            <a
+                                                               ng-click="getNavigation(_BLUECOLLAR_)">
+                                                                <img src="images/bluecollar_img_new.png"
+                                                                     title="Blue Collar Services">
+                                                                Blue Collar Services
+                                                            </a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="home-menu">
+                                                    <h3>Relocation</h3>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Home</div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return subcriptionuserservice(15,'/buyersearch')">
+                                                                <img src="images/domestic.png"
+                                                                     title="RELOCATION DOMESTIC">
+                                                                Domestic
+                                                            </a>
+                                                        </div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return subcriptionuserservice(17,'/buyersearch')">
+                                                                <img src="images/domestic.png"
+                                                                     title="RELOCATION DOMESTIC">
+                                                                Pet Move
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div"><span
+                                                                class="invisible_text">Home</span></div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/international.png"
+                                                                     title="RELOCATION INTERNATIONAL">
+                                                                International
+                                                            </a>
+                                                        </div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/global_mobility.png"
+                                                                     title="RELOCATION GLOBAL MOBILITY">
+                                                                Global Mobility
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Office</div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false">
+                                                                <img src="images/office_domestic.png"
+                                                                     title="RELOCATION OFFICE DOMESTIC">
+                                                                Domestic
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <h3 class="panel-title m-t-25">
+                                                        Multi Services
+                                                    </h3>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a href="#." class="margin-auto float-none"
+                                                               onclick="return subcriptionuserservice(14,'/sellersearchbuyers')">
+                                                                <img src="images/multi-model.png"
+                                                                     title="Multi Services">
+                                                                Multi Services
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="home-menu non_link">
+                                                    <h3>Up Coming Services</h3>
+                                                    <p><a>Packaging Services</a>
+                                                    </p>
+                                                    <p><a>Equipment Lease</a>
+                                                    </p>
+                                                    <p><a>3rd Party Logistics</a></p>
+                                                    <p><a>Shipping and Marine</a></p>
+                                                    <p><a>Speciality Logistics</a></p>
+                                                </div>
+                                            </div>
+                                            <div id="post" class="tab-pane fade">
+                                                <div class="home-menu">
+                                                    <h3>Transportation</h3>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Road</div>
+                                                        <div id="ftl"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return subcriptionuserservice(1,'/createseller')">
+                                                                <img src="images/FTL.png" title="FTL">
+                                                                FTL
+                                                            </a>
+                                                        </div>
+                                                        <div id="ltl"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return subcriptionuserservice(2,'/ptl/createsellerpost')">
+                                                                <img src="images/LTL.png" title="LTL">
+                                                                LTL
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Rail</div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/rail.png" title="RAIL">
+                                                                Parcel
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Air</div>
+                                                        <div id="airdomestic"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/air_dom.png" title="AIR DOMESTIC">
+                                                                Domestic
+                                                            </a>
+                                                        </div>
+                                                        <div id="airinternational"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/air_intl.png"
+                                                                     title="AIR INTERNATIONAL">
+                                                                Intl
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Ocean</div>
+                                                        <div id="ocean"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false">
+                                                                <img src="images/ocean.png" title="OCEAN">
+                                                                Parcel
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Intracity</div>
+                                                        <div id="hyper_local" class="service-div service-icon-div">
+                                                            <a href="javascript:void(0)" ng-click="getNavigation(_HYPERLOCAL_)">
+                                                                <img src="images/hyper_local.png"
+                                                                     title="INTRACITY HYPER LOCAL">
+                                                                Hyper Local
+                                                            </a>
+                                                        </div>
+                                                        <div id="intracity" class="service-div service-icon-div">
+                                                            <a ng-click="getNavigation(_INTRACITY_)">
+                                                                <img src="images/intracity.png" title="INTRACITY">
+                                                                Intracity
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Courier</div>
+                                                        <div id="courier"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/courier.png" title="COURIER">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="home-menu">
+                                                    <h3>Vehicle</h3>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Truck</div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/truck_haul.png" title="TRUCK HAUL">
+                                                                Haul
+                                                            </a>
+                                                        </div>
+                                                        <div id="trucklease"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/truck_lease.png" title="TRUCK LEASE">
+                                                                Lease
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <h3 class="panel-title m-t-25">
+                                                        Warehouse
+                                                    </h3>
+                                                    <div class="service-div-block m-t-25">
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a class="active-inner" onclick="return false;">
+                                                                <img src="images/warehouse.png" title="Warehouse">
+                                                                Warehouse
+                                                            </a>
+                                                            <!--<a onclick="homeServiceLogin(14,'search')">
+                                                               <img src="images/warehouse.png" title="" >
+                                                               Warehouse
+                                                               </a>-->
+                                                        </div>
+                                                    </div>
+                                                    <h3 class="panel-title m-t-25">
+                                                        Handling Services
+                                                    </h3>
+                                                    <div class="service-div-block m-t-25">
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a href="#.">
+                                                                <img src="images/handling-services.png"
+                                                                     title="Handling Services">
+                                                                Handling Services
+                                                            </a>
+                                                            <!--<a onclick="homeServiceLogin(14,'search')">
+                                                               <img src="images/handling-services.png" title="" >
+                                                               Handling Services
+                                                               </a>-->
+                                                        </div>
+                                                    </div>
+
+                                                    <h3 class="panel-title m-t-25">
+                                                        Blue Collar Services
+                                                    </h3>
+
+                                                    <div class="service-div-block m-t-15">
+                                                        <div class="service-div service-icon-div">
+                                                            <a
+                                                               ng-click="getNavigation(_BLUECOLLAR_)">
+                                                                <img src="images/bluecollar_img_new.png"
+                                                                     title="Blue Collar Services">
+                                                                Blue Collar Services
+                                                            </a>
+                                                            <!--<a onclick="homeServiceLogin(5,'search')">
+                                                               <img src="images/handling-services.png" title="" >
+                                                               Handling Services
+                                                               </a>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="home-menu">
+                                                    <h3>Relocation</h3>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Home</div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return subcriptionuserservice(15,'/relocation/createsellerpost')">
+                                                                <img src="images/domestic.png"
+                                                                     title="RELOCATION DOMESTIC">
+                                                                Domestic
+                                                            </a>
+                                                        </div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return subcriptionuserservice(17,'/relocation/createsellerpost')">
+                                                                <img src="images/domestic.png"
+                                                                     title="RELOCATION DOMESTIC">
+                                                                Pet Move
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div"><span class="invisible_text text-17">Home</span>
+                                                        </div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false">
+                                                                <img src="images/international.png"
+                                                                     title="RELOCATION INTERNATIONAL">
+                                                                International
+                                                            </a>
+                                                        </div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false;">
+                                                                <img src="images/global_mobility.png"
+                                                                     title="RELOCATION GLOBAL MOBILITY">
+                                                                Global Mobility
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Office</div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return false">
+                                                                <img src="images/office_domestic.png"
+                                                                     title="RELOCATION OFFICE DOMESTIC">
+                                                                Domestic
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <h3 class="panel-title m-t-25">
+                                                        Multi Services
+                                                    </h3>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="return subcriptionuserservice(10,'/sellersearchbuyers')"
+                                                               class="active-inner  float-none">
+                                                                <img src="images/multi-model.png"
+                                                                     class="margin-auto float-none"
+                                                                     title="Multi Services">
+                                                                Multi Services
+                                                            </a>
+                                                            <!--<a onclick="homeServiceLogin(14,'search')">
+                                                               <img src="images/handling-services.png" title="" >
+                                                               Handling Services
+                                                               </a>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="home-menu non_link">
+                                                    <h3>Up Coming Services</h3>
+                                                    <!--  <p>
+                                                       <a href="#" onclick="return subcriptionuserservice(14,'/sellersearchbuyers')">Mulit Modal</a>
+                                                       </p>
+                                                       <p><a onclick="return subcriptionuserservice(14,'/warehouse/createsellerpost')">Warehouse</a></p>
+                                                       <p>
+                                                       <a href="#">Handling Services</a> -->
+                                                    <p></p>
+                                                    <p><a>Packaging Services</a>
+                                                    </p>
+                                                    <p><a>Equipment Lease</a>
+                                                    </p>
+                                                    <p><a>3rd Party Logistics</a></p>
+                                                    <p><a>Shipping and Marine</a></p>
+                                                    <p><a>Speciality Logistics</a></p>
+                                                </div>
+                                            </div>
+                                            <div id="market" class="tab-pane fade">
+                                                <div class="home-menu">
+                                                    <h3>Transportation</h3>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Road</div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="homeServiceLogin(1,'search')">
+                                                                <img src="../images/FTL.png" title="FTL">
+                                                                FTL
+                                                            </a>
+                                                        </div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="homeServiceLogin(2,'search')">
+                                                                <img src="../images/LTL.png" title="LTL">
+                                                                LTL
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Rail</div>
+                                                        <div class="service-div service-icon-div">
+                                                            <a onclick="homeServiceLogin(6,'search')">
+                                                                <img src="../images/rail.png" title="RAIL">
+                                                                Parcel
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Air</div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="homeServiceLogin(7,'search')">
+                                                                <img src="../images/air_dom.png" title="AIR DOMESTIC">
+                                                                Domestic
+                                                            </a>
+                                                        </div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="homeServiceLogin1(8,'search')">
+                                                                <img src="../images/air_intl.png"
+                                                                     title="AIR INTERNATIONAL">
+                                                                Intl
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Ocean</div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="homeServiceLogin1(9,'search')">
+                                                                <img src="../images/ocean.png" title="OCEAN">
+                                                                Parcel
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Intracity</div>
+                                                        <div id="hyper_local"
+                                                             class="service-div service-icon-div checkserviceseller">
+                                                            <a href="#">
+                                                                <img src="images/hyper_local.png"
+                                                                     title="INTRACITY HYPER LOCAL">
+                                                                Hyper Local
+                                                            </a>
+                                                        </div>
+                                                        <div class="service-div service-icon-div">
+                                                            <a onclick="homeServiceLogin('','search')">
+                                                                <img src="../images/intracity.png" title="INTRACITY">
+                                                                Intracity
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Courier</div>
+                                                        <div class="service-div service-icon-div">
+                                                            <a onclick="homeServiceLogin(21,'search')">
+                                                                <img src="../images/courier.png" title="COURIER">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="home-menu">
+                                                    <h3>Vehicle</h3>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Truck</div>
+                                                        <div class="service-div service-icon-div">
+                                                            <a onclick="homeServiceLogin(4,'search')">
+                                                                <img src="../images/truck_haul.png" title="TRUCK HAUL">
+                                                                Haul
+                                                            </a>
+                                                        </div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a onclick="homeServiceLogin1(5,'search')">
+                                                                <img src="../images/truck_lease.png"
+                                                                     title="TRUCK LEASE">
+                                                                Lease
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="home-menu">
+                                                    <h3>Relocation</h3>
+                                                    <div class="service-div-block">
+                                                        <div class="service-div text-17">Home</div>
+                                                        <div class="service-div service-icon-div">
+                                                            <a href="#" onclick="return homeServiceLogin(15,'search')">
+                                                                <img src="../images/domestic.png"
+                                                                     title="RELOCATION DOMESTIC">
+                                                                Domestic
+                                                            </a>
+                                                        </div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a href="#" onclick="return homeServiceLogin1(17,'search')">
+                                                                <img src="../images/pet_move.png"
+                                                                     title="RELOCATION PETMOVE">
+                                                                Pet Move
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block checkserviceseller">
+                                                        <div class="service-div"><span class="invisible_text text-17">Home</span>
+                                                        </div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a href="#" onclick="return homeServiceLogin1(18,'search')">
+                                                                <img src="../images/international.png"
+                                                                     title="RELOCATION INTERNATIONAL">
+                                                                International
+                                                            </a>
+                                                        </div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a href="#">
+                                                                <img src="../images/global_mobility.png"
+                                                                     title="RELOCATION GLOBAL MOBILITY">
+                                                                Global Mobility
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="service-div-block checkserviceseller">
+                                                        <div class="service-div text-17">Office</div>
+                                                        <div class="service-div service-icon-div checkserviceseller">
+                                                            <a href="#" onclick="return homeServiceLogin1(20,'search')">
+                                                                <img src="../images/office_domestic.png"
+                                                                     title="RELOCATION OFFICE DOMESTIC">
+                                                                Domestic
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="home-menu non_link">
+                                                    <h3>Up Coming Services</h3>
+                                                    <p><a>Multi Services</a></p>
+                                                    <p><a>Warehouse</a></p>
+                                                    <p><a>Handling Services</a></p>
+                                                    <p><a>Packaging Services</a>
+                                                    </p>
+                                                    <p><a>Equipment Lease</a>
+                                                    </p>
+                                                    <p><a>3rd Party Logistics</a></p>
+                                                    <p><a>Shipping and Marine</a></p>
+                                                    <p><a>Speciality Logistics</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Start : Notifications data-->
+                                <!-- Start : Data tables required assets Css / JS-->
+                                <!-- Start : Data Tables CSS -->
+                                <link rel="stylesheet"
+                                      href="http://www.logistiks.com/css/datatables/dataTables.bootstrap.min.css">
+                                <!--<link rel="stylesheet" href="http://www.logistiks.com/css/datatables/responsive.bootstrap.min.css">-->
+                                <!-- End : Data Tables CSS -->
+                                <!-- Start : Datatable js -->
+                                <script src="http://www.logistiks.com/js/datatables/jquery.dataTables.min.js"></script>
+                                <!-- Bootstrap JavaScript -->
+                                <script src="http://www.logistiks.com/js/datatables/jquery.dataTables.min.js"></script>
+                                <script src="http://www.logistiks.com/js/datatables/dataTables.bootstrap.min.js"></script>
+                                <script src="http://www.logistiks.com/js/datatables/dataTables.scroller.min.js"></script>
+                                <!-- End : Datatable js -->
+                                <!-- End : Data tables required assets css  active-black  / JS-->
+                                <div class="col-md-12 padding-none n-list">
+                                    <span class="notify_text"> Notifications</span>
+                                    <div class="pull-right links">
+                                        <a class="link-zindex top-20" data-toggle="modal" data-target="#settings">Settings
+                                            <i class="fa fa-gear"></i></a>
+                                        <a data-toggle="collapse" data-target="#filters" class="link-zindex">Filters <i
+                                                class="fa fa-bars"></i></a>
+                                    </div>
+                                    <div id="filters" class="filters collapse nots_block">
+                                        <div class="clearfix"></div>
+                                        <form method="POST" action="#" accept-charset="UTF-8"
+                                              id="userNotificationFilters" autocomplete="off">
+                                            <input name="_token" type="hidden"
+                                                   value="Ut32S7s5PIRVq6eN4UxMgJbiFnIyzj9ULfEwIUat">
+                                            <div class="row no-margin">
+                                                <div class="col-md-4">
+                                                    <div class="error_align_div">
+                                                        <div class="error_align_div">
+                                                            <div class="normal-select input-prepend">
+                                                                <select class="selectpicker notification_type bs-select-hidden"
+                                                                        id="notification_type">
+                                                                    <option value="">Notification Type</option>
+                                                                    <option value="">All</option>
+                                                                    <option value="1">Posts</option>
+                                                                    <option value="3">Orders</option>
+                                                                    <option value="2">System Notification</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="error_align_div">
+                                                        <div class="error_align_div">
+                                                            <div class="normal-select input-prepend">
+                                                                <select class="selectpicker service_type bs-select-hidden"
+                                                                        id="service_type">
+                                                                    <option value="">Select Service</option>
+                                                                    <option value="1">FTL</option>
+                                                                    <option value="4">Truck Haul</option>
+                                                                    <option value="5">Truck Lease</option>
+                                                                    <option value="2">LTL</option>
+                                                                    <option value="6">RAIL</option>
+                                                                    <option value="7">AIRDOMESTIC</option>
+                                                                </select>
+                                                                <!--  <div class="btn-group bootstrap-select service_type">
+                                                                     <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" data-id="service_type" title="Select Service"><span class="filter-option pull-left">Select Service</span>&nbsp;<span class="bg-caret"><span class="caret"></span></span></button>
+                                                                     <div class="open dropdown-menu">
+                                                                        <ul class="dropdown-menu inner" role="menu">
+
+                                                                           <li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Select Service</span></a></li>
+                                                                           <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">FTL</span></a></li>
+                                                                           <li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Truck Haul</span></a></li>
+                                                                           <li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Truck Lease</span></a></li>
+                                                                           <li data-original-index="4"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">LTL</span></a></li>
+                                                                           <li data-original-index="5"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">RAIL</span></a></li>
+                                                                           <li data-original-index="6"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">AIRDOMESTIC</span></a></li>
+
+                                                                        </ul>
+                                                                     </div>
+                                                                  </div> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="error_align_div">
+                                                        <div class="input-prepend search-icon">
+                                                            <input class="form-control form-control1 js-placeholder height-j"
+                                                                   id="post_title" style="border-right: 0px none;"
+                                                                   placeholder="Search Post" type="text">
+                                                            <!--  <i class="fa fa-search"></i> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row no-margin">
+                                                <div class="col-md-4">
+                                                    <div class="error_align_div">
+                                                        <div class="input-prepend search-icon">
+                                                            <input class="form-control form-control1 js-placeholder height-j"
+                                                                   id="" style="border-right: 0px none;"
+                                                                   placeholder="Search Order" type="text">
+                                                            <!--  <i class="fa fa-search"></i> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="error_align_div">
+                                                        <div class="error_align_div">
+                                                            <div class="normal-select input-prepend">
+                                                                <select class="selectpicker post_nature bs-select-hidden"
+                                                                        id="post_nature">
+                                                                    <option value="">Select Post Nature</option>
+                                                                    <option value="1">Inbound</option>
+                                                                    <option value="2">Outbound</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="error_align_div">
+                                                        <div class="error_align_div">
+                                                            <div class="normal-select input-prepend">
+                                                                <select class="selectpicker post_type bs-select-hidden"
+                                                                        id="post_type">
+                                                                    <option value="">Select Post Type</option>
+                                                                    <option value="1">Spot</option>
+                                                                    <option value="2">Term</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="selected-filters border-none">
+                                                <ul class="list-inline m-bottom-0 font-bold-black pull-left">
+                                                    <li class="pull-right clear-all under-line"><a
+                                                            href="javascript:void(0)" class="text-underline"
+                                                            id="clearNotificationMasterFilter">Clear All</a></li>
+                                                </ul>
+                                            </div>
+                                    </div>
+                                    </form>
+                                </div>
+                                <div id="userNotificationTable_wrapper"
+                                     class="dataTables_wrapper form-inline dt-bootstrap4 no-footer">
+                                    <div class="row">
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-6"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table id="userNotificationTable"
+                                                   class="search-Resultss dataTable no-footer" cellspacing="0"
+                                                   width="100%" role="grid" style="width: 100%;">
+                                                <thead>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="datatable_tr_link odd" role="row">
+                                                    <td class="sorting_1">
+                                                        <div class="col-md-9 redirectUrl"
+                                                             data_redirect_url="sellerposts/360" data_serivce_id="1">
+                                                            <div class="col-md-2 padding-left-none">
+                                                                <img src="images/out.jpg" width="50" height="60"
+                                                                     alt="logo"
+                                                                     class="pull-left p-right-5 p-top-5"><span
+                                                                    class="countss"></span>
+                                                            </div>
+                                                            <strong>test negotiation</strong> (SPOT) - You have 0
+                                                            Messages, 0 Enquires 0 Lead - Pending
+                                                        </div>
+                                                        <div class="col-md-3 pull-right text-right redirectUrl"
+                                                             data_redirect_url="sellerposts/360" data_serivce_id="1">
+                                                            05:02 PM <br>
+                                                            <a href="javascript:void(0)">0 Views</a>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="col-md-2"></div>
+                                                        <div class="col-md-5">
+                                                            <div class="pull-left text-left postleft"></div>
+                                                        </div>
+                                                        <div class="col-md-1 pull-right text-right sfdsafdf"></div>
+                                                        <div class="pull-right text-right"></div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="datatable_tr_link odd" role="row">
+                                                    <td class="sorting_1">
+                                                        <div class="col-md-9 redirectUrl"
+                                                             data_redirect_url="sellerposts/360" data_serivce_id="1">
+                                                            <div class="col-md-2 padding-left-none">
+                                                                <img src="images/out.jpg" width="50" height="60"
+                                                                     alt="logo"
+                                                                     class="pull-left p-right-5 p-top-5"><span
+                                                                    class="countss"></span>
+                                                            </div>
+                                                            <strong>test negotiation</strong> (SPOT) - You have 0
+                                                            Messages, 0 Enquires 0 Lead - Pending
+                                                        </div>
+                                                        <div class="col-md-3 pull-right text-right redirectUrl"
+                                                             data_redirect_url="sellerposts/360" data_serivce_id="1">
+                                                            05:02 PM <br>
+                                                            <a href="javascript:void(0)">0 Views</a>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="col-md-2"></div>
+                                                        <div class="col-md-5">
+                                                            <div class="pull-left text-left postleft"></div>
+                                                        </div>
+                                                        <div class="col-md-1 pull-right text-right sfdsafdf"></div>
+                                                        <div class="pull-right text-right"></div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="datatable_tr_link odd" role="row">
+                                                    <td class="sorting_1">
+                                                        <div class="col-md-9 redirectUrl"
+                                                             data_redirect_url="sellerposts/360" data_serivce_id="1">
+                                                            <div class="col-md-2 padding-left-none">
+                                                                <img src="images/out.jpg" width="50" height="60"
+                                                                     alt="logo"
+                                                                     class="pull-left p-right-5 p-top-5"><span
+                                                                    class="countss"></span>
+                                                            </div>
+                                                            <strong>test negotiation</strong> (SPOT) - You have 0
+                                                            Messages, 0 Enquires 0 Lead - Pending
+                                                        </div>
+                                                        <div class="col-md-3 pull-right text-right redirectUrl"
+                                                             data_redirect_url="sellerposts/360" data_serivce_id="1">
+                                                            05:02 PM <br>
+                                                            <a href="javascript:void(0)">0 Views</a>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="col-md-2"></div>
+                                                        <div class="col-md-5">
+                                                            <div class="pull-left text-left postleft"></div>
+                                                        </div>
+                                                        <div class="col-md-1 pull-right text-right sfdsafdf"></div>
+                                                        <div class="pull-right text-right"></div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="datatable_tr_link odd" role="row">
+                                                    <td class="sorting_1">
+                                                        <div class="col-md-9 redirectUrl"
+                                                             data_redirect_url="sellerposts/360" data_serivce_id="1">
+                                                            <div class="col-md-2 padding-left-none">
+                                                                <img src="images/out.jpg" width="50" height="60"
+                                                                     alt="logo"
+                                                                     class="pull-left p-right-5 p-top-5"><span
+                                                                    class="countss"></span>
+                                                            </div>
+                                                            <strong>test negotiation</strong> (SPOT) - You have 0
+                                                            Messages, 0 Enquires 0 Lead - Pending
+                                                        </div>
+                                                        <div class="col-md-3 pull-right text-right redirectUrl"
+                                                             data_redirect_url="sellerposts/360" data_serivce_id="1">
+                                                            05:02 PM <br>
+                                                            <a href="javascript:void(0)">0 Views</a>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="col-md-2"></div>
+                                                        <div class="col-md-5">
+                                                            <div class="pull-left text-left postleft"></div>
+                                                        </div>
+                                                        <div class="col-md-1 pull-right text-right sfdsafdf"></div>
+                                                        <div class="pull-right text-right"></div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="datatable_tr_link odd" role="row">
+                                                    <td class="sorting_1">
+                                                        <div class="col-md-9 redirectUrl"
+                                                             data_redirect_url="sellerposts/360" data_serivce_id="1">
+                                                            <div class="col-md-2 padding-left-none">
+                                                                <img src="images/out.jpg" width="50" height="60"
+                                                                     alt="logo"
+                                                                     class="pull-left p-right-5 p-top-5"><span
+                                                                    class="countss"></span>
+                                                            </div>
+                                                            <strong>test negotiation</strong> (SPOT) - You have 0
+                                                            Messages, 0 Enquires 0 Lead - Pending
+                                                        </div>
+                                                        <div class="col-md-3 pull-right text-right redirectUrl"
+                                                             data_redirect_url="sellerposts/360" data_serivce_id="1">
+                                                            05:02 PM <br>
+                                                            <a href="javascript:void(0)">0 Views</a>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="col-md-2"></div>
+                                                        <div class="col-md-5">
+                                                            <div class="pull-left text-left postleft"></div>
+                                                        </div>
+                                                        <div class="col-md-1 pull-right text-right sfdsafdf"></div>
+                                                        <div class="pull-right text-right"></div>
+                                                    </td>
+                                                </tr>
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5"></div>
+                                        <div class="col-md-7"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End : Notifications data  -->
+                        </div>
+                        <div class="col-md-3 padding-right-none">
+                            <div class="block red">
+                                <!--  -->
+                                <div class="main-left">
+                                    <div class="left-menu menu-report">
+                                        <ul class="nav nav-list display-div" style="margin-right: 20px;">
+                                            <label id="reportshover"
+                                                   class="tree-toggler nav-header reportshover red reports-active">Reports</label>
+                                            <li>
+                                                <ul class="show-data-link underreports" style="display: none;">
+                                                    <li><a class="nav-header reportsindvhover"
+                                                           style="margin-left:-23px;" href="#">Customers</a>
+                                                    </li>
+                                                    <li><a class="nav-header reportsindvhover"
+                                                           style="margin-left:-23px;" href="#">Sales</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Reports:
+                                   <br> -->
+                                <!--
+                                   <a href="/marketProfile" class="red">Profile,</a>
+                                   -->
+                                <br>
+                            </div>
+                            <!-- commented BY Teja 27/02/2017.
+                               <div class="block">
+                                  <div class="head">
+                                     <div class="pull-left">
+                                        <input type="checkbox">
+                                        <span class="lbl padding-8"></span>To Do
+                                     </div>
+                                     <div class="pull-right"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                     </div>
+                                  </div>
+                                  <div class="clearfix"></div>
+                                  <div class="col-md-6 text-center">21st - Dec 10 AM</div>
+                                  <div class="col-md-6 text-center">New Rate Card</div>
+                                  <div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><i class="fa fa-caret-down arrow1"></i></div>
+                                  <div class="clearfix"></div>
+                               </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <!-- Modal -->
+                <div class="modal fade" id="settings" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <form method="POST" action="http://www.logistiks.com/usernotifysetting" accept-charset="UTF-8"
+                              id="user_setting">
+                            <input name="_token" type="hidden" value="Ut32S7s5PIRVq6eN4UxMgJbiFnIyzj9ULfEwIUat">
+                            <div class="modal-content">
+                                <button type="button" class="close" data-dismiss="modal">×</button>
+                                <div class="modal-body">
+                                    <div class="col-md-12 modal-form">
+                                        <div id="settings_status_message_flash" class="" style="display: none">
+                                            <p class="text-success col-sm-12 text-center alert-success settings_status_message">
+                                            </p>
+                                        </div>
+                                        <h3 class="margin-top-none">Notifications</h3>
+                                        <div class="popup-check-1">
+                                            <ul>
+                                                <li><input type="checkbox" name="sellerenqueries">
+                                                    <span class="lbl padding-8 check_box check_box_1"></span>
+                                                    Display related enquiries and leads
+                                                </li>
+                                                <li><input type="checkbox" name="systemnotify">
+                                                    <span class="lbl padding-8 check_box check_box_1">
+
+                                    </span>Display system notifications
+                                                </li>
+                                                <li><input type="checkbox" name="partlyenquries"><span
+                                                        class="check_box check_box_1 lbl padding-8"></span>Display
+                                                    partly related enquiries and leads
+                                                </li>
+                                                <input type="hidden" id="page_type" name="page_type" value="2">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn flat-btn red-btn" data-dismiss="modal">Ok</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $('.display-div').click(function () {
+
+                        $(this).parent().parent().find(".show-data-link").slideToggle(500);
+
+
+                    });
+
+                    $('.reports-active').on("click", function () {
+
+                        if ($(this).val() == "") {
+
+                            $(this).css('background-color', '#ed3237');
+
+                            $(this).css('color', 'white');
+
+                            $(this).val(1);
+
+                        }
+                        else {
+
+                            $(this).css('background-color', '#e2e2e2');
+
+                            $(this).css('color', 'black');
+
+                            $(this).val("");
+
+                        }
+
+                    });
+
+
+                </script>
+            </div>
+            <!-- End : Include Body Content Right / Normal -->
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#Discounts_id_1").click(function () {
+            $("#Discounts_oepn").slideToggle();
+        });
+        $(".nav-tabs li a").hover(function () {
+            var x = $(this).attr("title");
+            $(".tab-pane").removeClass("active").removeClass("in");
+            $("" + x + "").addClass("active").addClass("in");
+            $(this).trigger("click");
+        });
+    });
+
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

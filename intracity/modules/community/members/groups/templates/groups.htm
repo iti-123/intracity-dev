@@ -1,0 +1,280 @@
+<div class="right_section_community left_menu_space">        
+    <div class="col-md-12 col-sm-8 col-xs-12">
+        <div class="row">
+            <div class="right_serch_p titile_gray">
+                <div class="right_search_bar">
+                    <ul class="search_bar_tab">
+                        <li><a href="#community-profile">Community</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                        <li><a href="#groups">Members</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                        <li><a href="javascript:void(0);" class="active_c">Groups</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right_serch_p titile_gray">
+                <div class="public_private_group">
+                    <div class="radio-block">
+                        <div class="radio_inline">
+                            <input type="radio" class="isPublic" id="Public" ng-click="getGroup('public')" checked="" name="grouptype" value="0">
+                            <label for="Public"><span></span>Public</label>
+                        </div>
+
+                        <div class="radio_inline">
+                            <input type="radio" class="isPublic" id="Private" ng-click="getGroup('private')" name="grouptype" value="1">
+                            <label for="Private"><span></span>Private</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="row">
+            <!--start public group-->
+            <div class="right_serch_p group" id="group1">
+                <div class="main-right">
+                    <!-- Search Block Starts Here -->
+                    <div class="search-block inner-block-bg">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <div class="row">
+                                <div class="cell-1 cell-1-80">
+                                    <ul class="list-inline m-bottom-0 m-top-5 font-bold-black">
+                                        <li><a href="#">{{ isPublic }} Groups ( {{ groups.payload.data.length }} )</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="row">
+                                <div class="cell-1">
+                                    <ul class="list-inline pull-right m-bottom-0">
+                                        <li>
+                                            <div class="search-modify"><a href="#/create-new-group" class="padd-0"><span>+ Group</span></a></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--invitation notification start-->
+                    <div class="invitaion_notification">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="invitation_text">Groups Invitation ( {{ invitations.totalInvitation }} New )</div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-repeat="invitation in invitations.data">
+                                <div class="invitation_box">                                        
+                                    <div class="invitation_d">                                           
+                                        <div class="invitation_image">                                                
+                                            <img ng-src="{{storagePath+''+invitation.group.image}}" alt="user">
+                                        </div>
+                                    </div>
+                                    <div class="invitation_info">
+                                        <div class="invite_name"> {{ invitation.group.name }} </div>
+                                        <div class="invite_text"> By {{ invitation.user.username }} </div>
+                                    </div>
+                                    <div class="invitation_action">
+                                        <div class="action_icon margin_bottom5">
+                                            <div class="close_action" ng-click="actionOnInvitation(invitation,'cancel')"></div>
+                                        </div>
+                                        <div class="action_icon">
+                                            <div class="accept_action" ng-click="actionOnInvitation(invitation,'accept')"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                    <!--invitation notification end-->
+
+
+                    <div class="search-block inner-block-bg">
+                        <!-- <div class="cell-1">
+                            <ul class="list-inline list-inline1 pull-right m-bottom-0 p-up-down">
+                                <li> <a href="javascript:void(0)" class="link-zindex">Filters <i class="fa fa-bars"></i></a> </li>
+                            </ul>
+                        </div> -->
+                        <div class="community-search-pannel">
+                    <div class="search-input">
+                        <input type="Search" name="indi-search">
+                        <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                    </div>
+                    <div class="bg-block" ng-repeat="(key,group) in groups.payload.data">
+                        <div class="linkdin_pro">
+                            <div class="col-md-6 padding-left-none">
+                                <img src="{{storagePath+''+group.image}}" width="55" height="55" class="pull-left" style="border-radius:50%">
+                                <div class="pull-left col-md-10 padding-none">
+
+
+                                    <div class="down-link">
+
+                                        <strong style="font-size:16px;padding: 0px 5px;">
+                                            <a style="color:#333; text-decoration:none;" href="javascript:void(0)"> 
+                                                {{ group.name }}
+                                            </a>
+                                        </strong>
+
+                                        <p>Members <span> {{ group.members.length }} </span></p>
+                                        <div class="rating_link_new">
+                                            <a href="#">Brief</a>
+                                            <!-- <a href="#">Rules</a> -->
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-4"></div>
+
+                            <div class="col-md-2 padding-left-none">
+                                <div class="right-side-div">
+                                    <input type="button" ng-show="!group.is_joining" value="Join" ng-click="sendInvitationForConnection('group',key)" class="book_btn_gray joi">
+                                    <input type="button" ng-show="group.is_joining && group.is_joining.status == 1" value="Pending" class="book_btn_gray joi">
+                                    <input type="button" ng-show="group.is_joining && group.is_joining.status == 2" value="Joined" class="book_btn_gray joi">
+                                    <input type="button" ng-show="group.is_joining && group.is_joining.status == 3" value="Canceled" class="book_btn_gray joi">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </div>
+            <!--end pubilc group-->
+            <!--start private group-->
+            <div class="right_serch_p group" id="group2" style="display: none;">
+                <div class="main-right">
+                    <!-- Search Block Starts Here -->
+                    <div class="search-block inner-block-bg">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <div class="row">
+                                <div class="cell-1 cell-1-80">
+                                    <ul class="list-inline m-bottom-0 m-top-5 font-bold-black">
+                                        <li><a href="#">Private GROUPS (15)</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="row">
+                                <div class="cell-1">
+                                    <ul class="list-inline pull-right m-bottom-0">
+                                        <li>
+                                            <div class="search-modify"><a href="create-new-group.html" class="padd-0"><span>+ Group</span></a></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="search-block inner-block-bg">                       
+                        <div class="cell-1">
+                            <ul class="list-inline list-inline1 pull-right m-bottom-0 p-up-down">
+                                <li> <a href="javascript:void(0)" class="link-zindex collapsed">Filters <i class="fa fa-bars"></i></a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bg-block">
+                        <div class="linkdin_pro">
+                            <div class="col-md-6 padding-left-none">
+                                <img src="../intracity/images/kapil.png" class="pull-left m-r-10">
+                                <div class="pull-left col-md-10 padding-none">
+
+
+                                    <div class="down-link">
+
+                                        <strong style="font-size:16px;     padding: 0px 5px;"><a style="color:#333; text-decoration:none;" href="group-profile-page.html">Logisticks GROUP</a></strong>
+
+                                        <p>Members <span>145</span></p>
+                                        <div class="rating_link_new">
+                                            <a href="#">Brief</a>
+                                            <a href="#">Rules</a>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-4"></div>
+
+                            <div class="col-md-2 padding-left-none">
+                                <div class="right-side-div">
+                                    <input type="button" value="Join" onclick="return change2(this);" class="book_btn_gray joi">
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="bg-block">
+                        <div class="linkdin_pro">
+                            <div class="col-md-6 padding-left-none">
+                                <img src="../intracity/images/kapil.png" class="pull-left m-r-10">
+                                <div class="pull-left col-md-10 padding-none">
+
+
+                                    <div class="down-link">
+
+                                        <strong style="font-size:16px;     padding: 0px 5px;">Fertilizer Group</strong>
+
+                                        <p>Members <span>145</span></p>
+                                        <div class="rating_link_new">
+                                            <a href="#">Brief</a>
+                                            <a href="#">Rules</a>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-4"></div>
+
+                            <div class="col-md-2 padding-left-none">
+                                <div class="right-side-div">
+                                    <input type="button" value="Join" onclick="return change2(this);" class="book_btn_gray joi">
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="bg-block">
+                        <div class="linkdin_pro">
+
+                            <div class="col-md-12">
+                                <div class="view-more">
+                                    <a href="">View More</a>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--end private group-->
+        </div><!--end of right_search_p-->
+    </div>
+</div>

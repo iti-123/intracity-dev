@@ -1,0 +1,276 @@
+app.controller('SellerPostRateCardCtrl', ['$scope', '$http', 'config', '$location', 'BuyerSearchServices','$state', function ($scope, $http, config, $location, BuyerSearchServices,$state) {
+
+    var serverUrl = config.serverUrl;
+    $scope.multiplePosts = [];
+
+    $scope.profileTypes = [{key: 'Profile Type', value: ''}, {key: 'DRIVER', value: 'DRIVER'}, {
+        key: 'CLEANER',
+        value: 'CLEANER'
+    }, {key: 'SKILLED', value: 'SKILLED'}, {key: 'SEMISKILLED', value: 'SEMISKILLED'}];
+    //$scope.vehicleTypes = ['Vehicle Type', 'BIKE', 'LMV', 'MMV', 'HMV'];
+    //$scope.vehicleTypes = [{key: 'BIKE', value: 'BIKE'},{key: 'LMV', value: 'LMV'},{key: 'MMV', value: 'MMV'},{key: 'HMV', value: 'HMV'}];
+    $scope.employmentTypes = [{key: 'Employment Type', value: ''},{key: 'FULL TIME', value: 'FULL_TIME'},{
+        key: 'PART TIME',value: 'PART_TIME'}, {key: 'CONTRACT', value: 'CONTRACT'}];
+    $scope.salaryTypes = [{key: 'Salary Type', value: ''}, {key: 'PER DAY', value: 'PER_DAY'}, {
+        key: 'PER WEEK',
+        value: 'PER_WEEK'
+    }, {key: 'PER MONTH', value: 'PER_MONTH'}];
+    $scope.qualificationTypes = [{key: 'Qualifications', value: ''},{key: 'SSLC', value: 'SSLC'}, {
+        key: 'Intermediate',value: 'INTERMEDIATE'}, {key: 'Graduate', value: 'GRADUATE'}, {key: 'Post Graduate', value: 'POST_GRADUATE'}];
+    //$scope.locationPH = '';
+    $scope.vehicleTypePH = 'Vehicle Type';
+    $scope.machineTypePH = 'Machine Type';
+    $scope.vehicleTypes = [];
+    $scope.machineTypes = [];
+
+    $scope.formData = {
+        profileType: '',
+        location: '',
+        locationPH: '',
+        vehicleTypes: [],
+        machineTypes: [],
+        employmentType: '',
+        experience: '',
+        salaryType: '',
+        salary: '',
+        qualification: ''
+    };
+
+    $scope.formError = {
+        profileType: false,
+        location: false,
+        locationPH: false,
+        vehicleTypes: false,
+        machineTypes: false,
+        employmentType: false,
+        experience: false,
+        salaryType: false,
+        salary: false,
+        qualification: false
+    };
+    $scope.defaultForm = angular.copy($scope.formData);
+    $scope.searchResults = [];
+     
+    $scope.addMultiplePosts = function (data) {
+        if($scope.validate()){
+          $scope.new = angular.copy(data);
+          $scope.multiplePosts.push($scope.new);
+          $scope.formData = angular.copy($scope.defaultForm);
+          $scope.locationPH = '';
+          console.log("AddMultiple Posts ::", $scope.multiplePosts);
+        }
+    }
+  
+    $scope.deleteMultiplePosts = function(index) {
+        $scope.multiplePosts.splice(index,1);
+    }
+  
+    $scope.editMultipleRate = function(value) {
+        console.log("editMultipleRate",$scope.multiplePosts);
+        $scope.multiplePosts.splice(value.index,1);
+        $scope.formData = value;
+        $scope.locationPH = value.location;
+        $scope.isUpdate = true;
+    }
+
+    $scope.selectedLocation = function($item, $model, $label){
+        $scope.formData.location = $item;
+    };
+    
+    $http({
+        method: 'GET',
+        url: serverUrl + 'bluecollar/vehicle-types',
+        headers: {
+            'authorization': 'Bearer ' + localStorage.getItem("access_token")
+        }
+    }).then(function success(response) {
+        if (response.data) {
+            $scope.vehicleTypes = response.data.data;
+            $scope.vehicleTypes.unshift({name: "Vehicle Type", id: ""});
+
+            console.log($scope.vehicleTypes);
+        }
+    }, function error(response) {
+        //
+    });
+
+    $http({
+        method: 'GET',
+        url: serverUrl + 'bluecollar/machine-types',
+        headers: {
+            'authorization': 'Bearer ' + localStorage.getItem("access_token")
+        }
+    }).then(function success(response) {
+        if (response.data) {
+            $scope.machineTypes = response.data.data;
+            $scope.machineTypes.unshift({name: "Machine Type", id: ""});
+            console.log($scope.machineTypes);
+        }
+    }, function error(response) {
+        //
+    });
+
+    $scope.searchLocations = function () {
+        //$scope.searchResults = [{'cur_state_or_city': 'PUNED'}, {'cur_state_or_city': 'hydra'}];
+        $http({
+            method: 'POST',
+            url: config.serverUrl + 'bluecollar/buyer-location-search',
+            headers: {
+                'authorization': 'Bearer ' + localStorage.getItem("access_token")
+            },
+            data: {'search': $scope.formData.locationPH},
+        }).then(function (response) {
+            //console.log(httpResponse.data.data);
+            $scope.searchResults = response.data.data;
+        }, function (response) {
+
+        });
+    };
+
+   
+    $scope.validate = function () {
+        // console.log($scope.formData);
+        var validated = true;
+        if ($scope.formData.profileType == '') {
+            $scope.formError.profileType = true;
+            validated = false;
+        } else {
+            $scope.formError.profileType = false;
+        }
+        if (isNaN($scope.formData.experience) || $scope.formData.experience == '') {
+            $scope.formError.experience = true;
+            validated = false;
+        } else {
+            $scope.formError.experience = false;
+        }
+        if ($scope.formData.employmentType == '') {
+            $scope.formError.employmentType = true;
+            validated = false;
+        } else {
+            $scope.formError.employmentType = false;
+        }
+        if ($scope.formData.salaryType == '') {
+            $scope.formError.salaryType = true;
+            validated = false;
+        } else {
+            $scope.formError.salaryType = false;
+        }
+        if ($scope.formData.salary == '') {
+            $scope.formError.salary = true;
+            validated = false;
+        } else {
+            $scope.formError.salary = false;
+        }
+        if ($scope.formData.profileType == 'DRIVER' && $scope.formData.vehicleType == '') {
+            $scope.formError.vehicleType = true;
+            validated = false;
+        } else {
+            $scope.formError.vehicleType = false;
+        }
+        if ($scope.formData.location == '') {
+            $scope.formError.location = true;
+            validated = false;
+        } else {
+            $scope.formError.location = true;
+            for (l in $scope.searchResults) {
+                if ($scope.searchResults[l]['city_id'] == $scope.formData.location.city_id) {
+                    $scope.formError.location = false;
+                    break;
+                }
+            }
+            if ($scope.formError.location) {
+                validated = false;
+            }
+        }
+
+        if ($scope.formData.qualification == '') {
+            $scope.formError.qualification = true;
+            validated = false;
+        } else {
+            $scope.formError.qualification = false;
+        }
+
+        if ($scope.formData.salary == '' || $scope.formData.salary == undefined) {
+            $scope.formError.salary = true;
+            validated = false;
+        } else {
+            $scope.formError.salary = false;
+        }
+        return validated;
+    };
+
+    $scope.addVehicleType = function () {
+        var vehicleType = JSON.parse($scope.vehicleTypePH);
+        var index = -1;
+        if (vehicleType != '') {
+            let exists = false;
+            for (let v in $scope.formData.vehicleTypes) {
+                if ($scope.formData.vehicleTypes[v].name == vehicleType.name) {
+                    exists = true;
+                    index = v;
+                }
+            }
+            if (!exists) {
+                $scope.formData.vehicleTypes.push(vehicleType);
+            } else {
+                $scope.formData.vehicleTypes.splice(index, 1);
+            }
+        }
+    };
+
+    $scope.addMachineType = function () {
+        var vehicleType = JSON.parse($scope.machineTypePH);
+        var index = -1;
+        if (vehicleType != '') {
+            if (vehicleType.name != 'Machine Type' && vehicleType.name != '') {
+                let exists = false;
+                for (let v in $scope.formData.machineTypes) {
+                    if ($scope.formData.machineTypes[v].name == vehicleType.name) {
+                        exists = true;
+                        index = v;
+                    }
+                }
+                if (!exists) {
+                    $scope.formData.machineTypes.push(vehicleType);
+                } else {
+                    $scope.formData.machineTypes.splice(index, 1);
+                }
+            }
+        }
+    };
+
+    $scope.post = function (multiplePosts,status) {
+              if($scope.multiplePosts.length < 1) {
+                alert("Please Create at least one post");
+                return false;
+              }
+
+              if(!$('#Accept').is(':checked')) {
+                alert('Accept Terms & Conditions ');
+                return false;
+              }
+
+            //console.log($scope.formData);
+           // $('.loaderGif').show();
+            $http({
+                url: serverUrl + 'bluecollar/seller-post/' + status,
+                method: 'POST',
+                headers: {
+                    'authorization': 'Bearer ' + localStorage.getItem("access_token")
+                },
+                data: JSON.stringify(multiplePosts),
+            }).then(function success(response) {
+                if (response.data.success) {
+                 alert("/");  
+                  $scope.formData = angular.copy($scope.defaultForm);
+                    // $('body #postConfirmationModal').modal('show');
+                    // $('.loaderGif').hide();
+                    
+                    $state.go('bluecollar-seller-post-list');
+                }
+            }, function error(response) {
+                $('.loaderGif').hide();
+
+            });
+        };
+}]);

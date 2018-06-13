@@ -1,0 +1,614 @@
+﻿.admin_page {
+    min-height: 500px;
+}
+
+.admin_page .top_dealer_list {
+    float: left;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.admin_page .top_dealer_list .list_icon {
+    width: 18px;
+    height: 2px;
+    background: #808080;
+    margin-right: 10px;
+    margin-top: 9px;
+    float: left;
+    position: relative;
+}
+
+.admin_page .top_dealer_list .list_icon:after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    top: 5px;
+    height: 2px;
+    background: #808080;
+}
+
+.admin_page .top_dealer_list .list_icon:before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    top: 10px;
+    height: 2px;
+    background: #808080;
+}
+
+.admin_page .filter_div {
+    padding: 15px 10px;
+    margin: 5px 0px 10px;
+    background: #fff;
+}
+
+.admin_page .filter_div .filter_text {
+    float: left;
+}
+
+.admin_page .filter_div .filter_text ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    float: left;
+}
+
+.admin_page .filter_div .filter_text ul li {
+    float: left;
+    padding: 4px 15px;
+}
+
+.admin_page .filter_div .filter_text ul li:first-child {
+    padding-left: 0px;
+}
+
+.admin_page .filter_div .filter_text ul li a {
+    text-transform: uppercase;
+    color: #808080;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.admin_page .filter_div .filter_n {
+    float: right;
+    color: #808080;
+    text-decoration: none;
+    font-size: 18px;
+    padding-top: 2px;
+}
+
+.admin_page .filter_div .filter_n .filter_n_text .filter_icon {
+    width: 18px;
+    height: 2px;
+    background: #808080;
+    margin-left: 10px;
+    margin-top: 8px;
+    float: right;
+    position: relative;
+}
+
+.admin_page .filter_div .filter_n .filter_n_text .filter_icon:after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    top: 5px;
+    height: 2px;
+    background: #808080;
+}
+
+.admin_page .filter_div .filter_n .filter_n_text .filter_icon:before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    top: 10px;
+    height: 2px;
+    background: #808080;
+}
+
+.admin_page .grid_head {
+    background: #fff;
+    padding: 0px 10px;
+    margin-bottom: 8px;
+}
+
+.admin_page .grid_head .head_text {
+    text-align: center;
+    padding: 15px 0px;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.admin_page .grid_row {
+    min-height: 60px;
+    padding: 0px 10px;
+}
+
+.admin_page .grid_row .row_text {
+    padding: 10px 0px 6px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.admin_page .grid_row .row_text .user_img {
+    float: left;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    margin-top: -6px;
+}
+
+.admin_page .grid_row .row_text .user_img img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.admin_page .grid_row .row_text .notification .noti_ul {
+    float: right;
+    margin: 0px;
+    padding: 0px;
+}
+
+.admin_page .grid_row .row_text .notification .noti_ul li {
+    float: left;
+    list-style-type: none;
+    position: relative;
+    padding-right: 4px;
+}
+
+.admin_page .grid_row .row_text .notification .noti_ul li a {
+    float: left;
+    width: 48px;
+    height: 22px;
+}
+
+.admin_page .grid_row .row_text .notification .noti_ul li a span {
+    float: right;
+    color: #ff0000;
+    width: 32px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.admin_page .grid_row .row_text .notification .noti_ul li a.noti_m {
+    background: url(../images/noti_m.jpg) no-repeat;
+}
+
+.admin_page .grid_row .row_text .notification .noti_ul li a.noti_m2 {
+    background: url(../images/noti_m2.jpg) no-repeat;
+}
+
+.admin_page .grid_row .row_text .notification .noti_ul li a.noti_m3 {
+    background: url(../images/noti_m3.jpg) no-repeat;
+}
+
+.admin_page .grid_row .row_text .notification .noti_ul li a.noti_m4 {
+    background: url(../images/noti_m4.jpg) no-repeat;
+}
+
+.admin_page .grid_row .row_text .notification .noti_ul li:after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 16px;
+    background: #b7b7b7;
+    right: 4px;
+    top: 2px;
+}
+
+.admin_page .grid_row .row_text .notification .noti_ul li:last-child:after {
+    display: none;
+}
+
+.admin_page .grid_row .row_text .detail_btn .detail_b {
+    float: right;
+    margin-top: 9px;
+    padding: 3px 25px 2px 20px;
+    font-size: 17px;
+    background: url(../images/detail_m_icon.jpg) center right no-repeat;
+    cursor: pointer;
+    position: relative;
+}
+
+.admin_page .grid_row .row_text .detail_btn .detail_b:before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 14px;
+    width: 12px;
+    height: 2px;
+    background: #808080;
+}
+
+.admin_page .grid_row .row_text .detail_btn .detail_b:after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 9px;
+    height: 12px;
+    width: 2px;
+    background: #808080;
+}
+
+.admin_page .grid_row .row_text .detail_btn .detail_b.open:after {
+    display: none;
+}
+
+.admin_page .row_border {
+    background: #fff;
+    margin-bottom: 5px;
+}
+
+.admin_page .row_border:last-child {
+    border-bottom: none;
+}
+
+.admin_page .sep_div .detail_show {
+    display: block !important;
+}
+
+.admin_page .sep_div .detail_div {
+    /*display: none;*/
+}
+
+.admin_page .sep_div .detail_div .detail_ul {
+    padding: 0px;
+    margin: 15px 0px;
+    list-style-type: none;
+}
+
+.admin_page .sep_div .detail_div .detail_ul li {
+    float: left;
+    font-size: 16px;
+    padding: 8px 20px;
+    font-weight: 600;
+}
+
+.admin_page .sep_div .detail_div .admin_input {
+    padding: 3px 3px;
+}
+
+.admin_page .sep_div .detail_div .admin_input .text {
+    float: left;
+    width: 60%;
+    padding-left: 0px;
+}
+
+.admin_page .sep_div .detail_div .admin_input .in_text {
+    float: left;
+    width: 40%;
+    padding-left: 0px;
+}
+
+.admin_page .sep_div .detail_div .admin_input select {
+    padding: 7px 8px;
+    font-size: 16px;
+    border: solid 1px #e0e0e0;
+}
+
+.admin_page .sep_div .detail_div .admin_input label {
+    font-size: 16px;
+    font-weight: 400;
+    padding-left: 35px;
+}
+
+.admin_page .sep_div .detail_div .admin_input.margin_t {
+    margin-top: 7px;
+}
+
+.admin_page .sep_div .detail_div .detail_foo {
+    margin-bottom: 20px;
+}
+
+.admin_page .sep_div .detail_div .detail_foo ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.admin_page .sep_div .detail_div .detail_foo ul li {
+    float: left;
+    list-style-type: none;
+    padding: 8px 8px;
+}
+
+.admin_page .sep_div .detail_div .detail_foo ul li a {
+    color: #808080;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.admin_page .sep_div .detail_div .detail_foo ul li a .foo_img {
+    text-align: center;
+}
+
+.admin_page .sep_div .detail_div .detail_foo ul li a .foo_img img {
+    opacity: 0.7;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.admin_page .sep_div .detail_div .detail_foo ul li a .foo_text {
+    font-size: 19px;
+    text-align: center;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.admin_page .sep_div .detail_div .detail_foo ul li:hover .foo_img img {
+    opacity: 1;
+}
+
+.admin_page .sep_div .detail_div .detail_foo ul li:hover .foo_text {
+    color: #1e1e1e;
+}
+
+.dealer_profile {
+    background: #fff;
+    padding: 5px 7px;
+}
+
+.dealer_profile .d_name {
+    text-align: center;
+    font-size: 17px;
+}
+
+.dealer_profile .d_type {
+    text-align: center;
+    font-size: 19px;
+    font-weight: 600;
+    padding: 10px 0px;
+}
+
+.dealer_profile .rating {
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+.dealer_profile .rating .rating_text {
+    text-align: center;
+}
+
+.dealer_profile .rating .rating_star {
+    text-align: center;
+}
+
+.dealer_profile .rating .rating_star ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.dealer_profile .rating .rating_star ul li {
+    display: inline-flex;
+}
+
+.dealer_profile .rating .rating_star ul li i {
+    font-size: 12px;
+}
+
+.dealer_profile .rating .rating_star ul li .s_red {
+    color: #ec3434;
+}
+
+.dealer_profile .follow_r {
+    text-align: center;
+    padding: 10px 0px;
+    border-bottom: solid 1px #e0e0e0;
+    border-top: solid 1px #e0e0e0;
+}
+
+.dealer_profile .partner_r {
+    text-align: center;
+    padding: 10px 0px;
+    border-bottom: solid 1px #e0e0e0;
+}
+
+.dealer_profile .d_link {
+    text-align: center;
+    padding: 10px 0px 7px;
+}
+
+.dealer_profile .d_link a {
+    color: #444;
+    text-decoration: underline;
+}
+
+.dealer_profile .d_link a:hover {
+    text-decoration: none;
+}
+
+.dealer_profile .profile_d .profile_title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 0 5px;
+}
+
+.dealer_profile .profile_d .profile_bar {
+    text-align: center;
+}
+
+.dealer_profile .profile_d .profile_bar .bar_bg {
+    width: 150px;
+    height: 8px;
+    background: #b6b6b6;
+    margin: auto;
+    position: relative;
+}
+
+.dealer_profile .profile_d .profile_bar .bar_bg .pro_bar {
+    position: absolute;
+    background: #ec3434;
+    height: 8px;
+}
+
+.dealer_profile .profile_d .pro_link {
+    padding: 8px 0px;
+    text-align: center;
+}
+
+.dealer_profile .profile_d .pro_link a {
+    color: #444;
+    text-decoration: underline;
+}
+
+.dealer_profile .profile_d .pro_link a:hover {
+    text-decoration: none;
+}
+
+.dealer_profile .pro_detail {
+    padding-bottom: 15px;
+}
+
+.dealer_profile .pro_detail .text {
+    text-align: center;
+}
+
+.dealer_profile .pro_detail .text_lbl {
+    text-align: center;
+    font-weight: 600;
+}
+
+.adm_box {
+    background: #fff;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+}
+
+.adm_box .adm_breadcrum ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.adm_box .adm_breadcrum ul li {
+    float: left;
+    list-style-type: none;
+    padding: 3px 7px;
+}
+
+.adm_box .adm_breadcrum ul li a {
+    color: #444;
+    float: left;
+    margin-right: 7px;
+}
+
+.adm_box .box_title {
+    font-size: 18px;
+    padding: 0px 0px 12px;
+}
+
+.adm_box .box_text {
+    padding-bottom: 8px;
+}
+
+.adm_box .box_text span {
+    margin-left: 10px;
+}
+
+.adm_box .box_text .box_text {
+    padding-bottom: 3px;
+}
+
+.top_notification {
+    float: right;
+    width: 100%;
+    padding-top: 15px;
+}
+
+.top_notification ul {
+    float: right;
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.top_notification ul li {
+    float: right;
+    padding: 10px 10px;
+}
+
+.top_notification ul li .noti_icon {
+    text-align: center;
+    color: #8c8c8c;
+}
+
+.top_notification ul li .noti_text {
+    text-align: center;
+}
+
+.fullwidth,
+.admin_page,
+.admin_page .filter_div,
+.admin_page .grid_head,
+.admin_page .grid_head .head_text,
+.admin_page .grid_row,
+.admin_page .grid_row .row_text,
+.admin_page .grid_row .row_text .notification,
+.admin_page .grid_row .row_text .detail_btn,
+.admin_page .sep_div,
+.admin_page .sep_div .detail_div,
+.admin_page .sep_div .detail_div .detail_ul,
+.admin_page .sep_div .detail_div .admin_input,
+.admin_page .sep_div .detail_div .admin_input select,
+.admin_page .sep_div .detail_div .detail_foo,
+.admin_page .sep_div .detail_div .detail_foo ul,
+.admin_page .sep_div .detail_div .detail_foo ul li a .foo_img,
+.admin_page .sep_div .detail_div .detail_foo ul li a .foo_text,
+.dealer_profile,
+.dealer_profile .d_name,
+.dealer_profile .d_type,
+.dealer_profile .rating,
+.dealer_profile .rating .rating_text,
+.dealer_profile .rating .rating_star,
+.dealer_profile .rating .rating_star ul,
+.dealer_profile .follow_r,
+.dealer_profile .partner_r,
+.dealer_profile .d_link,
+.dealer_profile .profile_d,
+.dealer_profile .profile_d .profile_title,
+.dealer_profile .profile_d .profile_bar,
+.dealer_profile .profile_d .pro_link,
+.dealer_profile .pro_detail,
+.dealer_profile .pro_detail .text,
+.dealer_profile .pro_detail .text_lbl,
+.adm_box,
+.adm_box .adm_breadcrum,
+.adm_box .adm_breadcrum ul,
+.adm_box .box_title,
+.adm_box .box_text,
+.top_notification ul li .noti_icon,
+.top_notification ul li .noti_text {
+    float: left;
+    width: 100%;
+}
+
+.submit_btn {
+    padding: 7px 15px;
+    background: #ec3434;
+    color: #fff;
+    border: none;
+    margin: 15px 0px;
+}
+
+.row_text .status_graph {
+    list-style: none;
+}
+
+.row_text .status_graph li {
+    display: inline-block;
+    padding: 10px 60px;
+}
+
+.row_text .status_graph li a {
+    font-size: 15px;
+    text-decoration: none;
+}

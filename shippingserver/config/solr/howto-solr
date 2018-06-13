@@ -1,0 +1,83 @@
+==================
+SOLR Readme / FAQ
+==================
+
+1) Install JDK 1.8
+
+2) Install / Unzip solr-6.1.0
+
+3) Start server => {solr-root}/bin/solr start
+	On Windows  => D:\Projects\solr-6.1.0>bin\solr.cmd start
+
+Likewise Stop server => {solr-root}/bin/solr stop
+
+4) Check if your SOLR is running
+
+UNIX
+ps -ef | grep solr
+
+WINDOWS
+See Running programs at Task Manager
+
+5) Access your SOLR at http://{your-site}:8983/solr
+
+6) Create a new collection {solr-root}/bin/solr create -c {your-solr-core}
+
+9) Copy all fields from {your-git-root}/shippingserver/config/solr/solr-schema.txt to {solr-root}/server/solr/logistiksdev/conf/managed-schema
+at the end of the file
+
+10) Copy content of {your-git-root}/shippingserver/config/solr/solrconfig.xml to
+{solr-root}/server/solr/logistiksdev/conf/solrconfig.xml at the end of the file
+
+11) Copy the file {your-git-root}/shippingserver/config/solr/logistiks-dataimporthandler-config.xml to {solr-root}/server/solr/logistiksdev/conf/
+and adjust the data source settings accordingly.
+
+12) Copy {your-git-root}/shippingserver/config/solr/mysql-connector-java-5.1.40-bin.jar to {solr-root}/dist
+
+13) Restart SOLR.
+
+
+=====
+FAQ
+=====
+
+1) Drop all documents by running /update handler with content as XML and with command as
+<delete><query>*:*</query></delete>
+
+2) Drop all documents by running curl
+   curl "http://{your-site}:8983/solr/{your-solr-core}update?commit=true" -H "Content-Type: text/xml" --data-binary '<delete><query>*:*</query></delete>'
+
+3) Import data from MySQL to SOLR - Both full & delta imports.
+
+Full imports
+--------------
+curl --data "command=full-import&verbose=false&clean=true&commit=true&optimize=false&core=logistiksdev&entity=buyerposts" http://localhost:8983/solr/logistiksdev/dataimport?_=1489486020236&indent=on&wt=json
+
+curl --data "command=full-import&verbose=false&clean=true&commit=true&optimize=false&core=logistiksdev&entity=sellerposts" http://localhost:8983/solr/logistiksdev/dataimport?_=1489486020236&indent=on&wt=json
+
+Delta imports
+---------------
+curl --data "command=delta-import&verbose=false&clean=false&commit=true&optimize=false&core=logistiksdev&entity=buyerposts" http://localhost:8983/solr/logistiksdev/dataimport?_=1489486020236&indent=on&wt=json
+
+curl --data "command=delta-import&verbose=false&clean=false&commit=true&optimize=false&core=logistiksdev&entity=sellerposts" http://localhost:8983/solr/logistiksdev/dataimport?_=1489486020236&indent=on&wt=json
+
+Schedule delta imports to run every minute
+------------------------------------------
+
+On Unix
+
+#Check if CRON is running
+ps aux | grep crond
+
+# Add scheduled tasks to CRON to run index pull every minute from MySQL to SOLR.
+# This program is available at {git-root}/shippingserver/config/solr/mysql2solr.sh
+
+crontab -e
+
+# Add the following lines.
+
+* * * * * /path/to/mysql2solr.sh > /tmp/mysql2solr.out 2>&1
+
+On Windows
+
+Use Windows Scheduler and build a similar capability.

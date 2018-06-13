@@ -1,0 +1,38 @@
+.<script>
+    $('.child').hide(); //Hide children by default
+
+    $('.parent').children().click(function () {
+        event.preventDefault();
+        $(this).children('.child').slideToggle('slow');
+    });
+</script>
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="left_side_services">
+        <div calss="sub_right_c">
+            <h2>SERVICES</h2>
+            <ul class="service_left parent">
+               
+                <li ng-class="{true: 'intra_active', false: 'in_active'}[nav.name == selected_service_parent]" class="submenu-dropdown" ng-repeat="(key, nav) in leftSideMenu"    >
+                    <a href="javascript:void(0)">{{ nav.name }}</a>
+                    <ul class="sub_service child">
+                        <li ng-repeat="(gKey, group) in nav.groups">
+                            <a ng-click="left_nave_services(group.url,group.serviceId)" ng-attr-id="{{group.serviceId}}" ng-class="{true: 'active_service', false: 'inactive_service'}[group.serviceId == selected_service]" href="javascript:void(0);" ng-if="group.url != ''">{{ group.name }}</a>
+
+                            <a ng-click="left_nave_services(group.url,group.serviceId)" ng-attr-id="{{group.serviceId}}" ng-class="{true: 'icon-pfeil_unten', false: 'icon-pfeil-oben'}[group.serviceId == selected_service]" href="javascript:void(0);" ng-if="group.url == ''">{{ group.name }} </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<style>
+    .intra_active > .sub_service {
+        display: block!important;
+    }
+    .active_service{
+        color: #ed3237!important;
+    }
+</style>
+
+

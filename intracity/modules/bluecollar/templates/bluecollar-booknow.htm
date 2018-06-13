@@ -1,0 +1,296 @@
+<form method="post" id="BookNowFormData" name="booking" novalidate>
+
+
+    <div class="col-lg-3">
+        <div class="data_head">
+            <div class="text_box">
+                <span class="font_normal_miduam">Name</span>
+                <span class="font_simple">
+                                    {{ search_data.data.posted_by.username }}</span>
+            </div>
+            <div class="text_box">
+                <span class="font_normal_miduam">Vehicle Type</span>
+                <span class="font_simple"
+                      ng-repeat="type in search_data.data.veh_mach"> {{  type.detail.name }}  </span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-3">
+        <div class="data_head">
+            <div class="text_box">
+                <span class="font_normal_miduam">Experience</span>
+                <span class="font_simple">
+                                        {{ search_data.data.experience }}
+                                    </span>
+            </div>
+            <div class="text_box">
+                <span class="font_normal_miduam">Qualification</span>
+                <span class="font_simple">{{ search_data.data.qualification }}</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-3">
+        <div class="data_head">
+            <div class="text_box">
+                <span class="font_normal_miduam">Salary</span>
+                <span class="font_simple"> {{ search_data.data.salary_type }} </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form_100">
+
+
+        <div class="col-lg-4">
+            <h4 class="mid_heading">Employer Details</h4>
+        </div>
+
+        <div class="load_type">
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra" ng-class="{true: 'error'}[submitted && formOrder.name.$invalid]">
+                    <input required id="consignor_name" type="text"
+                           value="{{ search_data.data.bc_data.first_name + ' ' + search_data.data.bc_data.last_name }}"
+                           name="consignor_name" class="input_ani">
+                    <label class="lbl_text2">Consignor Name <span>*</span></label>
+                    <span class="help-inline" style="color:red;"
+                          ng-show="booking.consignor_name.$dirty && booking.consignor_name.$invalid">Please enter consignor name</span>
+
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input required id="consignor_mobile" type="text" name="consignor_mobile"
+                           value="{{ search_data.data.bc_data.cur_mobile }}" class="input_ani clsMobileno"
+                           maxlength="10">
+                    <label class="lbl_text2">Mobile <span>*</span></label>
+
+                    <span class="help-inline" style="color:red;"
+                          ng-show="booking.consignor_mobile.$dirty && booking.consignor_mobile.$invalid">Please enter consignor mobile</span>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input required id="consignor_email" type="email" value="{{ search_data.data.bc_data.email }}"
+                           name="consignor_email" class="input_ani clsConsignEmail">
+                    <label class="lbl_text2">Email id</label>
+                    <span class="help-inline" style="color:red;"
+                          ng-show="booking.consignor_email.$dirty && booking.consignor_email.$invalid">Please enter consignor valid email</span>
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="load_type">
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra"
+                     ng-class="{true: 'error'}[submitted && formOrder.consignee_address1.$invalid]">
+                    <input required type="text" id="consignor_address1" class="input_ani"
+                           value="{{ search_data.data.bc_data.cur_street }}" name="consignor_address1">
+                    <label class="lbl_text2">Address 1 <span> * </span></label>
+                    <span class="help-inline" style="color:red;"
+                          ng-show="booking.consignor_address1.$dirty && booking.consignor_address1.$invalid">Please enter consignor address</span>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input id="address2" value="{{ search_data.data.bc_data.cur_locality }}" type="text" class="input_ani" >
+                    <label class="lbl_text2">Address 2 </label>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input id="address3" type="text" class="input_ani" value="{{ search_data.data.bc_data.cur_house_no }}" >
+                    <label class="lbl_text2">Address 3 </label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="load_type">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input type="text" id="consignorPinCode" maxlength="6"
+                           class="input_ani {{errorClass(formError.currentAddress.pincode)}}"
+                           name="currentAddressPincode"
+                           required="" value="{{ search_data.data.bc_data.cur_pincode }}" autocomplete="off">
+
+
+                    <label class="lbl_text2">Pin Code</label>
+                    <!-- <span class="form-error" >Enter pincode</span> -->
+
+                    <!--Previous City  -->
+
+                    <!-- <input required type="text" id="pin_code" class="input_ani clsPinCode" maxlength="6" ng-model="data.consignor.pin_code">
+                    <label class="lbl_text2">Pin code <span> * </span></label> -->
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input  type="text" id="consignor_city" class="input_ani" value="{{ search_data.data.bc_data.cur_city.city_name }}">
+                    <label class="lbl_text2">City </label>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input  id="consignor_state" type="text" value="{{ search_data.data.bc_data.cur_state.state_name }}" class="input_ani">
+                    <label class="lbl_text2">State </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <h4 class="mid_heading">Consignee Details</h4>
+        </div>
+
+
+        <div class="load_type">
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input required type="text" id="consignee_name" name="consignee_name" class="input_ani"
+                           ng-model="data.consignee.name">
+                    <label class="lbl_text2">Consignee Name <span>*</span></label>
+                    <span class="help-inline" style="color:red;"
+                          ng-show="booking.consignee_name.$dirty && booking.consignee_name.$invalid">Please enter consignee name</span>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input required id="consignee_mobile" name="consignee_mobile" type="text"
+                           class="input_ani clsMobileno" maxlength="10" ng-model="data.consignee.mobile">
+                    <label class="lbl_text2">Mobile <span>*</span></label>
+                    <span class="help-inline" style="color:red;"
+                          ng-show="booking.consignee_mobile.$dirty && booking.consignee_mobile.$invalid">Please enter consignee mobile</span>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input id="consignee_email_id" type="email" name="consignee_email" class="input_ani" required
+                           ng-model="data.consignee.email_id">
+                    <label class="lbl_text2">Email id * </label>
+                    <span class="help-inline" style="color:red;"
+                          ng-show="booking.consignee_email.$dirty && booking.consignee_email.$invalid">Please enter consignee valid email</span>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="load_type">
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input required id="consignee_address1" type="text" class="input_ani"
+                           ng-model="data.consignee.address1">
+                    <label class="lbl_text2">Address 1 <span> * </span></label>
+                    <span class="help-inline" style="color:red;"
+                          ng-show="booking.consignee_address1.$dirty && booking.consignee_address1.$invalid">Please enter consignee address</span>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input type="text" id="consignee_address2" class="input_ani" ng-model="data.consignee.address2">
+                    <label class="lbl_text2">Address 2 </label>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input id="consignee_address3" type="text" class="input_ani" ng-model="data.consignee.address3">
+                    <label class="lbl_text2">Address 3 </label>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="load_type">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+
+                    <input type="text" name="consignee_pin_code" id="consignee_pin_code" class="input_ani "
+                           name="currentAddressPincode" required="" maxlength="6"
+                           typeahead="name as (sugg.city_name +', '+ sugg.statename) for sugg in autocompCity('consignee', $viewValue)"
+                           ng-model="data.consignee.pin_code"
+                           typeahead-on-select="selectedCity($item, $model, $label, 'consignee')" autocomplete="off">
+
+                    <label class="lbl_text2">Pin code <span> * </span></label>
+                    <span class="help-inline" style="color:red;"
+                          ng-show="booking.consignee_pin_code.$dirty && booking.consignee_pin_code.$invalid">Please enter consignee pin code</span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input id="consigneecity" type="text" class="input_ani " ng-model="data.consignee.city">
+                    <label class="lbl_text2">City </label>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input id="consignee_state" type="text" class="input_ani" ng-model="data.consignee.state">
+                    <label class="lbl_text2">State </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="load_type">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="select_form_intra">
+                    <input id="additional_details" type="text" class="input_ani"
+                           ng-model="data.consignee.additional_details">
+                    <label class="lbl_text2">Additional Details </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="load_type padding">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="post_public">
+                    <div class="admin_input">
+                        <input id="AcceptTermAndCond" type="checkbox" ng-model="data.need_insurance">
+                        <label for="AcceptTermAndCond"><span class="b_text">Need Insurance</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="load_type">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="div_btn">
+                    <div class="need-insurance Confirm_post_btn pull-left" style="display:none">
+                        Need Insurance
+                    </div>
+                    <input type="submit" ng-disabled="booking.$invalid" ng-model="data.checkout"
+                           ng-click="submitBookNow(data,'checkout')" value="Checkout" class="Confirm_post_btn"
+                           ng-click="submitted=true">
+                    <!-- <input type="submit" class="button_serch" name="button" value="Float RFP" ng-click="submitted=true" /> -->
+                    <input type="submit" ng-model="data.add_to_cart" ng-disabled="booking.$invalid"
+                           ng-click="submitBookNow(data,'add_to_cart')" value="Add To Cart" class="Add_Routes_btn"
+                           ng-click="submitted=true">
+                    <!-- <input type="submit" ng-model="data.add_to_cart" value="Add To Cart" class="Add_Routes_btn" ng-disabled="booking.$invalid"> -->
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</form>

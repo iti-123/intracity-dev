@@ -1,0 +1,582 @@
+
+<div class="hyper-buyer-post">
+  <style class="ng-scope">
+   .modal-content {
+     border-radius: 0;
+   }
+   .modal-body {
+     max-height: calc(100vh - 200px);
+     overflow-y: auto;
+   }
+   .modal-body {
+     display: table;
+     width: 100%;
+     padding: 50px 15px 20px;
+     font-size: 17px;
+     font-family: FuturaBT-Book !important;
+     word-spacing: 3px; 
+     text-align: justify;
+   }
+   .select_form_intra{
+    height:65px;
+  }
+  .font_normal_Labour{
+   font-family: FuturaBT-Book !important;
+   font-weight:400;
+   padding-left:5px;
+   padding-top:2px;
+ }
+ .paddintg_t_10{
+  padding-top:15px!important;
+}
+.reporting_time_spot{
+  position: relative;
+}
+.add-on-1{
+  left: 0px!important;
+  top: 18px!important;
+}
+#validtime{
+ background: #fff;
+ margin-top: 0px;
+ padding-left: 35px;
+ color: #696767  !important;
+}
+.form-error {
+  color:red;
+}
+</style>
+<div class="col-lg-12 col-md-12 col-sm-12 ng-scope">
+ <div class="right_serch_p">
+  <div class="right_search_bar">
+   <ul class="search_bar_tab">
+    <li><a href="#">Buyer </a><span class="crum-2"><i class="fa  fa-angle-right"></i></span></li>
+    <li><a href="#">Services</a><span class="crum-2"><i class="fa  fa-angle-right"></i></span></li>
+    <li><a href="#" class="active_c">Hyperlocal Post</a></li>
+  </ul>
+</div>
+<form name="buyer_post" enctype="multipart/form-data" id="buyer_post-form" method="post" ng-submit="hp_buyer_post(data)" class="ng-pristine" novalidate>
+ <div class="location_sec heght_100">
+  <div class="spot_t" ng-init="data.type='1'">
+    <ul>
+      <li>
+        <input type="radio" ng-checked="true" ng-click="showHideType(1)" ng-model="data.type" value="1" id="spot" data-target="spot_d" class="ng-untouched ng-valid ng-dirty" name="12" checked="checked">
+        <label for="spot">Spot</label>
+        <span></span>
+      </li>
+      <li>
+        <input type="radio" ng-model="data.type" ng-click="showHideType(2)" value="2" id="term" data-target="term_d" class="ng-untouched ng-valid ng-dirty ng-valid-parse" name="13">
+        <label for="term">Term</label>
+        <span></span>
+      </li>
+    </ul>
+  </div> 
+
+  <!--   <div class="load_type"> -->
+  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <div class="select_form_intra" id="title_div">
+        <input type="text" id="title" name="title" class="input_ani" ng-model="data.title" required=""/>
+        <label class="lbl_text2">Title<span>*</span></label>
+    </div>
+     <span class="form-error" ng-show="formError.title">Enter value more than 0.</span>
+ </div>
+  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <div class="select_form_intra" id="city1">
+     <input type="text" id="city" name="city" autocomplete="off"  class="input_ani" typeahead-on-select="onSelect($item, $model, $label)"
+     ng-model="data.city_id.id" required="" typeahead="city as (city.city_name) for city in cities   | filter:$viewValue "
+     />
+     <label class="lbl_text2">SELECT CITY<span>*</span></label>
+     <span class="search_icon"><i class="fa fa-search"></i></span>
+   </div>
+ </div>
+ <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-if="data.type==1">
+  <div class="date_selection select_form_intra" id="valid_from_date2">
+   <span class="left_v_from">
+     <input type="text" name = "depart_date" readonly ng-model="data.depart_date" fromcalendar id="valid_from_date" class="date_p input_ani ng-pristine ng-untouched ng-valid" required="">
+     <label class="lbl_text2 padg_l">Date<span>*</span></label>
+   </span>
+ </div>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-if="data.type==2">
+  <div class="date_selection select_form_intra" id="fromdate1">
+   <span class="left_v_from">
+     <input type="text" name = "fromdate" readonly ng-model="data.from_date" fromcalendar id="fromdate" class="date_p input_ani ng-pristine ng-untouched ng-valid" required="">
+     <label class="lbl_text2 padg_l">From Date<span>*</span></label>
+   </span>
+ </div>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-if="data.type==2">
+  <div class="date_selection select_form_intra" id="todate1">
+   <span class="left_v_from">
+     <input type="text" name = "todate" readonly ng-model="data.todate" fromcalendar id="todate" class="date_p input_ani ng-pristine ng-untouched ng-valid" required="">
+     <label class="lbl_text2 padg_l">To Date<span>*</span></label>
+   </span>
+ </div>
+</div>
+<div  class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+  <div class="select_form_intra" id="service_type_div">
+   <select ng-model="data.service_type" class="selectpicker" selectpicker id="service_type" ng-options=" y.value for (x,y) in servicetype track by y.id">
+    <option value="">Service Type<span>*</span></option>
+  </select>
+</div>
+</div>  
+<!--   </div>  -->         
+<!-- <div class="load_type">   -->  
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+ <div class="select_form_intra paddintg_t_10">
+  <div class="col-lg-3 col-md-3 col-xs-4" ng-init="data.is_fragile=0">
+   <div class="row">
+     <label class="font_normal_Labour">Fragile</label></div>
+   </div>
+   <div class="col-lg-3 col-md-3 col-xs-4">
+     <input type="radio" id="yes" class="radio_box2" ng-model="data.is_fragile" name="is_fragile" value="1">
+     <label for="yes">Yes</label>
+   </div>
+   <div class="col-lg-3 col-md-3 col-xs-4">
+     <input type="radio" id="no" class="radio_box2" name="is_fragile" ng-model="data.is_fragile" value="0" selected>
+     <label for="no">No</label>
+   </div>
+ </div>
+</div>
+<!-- </div> -->
+<!-- <div class="load_type"> --><!-- {{categories}} -->
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+ <div class="select_form_intra" id="category_div">
+  <select ng-model="data.category" id="category" class="selectpicker" selectpicker ng-options="y.name for (x,y) in categories track by y.id">
+   <option value="">Select Category<span>*</span></option>
+ </select>
+</div>
+</div> 
+
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-if="data.type==2">
+ <div class="select_form_intra" id="unit1">
+  <select ng-model="data.unit" id="unit" ng-options="y.value for (x,y) in UNIT track by y.id" class="selectpicker" selectpicker>
+   <option value="">Estimated Total Units</option>
+
+ </select>
+</div>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-if="data.type==2">
+ <div class="select_form_intra" id="quantity1">
+  <input type="text" min="0" ng-model="data.quantity" id="quantity" name="no_of_vehicles" maxlength="5" class="input_ani valid-number no_of_vehicles ng-pristine ng-invalid ng-invalid-required ng-valid-maxlength ng-touched" required="">
+  <label class="lbl_text2">Estimated Total Quantity </label>
+  <span class="form-error" ng-show="formError.quantity">Enter quantity more than 0.</span>
+</div>
+</div>
+<div>
+  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+    <div class="select_form_intra" id="price_type1">
+      <select id="price_type" ng-model="data.price_type" class="selectpicker" selectpicker name="price_type"  required ng-options="y.value for (x,y) in priceTypes track by y.id">
+        <option value="">Select Price Type *</option>                                
+      </select>                               
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-3 col-sm-4 col-xs-12">
+    <div class="select_form_intra" id="price1">
+      <input type="text" class="input_ani valid-number firm_price" autocomplete="off" id="price"  ng-model="data.firm_price" min="0" maxlength="6" required=""/>                               
+      <label class="lbl_text2">Price *</label> 
+      <span class="form-error" ng-show="formError.firm_price">Enter price more than 0.</span>                              
+    </div>
+  </div>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+  <div class="select_form_intra" id="from_location1">
+    <input type="text" autocomplete="off" name="from_location" id="from_location"  ng-model="data.from_location" 
+    class="input_ani" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+    required="">
+    <label class="lbl_text2" >From location <span>*</span></label>
+  </div>
+</div>
+
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+  <div class="select_form_intra" id="to_location1">
+    <input type="text" autocomplete="off" name="to_location" id="to_location" ng-model="data.to_location" 
+    class="input_ani" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+    required="">
+    <label class="lbl_text2">To location <span>*</span></label>
+  </div>
+</div>
+<!-- </div> -->
+<div class="load_type" >
+  <div class="col-lg-12">
+    <div class="font_normal_b">For every to location collect below info.</div>
+  </div>
+</div>
+
+<div class="load_type" >
+  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+    <div class="select_form_intra" id="weight1">
+      <input type="text" min="0" maxlength="3" name="max_weight" id="weight" class="distance_rate input_ani" ng-model="data.max_weight" required="">
+      <label class="lbl_text2">Total Weight(In Kg) <span>*</span></label>
+       <span class="form-error" ng-show="formError.max_weight">Enter weight more than 0.</span>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+    <div class="select_form_intra" id="parcel1">
+      <input type="text" min="0" id="parcel" maxlength="4" name="hp_max_no_parcel" class="distance_rate input_ani" ng-model="data.max_no_parcel" required="">
+      <label class="lbl_text2">No of Parcels <span>*</span></label>
+       <span class="form-error" ng-show="formError.max_no_parcel">Enter parcel more than 0.</span>
+    </div>
+  </div>
+</div>
+<div class="add_more_btn">
+ <div class="add_m_b">
+  <input type="button" class="button_serch"  ng-click="addMore(data)" name="button" value="Add" />
+</div>
+</div>
+<div class="col-lg-12 col-md-12" id="showdata" style = "display:none">
+ <div class="c_details">
+  <div class="c_sub">
+   <div class="c_type">
+    <span>FROM</span>
+    <span>TO</span>
+    <span>SERVICE TYPE</span>
+    <span>CATEGORY</span>
+    <span>WEIGHT</span>
+    <span>NO OF PARCEL</span>
+  </div>
+</div>
+
+<div class="c_sub" ng-repeat="(key, value) in multipleLocation track by $index">
+ <div class="d_type">
+
+  <span>
+    {{value.from_location.locality_name}}
+  </span>
+
+  <span>{{value.to_location.locality_name}}</span>
+  <span>{{value.service_type.value}}</span>
+  <span>{{value.category.name}}</span>
+  <span> {{ value.max_weight}}</span>
+  <span>{{ value.max_no_parcel}}</span>
+  <div class="edit_del">
+   <span ng-click="editlocation(value,$index)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+   </span>
+   <span class="delete_img" ng-click="removeItem($index)">
+     <i class="fa fa-trash-o" aria-hidden="true"></i>
+   </span>
+ </div>
+</div>
+</div>
+<!-- list Term Distance -->
+
+</div>
+</div>
+<div class="load_type" ng-if="data.type==2">
+ <div class="col-lg-12"><h3 class="h3_heading">RFP ELIGIBILITY</h3></div> 
+ <div class="d_row">
+   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+     <div class="select_form_intra paddintg_t_10">
+     <label class="font_normal_Labour">No. of Own Trucks</label>
+   </div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+   <div class="select_form_intra">
+     <input type="text" class="input_ani valid-number" ng-model="data.no_of_trucks" min="0" maxlength="6" required="">
+     <label class="lbl_text2">No of Own Trucks*</label>
+     </div>
+   </div>
+ </div>
+  <div class="d_row">
+   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+     <div class="select_form_intra paddintg_t_10">
+     <label class="font_normal_Labour">Average Turn Over last three years(In Lakhs)</label>
+   </div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+   <div class="select_form_intra">
+     <input type="text" class="input_ani valid-number" ng-model="data.average_turn_over" min="0" maxlength="6" required="" >
+     <label class="lbl_text2">Avg Turn Over (In Lakhs) *</label>
+     </div>
+   </div>
+ </div>
+ <div class="d_row">
+   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+     <div class="select_form_intra paddintg_t_10">
+     <label class="font_normal_Labour">Income Tax Assessee</label>
+   </div>
+   </div>
+
+
+
+   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 paddint-top8"  >
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" >
+   <div class="select_form_intra" ng-init="data.income_tax_assesse=0">
+     <input type="radio" id="tax_y" name="income_tax_assesse"  value="1" ng-model="data.income_tax_assesse" class="radio_box2"  required="" checked >
+     <label for="tax_y">Yes</label>
+     </div>
+     </div>
+     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+   <div class="select_form_intra">
+    <input type="radio" id="tax_N"   name="income_tax_assesse"  value="0" ng-model="data.income_tax_assesse" class="radio_box2" required="">
+     <label for="tax_N">No</label>
+     
+     </div>
+     </div>
+   </div>
+ </div>
+ <div class="d_row">
+   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+     <div class="select_form_intra paddintg_t_10">
+     <label class="font_normal_Labour">No. of years in Business</label>
+   </div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+   <div class="select_form_intra">
+     <input type="text" class="input_ani valid-number" ng-model="data.no_of_years" min="0" maxlength="2" required="">
+     <label class="lbl_text2">No. of years *</label>
+     </div>
+   </div>
+ </div>
+  <div class="d_row">
+   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+     <div class="select_form_intra paddintg_t_10">
+     <label class="font_normal_Labour">Term Contract with other companies</label>
+   </div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 paddint-top8" ng-init="data.term_contract_woc=1">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+   <div class="select_form_intra">
+     <input type="radio" id="tax_y2" value="1" name="term_contract_woc" ng-model="data.term_contract_woc" class="radio_box2" required="" checked>
+     <label for="tax_y2">Yes</label>
+     </div>
+     </div>
+     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+   <div class="select_form_intra">
+    <input type="radio" id="tax_N2" value="0" name="term_contract_woc" class="radio_box2" ng-model="data.term_contract_woc" required="">
+     <label for="tax_N2">No</label>
+     </div>
+     </div>
+   </div>
+ </div>
+ </div>
+<div class="d_row">
+ <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+   <div class="select_form_intra paddintg_t_10">
+     <label class="font_normal_Labour">Last Date/Time for Quote</label>
+   </div>
+ </div>
+ <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+  <div class="date_selection select_form_intra">
+   <span class="left_v_from">
+     <input type="text" name="fromdate" readonly ng-model="data.quote_date" fromcalendar id="quote_date" class="date_p input_ani ng-pristine ng-untouched ng-valid" required="">
+     <label class="lbl_text2 padg_l">Date<span>*</span></label>
+   </span>
+ </div>
+</div>
+
+<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+  <div class="select_form_intra">
+    <div class="reporting_time_spot  js-label-datepicker select_form_intra input-prepend date clsbid_close_time">
+      <span class="left_v_from" id="hyper_time_icon_add"><i class="fa fa-clock-o"></i>
+      <input class="input_ani padding_l vehicle_reporting_time  ato  disable-bg-white clsFTLTBidCloserTime js-placeholder ng-pristine ng-untouched ng-invalid ng-invalid-required" readonly="readonly" jsplaceholder="" name="vehicle_reporting_time" id="validtime" type="text" placeholder="Time *" ng-model="data.validtime"  required="">
+      <!-- <label class="lbl_text2 padi_l js-placeholder-text">Time *</label> </span> -->
+    </div>   
+  </div> 
+</div>
+</div>
+<style>
+.left_v_from{
+      float: left;
+    width: 100%;
+}
+  .left_v_from i{
+    position: absolute;
+    top:19px;
+    font-size:20px;
+  }
+  .padi_l{
+   padding:0px 35px;
+  }
+</style>
+ <div class="d_row" ng-if="data.type==2">
+   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+     <div class="select_form_intra paddintg_t_10">
+     <label class="font_normal_Labour">Bid Terms & Conditions</label>
+   </div>
+   </div>
+  
+ </div>
+ <div class="m-top-15" ng-repeat="termUploadDocx in termUploadDocxs" ng-if="data.type==2">
+  <div class="col-md-12 padding-none">
+      <span style="display: none;" class="box-number-delete">2</span>
+      <div class="documents-terms">
+          <div class="col-md-4 form-control-fld">
+              <div class="upload-fld">
+
+                  <input type="file" ng-model="termUploadDocx.term_upload_docx" class="form-control form-control1 update_txt upload-change chrome-alignment" ng-model-instant onchange="angular.element(this).scope().setBidTermsDocument(this)" id="terms_condtion_types_term_defualt">
+
+              </div>
+          </div>
+      </div>
+      <div class="col-md-4 form-control-fld">
+          <input type="button" class="documents-add btn add-btn add_btn_new" value="Add +" ng-click="addDocx()" ng-if="$index==0">
+          <a ng-click="removeBidDocument($index)" class="removeCont"><i class="fa fa-trash-o m-top-15" ng-hide="$index==0"></i></a>
+      </div>
+      <div class="clearfix"></div>
+  </div>
+  </div>
+ <div class="d_row" ng-if="data.type==2">
+   <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+     <div class="comment_text">
+       <textarea placeholder="Comment" ng-model="data.comment"></textarea>
+     </div>
+   </div>
+ </div>
+
+
+</div> 
+
+
+<div class="load_type">
+ <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+  <div class="spot_t" ng-init="data.post_type=0">
+   <ul class="select_inline">
+    <li>
+     <input type="radio" id="PostPublic" ng-model="data.is_private_public" name="post_type" value="0" class="ng-pristine radio_box2 ng-untouched ng-valid">
+     <label for="PostPublic" class="ab_c">Post Public</label>
+     
+   </li>
+   <li>
+     <input type="radio" name="post_type" id="PostPrivate" ng-model="data.is_private_public" value="1" class="ng-pristine ng-untouched ng-valid radio_box2">
+     <label for="PostPrivate" class="ab_c">Post Private</label>
+     
+   </li>
+ </ul>
+</div>
+</div>
+<div class="col-md-12 padding-none">
+  <div class="clearfix"></div>
+  <div class="col-md-4 m-top-10 typeahed-search" ng-show="data.is_private_public == '1'">
+   <input type="text" class="form-control form-control1" id="sellerListTerm" ng-model="data.visibleToSellers" name="seller_list" placeholder="Seller Name (Auto Search)" ng-required="dataSpot.isPublic=='private'" />
+   <label ng-show="!data.visibleToSellers && errorRaised" class="error">Seller is required</label>
+ </div>
+</div>
+</div>
+<div class="load_type">
+ <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+  <div class="post_public">
+   <div class="admin_input">
+    <input name="is_accept_terms_cond" ng-model="data.is_accept_terms_cond" class="check_box"  id="Accept" type="checkbox" value = "1" class="check_box ng-pristine ng-untouched ng-valid">
+    <label for="Accept">Accept Terms &amp; Conditions (Digital Contract)</label>
+  </div>
+</div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+  <div class="div_btn">
+   <input type="button" id="confirm" value="Confirm" class="Confirm_post_btn" invalids="0">
+   <input type="button" id="draft" value="Save as Draft" class="Add_Routes_btn" invalids="0">
+ </div>
+</div>
+</div>
+</form>
+<div class="modal fade" id="QuoteConfirmationPopup" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content statusText" style="overflow: hidden;padding: 0 10px 10px">
+      <div class="modal-body popup" id="responsetext">
+      </div>
+      <div>
+        <button type="button" class="btn btn-default pull-right" data-type="" ng-click="closeConfirmationPopup(data)">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!--end of location_sec-->
+</div>
+<!--end of right_search_p-->
+</div>
+<script>
+
+
+
+
+$(document).on("focus click keyup keypress blur change",'#hyper_time_icon_add', function(e){
+    $(".hour.disabled, .minute.disabled").addClass("timeDisable");
+    //Checking Bid Closure date
+    var lastBidDate = $('#quote_date').val();
+    
+    if(lastBidDate == null || lastBidDate == ''){
+        
+        return false;
+    }
+    $("#hyper_time_icon_add").datetimepicker({
+        format: 'hh:ii',
+        autoclose: true,
+        startView: 1,
+        maxView: 1,
+        minuteStep:2,
+        linkField: "validtime",
+        linkFormat: "hh:ii"
+    }).on("show", function(e){
+        var lastBidDate = $('#quote_date').val();
+        var currDate = moment().format('DD/MM/YYYY');
+        if(lastBidDate == currDate){
+            var lBd = $('#quote_date').val().split('/').reverse();
+            var TimeZoned = new Date( lBd[0], (lBd[1]-1), lBd[2], moment().format('H'), moment().format('mm'), moment().format('ss'));
+        }else{
+            var lBd = $('#quote_date').val().split('/').reverse();
+            var TimeZoned = new Date( lBd[0], (lBd[1]-1), lBd[2]);
+        }
+        $('#hyper_time_icon_add').datetimepicker('setStartDate', TimeZoned);
+        
+        
+    }).on("change", function(e){
+        
+        $(this).parent().find('label').addClass('text-input-placeholder_pos_top');
+        
+
+    });    
+});
+
+
+
+/*        $(document).on("focus click keyup keypress blur change", '.reporting_time_spot', function(e) {
+                $(".hour.disabled, .minute.disabled").addClass("timeDisable");
+
+                 var todayBidDate = moment().format('DD/MM/YYYY');
+                    var lastBidDate = $("#quote_date").val();  
+    
+                    var lBd = lastBidDate.split('/').reverse();
+                
+                $(".reporting_time_spot").datetimepicker({
+                    format: 'hh:ii',
+                    autoclose: true,
+                    startView: 1,
+                    maxView: 1,
+                    minuteStep: 2,
+                    linkField: "departure",
+                    linkFormat: "hh:ii",
+
+                }).on("show", function(e) {
+
+                    
+                    var TimeZoned = new Date(lBd[0], (lBd[1] - 1), lBd[2], moment().format('H'), moment().format('mm'), moment().format('ss'));
+                    if(lastBidDate == todayBidDate){
+                      $('.reporting_time_spot').datetimepicker('setStartDate', TimeZoned);
+                    }
+                    else{
+                       $('.reporting_time_spot').datetimepicker();
+                    }
+                   
+                    
+
+                }).on("change", function(e) {
+                    $(this).parent().find('label').addClass('text-input-placeholder_pos_top');
+                    //$(this).closest('label').addClass('text-input-placeholder_pos_top');
+
+                });
+
+            });*/
+
+    $(document).ready(function () {
+        $("#QuoteConfirmationPopup").modal({ 
+            show: false,   
+            backdrop: 'static'    
+        });
+
+    });
+    
+
+</script>
+

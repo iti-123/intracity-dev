@@ -1,0 +1,18 @@
+<div class="">     
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin_input">
+        <div class="select_form_intra price_type">
+            <select ng-model="dataSpot.price_type" name="price_type" class="price_type selectpicker" selectpicker required ng-options="y.value for (x,y) in priceTypes track by y.id">
+            <option value="">Select Price Type *</option>  
+            
+        </select>  
+        <span class="help-inline" style="color:red;" ng-show="price_type_validation">Please enter Price Type</span>                                                                                       
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-3 col-sm-4 col-xs-12 margin_input" ng-show="dataSpot.price_type.id == 2">
+        <div class="select_form_intra">
+            <input type="text" class="input_ani valid-number firm_price" autocomplete="off" maxlength="8"  ng-model="dataSpot.firm_price" required=""/>                               
+            <label class="lbl_text2">Price *</label>   
+             
+        </div>
+    </div>
+</div> 

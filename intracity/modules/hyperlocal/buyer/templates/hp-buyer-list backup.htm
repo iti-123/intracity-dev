@@ -1,0 +1,783 @@
+﻿﻿<style>
+   .daa {
+   width: 90%;
+   }
+   .modal-header{ border:none;}
+   .all-pap{ width:100%;padding: 0px 20px; }
+   .all-pap h3{ color: #666666; }
+   .all-pap .contet{ width:100%;}
+   .all-pap .contet ul{ margin: 0px;
+   padding: 0px;
+   list-style: none;}
+   .all-pap .contet ul li{ margin: 0px;
+   padding: 5px 0px;
+   line-height: 30px;
+   list-style: none;
+   font-size: 19px;
+   line-height: 43px;
+   color: #666666;}
+   .all-pap .contet ul li input{
+   width: 18px;
+   height: 18px;
+   background-color: #F5F8FC;
+   border-color: #adb8c0;
+   }
+   .modal-footer{ width:100%; border:none;}
+   .flat-btn {
+   font-size: 18px !important;
+   padding: 4px 10px;
+   text-transform: capitalize;
+   margin-left: 10px;
+   height: 35px;
+   font-family: FuturaBT-Medium !important;
+   background-color: #ed3237;
+   border: 1px solid #ed3237;
+   color: #ffffff !important;
+   }
+   .clc{font-size: 37px;}
+   .popup-txt-feld {
+   display: inline-block;
+   width: 100px;
+   }
+   .popup-txt-feld input{    width: 100% !important;
+   float: left;
+   padding: 18px 0px;
+   text-align: center;
+   top: 14px !important;}
+   input[type=checkbox]+.lbl {
+   position: relative;
+   z-index: 11;
+   display: inline-block;
+   margin: 0;
+   line-height: 30px;
+   min-height: 14px;
+   min-width: 14px;
+   font-weight: normal;
+   }
+   input[type=checkbox]:checked+.lbl::before {
+   display: inline-block;
+   content: '\f00c';
+   /* background-color: #F5F8FC; */
+   /* border-color: #adb8c0; */
+   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+   }
+   input[type=checkbox]+.lbl.padding-8::before {
+   margin-right: 8px;
+   }
+   input[type=checkbox]+.lbl::before {
+   font-family: fontAwesome;
+   font-weight: normal;
+   font-size: 12px;
+   color: #222222;
+   content: "\a0";
+   background-color: #FAFAFA;
+   border: 1px solid #999999;
+   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+   border-radius: 0;
+   text-align: center;
+   vertical-align: middle;
+   height: 16px;
+   line-height: 16px;
+   width: 16px;
+   margin-right: 1px;
+   margin-top: -3px;
+   display: inline-block !important;
+   }
+   input[type=checkbox] {
+   opacity: 0;
+   position: absolute;
+   z-index: 12;
+   width: 18px;
+   height: 18px;
+   }
+</style>
+<form name="buyerlist" method="post" ng-app>
+   <div class="col-lg-12 col-md-12 col-sm-12">
+      <div class="right_serch_p">
+         <div class="right_search_bar">
+            <ul class="search_bar_tab">
+               <li><a href="javascript:void(0)">Buyer</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+               <li><a href="#services">Services</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+               <li><a href="javascript:void(0)" class="active_c">Post Master</a></li>
+            </ul>
+         </div>
+         <div class="intra_city_list heght_100">
+            <div class="loc_det">
+               <ul class="loc_list">
+                  <li>POST MASTER</li>
+               </ul>
+               <div class="right_setg space_top">
+                  <div class="cell-1">
+                     <ul class="list-inline pull-right m-bottom-0">
+                        <li>
+                           <a class="buyer-setting" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-gear setting_icon"></i> Settings</a>
+                        </li>
+                        <li>
+                           <a href="#hp-buyer-post" class="search-modify">
+                           <span><i class="fa fa-plus puls_icon" aria-hidden="true"></i> Post</span></a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+               <div class="modal-dialog daa" role="document">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <button type="button" class="close clc" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     </div>
+                     <div class="modal-body">
+                        <div class="all-pap">
+                           <h3>Spot Enquiry</h3>
+                           <div class="contet">
+                              <ul>
+                                 <li> <input name="se_all_rate_card" checked="checked" type="checkbox" class="settings_checkbox"><span class="lbl padding-8">Display Offers (Quotes) / Leads against posts</span></li>
+                                 <li> <input class="settings_checkbox" checked="checked" name="se_private_rate_card" type="checkbox"><span class="lbl padding-8"></span> Display private rate cards if all four parameters matches with my orders in the past 6 months</li>
+                                 <li> <input name="se_all_rate_card" checked="checked" type="checkbox" class="settings_checkbox"><span class="lbl padding-8"> Display all rate cards posted to me as "Partly related" enquiries shown in a separate file
+                                    if From Location matches with my booking
+                                    during "last 6 months bookings"</span>
+                                 </li>
+                                 <li> <input name="se_all_private_posts" checked="checked" type="checkbox" class="settings_checkbox"><span class="lbl padding-8"> Display all private posts of rate cards as "Unrelated" enquiries will be shown in a separate file
+                                    in the post master main page</span>
+                                 </li>
+                              </ul>
+                           </div>
+                           <h3>Spot Lead</h3>
+                           <div class="contet">
+                              <ul>
+                                 <li> <input class="settings_checkbox" checked="checked" name="public_rate_cards" type="checkbox"><span class="lbl padding-8"></span> Display all public rate cards post under rate card if 4 parameters matches with my orders in the past 6 months
+                                    <input class="settings_checkbox" checked="checked" type="checkbox"><span class="lbl padding-8"></span>To, <input class="settings_checkbox" checked="checked" type="checkbox"><span class="lbl padding-8"></span>From, <input class="settings_checkbox" checked="checked" type="checkbox"><span class="lbl padding-8"></span>Load Type (Including Load Type Any) <input class="settings_checkbox" checked="checked" type="checkbox"><span class="lbl padding-8"></span> Vehicle Type
+                                 </li>
+                                 <li> <input name="partly_related_leads" checked="checked" type="checkbox" class="settings_checkbox"><span class="lbl padding-8"> Display all rate cards posted to me as Partly related Leads shown in a separate file
+                                    if From Location matches with my booking
+                                    during “last 6 months bookings”</span>
+                                 </li>
+                                 <li>
+                                    <input name="unrelated_leads" checked="checked" type="checkbox" class="settings_checkbox">
+                                    <span class="lbl padding-8"> Display all other public rate cards as Unrelated leads will be shown in a separate file in the post master main page
+                                    </span>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn flat-btn red-btn" data-dismiss="modal">Ok</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="loc_det">
+               <ul class="filter_s ul_nav_search">
+                  <li class="all" ng-click="search_filter('all')">All({{postrecord.total}})</li>
+                  <li class="0" ng-click="search_filter(0)">Public({{postrecord.public}})</li>
+                  <li class="1" ng-click="search_filter(1)">Private({{postrecord.private}})</li>
+                   <li class="spot" ng-click="search_filter('spot')">Spot({{postrecord.spot}})</li>
+                   <li class="term" ng-click="search_filter('term')">Term({{postrecord.term}})</li>
+                   
+                   <li ><img src="images/download-icon.png" alt="IN" ng-click="search_filter('Inbound')"></li>
+                   <li>{{postrecord.total}}<img ng-click="search_filter('all')" src="images/upload-icon.png" alt="OUT"></li>
+               </ul>
+            </div>
+            <div class="loc_det">
+               <ul class="filter_s">
+                  <li>CITY</li>
+                  <li>FROM LOCATION</li>
+                  <li>TO LOCATION</li>
+                  <li>POST TYPE</li>
+                  <li>POST STATUS</li>
+               </ul>
+               <span class="rilters_right" id="filters_click"><i class="fa fa-bars"></i> Filters </span>
+            </div>
+            <div class="white_bg overflow" id="filters_show">
+               <div class="scroller-div">
+                  <div class="fillter_div">
+                     <!-- <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="">
+                              <input type="text" id="buyer" class="input_ani" autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)" ng-model="data.city_id.id" required="" typeahead="city as (city.city_name) for city in cities | filter:$viewValue" />
+                              <label class="lbl_text2">SELECT CITY</label>
+                              <span class="search_icon"><i class="fa fa-search"></i></span>
+                           </div>
+                        </div>
+                     </div> -->
+                     <!-- <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <div class="select_form_intra">
+                                 <input type="text" id="buyer" class="input_ani" autocomplete="off" ng-model="data.d_from_location" required="" />
+                                 <label class="lbl_text2">FROM LOCATION</label>
+                                 <span class="search_icon"><i class="fa fa-search"></i></span>
+                              </div>
+                              <div class="filter_from_location">
+                                 <div class="col-lg-6">
+                                    <div class="row">
+                                       <ul class="post_inline">
+                                          <li ng-repeat="(key,value) in locations |filter:data.d_from_location">
+                                             <div class="admin_input">
+                                                <input ng-click="selectNewFromLocation(value.locality_name);" id="from{{value.id}}" name="value.id" ng-model="data.locality_name[key]" autocomplete="off" type="checkbox" value="{{value.id}}" class="check_box check_box_1">
+                                                <label for="from{{value.id}}">
+                                                <label for="Cash">{{value.locality_name}}</label>
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div> -->
+                     <!-- <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <div class="select_form_intra">
+                                 <input type="text" id="buyer" class="input_ani d_to_location" autocomplete="off" ng-model="data.d_to_location" required="" />
+                                 <label class="lbl_text2">TO LOCATION</label>
+                                 <span class="search_icon"><i class="fa fa-search"></i></span>
+                              </div>
+                              <div class="filter_from_location">
+                                 <div class="col-lg-12">
+                                    <div class="row">
+                                       <ul class="post_inline">
+                                          <li>
+                                             <div class="admin_input" ng-repeat="(key,value) in locations | filter:data.d_to_location">
+                                                <input ng-click="selectNewToLocation(value.locality_name);" autocomplete="off" type="checkbox" id="to{{value.id}}" class="check_box">
+                                                <label for="to{{value.id}}">{{ value.locality_name }}</label>
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div> -->
+                     <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <div class="select_form_intra">
+                                 <input type="text" class="input_ani" ng-model="data.vehicle_type" required="" />
+                                 <label class="lbl_text2">Category</label>
+                                 <span class="search_icon"><i class="fa fa-search"></i></span>
+                              </div>
+                              <div class="filter_from_location">
+                                 <div class="col-lg-12">
+                                    <div class="row">
+                                       <ul class="post_inline">
+                                          <li ng-repeat="type in categories">
+                                             <div class="admin_input">
+                                                <input type="checkbox" ng-click="selectNewCategory(type.id)" id="type{{type.id}}" class="check_box">
+                                                <label class="text-capitalize" for="type{{type.id}}">{{type.name}}</label>
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <div class="select_form_intra">
+                                 <input type="text" class="input_ani" ng-model="data.post_type" required="">
+                                 <label class="lbl_text2">Service</label>
+                                 <span class="search_icon"><i class="fa fa-search"></i></span>
+                              </div>
+                              <div class="filter_from_location">
+                                 <div class="col-lg-12">
+                                    <div class="row">
+                                       <ul class="post_inline">
+                                          <li ng-repeat="type in servicetype">
+                                             <div class="admin_input">
+                                                <input type="checkbox" ng-click="selectNewService(type.id)" id="service{{type.id}}" class="check_box">
+                                                <label for="service{{type.id}}">{{type.value}}</label>
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <div class="select_form_intra">
+                                 <input type="text" class="input_ani" ng-model="data.post_type" required="">
+                                 <label class="lbl_text2">Post Status</label>
+                                 <span class="search_icon"><i class="fa fa-search"></i></span>
+                              </div>
+                              <div class="filter_from_location">
+                                 <div class="col-lg-12">
+                                    <div class="row">
+                                       <ul class="post_inline">
+                                          <li ng-repeat="status in post_Status" ng-show="status.id==3 || status.id==1">
+                                             <div class="admin_input" >
+                                                <input type="checkbox"  ng-click="postStatus(status.id)" id="status{{status.id}}"  class="check_box">
+                                                <label for="status{{status.id}}">{{status.value}}</label>
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <div class="select_form_intra ">
+                                 <input type="text" class="input_ani" required="" ng-model="data.name">
+                                 <label class="lbl_text2">SELLER NAME</label>
+                                 <span class="search_icon"><i class="fa fa-search"></i></span>
+                              </div>
+                              <div class="filter_from_location sellers_det">
+                                 <div class="col-lg-12">
+                                    <div class="row">
+                                       <ul class="post_inline">
+                                          <li ng-repeat="(key,value) in sellerList |filter:data.name">
+                                             <div class="admin_input">
+                                                <input ng-click="selectNewSellerName(value.username);" id="s{{value.id}}" name="value.id" ng-model="data.username[key].username" type="checkbox" value="{{value.id}}" class="check_box check_box_1">
+                                                <label for="s{{value.id}}">
+                                                <label for="Cash">{{value.username}}</label>
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <div class="date_selection select_form_intra">
+                                 <span class="left_v_from">
+                                 <input  type="text" id="from_calendar" ng-model="data.dispatchdate" fromcalendar class="date_p input_ani" required="">
+                                 <label class="lbl_text2 padg_l">Date </label>
+                                 </span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <!-- <div class="date_selection select_form_intra">
+                                 <span class="left_v_from">
+                                 <input type="text" id="to_date" ng-model="data.lastdate" tocalendar class="date_p input_ani" required="">
+                                 <label class="lbl_text2 padg_l">Post End Date</label>
+                                 </span>
+                              </div> -->
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+             <!-- {{spotsList}}  -->
+            <table class="table" id="myTable" >
+               <tr>
+                  <th class="sort" onclick="DataTable(0)">TO/FROM</th>
+                  <th >Service Type</th>
+                  <th onclick="DataTable(2)">Category</th>
+                  <th class="sort" onclick="DataTable(3)">DATE </th>
+                  <th style="text-align:center">NOTIFICATIONS</th>
+               </tr>
+               <tbody ng-click="totalLink(value.enc_id)"  ng-repeat="(key, value) in spotsList|filter:NewCategoryFilter|filter:NewserviceFilter|filter:{ depart_date:data.dispatchdate}|filter:NewCityFilter|filter:NewBuyersFilter|filter:NewPostStatusFilter |  orderBy:'id'">
+                  <tr class="total-link" style="cursor: pointer;" >
+                     <td><a href="#hyperlocal-buyer-post-Details/{{value.enc_id}}"><span><img src="images/upload-icon.png" alt="IN"></span> {{ value.is_private_public == 1 && 'Private' || 'Public' }}</a></td>
+                     <td class="text-capitalize"><a href="#hyperlocal-buyer-post-Details/{{value.enc_id}}">
+                     {{value.servicetype|getobjectvalue:servicetype}}
+                     </a>
+                        
+                        </td>
+                     <td class="text-capitalize"><a href="#hyperlocal-buyer-post-Details/{{value.enc_id}}">{{value.category|getName:categories}}</a></td>
+                     <td><a href="#hyperlocal-buyer-post-Details/{{value.enc_id}}">{{ value.depart_date }}</a></td>
+                     <td>
+                        <div class="info_links">
+                           <a href="#hyperlocal-buyer-post-Details/{{value.enc_id}}" class="active"><i class="fa fa-envelope-o"></i></a>
+                           <a href="#hyperlocal-buyer-post-Details/{{value.enc_id}}"><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                           <a href="#hyperlocal-buyer-post-Details/{{value.enc_id}}"><i class="fa fa-bullseye"></i><span class="vlue">0</span></a>
+                           <a href="#hyperlocal-buyer-post-Details/{{value.enc_id}}"><i class="fa fa-line-chart"><span class="vlue">0</span></i></a>
+                           <a href="#hyperlocal-buyer-post-Details/{{value.enc_id}}"><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                        </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <div class="white_bg" ng-if="spotsList == ''">
+               <h3>Data not available</h3>
+            </div>
+            <div class="post-master-data">
+
+               <div class="vechile_list_main" ng-show="show=='outbound'||show=='inbound'">
+                <tabel>
+                    <tr>
+                         <div class="v_name">
+                            <span>FROM</span>
+                         </div>
+                         <div class="v_type">
+                            <span>TITLE</span>
+                            <span>VALID FROM</span>
+                            <span class="drop_d">VALID TO</span>
+                         </div>
+                  </tr>
+                  <div class="list_trans" ng-repeat="value in inboundList" ng-show="show=='inbound'">
+                     <div class="nair_trns">
+                        <span class="logo_t">
+                           {{ !empty(value.post.post_by.username) && value.post.post_by.username || '' }}
+                           <!-- <img src="images/nair_logo.png"> -->
+                        </span>
+                        <!-- <span class="text_trns">Sponsered</span> -->
+                     </div>
+                     <div class="nairs_v">
+                        <div class="vech_ts">
+                           <div>
+                              <span>
+                              {{typeBasis(value.route.type_basis)}} {{leadBasis(value.post.lead_type)}}
+                              </span>
+                           </div>
+                           <div>
+                              <span> {{ value.route.valid_from }} </span>
+                           </div>
+                           <!--<div><span>10</span><span>Loads</span></div>-->
+                           <div>
+                              <span>
+                              {{value.route.valid_to}}
+                              </span>
+                           </div>
+                           <div>
+                              <div class="sep_div1">
+                                 <input id="Submit1" type="submit" ng-click="bookInboundNow($index)" value="Book Now" class="book_btn">
+                              </div>
+                              <div class="detail_b1" ng-click="showHideInboundDetail($index)" data-id="{{ $index }}">Detail</div>
+                              <a href="javascript:void(0)" ng-click="sendInboundMessageModal($index)" data-toggle="modal" data-target="#messageModal" class="pull-right">
+                              <i class="fa fa-envelope-o"></i>
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- Detail here -->
+                     <div class="on_time" style="display:none" id="detail-{{ $index }}">
+                        <div class="row">
+                           <div class="col-sm-3">
+                              <h5>POST FROM:</h5>
+                              <p>
+                                 {{ !empty(value.post.post_by.username) && value.post.post_by.username || '' }}
+                              </p>
+                           </div>
+                           <div class="col-sm-3">
+                              <h5>VALID FROM:</h5>
+                              <p>
+                                 {{value.route.valid_from}}
+                              </p>
+                           </div>
+                           <div class="col-sm-3">
+                              <h5>VALID TO:</h5>
+                              <p>
+                                 {{value.route.valid_to}}
+                              </p>
+                           </div>
+                           <div class="col-sm-3">
+                              <h5>RATE:</h5>
+                              <p>
+                                 {{value.initial_quote_price}}
+                              </p>
+                           </div>
+                           <div class="col-sm-3">
+                              <h5>DISCOUNT RATE:</h5>
+                              <p>
+                                 {{value.initial_quote_price}}
+                              </p>
+                           </div>
+                           <div class="col-sm-3">
+                              <h5>FROM LOCATOIN:</h5>
+                              <p>
+                                 {{ !empty(value.route.from_location.city_name) && value.route.from_location.city_name || '--'}}
+                              </p>
+                           </div>
+                           <div class="col-sm-3">
+                              <h5>TO LOCATION:</h5>
+                              <p>
+                                 {{ !empty(value.route.to_location.city_name) && value.route.to_location.city_name || '--'}}
+                              </p>
+                           </div>
+                           <div class="col-sm-3">
+                              <h5>PAYMENT TERM:</h5>
+                              <p>
+                                 {{value.payment_method}}
+                              </p>
+                           </div>
+                           <div class="col-sm-3">
+                              <h5>VEHICLE TYPE:</h5>
+                              <p>
+                                 {{ !empty(value.post.vehicle_type.vehicle_type) && value.post.vehicle_type.vehicle_type || 'ANY' }}
+                              </p>
+                           </div>
+                           <div class="col-sm-3">
+                              <h5>TRANSIT DAYS:</h5>
+                              <p>
+                                 {{value.transit_day}}
+                              </p>
+                           </div>
+                           <div class="col-sm-3">
+                              <h5>LOAD COMMITMENT:</h5>
+                              <p>
+                                 1
+                              </p>
+                           </div>
+                           <div class="col-sm-3">
+                              <h5>GUARANTEED DELIVERY:</h5>
+                              <p>
+                                 YES
+                              </p>
+                           </div>
+                           <div class="col-sm-3">
+                              <h5>TRACKING:</h5>
+                              <p>
+                                 {{ trackingType(value.tracking_type) }}
+                              </p>
+                           </div>
+                           <div class="col-sm-3">
+                              <h5>LOAD TYPE:</h5>
+                              <p>
+                                 ANY
+                              </p>
+                           </div>
+                        </div>
+                        <div class="row" ng-show="value.quotation_type=='COMPETITIVE' && value.buyer_status==null">
+                           <div class="col-sm-4">
+                              <p>
+                              </p>
+                           </div>
+                           <div class="col-sm-8">
+                              <div class="col-sm-6 ct">
+                                 <p>COMPETITIVE OFFER :</p>
+                                 <p>
+                                    Rs {{value.route.emp_amount}}/-
+                                 </p>
+                                 <input type="text" class="form-control" placeholder="Quote Price" ng-model="value.buyer_quote"/>
+                              </div>
+                              <div class="col-sm-6 ct">
+                                 <input type="text" class="form-control" placeholder="Transit Days" ng-model="value.counter_transit_days"/>
+                              </div>
+                              <button class="btn col-md-5" ng-click="competitiveQuoteAction($index, 'COUNTER')">Offer</button>
+                              <button class="btn col-md-5" ng-click="competitiveQuoteAction($index, 'DENY')">Deny</button>
+                           </div>
+                        </div>
+                        <div class="row" ng-show="value.quotation_type=='FIRM' && value.buyer_status==null">
+                           <button class="btn col-md-6" ng-click="firmQuoteAction($index, 'ACCEPT')">Accept</button>
+                           <button class="btn col-md-6" ng-click="firmQuoteAction($index, 'DENY')">Deny</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Detail end here-->
+   </div>
+   <div class="list_trans" ng-repeat="value in outboundList" ng-show="show=='outbound'">
+      <div class="nair_trns">
+         <span class="logo_t">
+            {{ !empty(value.post.post_by.username) && value.post.post_by.username || '' }}
+            <!-- <img src="images/nair_logo.png"> -->
+         </span>
+         <!-- <span class="text_trns">Sponsered</span> -->
+      </div>
+      <div class="nairs_v">
+         <div class="vech_ts">
+            <div>
+               <span>
+               {{typeBasis(value.route.type_basis)}} {{leadBasis(value.post.lead_type)}}
+               </span>
+            </div>
+            <div>
+               <span> {{ value.route.valid_from }} </span>
+            </div>
+            <!--<div><span>10</span><span>Loads</span></div>-->
+            <div>
+               <span>
+               {{value.route.valid_to}}
+               </span>
+            </div>
+            <div>
+               <div class="sep_div1" ng-show="value.buyer_status=='COUNTER'">
+                  <input id="Submit1" type="submit" ng-click="finalQuoteAction($index, 'ACCEPT')" value="Accept" class="book_btn" ng-disabled="value.seller_status!='ACCEPT'">
+                  <input id="Submit2" type="submit" ng-click="finalQuoteAction($index, 'DENY')" value="Deny" ng-disabled="value.seller_status!='ACCEPT'">
+               </div>
+               <div class="detail_b1" ng-click="showHideInboundDetail($index)" data-id="{{ $index }}">Detail</div>
+               <a href="javascript:void(0)" ng-click="sendInboundMessageModal($index)" data-toggle="modal" data-target="#messageModal" class="pull-right">
+               <i class="fa fa-envelope-o"></i>
+               </a>
+            </div>
+         </div>
+      </div>
+      <!-- Detail here -->
+      <div class="on_time" style="display:none" id="detail-{{ $index }}">
+         <div class="row">
+            <div class="col-sm-3">
+               <h5>POST FROM:</h5>
+               <p>
+                  {{ !empty(value.post.post_by.username) && value.post.post_by.username || '' }}
+               </p>
+            </div>
+            <div class="col-sm-3">
+               <h5>VALID FROM:</h5>
+               <p>
+                  {{value.route.valid_from}}
+               </p>
+            </div>
+            <div class="col-sm-3">
+               <h5>VALID TO:</h5>
+               <p>
+                  {{value.route.valid_to}}
+               </p>
+            </div>
+            <div class="col-sm-3">
+               <h5>RATE:</h5>
+               <p>
+                  {{value.initial_quote_price}}
+               </p>
+            </div>
+            <div class="col-sm-3">
+               <h5>DISCOUNT RATE:</h5>
+               <p>
+                  {{value.initial_quote_price}}
+               </p>
+            </div>
+            <div class="col-sm-3">
+               <h5>FROM LOCATOIN:</h5>
+               <p>
+                  {{ !empty(value.route.from_location.city_name) && value.route.from_location.city_name || '--'}}
+               </p>
+            </div>
+            <div class="col-sm-3">
+               <h5>TO LOCATION:</h5>
+               <p>
+                  {{ !empty(value.route.to_location.city_name) && value.route.to_location.city_name || '--'}}
+               </p>
+            </div>
+            <div class="col-sm-3">
+               <h5>PAYMENT TERM:</h5>
+               <p>
+                  {{value.payment_method}}
+               </p>
+            </div>
+            <div class="col-sm-3">
+               <h5>VEHICLE TYPE:</h5>
+               <p>
+                  {{ !empty(value.post.vehicle_type.vehicle_type) && value.post.vehicle_type.vehicle_type || 'ANY' }}
+               </p>
+            </div>
+            <div class="col-sm-3">
+               <h5>TRANSIT DAYS:</h5>
+               <p>
+                  {{value.transit_day}}
+               </p>
+            </div>
+            <div class="col-sm-3">
+               <h5>LOAD COMMITMENT:</h5>
+               <p>
+                  1
+               </p>
+            </div>
+            <div class="col-sm-3">
+               <h5>GUARANTEED DELIVERY:</h5>
+               <p>
+                  YES
+               </p>
+            </div>
+            <div class="col-sm-3">
+               <h5>TRACKING:</h5>
+               <p>
+                  {{ trackingType(value.tracking_type) }}
+               </p>
+            </div>
+            <div class="col-sm-3">
+               <h5>LOAD TYPE:</h5>
+               <p>
+                  ANY
+               </p>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
+   </div>
+   </div>
+   <!-- Detail end here-->
+   </div>
+   </div>
+   <div class="white_bg" ng-if="(inboundList.length == 0 && show=='inbound')||(outboundList.length == 0 && show=='outbound')" style="text-align:center">
+      <h3>Data not available</h3>
+   </div>
+   </div>
+   </div>
+   </div>
+</form>
+<script>
+   $(document).ready(function() {
+   
+       // $('#example').DataTable();
+   
+       $("#filters_click").click(function() {
+           $("#filters_show").toggle('fast');
+       });
+     });
+   
+</script>
+<script>
+   $(document).ready(function() {
+     var gwid = $(".scroll_div").width();
+       var twid = $(".loc_det").width();
+       var acwid = gwid / twid * 100;
+       var len = $(".scroll_div").length;
+       var towid = acwid * len + 9;
+       $(".fillter_div").css({"width":""+towid+"%"});
+   });
+  
+</script>
+<style>
+   .ct{
+   padding:40px;
+   }
+   .form-control {
+   border-radius: 0;
+   width: 100%;
+   box-shadow: none !important;
+   outline: none !important;
+   height: 38px;
+   text-indent: 0;
+   padding-left: 0;
+   font-size: 16px !important;
+   border: 0;
+   border-bottom: 1px solid #e2e2e2;
+   position: relative;
+   }
+   .detail-minus:after{
+      content: "";
+      display: none;
+   }
+   .total-link td a:hover{
+       text-decoration: none;
+   }
+</style>
+
+
+<script type="text/javascript">
+   $(document).ready(function(){
+      $(".detail_b1").click(function(){
+         $(this).ToggleClass("detail-minus");
+      });
+   });
+</script>
+
+
+

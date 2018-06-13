@@ -1,0 +1,393 @@
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">Seller</a><i class="fa  fa-angle-right"></i></li>
+                <li><a href="#">Services</a><i class="fa  fa-angle-right"></i></li>
+                <li><a href="#">Intracity</a><i class="fa  fa-angle-right"></i></li>
+                <li><a href="#" class="active_c">{{post[0].post_transaction_id}}</a></li>
+            </ul>
+        </div>
+
+
+        <div class="div_100">
+            <div class="col-lg-9">
+                <div class="row">
+                    <ul class="buyer_ul">
+                        <li class="tab_10 active_buyer" data-tab="Messages">
+                            <a href="javascript:void(0);">All</a>
+                        </li>
+                        <li class="tab_10" data-tab="Offers">
+                            <a href="javascript:void(0);">PUBLIC</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="back_post">
+                    <a href="#/seller-post-list" class="back_red_btn">Back to Post</a>
+                    <!-- <a href="#/seller-rate-card-edit/{{post[0].id}}" class="back_edit">Edit</a> -->
+                    <a href="javascript:void(0);" class="delete_gray"><i ng-click="deletePost(post[0].id);" class="fa fa-trash" title="Delete"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- {{post}} -->
+        <div class="white_bg">
+            <div class="c_6">
+                <div class="col-md-2 data-fld">
+                    <span class="data-head">Title</span>
+                    <span class="data-value break-word">
+                        
+                        {{ !empty(post[0].title) ? post[0].title : '' }}
+                    </span>
+                </div>
+                <div class="col-md-2 data-fld">
+                    <span class="data-head">City</span>
+                    <span class="data-value break-word">{{post[0].city_name}}</span>
+                </div>
+                <div class="col-md-2 data-fld">
+                    <span class="data-head">Post Type</span>
+                    <span class="data-value break-word">
+                        {{ post[0].is_private_public==0 && 'Public' || 'Private' }}
+                    </span>
+                </div>
+                <div class="col-md-2 data-fld">
+                    <span class="data-head">Type Basis</span>
+                    <span class="data-value break-word">{{post[0].type_basis == 1 ? 'Hours' : 'Distance' }}</span>
+                </div>
+                <div class="col-md-4 data-fld">
+                    <span class="data-head">Vehicle Type</span>
+                    <span class="data-value break-word">{{post[0].vehicle}}</span>
+                </div>
+                <div class="col-md-2 data-fld">
+                    <span class="data-head">Valid From</span>
+                    <span class="data-value break-word">{{post[0].valid_from | date:"dd/MM/yyyy" }}</span>
+                </div>
+                <div class="col-md-2 data-fld">
+                    <span class="data-head">Valid To</span>
+                    <span class="data-value break-word">{{post[0].valid_to | date:"dd/MM/yyyy"}}</span>
+                </div>
+             
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="c_2">
+                <div class="col-lg-12">
+                    <div class="data-head text-right">ORDER</div>
+                    <div class="data-value break-all text-right">NOTIFICATIONS</div>
+                </div>
+
+                <div class="info_links padding_top">
+                    <a href=""><i class="fa fa-envelope-o"></i></a>
+                    <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                    <a href=""><i class="fa fa-bullseye"></i><span class="vlue">0</span></a>
+                    <a href=""><i class="fa fa-line-chart"><span class="vlue">0</span></i></a>
+                    <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                </div>
+
+            </div>
+
+
+            <div class="c_2">
+                <div class="col-md-12 text-right">
+                    
+                    <div class="views_font">Views {{ post[0].views.length }}</div>
+
+                    <div class="a_link contact_click">
+                        <a href="javascript:void"><i class="fa-plus fa" aria-hidden="true"></i> Details</a>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="d_box">
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                    <span class="data-head">Discounts</span>
+                    <div class="table_heading_one">
+                        <div class="col-md-3">Name</div>
+                        <div class="col-md-3">Discount Type</div>
+                        <div class="col-md-3">Discount</div>
+                        <div class="col-md-3">Credit Days</div>
+                    </div>
+                    <div class="table_heading_one" ng-repeat="(key,value) in post[0].discount">
+                        <div class="col-md-3">{{value.username}}</div>
+                        <div class="col-md-3">{{ value.disc_type==1 && 'Percent' || 'Flat' }}</div>
+                        <div class="col-md-3">{{value.disc_amt}}</div>
+                        <div class="col-md-3">{{value.credit_days}}</div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+            <div class="div_100 space10">
+
+                <div class="c_8">
+                    <ul class="filter_list">
+                        <li>City</li>
+                        <li>Vehicle Type</li>
+                        <li>Valid FROM</li>
+                        <li>Valid To</li>
+                        <li>Buyer Name</li>
+                    </ul>
+                </div>
+                <div class="c_2">
+
+                    <span class="rilters_click click_a contact_click1"><i class="fa fa-bars"></i> Filters </span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="white_bg overflow open_a d_box1" style="display:none;">
+            <div class="scroller-div">
+                <div class="fillter_div">
+                    
+                    <div class="scroll_div">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="select_form_intra">
+                                    <div class="select_form_intra">
+                                        <input type="text" ng-model="data.city" class="input_ani" required="">
+                                        <label class="lbl_text2">City</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+                                    <div class="filter_from_location sellers_det">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <ul class="post_inline">
+                                                    <li>
+                                                        <div class="admin_input"
+                                                             ng-repeat="value in cities |filter:data.city">
+                                                            <input type="checkbox" ng-click="selectCity(value.id);"
+                                                                   class="check_box" id="vl{{value.id}}">
+                                                            <label for="vl{{value.id}}">{{ value.city_name }}</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                   
+
+                    <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+
+                                <div class="select_form_intra">
+                                    <input type="text" class="input_ani" ng-model="data.vehicle_type" required=""/>
+                                    <label class="lbl_text2">VEHICLE TYPE</label>
+                                    <span class="search_icon"><i class="fa fa-search"></i></span>
+                                </div>
+
+                                <div class="filter_from_location">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <ul class="post_inline">
+                                                <li>
+                                                    <div class="admin_input">
+                                                        <div class="admin_input"
+                                                             ng-repeat="vehicle in vehicles | filter:data.vehicle_type">
+                                                            <input type="checkbox" class="check_box check_box_1"
+                                                                   ng-click="selectNewVehicleType(vehicle.vehicle_type)"
+                                                                   id="vl{{vehicle.vehicle_type}}">
+                                                            <label for="vl{{vehicle.vehicle_type}}">{{ vehicle.vehicle_type
+                                                                }}</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <div class="date_selection select_form_intra">
+                                    <span class="left_v_from">
+                                <input type="text" id="from_calendar" ng-model="data.from_date" fromcalendar
+                                        class="date_p input_ani" required="">
+                                <label class="lbl_text2 padg_l">Valid From </label>
+                                </span><span class="search_icon"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <div class="date_selection select_form_intra">
+                                    <span class="left_v_from">
+                                <input type="text" id="to_date" ng-model="data.to_date" tocalendar
+                                        class="date_p input_ani" required="">
+                                <label class="lbl_text2 padg_l">Valid To</label>
+                                </span><span class="search_icon"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scroll_div">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="select_form_intra">
+                                        <input type="text" class="input_ani" ng-model="data.name" required=""/>
+                                        <label class="lbl_text2">Buyer Name</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+
+                                    <div class="filter_from_location">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <ul class="post_inline sellers_det">
+                                                    <li>
+                                                        <div class="admin_input"
+                                                             ng-repeat="user in users | filter:data.full_name">
+                                                            <input type="checkbox" ng-click="selectBuyer(user.id)"
+                                                                   id="s{{user.id}}" class="check_box">
+                                                            <label for="s{{user.id}}">{{ user.full_name }}</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="cart heght_100">
+
+        <div class="loc_det">
+            <div class="gray_bg">
+
+                <div class="col-lg-9">
+                    <div class="row">
+
+                        <div class="col-lg-2">
+                            <div class="heading_text">City</div>
+                        </div>
+                        <!--  <div class="col-lg-2">
+                             <div class="heading_text">TO</div>
+                         </div> -->
+                        <div class="col-lg-2">
+                            <div class="heading_text">VEHICLE TYPE</div>
+                        </div>
+
+                        <!--  <div class="col-lg-3">
+                             <div class="heading_text">LOAD TYPE</div>
+                         </div> -->
+
+                        <div class="col-lg-2">
+                            <div class="heading_text">PRICE</div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="heading_text">STATUS</div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="row">
+                        <div class="heading_text padding_left">NOTIFICATIONS</div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--{{post}} -->
+        <div class="white_bg" ng-repeat="(key, value) in post|filter:NewCityFilter|filter:NewVehicleTypeFilter|filter:NewtrnsitFilter|filter:NewtrackingFilter|filter:NewBuyersFilter|filter:{from_date:data.from_date}|filter:{to_date:data.to_date}">
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="normal_text">{{ value.city_name}}</div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="normal_text">{{ value.vehicle}}</div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="normal_text"> Rs {{ !empty(value.rate_base_distance) &&
+                            value.base_distance*value.rate_base_distance || '' }}
+                            {{ !empty(value.base_time) && value.base_time*value.cost_base_time || '' }}
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="normal_text" ng-if="value.post_status==0">Draft</div>
+                        <div class="normal_text" ng-if="value.post_status==1">Open</div>
+                        <div class="normal_text" ng-if="value.post_status==2">Deleted</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+
+                <div class="info_links">
+                    <a href=""><i class="fa fa-envelope-o"></i></a>
+                    <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                    <a href="#/seller-leads/{{value.id}}"><i class="fa fa-bullseye"></i><span class="vlue">{{value.totalLeads}}</span></a>
+                    <a href=""><i class="fa fa-line-chart"><span class="vlue">0</span></i></a>
+                    <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                </div>
+            </div>
+        </div>
+
+
+    </div> <!--end of location_sec-->
+</div> <!--end of right_search_p-->
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".contact_click").click(function () {
+            $(".d_box").slideToggle("slow");
+        });
+
+        $('.contact_click').click(function () {
+            $(this).next('.d_box').slideToggle('500');
+            $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
+        });
+
+    });
+
+
+    $(document).ready(function () {
+        $(".contact_click1").click(function () {
+            $(".d_box1").slideToggle("slow");
+        });
+
+        $('.contact_click1').click(function () {
+            $(this).next('.d_box1').slideToggle('500');
+
+        });
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var gwid = $(".scroll_div").width();
+        var twid = $(".loc_det").width();
+        var acwid = gwid / twid * 100;
+        var len = $(".scroll_div").length;
+        var towid = acwid * len + 9;
+        $(".fillter_div").css({"width": "" + towid + "%"});
+    });
+</script>

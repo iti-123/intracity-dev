@@ -1,0 +1,287 @@
+<div class="col-md-12 col-sm-8 col-xs-12">    
+    <div class="right_serch_p titile_gray">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#community-profile">Community</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                <li><a href="javascript:void(0)">Event</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                
+                <li><a href="javascript:void(0)" class="active_c">Create Event</a></li>
+                
+            </ul>
+        </div>
+    </div>
+    
+    
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12">                                    
+    <div class="right_serch_p">
+        <div class="main-right">            
+            <div class="search-block inner-block-bg">
+                <div class="cell-1 cell-1-80">
+                    <ul class="list-inline m-bottom-0 m-top-5 font-bold-black">
+                        <li><a href="javascript:void(0)">Create Event</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="table-div">
+                <div class="invitation_bg">
+                    <div class="col-md-12">   
+                        <form name="myForm" ng-submit="myForm.$submitted && myForm.$valid && createArticle()" enctype="multipart/form-data" novalidate>
+                            <div class="public_private_group">
+                                <div class="radio-block">
+                                    <div class="radio_inline">
+                                        <input type="radio" ng-model="event.articletype" id="free" ng-init="event.articletype = 1" ng-click="myForm.$submitted = false" ng-checked="true" name="articletype" value="1">
+                                        <label for="free"><span></span>Free</label>
+                                    </div>
+                    
+                                    <div class="radio_inline">
+                                        <input type="radio" ng-model="event.articletype" id="paid" ng-click="myForm.$submitted = false" name="articletype" value="2">
+                                        <label for="paid"><span></span>Paid</label>
+                                    </div>
+                                </div>
+                            </div>                            
+
+                            <div class="form-group input_back margin-top15">
+                                <input class="form-control input_t" name="title" ng-model="event.title" required type="text">
+                                
+                                <label> Event Name </label>
+                                <span style="color:red" ng-show="myForm.$submitted && myForm.title.$error.required">
+                                        Event Name is required.
+                                </span>
+                            </div>
+                            <div class="form-group input_back margin-top15" ng-show="event.articletype == 2">
+                                <input class="form-control input_t valid-number" name="price"  ng-model="event.price" type="text">
+                                <label class="">View Price</label>
+                                <span style="color:red" ng-show="myForm.$submitted && event.articletype == 2 && myForm.price.$error.required">
+                                    Article Price is required.
+                                </span>
+                            </div>
+                            <div class="form-group input_back">
+                                <input class="form-control input_t" name="heading" ng-model="event.heading" required type="text">
+                                
+                                <label>Topic</label>
+                                <span style="color:red" ng-show="myForm.$submitted && myForm.heading.$error.required">
+                                    Topic is required.
+                                </span>
+                            </div>
+
+                            <div class="form-group input_back">
+                                <input class="form-control input_t" name="location" ng-model="event.location" required type="text">
+                                
+                                <label>Event Location</label>
+                                <span style="color:red" ng-show="myForm.$submitted && myForm.location.$error.required">
+                                    Location is required.
+                                </span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="select_form_intra form-group input_back margin-top15">
+                                        <input type='text' class="form-control input_t" name="start_date" ng-model="event.startDate" id="eventStartDate" required fromcalendar />
+                                        <label class="">Start Date</label>
+                                        <span style="color:red" ng-show="myForm.$submitted && myForm.start_date.$error.required">
+                                            Start Date is required
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">                                    
+                                    <div id="eventStartTimePicker" class="js-label-datepicker input-prepend date clsbid_close_time">
+                                        <span class="add-on"><i class="fa fa-clock-o"></i></span>
+                                        <input id="eventStartTimePickerInput" class="input_ani padding_l form-control form-control1 disable-bg-white clsFTLTBidCloserTime js-placeholder" readonly="readonly" jsplaceholder name="start_time" ng-model="event.startTime" type="text" placeholder="Start Time *" required>
+                                            <span class="help-inline" style="color:red;" ng-show="myForm.$submitted && myForm.start_time.$error.required">Start Time is required</span>
+                                        <!--<label class="lbl_day text-input-placeholder js-placeholder-text">Time *</label>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="select_form_intra form-group input_back margin-top15">
+                                        <input type='text' class="form-control input_t" name="end_date" ng-model="event.endDate" id="eventEndDate" required tocalendar />
+                                        <label class="">End Date</label>
+                                        <span style="color:red" ng-show="myForm.$submitted && myForm.end_date.$error.required">
+                                            End Date is required
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div id="eventEndTimePicker" class="js-label-datepicker input-prepend date clsbid_close_time">
+                                        <span class="add-on"><i class="fa fa-clock-o"></i></span>
+                                        <input id="eventEndTimePickerInput" class="input_ani padding_l form-control form-control1 disable-bg-white clsFTLTBidCloserTime js-placeholder" readonly="readonly" jsplaceholder name="end_time" ng-model="event.endTime" type="text" placeholder="End Time *" required>
+                                            <span class="help-inline" style="color:red;" ng-show="myForm.$submitted && myForm.end_time.$error.required">End Time is required</span>
+                                        <!--<label class="lbl_day text-input-placeholder js-placeholder-text">Time *</label>-->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group input_back">
+                                <input class="form-control input_t" name="no_of_seats" ng-model="event.seatsAvailable" type="text">                                
+                                <label> No. of Seats </label>           
+                                <span style="color:red" ng-show="myForm.$submitted && myForm.no_of_seats.$error.required">
+                                    Location is required.
+                                </span>                     
+                            </div>
+
+                            
+                            <div class="form-group input_back">
+                                <textarea rows="10" ng-model="event.discription" name="discription" required class="form-control textarea input_t"></textarea>
+                                <label> Brief Description</label>
+                                <span style="color:red" ng-show="myForm.$submitted && myForm.discription.$error.required">
+                                    Discription is required.
+                                </span>
+                            </div>
+
+                            <div class="form-group input_back">
+                                <textarea rows="10" ng-model="event.workShopAgenda" name="workShopAgenda" required class="form-control textarea input_t"></textarea>
+                                <label>Workshop Agenda</label>    
+                                <span style="color:red" ng-show="myForm.$submitted && myForm.workShopAgenda.$error.required">
+                                        Work ShopAgenda is required.
+                                </span>                            
+                            </div>
+
+                            <div class="form-group input_back">
+                                <textarea rows="10" ng-model="event.whyAttend" name="whyAttend" required class="form-control textarea input_t"></textarea>
+                                <label>Why you should attend</label> 
+                                <span style="color:red" ng-show="myForm.$submitted && myForm.whyAttend.$error.required">
+                                        Why you should attend is required.
+                                </span>                                  
+                            </div>
+
+                            
+                            <div class="form-group input_back">
+                                <div class="upload_img_t">Upload image :<input type="file" upload-file="event.image" ng-model="event.image" name="image" required class="form-control form-control1 update_txt contract_files" value="" ></div>
+                                <span style="color:red" ng-show="myForm.$submitted && myForm.image.$error.required">
+                                        Image is required.
+                                </span>
+                            </div>
+                        
+                       
+                            <div class="form-group input_back">                                
+                                <div class="public_private_group">
+                                    <div class="radio-block">
+                                        <div class="radio_inline">
+                                            <input type="radio" ng-model="event.status" id="enable" ng-init="event.status = 1" ng-checked="true" name="articlestatus" value="1">
+                                            <label for="enable"><span></span>Enable</label>
+                                        </div>
+                        
+                                        <div class="radio_inline">
+                                            <input type="radio" ng-model="event.status" id="disable" name="articlestatus" value="0">
+                                            <label for="disable"><span></span>Disable</label>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>
+                            <div class="search-modify pull-right m-bottom-15">
+                            <button type="submit"  class="pull-right m-bottom-15">Publish</button>
+                            </div>                    
+                        </form >
+                    </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+                               
+<script type="text/javascript">
+    $(document).on("focus click keyup keypress blur change", '#eventStartTimePicker', function(e) {
+        $(".hour.disabled, .minute.disabled").addClass("timeDisable");
+        //Checking Bid Closure date
+        var lastBidDate = $('#eventStartDate').val();
+        $("#err_ftl_spot_close_time").html('');
+        if (lastBidDate == null || lastBidDate == '') {
+            $("#err_ftl_spot_close_time").html('Select Last Date first');
+            return false;
+        }
+        $("#eventStartTimePicker").datetimepicker({
+            format: 'hh:ii',
+            autoclose: true,
+            startView: 1,
+            maxView: 1,
+            minuteStep: 2,
+            linkField: "eventStartTimePickerInput",
+            linkFormat: "hh:ii"
+        }).on("show", function(e) {
+
+            var lastBidDate = moment($('#eventStartDate').val()).format('DD/MM/YYYY');
+            var currDate = moment().format('DD/MM/YYYY');
+            if (lastBidDate == currDate) {
+                var lBd = lastBidDate.split('/').reverse();
+                var TimeZoned = new Date(lBd[0], (lBd[1] - 1), lBd[2], moment().format('H'), moment().format('mm'), moment().format('ss'));
+            } else {
+                var lBd = lastBidDate.split('/').reverse();
+                var TimeZoned = new Date(lBd[0], (lBd[1] - 1), lBd[2]);
+            }
+            console.log(TimeZoned);
+            $('#eventStartTimePicker').datetimepicker('setStartDate', TimeZoned);
+
+        }).on("change", function(e) {
+
+            $(this).parent().find('label').addClass('active');
+            //$(this).closest('label').addClass('text-input-placeholder_pos_top');
+
+        });
+    });
+
+    $(document).on("focus click keyup keypress blur change", '#eventEndTimePicker', function(e) {
+        $(".hour.disabled, .minute.disabled").addClass("timeDisable");
+        //Checking Bid Closure date
+        var lastBidDate = $('#eventStartDate').val();
+        $("#err_ftl_spot_close_time").html('');
+        if (lastBidDate == null || lastBidDate == '') {
+            $("#err_ftl_spot_close_time").html('Select Last Date first');
+            return false;
+        }
+        $("#eventEndTimePicker").datetimepicker({
+            format: 'hh:ii',
+            autoclose: true,
+            startView: 1,
+            maxView: 1,
+            minuteStep: 2,
+            linkField: "eventEndTimePickerInput",
+            linkFormat: "hh:ii"
+        }).on("show", function(e) {
+
+            var lastBidDate = moment($('#eventEndDate').val()).format('DD/MM/YYYY');
+            var currDate = moment().format('DD/MM/YYYY');
+            if (lastBidDate == currDate) {
+                var lBd = lastBidDate.split('/').reverse();
+                var TimeZoned = new Date(lBd[0], (lBd[1] - 1), lBd[2], moment().format('H'), moment().format('mm'), moment().format('ss'));
+            } else {
+                var lBd = lastBidDate.split('/').reverse();
+                var TimeZoned = new Date(lBd[0], (lBd[1] - 1), lBd[2]);
+            }
+            console.log(TimeZoned);
+            $('#eventEndTimePicker').datetimepicker('setStartDate', TimeZoned);
+
+        }).on("change", function(e) {
+
+            $(this).parent().find('label').addClass('active');
+            //$(this).closest('label').addClass('text-input-placeholder_pos_top');
+
+        });
+    });
+
+</script>  
+ <script type="text/javascript">
+       $(document).ready(function () {
+    $(".input_t").focusin(function () {
+        $(this).next().addClass("active");
+    });
+    $(".input_t").focusout(function () {
+        if ($(this).val() == "") {
+            $(this).next().removeClass("active");
+        }
+        else {
+            $(this).next().addClass("active");
+        }
+    });
+
+
+});
+   </script>   
+   
+
+                               
+              

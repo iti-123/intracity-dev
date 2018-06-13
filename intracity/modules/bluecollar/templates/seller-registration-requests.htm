@@ -1,0 +1,283 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">Blue Collar Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#" class="active_c">Seller Registration Requests List</a></li>
+            </ul>
+        </div>
+
+
+        <div class="blue_section">
+
+            <div class="list_head_100">
+                <div class="list_head">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="list_heading">Name</div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="list_heading">Account Type</div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="list_heading">Location</div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="list_heading">Email</div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="list_heading">Salary (<span><img src="../images/rupee_white.png"
+                                                                     alt="logistiks logo"/></span>)
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="list_head_data_show">
+                    <div class="datashow_list border_four" ng-repeat="s in sellerList">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="data_cont"><span>{{s.first_name}} {{s.last_name}}</span><span> <img
+                                    src="../images/p.jpg" alt="logistiks logo"/></span> <span
+                                    class="spon_h">Sponsered</span></div>
+                            <div class="data_cont">
+                                <div class="color_more_1"></div>
+                                <div class="color_more_2"></div>
+                                <div class="color_more_3"></div>
+                                <div class="color_more_4"></div>
+                                <div class="color_more_5"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="data_cont_center">{{ s.profile_type }}</div>
+
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="data_cont_center">{{ s.cur_city.city_name }},{{ s.cur_state.state_name }}</div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="data_cont_center">{{ s.email }}</div>
+
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="data_cont_center">{{ s.current_salary }}</div>
+
+                        </div>
+
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            <div class="row">
+                                <div class="div_100"><a href="#/bluecollar-seller-verification-details/{{s.enc_id}}"
+                                                        target="_blank">Open Details</a></div>
+                                <!-- <div class="detail_100">
+                                    <span class="detail_btn_plus">+ Details</span>
+                                    <div class="mes_icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                                </div> -->
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div style="display:none;">
+                        <div class="datashow_list">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="data_cont">Trair Trans<span> <img src="../images/p.jpg"
+                                                                              alt="logistiks logo"/></span> <span
+                                        class="spon_h">Sponsered</span></div>
+                                <div class="data_cont">
+                                    <div class="color_more_1"></div>
+                                    <div class="color_more_2"></div>
+                                    <div class="color_more_3"></div>
+                                    <div class="color_more_4"></div>
+                                    <div class="color_more_5"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_cont_center">LMV/MMV</div>
+
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_cont_center">3-5</div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_cont_center">SSLC</div>
+
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_cont_center">16, 000.00</div>
+
+                            </div>
+
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                <div class="row">
+                                    <div class="div_100"><a href="#">Contact</a></div>
+                                    <div class="detail_100">
+                                        <span class="detail_btn_plus">+ Details</span>
+                                        <div class="mes_icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="datashow_list">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="data_cont">Trair Trans<span> <img src="../images/p.jpg"
+                                                                              alt="logistiks logo"/></span> <span
+                                        class="spon_h">Sponsered</span></div>
+                                <div class="data_cont">
+                                    <div class="color_more_1"></div>
+                                    <div class="color_more_2"></div>
+                                    <div class="color_more_3"></div>
+                                    <div class="color_more_4"></div>
+                                    <div class="color_more_5"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_cont_center">LMV/MMV</div>
+
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_cont_center">3-5</div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_cont_center">SSLC</div>
+
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_cont_center">16, 000.00</div>
+
+                            </div>
+
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                <div class="row">
+                                    <div class="div_100"><a href="#">Contact</a></div>
+                                    <div class="detail_100">
+                                        <div class="detail_btn_plus" id="contact_click"><a href="javascript:void"><i
+                                                class="fa fa-plus" aria-hidden="true"></i> Details</a></div>
+                                        <div class="mes_icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="blue_hide_details" id="contact_open">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-9">
+                                <div class="blue_details">
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">contact number</div>
+                                            <div class="blue_contact_vlue">98585 58585</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">Email</div>
+                                            <div class="blue_contact_vlue">rock.harry@gmail.com</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">DoB</div>
+                                            <div class="blue_contact_vlue">5/5/2017</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">Blood Group</div>
+                                            <div class="blue_contact_vlue">B+Ve</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="blue_details">
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">pan number</div>
+                                            <div class="blue_contact_vlue">98585 58585</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">aadhar no</div>
+                                            <div class="blue_contact_vlue">rock.harry@gmail.com</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">ration no</div>
+                                            <div class="blue_contact_vlue">5/5/2017</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">licence no</div>
+                                            <div class="blue_contact_vlue">B+Ve</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="blue_details">
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">lic policy</div>
+                                            <div class="blue_contact_vlue">YES</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">health policy</div>
+                                            <div class="blue_contact_vlue">YES</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">medical policy</div>
+                                            <div class="blue_contact_vlue">YES</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">languages</div>
+                                            <div class="blue_contact_vlue">English,Hindi</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div> <!--end of blue_section-->
+    </div>
+</div>
+<!--end of right_search_p-->

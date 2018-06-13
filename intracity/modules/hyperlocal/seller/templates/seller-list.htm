@@ -1,0 +1,944 @@
+<style>
+    .daa {
+        width: 90%;
+    }
+
+    .modal-header {
+        border: none;
+    }
+
+    .all-pap {
+        width: 100%;
+        padding: 0px 20px;
+    }
+
+    .all-pap h3 {
+        color: #666666;
+    }
+
+    .all-pap .contet {
+        width: 100%;
+    }
+
+    .all-pap .contet ul {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+    }
+
+    .all-pap .contet ul li {
+        margin: 0px;
+        padding: 5px 0px;
+        line-height: 30px;
+        list-style: none;
+        font-size: 19px;        
+        color: #666666;
+        position: relative;
+    }
+
+    .all-pap .contet ul li input[type=text] {
+    background-color: #F5F8FC;
+    border-color: #adb8c0;  
+    }
+
+    .modal-footer {
+        width: 100%;
+        border: none;
+    }
+
+    .flat-btn {
+        font-size: 18px !important;
+        padding: 4px 10px;
+        text-transform: capitalize;
+        margin-left: 10px;
+        height: 35px;
+        font-family: FuturaBT-Medium !important;
+        background-color: #ed3237;
+        border: 1px solid #ed3237;
+        color: #ffffff !important;
+    }
+
+    .clc {
+        font-size: 37px;
+    }
+
+    .popup-txt-feld {
+        display: inline-block;
+        width: 100px;
+    }
+
+    .popup-txt-feld input {
+        width: 100% !important;
+        float: left;
+        padding: 18px 0px;
+        text-align: center;
+        top: 14px !important;
+    }
+
+    input[type=checkbox] + .lbl {
+        position: relative;
+        z-index: 11;
+        display: inline-block;
+        margin: 0;
+        line-height: 30px;
+        min-height: 14px;
+        min-width: 14px;
+        font-weight: normal;
+    }
+
+    input[type=checkbox]:checked + .lbl::before {
+        display: inline-block;
+        content: '\f00c';
+        /* background-color: #F5F8FC; */
+        /* border-color: #adb8c0; */
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+    }
+
+    input[type=checkbox] + .lbl.padding-8::before {
+        margin-right: 8px;
+    }
+
+    input[type=checkbox] + .lbl::before {
+        font-family: fontAwesome;
+        font-weight: normal;
+        font-size: 12px;
+        color: #222222;
+        content: "\a0";
+        background-color: #FAFAFA;
+        border: 1px solid #999999;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        border-radius: 0;
+        text-align: center;
+        vertical-align: middle;
+        height: 16px;
+        line-height: 16px;
+        width: 16px;
+        margin-right: 1px;
+        margin-top: -3px;
+        display: inline-block !important;
+    }
+
+    .bs-example-modal-lg input[type=checkbox] {
+        opacity: 0 !important;
+        position: absolute;
+        z-index: 12;
+        width: 18px;
+        height: 18px;
+        top: 8px;
+        cursor: pointer;      
+    }
+
+    .right_serch_p .intra_city_list .loc_det .sa li {
+
+        padding: 3px 7px;
+    }
+
+    .pp ul {
+        margin: 0px;
+    }
+    .filter-1-data{ display: none;
+    }
+    .green_bg {
+        width: 100%;
+        float: left;
+        padding: 10px 0;
+        background: #daf1e6;
+        margin-bottom: 3px;
+        margin-top: 10px;
+        color:#5b8d7a;
+        font-size: 15px; line-height: 18px;
+    }
+        .list_blue_100 .close_list_main {
+    width: 100%;
+    float: left;
+}
+.list_blue_100 .close_list_main .close_list_ul {
+    padding: 0;
+    margin: 0;
+}
+.list_blue_100 .close_list_main li {
+    display: inline-block;
+    padding: 0px 15px 7px 20px;
+    float: left;
+    font-size: 17px;
+    color: #828282;
+    position: relative;
+    font-family: FuturaBT-Book;
+    cursor: pointer;
+}
+.list_blue_100 .close_list_main li::before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 10px;
+    background: #939596;
+    top: 7px;
+    left: 9px;
+    -moz-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+.list_blue_100 .close_list_main li:after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 10px;
+    background: #939596;
+    top: 7px;
+    left: 9px;
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+</style>
+<form name="buyerlist" method="post" ng-app>
+
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="right_serch_p">
+            <div class="green_bg" ng-show="postDraft" style="text-align:center">
+                Post was saved as draft.
+            </div>
+            <div class="right_search_bar">
+                <ul class="search_bar_tab">
+                    <li><a href="javascript:void(0)">{{getUserActiveRole}}</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                    <li><a href="#services">Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                    <li><a href="javascript:void(0)" class="active_c">Post Master</a></li>
+                </ul>
+            </div>
+            <div class="intra_city_list heght_100">
+                <div class="loc_det cell-1">
+                    <ul class="loc_list sa">
+                        <li>POST MASTER </li>  
+                    </ul>
+                    <div class="right_setg">
+                        <div class="pp">
+                            <ul class="list-inline pull-right m-bottom-0">
+                                <li>
+                                    <div class="search-modify" data-toggle="modal" data-target=".bs-example-modal-lg">
+                                        <span><i id="mysettingbtn" class="fa fa-gear setting_icon"></i> Settings</span>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="search-modify"><span><i class="fa fa-plus puls_icon"
+                                                                        aria-hidden="true"></i>  <a
+                                            href="#/hp-seller-rate-card">Post</a></span></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                     aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog daa" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close clc" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+
+                            </div>
+							
+                            <div class="modal-body">
+							
+                                <div class=" all-pap">  <!-- ng-app="sellerPostmasterSettingSaveApp" -->
+								   <form serializer="save_setting(setting_data)" id="sellerPostmasterSettingSave" ng-controller="HpSellerCtrl">
+                                    <h3>Spot Enquiry</h3>
+                                    <div class="contet">
+                                        <ul>
+											<!-- 	seller_spot_enquiries_related : true,
+													seller_spot_enquiries_partly_related : false,
+													seller_spot_enquiries_un_related: false,
+													
+													seller_spot_lead_related : true,
+													seller_spot_lead_partly_related : false,
+													seller_spot_lead_un_related : false,
+
+													seller_term_enquiries_related : true,
+													seller_term_enquiries_partly_related : false,
+													seller_term_enquiries_un_related : false,
+
+													seller_term_lead_related : true,
+													seller_term_lead_partly_related : false,
+													seller_term_lead_un_related : false, 
+											-->
+                                            <li>
+                                                <input name="seller_spot_enquiries_related" disabled="true" checked="checked" type="checkbox">
+                                                <span class="lbl padding-8">
+						</span> Display related enquiries under rate card if matching within
+                                                "validity period" :
+                                                <input disabled="" checked="checked" type="checkbox"><span
+                                                    class="lbl padding-8"></span>To,
+                                                <input disabled="" checked="checked" type="checkbox"><span
+                                                    class="lbl padding-8"></span>From,
+                                                <input disabled="" checked="checked" type="checkbox"><span
+                                                    class="lbl padding-8"></span>Load
+                                                Type
+                                                <input disabled="" checked="checked" type="checkbox"><span
+                                                    class="lbl padding-8"></span> Vehicle Type
+                                            </li>
+
+                                            <li> 
+											<!-- name="seller_partly_related_enquiries" -->
+                                                <input checked="checked" name="seller_spot_enquiries_partly_related" id="seller_un" type="checkbox" checked="checked"  ng-model="setting_data.seller_spot_enquiries_partly_related" ng-click="save_setting(setting_data)" />
+												
+												<span class="lbl padding-8"> Display Partly related enquiries 
+													<input name="se_os_enq" checked="checked" type="checkbox">
+													<span class="lbl padding-8"></span>
+													From ( From Location of Operating States ) will be shown in a separate file in
+                                                the post master main page
+                                                </span>
+                                            </li>
+                                            <li>
+											<!--  name="seller_un_related_enquiries" -->
+                                                <input checked="checked" name="seller_spot_enquiries_un_related" id="seller_nn" ng-model="setting_data.seller_spot_enquiries_un_related" ng-click="save_setting(setting_data)" type="checkbox">
+                                                <span class="lbl padding-8"> Display Unrelated enquiries will be shown
+												in a separate file in the post master main page (the same will apply if there is no rate card)
+												</span>
+											</li>
+                                        </ul>
+                                    </div>
+
+
+                                    <h3>Spot Lead</h3>
+                                    <div class="contet">
+                                        <ul>
+                                            <li>
+                                                <input disabled="" checked="checked" name="seller_spot_lead_related" type="checkbox">
+
+                                                <span class="lbl padding-8"></span> Display related public post under
+                                                rate
+                                                card if matching within "validity period" :
+                                                <input disabled="" checked="checked" name="sl_rel_to" type="checkbox">
+                                                <span
+                                                        class="lbl padding-8"></span>To,
+                                                <input disabled="" checked="checked" name="sl_rel_from" type="checkbox">
+                                                <span
+                                                        class="lbl padding-8"></span>From,
+                                                <input disabled="" checked="checked" name="sl_rel_load_type"
+                                                       type="checkbox">
+                                                <span
+                                                        class="lbl padding-8"></span>Load Type
+                                                <input disabled="" checked="checked" name="sl_vehice_type"
+                                                       type="checkbox">
+                                                <span
+                                                        class="lbl padding-8"></span>Vehicle Type
+                                            </li>
+
+                                            <li>
+                                                <input name="seller_spot_lead_partly_related" checked="checked" type="checkbox" ng-model="setting_data.seller_spot_lead_partly_related" ng-click="save_setting(setting_data)">
+
+                                                <span class="lbl padding-8"></span> Display Partly related public posts
+                                                <input
+                                                        name="sl_os_posts" checked="checked" type="checkbox"><span
+                                                    class="lbl padding-8"></span> From ( From Location of Operating
+                                                States
+                                                ) will be shown in a separate file in the post master main page
+                                            </li>
+
+                                            <li>
+                                                <input name="seller_spot_lead_un_related" checked="checked" type="checkbox" ng-model="setting_data.seller_spot_lead_un_related" ng-click="save_setting(setting_data)">
+                                                <span class="lbl padding-8"></span> Display Unrelated public post will
+                                                be
+                                                shown in a separate file in the post master main page
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <h3>Term Enquiries</h3>
+                                    <div class="contet">
+                                        <ul>
+                                            <li>
+                                                <input disabled="" checked="checked" name="seller_term_enquiries_related" type="checkbox" ng-model="setting_data.seller_term_enquiries_related" ng-click="save_setting(setting_data)">
+
+                                                <span class="lbl padding-8"> Display all enquires with atleast <span
+                                                        class="popup-txt-feld">
+						<input disabled="" class="form-control form-control1 js-placeholder" placeholder="50%"
+                               type="text"></span>                                                of the routes having matching public rate card or term contracts in the post
+                                                master mainpage i.e No unrelated route enquries (less than 50%) to be shown
+                                                in mainpage
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <input name="seller_term_enquiries_partly_related" checked="checked" type="checkbox" ng-model="setting_data.seller_term_enquiries_partly_related" ng-click="save_setting(setting_data)">
+
+                                                <span class="lbl padding-8"></span> Display Partly related enquiries
+                                                <input
+                                                        name="te_os_enqs" checked="checked" type="checkbox"><span
+                                                    class="lbl padding-8"></span>From ( From Location of Operating
+                                                States
+                                                ) will be shown in a separate file in the post master mainpage (2)
+                                            </li>
+                                            <li>
+                                                <input name="seller_term_enquiries_un_related" checked="checked" type="checkbox" ng-model="setting_data.seller_term_enquiries_un_related" ng-click="save_setting(setting_data)">
+                                                <span class="lbl padding-8"></span> Display Unrelated enquiries will be
+                                                shown
+                                                in a separate file in the post master mainpage (3) (the same will apply
+                                                if
+                                                there is no rate card or term contract)
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
+                                    <h3>Term Leads</h3>
+                                    <div class="contet">
+                                        <ul>
+                                            <li>
+                                                <input disabled="" checked="checked" name="seller_term_lead_related" type="checkbox">
+
+                                                <span class="lbl padding-8"></span> Display all enquires with atleast
+                                                <span
+                                                        class="popup-txt-feld">
+                                                    <input disabled="" class="form-control form-control1 js-placeholder"
+                                                           placeholder="50%" type="text"></span>
+                                                of the routes having matching public rate card or term contracts or bid
+                                                profile match in the post master mainpage i.e No unrelated route
+                                                enquries
+                                                (less than 50%) to be shown in mainpage
+                                            </li>
+
+                                            <li>
+                                                <input name="seller_term_lead_partly_related" checked="checked" type="checkbox" ng-model="setting_data.seller_term_lead_partly_related" ng-click="save_setting(setting_data)">
+                                                <span class="lbl padding-8"> Display Partly related 	enquiries <input
+                                                        name="sl_os_enqs" checked="checked" type="checkbox"><span
+                                                        class="lbl padding-8"></span>From
+                                                ( From Location of Operating States ) will be shown in a separate file in
+                                                the post master mainpage (2)
+                                                </span>
+                                            </li>
+
+                                            <li>
+                                                <input name="seller_term_lead_un_related" checked="checked" type="checkbox" ng-model="setting_data.seller_term_lead_un_related" ng-click="save_setting(setting_data)">
+                                                <span class="lbl padding-8"></span> Display Unrelated enquiries will be
+                                                shown
+                                                in a separate file in the post master mainpage (3) (the same will apply
+                                                if
+                                                there is no rate card or term contract)
+                                            </li>
+                                        </ul>
+                                    </div>
+									</form>
+                                </div>
+							
+							
+                                <div class="modal-footer">
+                                    <button type="button" class="btn flat-btn red-btn" data-dismiss="modal">Ok</button>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="loc_det">
+                    <ul class="filter_s">
+                        <li class="all" ng-click="search_filter('all')">ALL</li>
+                        <li class="public" ng-click="search_filter('public')">Public({{ !empty(postCount[0].public) &&
+                            postCount[0].public || 0 }})
+                        </li>
+                        <li class="private" ng-click="search_filter('private')">Private({{ !empty(postCount[0].private) &&
+                            postCount[0].private || 0 }})
+                        </li>
+
+                        <li class="Inbound" ng-click="search_filter('Inbound')">
+                            <span> {{spotsList.totalLeadCount}} <img src="images/download-icon.png" alt="IN"></span>
+
+                        <li class="Outbound" ng-click="search_filter('Outbound')">
+                            {{ !empty(postCount[0].outbond) && postCount[0].outbond || 0 }}
+                            <span> <img src="images/upload-icon.png" alt="OUT"></span>
+                        </li>
+
+                         
+                    </ul>
+                </div>
+              
+                <div class="loc_det"  ng-show="selectdata.bound!='Inbound'">
+                    <ul class="filter_s">
+                        <li>CITY</li>
+                        <li>SERVCIE TYPE</li>
+                        <li>BUYER</li>
+                        <li>VALID FROM</li>
+                        <li>VALID TO</li>
+                    </ul>                   
+                   
+
+                    <span class="rilters_right" ng-show="filClearValue" ng-click="clearAll()">Clear All </span>                    
+                    <span class="rilters_right" id="filters_click"><i class="fa fa-bars"></i> Filters </span>
+                </div>
+                  <div class="list_blue_100">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                        <div class="close_list_main">
+                            <ul class="close_list_ul">
+                                <li ng-repeat="t in filterData.city"
+                                    ng-click="removeElem(filterData.city,$index)">{{ getCity(t) }}
+                                </li>
+                                <li ng-repeat="t in filterData.service_type"
+                                    ng-click="removeElem(filterData.service_type,$index)">
+                                    {{ getServiceType(t) }}
+                                </li>
+                                <li ng-repeat="t in filterData.usernames"
+                                    ng-click="removeElem(filterData.usernames,$index)">
+                                    {{ getUsername(t)}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                   <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="clear_right" ng-show="filClearValue" ng-click="clearAll()">Clear All</div>
+                    </div> -->
+                </div>
+                <div class="white_bg overflow" id="filters_show" ng-show="selectdata.bound!='Inbound'">
+                    <div class="fillter_div">
+                        <div class="scroll_div">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="select_form_intra">
+                                    <div class="select_form_intra">
+                                        <input type="text" ng-model="data.city" class="input_ani" required="">
+                                        <label class="lbl_text2">City</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+                                    <div class="filter_from_location sellers_det">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <ul class="post_inline">
+                                                    <li>
+                                                        <div class="admin_input"
+                                                             ng-repeat="city in cities | filter:data.city">
+                                                            <input type="checkbox" ng-checked="checkedFilterData(filterData.city,city.id)" ng-click="addFilterData(filterData.city,city.id);" class="check_box" id="vl{{city.id}}">
+                                                            <label for="vl{{city.id}}">{{ city.city_name }}</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scroll_div">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="select_form_intra">
+                                        <input type="text" class="input_ani" ng-model="data.service_type" required=""/>
+                                        <label class="lbl_text2">Service Type</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+                                    <div class="filter_from_location">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <ul class="post_inline">
+                                                    <li>
+                                                        <div class="admin_input"
+                                                             ng-repeat="service in servicetype | filter:data.value">
+                                                            <input type="checkbox" ng-checked="checkedFilterData(filterData.service_type,service.id)" ng-click="addFilterData(filterData.service_type,service.id);"
+                                                                   id="vls{{service.id}}" class="check_box">
+                                                            <label for="vls{{service.id}}">{{
+                                                                service.value }}</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scroll_div">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="select_form_intra">
+                                        <input type="text" class="input_ani" ng-model="data.name" required=""/>
+                                        <label class="lbl_text2">Buyer Name</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+
+                                    <div class="filter_from_location">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <ul class="post_inline sellers_det">
+                                                    <li>
+                                                        <div class="admin_input"
+                                                             ng-repeat="user in users | filter:data.username">
+                                                            <input type="checkbox" ng-checked="checkedFilterData(filterData.usernames,user.id)" ng-click="addFilterData(filterData.usernames,user.id);" id="s{{user.id}}" class="check_box">
+                                                            <label for="s{{user.id}}">{{ user.username }}</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scroll_div">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="date_selection select_form_intra">
+                                        <span class="left_v_from">
+                                    <input type="text" id="from_calendar" ng-model="filterData.from_date" fromcalendar
+                                           class="date_p input_ani" required="">
+                                    <label class="lbl_text2 padg_l">Valid From </label>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scroll_div">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="date_selection select_form_intra">
+                                        <span class="left_v_from">
+                                    <input type="text" id="to_date" ng-model="filterData.to_date" tocalendar
+                                           class="date_p input_ani" required="">
+                                    <label class="lbl_text2 padg_l">Valid To</label>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!---inboud starts filter come -->
+
+
+<div class="loc_det" ng-show="selectdata.bound=='Inbound'">
+               <ul class="filter_s">
+                  
+                  <li>Category</li>
+                  <li>Service</li>
+                  <!-- <li>Buyer</li> -->
+                  <li>Post Status</li>
+                  <li>Date</li>
+                </ul>
+    
+               <span class="rilters_right" id="filters_click1"><i class="fa fa-bars"></i> Filters </span>
+            </div>
+            <div class="white_bg overflow filter-1-data" id="filters_show1" ng-show="selectdata.bound=='Inbound'">
+               <div class="scroller-div">
+                  <div class="fillter_div">
+                     
+                     
+                     <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <div class="select_form_intra">
+                                 <input type="text" class="input_ani" ng-model="data.vehicle_type" required="" />
+                                 <label class="lbl_text2">Category</label>
+                                 <span class="search_icon"><i class="fa fa-search"></i></span>
+                              </div>
+                              <div class="filter_from_location">
+                                 <div class="col-lg-12">
+                                    <div class="row">
+                                       <ul class="post_inline">
+                                          <li ng-repeat="type in categories.data">
+                                             <div class="admin_input">
+                                                <input type="checkbox" ng-click="addFilterData(filterData.category,type.id)" id="type{{type.id}}" class="check_box">
+                                                <label class="text-capitalize" for="type{{type.id}}">{{type.name}}</label>
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <div class="select_form_intra">
+                                 <input type="text" class="input_ani" ng-model="data.post_type" required="">
+                                 <label class="lbl_text2">Service</label>
+                                 <span class="search_icon"><i class="fa fa-search"></i></span>
+                              </div>
+                              <div class="filter_from_location">
+                                 <div class="col-lg-12">
+                                    <div class="row">
+                                       <ul class="post_inline">
+                                          <li ng-repeat="type in servicetype">
+                                             <div class="admin_input">
+                                                <input type="checkbox" ng-click="addFilterData(filterData.service,type.id)" id="service{{type.id}}" class="check_box">
+                                                <label for="service{{type.id}}">{{type.value}}</label>
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <div class="select_form_intra">
+                                 <input type="text" class="input_ani" ng-model="data.post_type" required="">
+                                 <label class="lbl_text2">Post Status</label>
+                                 <span class="search_icon"><i class="fa fa-search"></i></span>
+                              </div>
+                              <div class="filter_from_location">
+                                 <div class="col-lg-12">
+                                    <div class="row">
+                                       <ul class="post_inline">
+                                          <li ng-repeat="status in post_Status" ng-show="status.id==3 || status.id==1">
+                                             <div class="admin_input" >
+                                                <input type="checkbox"  ng-click="addFilterData(filterData.postStatus,status.id)" id="status{{status.id}}"  class="check_box">
+                                                <label for="status{{status.id}}">{{status.value}}</label>
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <div class="select_form_intra ">
+                                 <input type="text" class="input_ani" required="" ng-model="data.name">
+                               
+                                 <label class="lbl_text2">SELLER NAME</label>
+                                 <span class="search_icon"><i class="fa fa-search"></i></span>
+                              </div>
+                              <div class="filter_from_location sellers_det">
+                                 <div class="col-lg-12">
+                                    <div class="row">
+                                       <ul class="post_inline">
+                                          <li ng-repeat="(key,value) in sellerList |filter:data.name">
+                                             <div class="admin_input">
+                                                <input ng-click="addFilterData(filterData.sellerName,value.id)" id="s{{value.id}}" name="value.id" ng-model="data.username[key].username" type="checkbox" value="{{value.id}}" class="check_box check_box_1">
+                                                <label for="s{{value.id}}">
+                                                <label for="Cash">{{value.full_name}}</label>
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div> -->
+                     <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <div class="date_selection select_form_intra">
+                                 <span class="left_v_from">
+                                 <input  type="text" ng-change="addFilterData(filterData.date,data.dispatchdate)"  ng-model="data.dispatchdate" fromcalendar class="date_p input_ani" required="">
+                                 <label class="lbl_text2 padg_l">Date </label>
+                                 </span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- -->
+                     <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <!-- <div class="date_selection select_form_intra">
+                                 <span class="left_v_from">
+                                 <input type="text" id="to_date" ng-model="data.lastdate" tocalendar class="date_p input_ani" required="">
+                                 <label class="lbl_text2 padg_l">Post End Date</label>
+                                 </span>
+                              </div> -->
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!--- inbound filter end here -->
+
+
+
+
+                 <div ng-if="selectdata.bound!='Inbound'">
+                <div class="loc_det">
+                    <div class="gray_bg">
+                        <div class="col-lg-2">
+                            <div class="heading_text">POST TYPE</div>
+                        </div>
+                        <div class="col-lg-1 npr">
+                            <div class="heading_text">Title</div>
+                        </div>
+                        <div class="col-lg-2 npr">
+                            <div class="heading_text">SERVICE TYPE</div>
+                        </div>
+                        <div class="col-lg-2 npr">
+                            <div class="heading_text">VALID FROM</div>
+                        </div>
+
+                        <div class="col-lg-2 npr">
+                            <div class="heading_text">VALID TO</div>
+                        </div>
+                        <div class="col-lg-3 np">
+                            <div class="heading_text padding_left">NOTIFICATIONS</div>
+                        </div>
+                    </div>
+                </div>
+               <!--  {{results}} -->
+                <div class="sellerList">
+                    <div ng-repeat="value in results track by $index" >
+                        <a href="javascript:void();" ng-click="goToLink(value);">
+                        <div class="white_bg border-bottom-p" ng-click = "getData(value)" >
+                            <div class="col-lg-2 npr">
+                                <div class="normal_text"><span><img src="images/upload-icon.png" alt="IN"></span> {{
+                                    value.is_private_public == 1
+                                    && 'Private' || 'Public' }}
+                                </div>
+                            </div>
+                            <div class="col-lg-1 npr">
+                                <div class="normal_text" title="{{ !empty(value.title) && value.title || 'N/A' }}">{{ !empty(value.title) && value.title || 'N/A' }}</div>
+                            </div>
+                            <div class="col-lg-2 npr">
+                                <div class="normal_text" ng-show="value.service_type == 1">Express</div>
+                                <div class="normal_text" ng-show="value.service_type == 2">Fast</div>
+                                <div class="normal_text" ng-show="value.service_type == 3">Same Day</div>
+                            </div>
+
+                            <div class="col-lg-2 npr">
+                                <div class="normal_text">{{ value.from_date |datefilter|date:'dd/MM/yyyy' }}</div>
+                            </div>
+
+                            <div class="col-lg-2 npr">
+                                <div class="normal_text">
+                                    {{value.to_date |datefilter|date:'dd/MM/yyyy'}}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 npr">
+                                <div ng-if="value.post_status == 1" class="info_links">
+                                    <a href="#hyperlocal-seller-post-details/{{ value.id }}"><i class="fa fa-envelope-o"></i></a>
+                                    <a href="#hyperlocal-seller-post-details/{{ value.id }}"><i class="fa fa-file-text-o"></i><span
+                                            class="vlue">1</span></a>
+                                    <a href="#hyperlocal-seller-post-details/{{ value.id }}"><i class="fa fa-bullseye"></i><span
+                                            class="vlue">{{ value.countOfLeads }}</span></a>
+                                    <a href="#hyperlocal-seller-post-details/{{ value.id }}"><i class="fa fa-line-chart"><span
+                                            class="vlue">0</span></i></a>
+                                    <a href="#hyperlocal-seller-post-details/{{ value.id }}"><i class="fa fa-file-text-o"></i><span
+                                            class="vlue">1</span></a>
+                                </div>
+                                <div ng-if="value.post_status == 0" class="info_links">
+                                    <a href="#hp-seller-drafts-rate-card/{{ value.id }}"><i class="fa fa-envelope-o"></i></a>
+                                    <a href="#hp-seller-drafts-rate-card/{{ value.id }}"><i class="fa fa-file-text-o"></i><span
+                                            class="vlue"></span></a>
+                                    <a href="#hp-seller-drafts-rate-card/{{ value.id }}"><i class="fa fa-bullseye"></i><span
+                                            class="vlue"></span></a>
+                                    <a href="#hp-seller-drafts-rate-card/{{ value.id }}"><i class="fa fa-line-chart"><span
+                                            class="vlue"></span></i></a>
+                                    <a href="#hp-seller-drafts-rate-card/{{ value.id }}"><i class="fa fa-file-text-o"></i><span
+                                            class="vlue"></span></a>
+                                </div>
+                            </div>
+
+                        </div>
+                       </a>
+                    </div>
+                </div>
+               </div>
+
+                <table class="table" id="myTable" ng-if="selectdata.bound=='Inbound'">
+               <tr>
+                  <th >FROM</th>
+                  <th >TITLE</th>
+                  <th >DATE</th>
+                  <th >DATE </th>
+                  <th style="text-align:center">NOTIFICATIONS</th>
+               </tr>
+           <!-- {{spotsList}}  -->
+               <tbody  ng-repeat="(key, value) in spotsList track by $index">
+                  <tr ng-if="value.data.length > 0">
+                    <td><span> <a href="#hp-sellerinboundsgrouping/{{value.key}}" ><img src="images/download-icon.png" alt="IN"></a></span>Multi</td>
+                     <td class="text-capitalize">
+                         <!-- {{ value.data[0] }} -->
+                        <a href="#hp-sellerinboundsgrouping/{{value.key}}" >{{value.key}}</a>
+                        </td>
+                     <td class="text-capitalize">
+                         <a href="#hp-sellerinboundsgrouping/{{value.key}}" > 
+                            <span ng-show="value.data[0].get_all_route[0].valid_from != '0000-00-00'"> {{ value.data[0].get_all_route[0].valid_from }} 
+                            </span>
+                            <span ng-show="value.data[0].get_all_route[0].valid_from == '0000-00-00'"> {{ value.data[0].depart_date }} 
+                                </span>
+                        </a>
+                    </td>
+                     <td><a href="#hp-sellerinboundsgrouping/{{value.key}}" > 
+                            <span ng-show="value.data[0].last_date"> {{ value.data[0].last_date }} </span> 
+                            <span ng-show="!value.data[0].last_date"> {{ value.data[0].depart_date }} </span> 
+                        </a>
+                    </td>
+                     <td>
+                        <div class="info_links">
+                             
+                           <a href="#hp-sellerinboundsgrouping/{{value.key}}" class="active"><i class="fa fa-envelope-o"></i></a>
+                           <a href="#hp-sellerinboundsgrouping/{{value.key}}"><i class="fa fa-file-text-o"></i><span class="vlue">{{value.data.length}}</span></a>
+                           <a href="#hp-sellerinboundsgrouping/{{value.key}}"><i class="fa fa-bullseye"></i><span class="vlue">0</span></a>
+                           <a href="#hp-sellerinboundsgrouping/{{value.key}}"><i class="fa fa-line-chart"><span class="vlue">0</span></i></a>
+                           <a href="#hp-sellerinboundsgrouping/{{value.key}}"><i class="fa fa-file-text-o"></i><span class="vlue">0</span></a>
+                        </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+                
+                <!-- <div  class="white_bg" ng-if="results.length=='0' && filterdata!='Inbound">
+                    <h3>Data not available </h3>
+
+                </div>
+                <div class="white_bg"  ng-if="inboundcount==0 ">
+                    <h3>Data not available h</h3>
+
+                </div>
+ -->
+                <!--End of vechile_list_main-->
+
+
+            </div>
+            <!--End of intra_city_list-->
+        </div>
+        <!--end of right_search_p-->
+    </div>
+</form>
+<script>
+    $(document).ready(function () {
+        $("#filters_click").click(function () {
+            $("#filters_show").toggle('slow');
+        });
+    });
+
+    $(document).ready(function () {
+        $("#filters_click1").click(function () {
+            $("#filters_show1").toggle('slow');
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $("#mysettingbtn").click(function () {
+            $('#settings').modal('show');
+        });
+    });
+
+</script>
+<style>
+    .white_bg {
+        width: 100%;
+        float: left;
+        padding: 10px 10px;
+        background: #fff;
+        margin-bottom: 3px;
+    }
+    .npr{
+        padding-right: 0px;
+    }
+</style>

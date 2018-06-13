@@ -1,0 +1,127 @@
+<div class="col-md-12 col-sm-8 col-xs-12">    
+    <div class="right_serch_p titile_gray">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">Community</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                <li><a href="#">Article</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                <li><a href="#" class="active_c">Create article</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12">                                    
+    <div class="right_serch_p">
+        <div class="main-right">            
+            <div class="search-block inner-block-bg">
+                <div class="cell-1 cell-1-80">
+                    <ul class="list-inline m-bottom-0 m-top-5 font-bold-black">
+                        <li><a href="#">Create article</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="table-div">
+                <div class="invitation_bg">
+                    <div class="col-md-12">   
+                        <form name="myForm" ng-submit="myForm.$submitted && myForm.$valid && createArticle()" enctype="multipart/form-data" novalidate>
+                            <div class="public_private_group">
+                                <div class="radio-block">
+                                    <div class="radio_inline">
+                                        <input type="radio" ng-model="article.articletype" id="free" ng-init="article.articletype = 1" ng-click="myForm.$submitted = false" ng-checked="true" name="articletype" value="1">
+                                        <label for="free"><span></span>Free</label>
+                                    </div>
+                    
+                                    <div class="radio_inline">
+                                        <input type="radio" ng-model="article.articletype" id="paid" ng-click="myForm.$submitted = false" name="articletype" value="2">
+                                        <label for="paid"><span></span>Paid</label>
+                                    </div>
+                                </div>
+                            </div>                            
+
+                            <div class="select_form_intra form-group input_back margin-top15">
+                                <input class="form-control input_t" name="title" ng-model="article.title" type="text" required="">
+                                <label class="lbl_text2">Article Title line</label>
+                                <span style="color:red" ng-show="myForm.$submitted && myForm.title.$error.required">
+                                    Title is required.
+                                </span>
+                            </div>
+
+                            <div class="select_form_intra form-group input_back" ng-show="article.articletype == 2">
+                                <input class="form-control input_t valid-number" name="price" ng-required="article.articletype == 2" ng-model="article.price" type="text" required="">
+                                <label class="lbl_text2">View Price</label>
+                                <span style="color:red" ng-show="myForm.$submitted && article.articletype == 2 && myForm.price.$error.required">
+                                    Article Price is required.
+                                </span>
+                            </div>
+
+                            <div class="select_form_intra form-group input_back">
+                                <input class="form-control input_t" name="heading" ng-model="article.heading" required type="text">
+                                <label class="lbl_text2">Heading</label>
+                                <span style="color:red" ng-show="myForm.$submitted && myForm.heading.$error.required">
+                                    Heading is required.
+                                </span>
+                            </div>
+
+                            <div class="form-group input_back">
+                                <textarea rows="10" ng-model="article.discription" name="discription" required class="form-control textarea input_t"></textarea>
+                                <label>Description</label>
+                                <span style="color:red" ng-show="myForm.$submitted && myForm.discription.$error.required">
+                                    Description is required.
+                                </span>
+                            </div>
+
+                            <div class="form-group input_back">
+                                <div class="upload_img_t">Upload image :<input type="file" upload-file="article.image" ng-model="article.image" name="image" ng-required="img == 'Image'" required class="form-control form-control1 update_txt contract_files" value="" ></div>
+                                <span style="color:red" ng-show="myForm.$submitted  && img == 'Image' && myForm.image.$error.required">
+                                        Image is required.
+                                </span>
+                                <div ng-if="img != 'Image'" class="upload_img_t">
+                                        <img style="width:50px;" src="{{ storagePATH+'/'+img }}">
+                                </div>
+                            </div>
+                            <div class="form-group input_back">
+                                <div class="public_private_group">
+                                    <div class="radio-block">
+                                        <div class="radio_inline">
+                                            <input type="radio" ng-model="article.status" id="enable" ng-init="article.status = 1" ng-checked="true" name="articlestatus" value="1">
+                                            <label for="enable"><span></span>Enable</label>
+                                        </div>
+                        
+                                        <div class="radio_inline">
+                                            <input type="radio" ng-model="article.status" id="disable" name="articlestatus" value="0">
+                                            <label for="disable"><span></span>Disable</label>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>
+
+                            <div class="search-modify pull-right m-bottom-15">
+                                <button type="submit"  class="pull-right m-bottom-15">Publish</button>
+                            </div>                    
+                        </form >
+                    </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+                               
+   <script type="text/javascript">
+       $(document).ready(function () {
+    $(".input_t").focusin(function () {
+        $(this).next().addClass("active");
+    });
+    $(".input_t").focusout(function () {
+        if ($(this).val() == "") {
+            $(this).next().removeClass("active");
+        }
+        else {
+            $(this).next().addClass("active");
+        }
+    });
+
+
+});
+   </script>                             
+                           

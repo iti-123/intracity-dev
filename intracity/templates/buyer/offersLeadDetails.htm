@@ -1,0 +1,123 @@
+<div class="cart heght_100">        
+    <div class="loc_det">
+        <div class="gray_bg">
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-3">
+                       <div class="heading_text">Title</div>
+                    </div>
+
+
+                    <div class="col-lg-2">
+                        <div class="heading_text">City</div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="heading_text">From Location</div>
+                    </div>    
+
+                    <div class="col-lg-3">
+                        <div class="heading_text">To Location</div>
+                    </div>                       
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="row">
+                    <div class="heading_text padding_left">NOTIFICATIONS</div>
+                </div>
+           </div>
+        </div>
+    </div>
+
+    <div class="white_bg">
+        <div ng-repeat="post in postLeads track by $index">
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="normal_text"><span>{{ !empty(post.title) && post.title }}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="normal_text">{{ !empty(post.city_name) &&
+                                post.city_name }}
+                        </div>
+                    </div>
+
+                    <div ng-if="post.type_basis == 2" class="col-lg-3">
+                      <div class="normal_text">
+                         <input type="text" autocomplete="off" name="from_location" id="from_location" ng-model="post.fromLocation" class="input_ani" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue" required>
+                         <label class="lbl_text2 align_text">From location <span>*</span></label>
+                         <span class="help-inline" style="color:red"
+                                  ng-show="post.from_location">Enter From location</span>
+                      </div>
+                    </div>
+
+                    <div ng-if="post.type_basis == 2" class="col-lg-3">
+                          <div class="normal_text">
+                             <input type="text" autocomplete="off"  name="to_location" id="to_location" ng-model="post.tolocation" class="input_ani" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue" required/>
+                             <label class="lbl_text2 align_text">To location <span>*</span></label>
+                             <span class="help-inline" style="color:red"
+                                      ng-show="post.to_location">Enter To location</span>
+                          </div>
+                    </div>
+
+                    <div ng-if="post.type_basis == 1" class="col-lg-3">
+                        <div class="normal_text">
+                             <input type="text" autocomplete="off"  name="reporting" id="reporting" ng-model="post.reporting_location" class="input_ani" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue" required/>
+                             <label class="lbl_text2 align_text">Reporting Location<span>*</span></label>
+                             <span class="help-inline" style="color:red"
+                                      ng-show="post.reportings">Enter Reporting Location</span>
+                        </div>
+                    </div> 
+                    
+                    <div ng-if="post.type_basis == 1" class="col-lg-3">
+                        <select ng-model="post.base_hour"
+                            ng-options="y.distance_hour for (x,y) in hourDistanceSlabs track by y.id" class="selectpicker" selectpicker>
+                            <option value="">Base hour *</option>
+                        </select>
+                        <span class="help-inline" style="color:red"
+                                      ng-show="post.base_hours">Enter Base hour</span>
+                         
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                    <div class="normal_text">
+                        <a class="book_d" ng-click="buyerQuoteAction(key, 'DENIED_QUOTE')">Decline</a>
+                    </div>
+                    <div class="div_100">
+                        <a class="seller_btn_submit text-center pull-right" ng-click="bookNowLeads(post,$index)">Book Now</a>
+                    </div>
+                    <div class="detail_100">
+                        <span class="detail_btn_plus" ng-click="openDetails($index)"><span
+                                ng-show="!isDetailsHidden($index)">+</span><span
+                                ng-show="isDetailsHidden($index)">-</span> Details</span>
+                        <div class="mes_icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                    </div>
+            </div>
+            <div ng-show="isDetailsHidden($index)">
+                <div class="row">                  
+                    <div class="col-sm-3"> 
+                        <b>Valid From</b> : {{ !empty(post.valid_from) && post.valid_from | date:"dd/MM/yyyy" }}
+                    </div>
+                    <div class="col-sm-3"> 
+                        <b>Valid To</b> : {{ !empty(post.valid_to) && post.valid_to | date:"dd/MM/yyyy" }}
+                    </div>
+                    <div class="col-sm-3"> 
+                        <b>Vehicle</b> : {{ !empty(post.vehicle) && post.vehicle || 'N/A' }}
+                    </div>       
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!--end of right_search_p-->
+
+<style>
+.mb-5{margin-bottom: 5px;}
+.mt-5{margin-top: 5px;}
+
+.ml-5 {margin-left: 5px;}
+
+</style>

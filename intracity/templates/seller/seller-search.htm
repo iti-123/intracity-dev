@@ -1,0 +1,257 @@
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <form name="search" id="search">
+        <div class="right_serch_p">
+            <div class="right_search_bar">
+                <ul class="search_bar_tab">
+                    <li><a href="javascript:void(0)">{{getUserActiveRole}}</a><i class="fa  fa-angle-right"></i></li>
+                    <li><a href="#services">Services</a><i class="fa  fa-angle-right"></i></li>
+                    <li><a href="javascript:void(0)" class="">Intracity Search</a></li>
+                </ul>
+            </div>
+            <div class="location_sec">
+
+                <div class="spot_t" ng-init="data.termPost=1">
+                    <ul>
+                        <li>
+                            <input type="radio" value="1" ng-model="data.termPost" id="term" data-target="id3"
+                                   name="termPost">
+                            <label for="term">Spot</label>
+                            <span></span>
+                        </li>
+                        <li>
+                            <input type="radio" id="spot" data-target="id4" value="2" name="termPost"
+                                   ng-model="data.termPost" checked="">
+                            <label for="spot">Term</label>
+                            <span></span>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="spot_t" ng-init="data.type=2">
+                    <ul>
+                        <li>
+
+                            <input type="radio" ng-click="showHide()" id="distance" data-target="id1" value="2"
+                                   name="selector" ng-model="data.type" checked="">
+
+                            <label for="distance">Distance</label>
+                            <span></span>
+                        </li>
+                        <li>
+
+                            <input type="radio" ng-click="showHide()" value="1" ng-model="data.type" id="hour"
+                                   data-target="id2" name="selector">
+
+                            <label for="hour">Hour</label>
+                            <span></span>
+                        </li>
+
+
+                    </ul>
+                </div>
+
+                <div class="load_type intra_main activeintra" id="id1">
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra mb-24">
+
+                            <input type="text" id="city" class="input_ani cityValidation" ng-change="onSelect(data.city)"
+                                   autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)"
+                                   ng-model="data.city" required=""
+                                   typeahead="city as (city.city_name) for city in cities | filter:$viewValue"/>
+                            <label class="lbl_text2">Select City </label>
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra mb-24">
+
+
+                            <input id="from_location" type="text" class="input_ani cityValidation" ng-model="data.from_location"
+                                   required=""
+                                   typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+                                   autocomplete="off"/>
+
+                            <label class="lbl_text2">From location <span>*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra mb-24">
+
+                            <input id="to_location" type="text" class="input_ani cityValidation" ng-model="data.to_location"
+                                   required=""
+                                   typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+                                   autocomplete="off"/>
+                            <label class="lbl_text2">To Location <span>*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="date_selection select_form_intra mb-24">
+                            <span class="left_v_from">
+                                        <input type="text" id="valid_to_date" fromcalendar ng-model="data.valid_to_date"
+                                               id="valid_to_date" class="date_p input_ani" required=""
+                                               autocomplete="off">
+                                                    <label class="lbl_text2 padg_l">Dispatch Date<span>*</span></label>
+                            <span class="tooptip_left">
+                                                        <a href="javascript:void(0)"
+                                                           tooltip="Please specify atleast one of these: Delivery or Dispatch date."> <i
+                                                                class="glyphicon glyphicon-info-sign"></i></a></span>
+                           
+                            </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="spot_t mb-24">
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="select_form_intra">
+                                        <select ng-model="data.time_slot" ng-options="x for x in timeslot" class="selectpicker" selectpicker>
+                                            <option value="">Time</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="select_form_intra">
+                                        <select class="selectpicker" selectpicker>
+                                            <option>AM</option>
+                                            <option>PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="select_form_intra">
+                                <select id="vehicle_type" class="selectpicker" selectpicker ng-model="data.vehicle_type"
+                                        ng-options="y.vehicle_type for (x, y) in vehicles">
+                                    <option value=""> Vehicle type</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="row">
+                                <div class="select_form_intra">
+                                    <div class="vichel_dimensin">
+                                        <span class="v_images"><img src="../images/dimension_v.png"></span>
+                                        <div class="vi_text">
+                                            <span class="v_text">Vehicle Dimensions<span>*</span></span><br>
+                                            <span>{{ data.vehicle_type.dimension }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="load_type intra_main" id="id2">
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+
+                            <input type="text" id="hourcity" class="input_ani cityValidation" ng-change="onSelect(data.city)"
+                                   autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)"
+                                   ng-model="data.hourcity" required=""
+                                   typeahead="city as (city.city_name) for city in cities | filter:$viewValue"/>
+                            <label class="lbl_text2">Select City</label>
+
+                            <!--<select>
+                                <option>City</option>
+                                <option>Hyderabad</option>
+                                <option>Chennai</option>
+                            </select>-->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+
+                        <div class="select_form_intra mb-24">
+                            <input type="text" autocomplete="off" id="reporting" ng-model="data.reporting" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue" class="input_ani cityValidation" required="">
+                            <label class="lbl_text2">Reporting Location<span>*</span></label>
+
+                            <!--<input type="text" class="input_ani" required="">-->
+                            <!--<label class="lbl_text2">Reporting Location<span>*</span></label>-->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra mb-24">
+                            <select ng-model="dataSpot.hd_slab" class="hd_slab selectpicker" selectpicker name="hd_slab"
+                                    ng-options="y.distance_hour for (x,y) in hourDistanceSlabs track by y.id" required>
+                                <option value="">Base hour</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="date_selection select_form_intra mb-24">
+                            <span class="left_v_from">
+                                <input type="text" id="hour_from_calendar" ng-model="data.dispatchdate" fromcalendar
+                                       class="date_p input_ani" required="">
+                                <label class="lbl_text2 padg_l">Date<span>*</span></label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra mb-24">
+                            <select id="vehicle_type" class="selectpicker" selectpicker ng-model="data.hour_vehicle_type"
+                                    ng-options="y.vehicle_type for (x, y) in vehicles">
+                                <option value=""> Vehicle type</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="select_form_intra mb-24">
+                                    <select ng-model="data.hour_time_slot" ng-options="x for x in timeslot" class="selectpicker" selectpicker>
+                                        <option value="">Time</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="select_form_intra mb-24">
+                                    <select class="selectpicker" selectpicker>
+                                        <option>AM</option>
+                                        <option>PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="load_type">
+
+                    <div class="search_btn">
+                        <div class="serch_vichel">
+                            <input type="button" class="button_serch" id="searchSeller" name="button" value="Search">
+                        </div>
+                    </div>
+                </div>
+                <!--End of load_type-->
+
+            </div>
+            <!--end of location_sec-->
+        </div>
+        <!--end of right_search_p-->
+    </form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[type="radio"]').click(function () {
+            var id = $(this).attr('data-target');
+            $('#' + id).addClass('activeintra').siblings().removeClass('activeintra');
+        });
+    });
+</script>

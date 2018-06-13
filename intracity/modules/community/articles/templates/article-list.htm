@@ -1,0 +1,321 @@
+<style type="text/css">
+ .commenttxt{border: 0px none; background-color:#f5f5f5;}
+</style>
+<div class="col-md-12 col-sm-8 col-xs-12">
+	<div class="right_serch_p titile_gray">
+		<div class="right_search_bar">
+			<ul class="search_bar_tab">
+				<li><a href="#community-profile">Community</a><i class="fa  fa-angle-right"></i></li>
+				<li><a href="javascript:void(0);">Article</a><i class="fa  fa-angle-right"></i></li>
+				<li><a href="javascript:void(0);" class="active_c">{{ articleType }}</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12">
+	<div class="right_serch_p">
+		<div class="main-right">
+			<div class="search-block inner-block-bg">
+				<div class="s_left">
+					<ul class="list-inline m-bottom-0 m-top-5 font-bold-black">
+						<li><a href="javascript:void(0);"> {{ articleType }}   ({{articles.length}})</a></li>
+					</ul>
+				</div>
+				<div class="s_right">
+					<div class="add_link"><a href="#/create-article" class=""><span>+ Write Article</span></a></div>
+				</div>
+			</div>
+
+			<div class="art-block" ng-repeat="(key,value) in articles track by $index">
+				<div class="linkdin_pro">
+					<div class="col-md-8 padding-left-none">
+						<img src=" {{ storagePath +'/'+value.file_path }} "  class="pull-left m-r-10 img-responsive" width="50">
+						<div class="pull-left col-md-10 padding-none">
+							<div class="down-link">
+								<strong style="font-size:16px;padding: 0px 5px;"><a class="commenttxt" href="#/artical-view/{{value.id}}">{{value.title}}</a></strong>
+								<p class="topics">{{value.heading}}</p>
+								<p class="discription"> {{value.description|limitstring}}..</p>
+							</div>
+						</div>
+						<div class="view_like_share no-cpad">
+							<ul>
+								<li><a ng-click="likes(1,value.id,key,value)" href="javascript:void(0)"><i class="fa fa-thumbs-o-up"></i> {{value.article_likes.length}} </a></li>
+								<li><a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i> 25</a></li>
+								<li>
+									<div class="edit_delete" ng-class="{'active_ul':value.isActiveArticleUl}" ng-click="value.isActiveArticleUl = !value.isActiveArticleUl">
+									    Edit
+										<ul>
+											<li><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+												<a href="#/edit-article/{{ value.id }}">Edit</a></li>
+											<li ng-click="postDel(value.id)"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</li>
+										</ul>
+									</div>
+								</li>								
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-4 padding-left-none">
+						<div class="right-side-div">
+							<!--<div ng-click="toggleCustom($index);" class="ed-listing">
+							    Edi
+								<ul ng-hide="toggle">
+									<li><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+										<a href="#/edit-article/{{ value.id }}">Edit</a></li>
+									<li ng-click="postDel(value.id)"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</li>
+								</ul>
+							</div> -->
+							<div class="article_price" ng-if="value.articletype == 2 ">
+								Rs. {{value.price}}
+							</div>
+							<a href="#/artical-view/{{value.id}}" class="add_btn_Register" >View Article</a>
+							<div class="follows-section">
+								<div class="info-links font-six">
+									<a href="javascript:void()">Follow</a>
+									<a ng-click="likes(1,value.id,key,value)" href="javascript:void()">Like</a>
+									<a href="javascript:void()">Comment</a>
+									<a ng-click="postUrl('#/artical-view/',value.id,value)" href="javascript:void(0);" data-toggle="modal" data-target="#myModal">Share</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="comments_block_bg">
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+							<div class="row">
+                             
+								<div class="comment_div" ng-repeat="(k,val) in value.comments">
+									<div class="user_pic_comment">
+										<img src="./images/dinesh.png" />
+									</div>
+                                   
+									<div class="comment_cont"> 
+										<div class="comment_diolog font-six">
+										<div class="edit_delete" ng-class="{'active_ul':val.isActiveArticleCommentUl}" ng-click="val.isActiveArticleCommentUl = !val.isActiveArticleCommentUl"  ng-show="userid == val.comment_users.id">
+										... 
+											<ul>
+												<li ng-click="commentEdit(val.id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</li>
+												<li ng-click="commentDel(val.id)"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</li>
+											</ul>
+										</div>
+											<span class="comm_name">{{val.comment_users.username}} </span><strong><input class="commenttxt"  readonly type="text" id="comment{{val.id}}" value="{{val.comment}}"/></strong></div>
+											<div class="feed-links font-six">
+												<span class="red_like ">Like</span>
+												<span class="red_like">Reply</span>
+												<span class="likes"><i ng-click="likes(2,val.id,key,value)" class="fa fa-thumbs-o-up"></i>{{val.comment_likes.length}}</span>
+											</div>
+											<div class="reply_comment" ng-repeat="(kr,rep) in val.comment_reply">
+												<div class="user_pic_comment">
+													<img src="./images/dinesh.png">
+												</div>
+												<div class="comment_cont">
+													<div class="comment_diolog font-six">
+													<div class="edit_delete" ng-class="{'active_ul':rep.isActiveArticleReplyUl}" ng-click="rep.isActiveArticleReplyUl = !rep.isActiveArticleReplyUl" ng-show="userid==rep.replyed_users.id">									...
+														<ul>
+															<li ng-click="replyEdit(rep.id)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</li>
+															<li ng-click="replyDel(rep.id)"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</li>
+														</ul>
+													</div>
+													<span class="comm_name"> {{rep.replyed_users.username}}</span><input class="commenttxt"  readonly type="text" id="reply{{rep.id}}" value="{{rep.reply_text}}"/>
+												</div>
+												<div class="feed-links font-six">
+													<span class="red_like ">Like</span>
+													<span class="likes"> <i ng-click="likes(3,rep.id,key,value)" class="fa fa-thumbs-o-up"></i> {{rep.reply_likes.length}}</span>
+												</div>
+												</div>
+											</div>
+													<!-- edit here -->
+											<div class="comment_type">
+												<div class="userpic_comment"><i class="fa fa-user"></i></div>
+												<span class="write_type">
+													<input type="text" name="replycomment{{k}}{{key}}" ng-model="val.reply" ng-keyup="replycomment(k,key,$event)" id="replycomment{{k}}{{key}}" placeholder="Write a reply..." class="form-control">
+												</span>
+											</div>
+													<!-- edit here -->
+												</div>
+											</div>
+											<div class="comment_type">
+												<div class="userpic_comment"><i class="fa fa-user"></i></div>
+												<span class="write_type">
+													<input type="text" name="comment{{key}}" ng-model="value.comment" ng-keyup="comment(key,$event)" id="comment{{key}}" placeholder="Write a comment..." class="form-control">
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+										<div class="comment_date font-six">
+											<span class="date_right">11/03/2016</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+						<!-- Table Starts Here -->
+					</div>
+				</div> <!--end of right_search_p-->
+
+			</div>
+
+
+ <div id="myModal" class="modal fade sharepost-popup" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Share Post on your timeline</h4>
+      </div>
+      <form method="post" name="shareForm">
+      <div class="modal-body">
+      	  <!--  <div class="form-group share_post_from">
+               <p>{{shareUrl}}</p>
+           </div> -->	 
+           <div class="form-group share_post_from">
+               <textarea name="commonPost" id="commonPost" ng-model="sharableData.commonPost" placeholder="about post"></textarea>
+           </div>
+       
+       <div ng-if="sharableData.articleData.file_path != ''" class="post_image">
+           <img src=" {{ storagePath + sharableData.articleData.file_path }} ">
+       </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-xs-12">
+                   <div class="form-group select-share-option">
+                        <select name="commonConnect" id="commonConnect">
+                            <option value="Connection">Connection</option>
+                        </select>
+                    </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <button type="Submit" class="popup-btn share" ng-click="insertPost(sharableData)"> Share</button>
+                <button type="button" class="popup-btn cancel" data-dismiss="modal"> cancel</button>
+            </div>
+        </div>
+      </div>
+	 </form>
+    </div>
+
+  </div>
+</div>
+
+
+   <script>
+		$(document).ready(function(){
+	 		// $("body").on("click",".edit_delete", function(){
+	 		// 	if($(this).hasClass("active_ul")){
+	 		// 		$(this).removeClass("active_ul");
+	 		// 	}
+	 		// 	else{
+	 		// 		$(".edit_delete").removeClass("active_ul");
+	 		// 		$(this).addClass("active_ul");
+	 		// 	}
+	 		// });
+	 	});
+	</script> 
+	
+<style type="text/css">
+.right-side-div{ position: relative; }
+.right-side-div .ed-listing{
+	 position: absolute;
+    right: -20px;
+    top: -20px;
+    cursor: pointer;
+}
+.edit_deletes {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    cursor: pointer;
+}
+.sharepost-popup .modal-header{
+    background: #ddd;
+    color: #393939;
+    border-bottom: 1px solid #b3b3b3 !important;
+    text-transform: capitalize;
+}
+.sharepost-popup .modal-header .close {
+    margin-top: 3px;
+    background: #fff;
+    z-index: 999999999;
+    opacity: 1;
+    padding: 10px;
+    border-radius: 50%;
+    line-height: 25px;
+    color: #bbb8b8;
+}
+.share_post_from{
+    width: 100%; float: left;
+}
+.share_post_from textarea{
+    width: 100%;
+    float: left;
+    resize: none;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.sharepost-popup .post_image{
+       width: 100%;
+    float: left;
+    max-height: 260px;
+    overflow: hidden;
+    margin: 0 0 15px 0;
+}
+.sharepost-popup .post_image img{
+    width: 100%; 
+    height: 100%;
+}
+.sharepost-popup .popup-btn{
+    background: #fff;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    text-transform: capitalize;
+}
+.sharepost-popup .popup-btn.cancel:hover{
+    background:#fd4d4d;
+    color: #fff;
+}
+.sharepost-popup .popup-btn.share:hover{
+    background:#1d52a0;
+    color: #fff;
+}
+.sharepost-popup .select-share-option {
+    width: 100%;
+    float: left;
+}
+.sharepost-popup .select-share-option select{
+        padding: 12px 15px;
+    font-size: 17px;
+    background: #ddd;
+    border: none;
+}
+.no-cpad{ padding: 0px !important; }
+.edit_delete {
+    position: absolute;
+    right: -18px;
+    top: 8px;
+    cursor: pointer;
+}
+.edit_delete ul {
+    position: absolute;
+    left: -58px;
+    top: 100%;
+    width: 90px;
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+    background: #fff;
+    z-index: 9;
+    display: none;
+}
+.view_like_share ul li{
+	position: relative;
+}
+</style>

@@ -1,0 +1,124 @@
+<div class="white_bg1 border-bottom-p" ng-show="!(value|isBidElapsed)">    
+    <div class="col-lg-12">
+        <div class="row" ng-show = "value.status==null || value.status < '1'">
+            <div class="box_shadow">
+                <div class="col-lg-4">
+                    <div ng-if="value.price_type == 2">
+                        <div class="data-head">Firm Offer :</div>
+                        <div class="note_vlue">Rs {{value.firm_price}} /-</div>
+                    </div>
+
+                    <div ng-if="value.price_type == 1">
+                        <div class="data-head">Competitive Offer</div>
+                        <!--<div class="note_vlue">Rs {{value.firm_price}} /-</div>-->
+                    </div>
+
+                    <div class="note_vlue" ng-if="value.price_type == 'null' || value.price_type == null || value.price_type == '1'">
+                        <input type="text" class="form-control valid-number" maxlength="6" minlength="1" value="" placeholder="Quote (Price) *"
+                            ng-model="value.quote.quotedPrice">
+                    </div>
+                    <div class="select_form_intra" ng-init="value.tracking_type=1">
+                        <select ng-model="value.quote.tracking_type" ng-options="y.id as y.value for (x,y) in tracking_type">
+                            <option value="">Select Tracking Type</option>
+                        </select>
+                        <span class="has-error" ng-show="value.quote.tracking_type_error"> Please Select  Tracking Type  </span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <input type="text" class="form-control  NoOfDays" placeholder="Transit Days *" ng-init="value.quote.transit_days = ''" ng-model="value.quote.transit_days">
+                    <span class="has-error" ng-show="value.quote.transit_days_error"> Please enter Transit Days </span>
+                    <div class="Payment_Terms"></div>
+                </div>
+                <div class="col-lg-4 colo-md-4">
+                <div class="select_form_intra">
+                        <select ng-model="value.quote.payment_term">
+                            <option value="">Select Payment Terms</option>
+                            <option value="ADVANCE">Advance</option>
+                            <option value="CREDIT">Credit</option>
+                        </select>
+                        <span class="has-error" ng-show="value.quote.payment_term_error"> Please Select Payment Terms </span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4" ng-show="value.quote.payment_term=='CREDIT'">
+                    <input type="text" class="form-control NoOfDays" value="" placeholder="Credit Days *"
+                        ng-model="value.quote.credit_days">
+                    <span class="has-error" ng-show="value.quote.credit_days_error"> Please enter Credit day </span>
+                </div>
+
+
+                <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
+                    <ul class="select_inline">
+                        <!--<div class="admin_input">
+                            <input id="NEFT{{value.id}}" type="checkbox" class="check_box"
+                            ng-click="paymentMethod($index, 'NEFT_RTGS')"
+                            ng-checked="value.payment_method=='NEFT_RTGS'">
+                            <label for="NEFT{{value.id}}">NEFT/RTGS</label>
+                        </div>-->
+                        <li>
+                            <div class="admin_input">
+                                <input id="NEFT{{value.id}}" type="checkbox" class="check_box"
+                                    ng-click="paymentMethod(key, 'NEFT_RTGS')"
+                                    ng-checked="value.quote.payment_method=='NEFT_RTGS'">
+                                <label for="NEFT{{value.id}}">NEFT/RTGS</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="admin_input">
+                                <input id="Credit{{value.id}}" type="checkbox" class="check_box"
+                                    ng-click="paymentMethod(key, 'CREDIT_CARD')"
+                                    ng-checked="value.quote.payment_method=='CREDIT_CARD'">
+                                    
+                                <label for="Credit{{value.id}}">Credit Card</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="admin_input">
+                                <input id="Debit{{value.id}}" type="checkbox" class="check_box"
+                                    ng-click="paymentMethod(key, 'DEBIT_CARD')">
+                                <label for="Debit{{value.id}}">Debit Card</label>
+                            </div>
+                        </li>
+                    </ul>
+                    <span class="has-error" ng-show="value.quote.payment_method_error"> Please check atleast one payment method </span>
+                </div>                
+                    <div class="col-lg-1">
+                        <div class="row">
+                            <input type="button" class="Accept_btn marg_btn" value="Submit" ng-click="submitInitialQuotation(key)">
+                        </div>  
+                    </div>                    
+            </div>
+        </div>
+
+        <div class="row" ng-show = "value.quote.status=='2'">
+            <div class="box_shadow">
+                <div class="col-lg-4">
+                    <div class="note_vlue">
+                        <input type="text" class="form-control valid-number" maxlength="6" minlength="1" value="" placeholder="Final Quote (Price) *"
+                            ng-model="value.quote.sellerFinalQuotePrice">
+                        <span ng-show="value.quote.sellerFinalQuotePriceError"> Please enter price * </span>
+                    </div>                    
+                </div>  
+                <div class="col-lg-4">                    
+                    <div class="select_form_intra">
+                        <input type="text" class="form-control valid-number" maxlength="3" minlength="1" value="" placeholder="Final Transit Day"
+                        ng-model="value.quote.sellerFinalTransitDay">                        
+                    </div>
+                </div>        
+                <div class="col-lg-2">
+                    <div class="note_vlue">
+                        <input type="button" class="Accept_btn marg_btn" value="Submit" ng-click="submitQuotation(key,valueKey,'SELLER_FINAL_QUOTE')">
+                    </div>  
+                </div>
+                <div class="col-lg-2">
+                    <div class="note_vlue">
+                        <input type="button" class="book_btn no-border marg_btn" value="Decline " ng-click="sellerQuoteAction(key,valueKey,'DENIED_QUOTE')">
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

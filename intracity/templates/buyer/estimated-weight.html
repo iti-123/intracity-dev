@@ -1,0 +1,85 @@
+<style>
+    .border-bottom {
+        border-bottom: 1px solid red !important;
+    }
+</style>
+<div class="clearfix"></div>
+<ng-form name="loads" novalidate>
+    <!-- Estimated Load and weight -->
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+        <div class="select_form_intra">
+
+            <input type="text" min ='0' name="estimatedQty"
+                   ng-style="loads.estimatedQty.$dirty && loads.estimatedQty.$invalid"
+                   name="estimatedQty" ng-model="dataLoads.estimatedQty" class="input_ani valid-number" maxlength="5" required="">
+            <label class="lbl_text2">Total Estimated Quantity *</label>
+            <span class="help-inline" style="color:red;" ng-show="estimatedQty_validation">Please enter Total Estimated Quantity</span>
+            <span class="help-inline" style="color:red;" ng-show="zero_estimatedQty">Please enter value more than 0.</span>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+        <div class="select_form_intra">
+
+            <select ng-model="dataLoads.unit" name="unit" class="unit selectpicker" selectpicker required  ng-options="y.value for (x,y) in units track by y.id"
+                    ng-style="loads.unit.$dirty && loads.unit.$invalid">
+                <option value="">Unit *</option>
+            </select>
+            <span class="help-inline" style="color:red;" ng-show="unit_validation">Please enter Unit</span>                                                                                       
+
+
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="select_form_intra">
+            <input type="text" min='0' name="estimatedLoads" ng-model="dataLoads.estimatedLoads" maxlength="5" class="input_ani valid-number weight_dTerm" ng-style="loads.estimatedLoads.$dirty && loads.estimatedLoads.$invalid" required="">
+            <label class="lbl_text2">Total Estimated Number of Loads *</label>
+            <span class="help-inline" style="color:red;" ng-show="estimatedLoads_validation">Please Enter Total Estimated Number of Loads</span>
+            <span class="help-inline" style="color:red;" ng-show="zero_estimatedLoads_validation">Please Enter Value More Than 0.</span>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+        <div class="select_form_intra">
+            <button type="button" ng-show="!isUpdate" ng-disabled="loads.$invalid" class="def-btn"
+                    ng-click="addMultipleLoads(dataLoads)">Add
+            </button>
+            <button type="button" ng-show="isUpdate" ng-disabled="loads.$invalid" class="def-btn"
+                    ng-click="updateMultipleLoads(dataLoads)">Update
+            </button>
+        </div>
+    </div>
+</ng-form>
+<div class="multiLoadContainer load_type" ng-if="multipleLoads.length">
+    <table class="table tbl_t">
+        <thead>
+        <tr>
+            <th>Total Estimated Quantity</th>
+            <th>Unit</th>
+            <th>Total Estimated Number of Loads</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="(key, value) in multipleLoads track by $index">
+            <td>
+                {{ value.estimatedQty }}
+            </td>
+            <td>
+                {{ value.unit.value }}
+            </td>
+            <td>
+                {{ value.estimatedLoads }}
+            </td>
+            <td>
+                <a href="javascript:void(0)" ng-click="editLoads(key,value)">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="javascript:void(0)" ng-click="removeLoads(key)">
+                    <i class="fa fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

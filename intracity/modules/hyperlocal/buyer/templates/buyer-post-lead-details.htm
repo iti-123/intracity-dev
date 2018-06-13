@@ -1,0 +1,395 @@
+<style>
+.list_blue_100 .close_list_main {
+    width: 100%;
+    float: left;
+}
+.list_blue_100 .close_list_main .close_list_ul {
+    padding: 0;
+    margin: 0;
+}
+.list_blue_100 .close_list_main li {
+    display: inline-block;
+    padding: 0px 15px 7px 20px;
+    float: left;
+    font-size: 17px;
+    color: #828282;
+    position: relative;
+    font-family: FuturaBT-Book;
+    cursor: pointer;
+}
+.list_blue_100 .close_list_main li::before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 10px;
+    background: #939596;
+    top: 7px;
+    left: 9px;
+    -moz-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+.list_blue_100 .close_list_main li:after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 10px;
+    background: #939596;
+    top: 7px;
+    left: 9px;
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+</style>
+<div class="col-lg-12 col-md-12 col-sm-12">
+   <div class="right_serch_p">
+      <div class="right_search_bar">
+         <ul class="search_bar_tab">
+            <li><a href="#">Buyer</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+            <li><a href="#">Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+            <li><a href="#">Hyperlocal</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+            <li><a href="#" class="active_c">{{post[0].post_transaction_id}}</a></li>
+         </ul>
+      </div>
+      <div class="div_100">
+         <div class="col-lg-9">
+            <div class="row">
+               <ul class="buyer_ul">
+                  <li class="tab_10 active_buyer" data-tab="Messages">
+                     <a href="javascript:void(0);">All</a>
+                  </li>
+                  <li class="tab_10" data-tab="Offers">
+                     <a href="javascript:void(0);">PUBLIC</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="col-md-3">
+            <div class="back_post">
+               <a href="#/hp-buyer-list" class="back_red_btn">Back to Post</a>
+               <a href="javascript:void(0);" class="delete_gray"><i ng-click="deletePost(post[0].id);"
+                  class="fa fa-trash" title="Delete"></i></a>
+            </div>
+         </div>
+      </div>
+      <!--{{quotedata[0].post}}-->
+      <div class="white_bg">
+          <div class="loc_det bg-white-new">
+               <div class="col-md-10">
+                  <div class="col-md-2 data-fld npl">
+                     <span class="data-head">CONTRACT TYPE:</span>
+                     <span class="data-value break-word ng-binding">{{ post[0].is_private_public == 0 && 'Public' || 'Private'  }}</span>
+                  </div>
+                  <div class="col-md-2 data-fld">
+                     <span class="data-head">TITLE:</span>
+                     <span class="data-value break-word ng-binding">{{ !empty(post[0].title) && post[0].title || 'N/A' }}</span>
+                  </div>
+                  <div class="col-md-2 data-fld" ng-show="post[0].lead_type == 2">
+                     <span class="data-head">VALID FROM:</span>
+                     <span class="data-value break-word ng-binding">{{ getValidFrom(post[0].multiple_location) |datefilter|date:'dd/MM/yyyy' }}</span>
+                  </div>
+                  <div class="col-md-2 data-fld" ng-show="post[0].lead_type == 2">
+                     <span class="data-head">VALID TO:</span>
+                     <span class="data-value break-word ng-binding">{{ getValidTo(post[0].multiple_location) |datefilter|date:'dd/MM/yyyy' }}</span>
+                  </div>
+                   <div class="col-md-2 data-fld" ng-show="post[0].lead_type == 1">
+                     <span class="data-head">Depart Date:</span>
+                     <span class="data-value break-word ng-binding">{{ !empty(post[0].depart_date) &&  post[0].depart_date |datefilter|date:'dd/MM/yyyy' || 'N/A' }}</span>
+                  </div>
+                  <!--<div class="col-md-2 data-fld">
+                     <span class="data-head">NO. OF ROUTES:</span>
+                     <span class="data-value break-word ng-binding"></span>
+                  </div>-->
+                  <div class="col-md-2 data-fld">
+                     <span class="data-head">EMD :</span>
+                     <span class="data-value break-word ng-binding">{{ !empty(post[0].emd_amount) &&  post[0].emd_amount || 'N/A' }}</span>
+                  </div>
+               </div>
+               <div class="col-md-2">
+                  <div class="col-md-12 text-right">
+                     <div class="views_font">Views 0</div>
+                     <div class="a_link" id="detail_click">
+                        <a href="javascript:void"><i class="fa-plus fa" aria-hidden="true"></i>
+                        Details</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="click-data-detail" class="detail-click-data d_box">
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">EMD MODE:</span>
+                  <span class="data-value break-word ng-binding">{{ !empty(post[0].emd_mode) &&  post[0].emd_mode || 'N/A' }}</span>
+               </div>
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">AWARD CRITERIA:</span>
+                  <span class="data-value break-word ng-binding">{{ !empty(post[0].award_criteria) &&  post[0].award_criteria || 'N/A' }}</span>
+               </div>
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">CONTRACT ALLOTMENT:</span>
+                  <span class="data-value break-word ng-binding">{{ !empty(post[0].contract_allotment) &&  post[0].contract_allotment || 'N/A' }}</span>
+               </div>
+               <div class="clearfix"></div>
+                 <div class="col-md-2 data-fld npl">
+                    <span class="data-head">NO. OF OWN TRUCKS:</span>
+                    <span class="data-value break-word ng-binding">{{ !empty(post[0].no_of_trucks) &&  post[0].no_of_trucks || 'N/A'  }}</span>
+                 </div>
+                 <div class="col-md-2 data-fld npl">
+                    <span class="data-head">AVERAGE TURN OVER LAST THREE YEARS:</span>
+                    <span class="data-value break-word ng-binding">{{ !empty(post[0].average_turn_over) &&  post[0].average_turn_over || 'N/A' }}</span>
+                 </div>
+                 <div class="col-md-2 data-fld npl">
+                    <span class="data-head">NO. OF YEARS IN BUSINESS:</span>
+                    <span class="data-value break-word ng-binding">{{ !empty(post[0].no_of_years) &&  post[0].no_of_years || 'N/A' }}</span>
+                 </div>
+                 <div class="col-md-2 data-fld npl">
+                    <span class="data-head">LAST DATE/TIME FOR QUOTE:</span>
+                    <span class="data-value break-word ng-binding">{{ post[0].last_date|datefilter|date:'dd/MM/yyyy' }} {{ post[0].last_time}}</span>
+                 </div>
+                 <div class="clearfix"></div>
+                 <div class="col-md-2 data-fld npl">
+                    <span class="data-head">POST PUBLIC/PRIVATE:</span>
+                    <span class="data-value break-word ng-binding">{{ (post[0].is_private_public==0) && 'Public' || 'Private' }}</span>
+                 </div>
+               {{value}}
+               {{ !empty(value.seller) && value.seller || '' }}  
+                 <div class="col-md-2 data-fld npl">
+                    <span class="data-head">BID DOCUMENTS:</span>
+                    <span class="data-value break-word ng-binding">Private</span>
+                 </div>
+            </div>
+         <div class="cart heght_100">
+            <div class="list_blue_100">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                    <div class="close_list_main">
+                        <ul class="close_list_ul">
+                            <li ng-repeat="t in filterDatas.sellerType"
+                                ng-click="removeElem(filterDatas.sellerType, $index)">{{ getUsername(t) }}
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white-new">
+               <div class="col-md-5">
+                  <div class="heading_text-new">
+                     SELLER
+                  </div>
+               </div>
+               <div style="float:right;" class="col-md-2">            
+                  <span class="rilters_click click_a" id="filters_click"><i class="fa fa-bars"></i> Filters </span>            
+               </div>
+              <span class="rilters_right" ng-show="filClearValue" ng-click="clearAll()">CLEAR ALL</span>
+            </div>
+            <div class="loc_det" id="filters_show">
+               <div class="scroll_div">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="select_form_intra">
+                            <input type="text" class="input_ani" ng-model="data.username" required=""/>
+                            <label class="lbl_text2">SELLERS</label>
+                            <span class="search_icon"><i class="fa fa-search"></i></span>
+                        </div>
+                        <div class="filter_from_location location_scroller">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <ul class="post_inline">
+                                        <li>
+                                            <div class="admin_input">
+                                                <div class="admin_input" ng-repeat="seller in sellerList | filter:data.username">
+                                                    <input type="checkbox"
+                                                           class="check_box check_box_1"
+                                                           ng-click="addFilterData(filterDatas.sellerType,seller.id)" ng-checked="checkedFilterData(filterDatas.sellerType, seller.id)" 
+                                                           id="vl{{seller.id}}">
+                                                    <label for="vl{{seller.id}}">{{
+                                                        seller.username }}</label>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="cart heght_100">        
+              <div class="loc_det">
+                  <div class="gray_bg">
+                      <div class="col-lg-9">
+                          <div class="row">
+                              <div class="col-lg-3">
+                                 <div class="heading_text">Title</div>
+                              </div>
+                              <div class="col-lg-3">
+                                  <div class="heading_text">City</div>
+                              </div>
+                              <div class="col-lg-3">
+                                  <div class="heading_text">From Location</div>
+                              </div>
+                              <div class="col-lg-3">
+                                  <div class="heading_text">To Location</div>
+                              </div>                                          
+                          </div>
+                      </div>
+                      <div class="col-lg-3">
+                          <div class="row">
+                              <div class="heading_text padding_left">NOTIFICATIONS</div>
+                          </div>
+                     </div>
+                  </div>
+              </div>
+
+              <div class="white_bg">
+                  <div class="white_bg1 " ng-repeat="post in postHpLeads track by $index">
+                      <div class="border-clr">
+                      <div class="col-lg-9">
+                          <div class="row">
+                              <div class="col-lg-3">
+                                  <div class="normal_text"><span>{{ !empty(post.title) && post.title }}</span>
+                                  </div>
+                              </div>
+                              <div class="col-lg-3">
+                                  <div class="normal_text">{{ !empty(post.city_name) &&
+                                          post.city_name }}
+                                  </div>
+                              </div>
+                              <div class="col-lg-3">
+                                  <div class="normal_text">
+                                     <input type="text" autocomplete="off" name="from_location" id="from_location" ng-model="post.fromLocation" class="input_ani" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue" required>
+                                     <label class="lbl_text2 align_text">From location <span>*</span></label>
+                                     <span class="help-inline" style="color:red"
+                                              ng-show="post.from_location">Enter From location</span>
+                                  </div>
+                              </div>
+                              <div class="col-lg-3">
+                                  <div class="normal_text">
+                                     <input type="text" autocomplete="off"  name="to_location" id="to_location" ng-model="post.tolocation" class="input_ani" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue" required/>
+                                     <label class="lbl_text2 align_text">To location <span>*</span></label>
+                                     <span class="help-inline" style="color:red"
+                                              ng-show="post.to_location">Enter To location</span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                              
+                              <div class="div_100">
+                                <div class="normal_text decline_btn">
+                                  <a class="book_d align_texts" ng-click="buyerQuoteAction(key, 'DENIED_QUOTE')">Decline</a>
+                              </div>
+                                  <a class="seller_btn_submit text-center pull-right" ng-click="bookNowLeads(post,$index)">Book Now</a>
+                              </div>
+                              <div class="detail_100">
+                                  <div class="details_align">
+                                  <span class="detail_btn_plus" ng-click="openDetails($index)"><span
+                                          ng-show="!isDetailsHidden($index)">+</span><span
+                                          ng-show="isDetailsHidden($index)">-</span> Details</span>
+                                  <div class="mes_icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                                </div>
+                              </div>
+                      </div>
+                      <div ng-show="isDetailsHidden($index)">
+                          <div class="row">   
+                              <div class="col-sm-3"> 
+                                  <b>Price</b> : {{ !empty(post.base_price) && post.base_price }}
+                              </div> 
+                              <div class="col-sm-3"> 
+                                  <b>Serive Type</b> : 
+                                  <span ng-show="post.service_type == 1"> Express </span>
+                                  <span ng-show="post.service_type == 2"> Fast </span>
+                                  <span ng-show="post.service_type == 3"> Same Day </span>
+                              </div>                
+                              <div class="col-sm-3"> 
+                                  <b>Valid From</b> : {{ !empty(post.from_date) && post.from_date |datefilter|date:'dd/MM/yyyy' }}
+                              </div>
+                              <div class="col-sm-3"> 
+                                  <b>Valid To</b> : {{ !empty(post.to_date) && post.to_date |datefilter|date:'dd/MM/yyyy' }}
+                              </div>     
+                          </div>
+                      </div>
+                  </div>
+              </div>
+                </div>
+              </div> <!--end of right_search_p-->
+            </div>
+         </div>
+      </div>
+   </div>
+<script>
+   $(document).ready(function () {
+       $(".contact_click").click(function () {
+           $(".d_box").slideToggle("slow");
+       });
+   
+       $('.contact_click').click(function () {
+           $(this).next('.d_box').slideToggle('500');
+           $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
+       });
+   
+   });
+   
+   
+   $(document).ready(function () {
+       $(".contact_click1").click(function () {
+           $(".d_box1").slideToggle("slow");
+       });
+   
+       $('.contact_click1').click(function () {
+           $(this).next('.d_box1').slideToggle('500');
+   
+       });
+        $('#filters_click').click(function () {
+           $("#filters_show").slideToggle("slow");
+   
+       });
+        $('#detail_click').click(function () {
+           $("#click-data-detail").slideToggle("slow");
+   
+       });
+         $('#buyer-post-detail-btn').click(function () {
+           $("#detail-tabel-data").slideToggle();
+   
+       });
+        
+   
+   });
+</script>
+<script>
+   $(document).ready(function () {
+       var gwid = $(".scroll_div").width();
+       var twid = $(".loc_det").width();
+       var acwid = gwid / twid * 100;
+       var len = $(".scroll_div").length;
+       var towid = acwid * len + 9;
+       $(".fillter_div").css({"width": "" + towid + "%"});
+   });
+</script>
+
+<style>
+   .mb-5{ margin-bottom: 5px;}
+   .new-generate-data { position: relative;}
+   .new-generate-data input{ 
+   /*float: left;
+   width: 22%;*/
+   }
+   .generate_data-btn {float: right;}
+   .generate_data_input{width: 18%;
+   position: absolute;
+   right: 19%;}
+   .detail-table-content td{padding: 0px !important;border-top: 0px !important}
+   .border-none{ border:0px !important;}
+   .new-tabel-inner{ width: 100% }
+   .data-selection-table{ width: 100%;}
+   .tbl_padding tr td{padding:5px 8px!important;}
+   .ml5{margin-left: 5px;}
+   
+</style>

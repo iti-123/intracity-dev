@@ -1,0 +1,207 @@
+@charset "utf-8";
+/* CSS Document */
+.right_search_bar {
+    width: 100%;
+    float: left;
+    padding: 10px 0;
+    background: #f7f8f8;
+}
+
+.right_search_bar .search_bar_tab {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.right_search_bar .search_bar_tab li {
+    display: inline-block;
+    padding: 10px 3px;
+    position: relative;
+}
+
+.right_search_bar .search_bar_tab li a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #616161;
+    margin: 0px 11px 0px 0px;
+}
+
+.right_search_bar .search_bar_tab li a.active_c {
+    color: #333;
+    font-size: 18px;
+    font-weight: normal;
+    font-family: 'FuturaBT-Medium';
+}
+
+.hyperlocal-rc-flow {
+    width: 100%;
+    float: left;
+    background: #fff;
+    margin: 0 0 15px 0;
+}
+
+.hyperlocal-rate-card {
+    width: 100%;
+    float: left;
+}
+
+.select_form_hyperlocal {
+    width: 100%;
+    float: left;
+    padding: 6px 0;
+    position: relative;
+}
+
+.select_form_hyperlocal select {
+    width: 100%;
+    float: left;
+    padding: 13px 2px;
+    border-radius: 3px;
+    font-size: 14px;
+    color: #666;
+    border: none;
+    border-bottom: #ccc solid 1px;
+    outline: none;
+    background: none;
+}
+
+.select_form_hyperlocal input {
+    border: none;
+    width: 100%;
+    float: left;
+    position: relative;
+    padding: 13px 38px;
+    outline: none;
+    border-bottom: solid 1px #e0e0e0;
+}
+
+.select_form_hyperlocal .input_ani:focus ~ label, .input_ani:valid ~ label {
+    top: 0px;
+    font-size: 12px;
+    color: #666;
+}
+
+.select_form_hyperlocal .input_ani {
+    padding: 20px 0 5px 5px;
+    border: none;
+    outline: none;
+    border-bottom: solid 1px #e0e0e0;
+    font-size: 16px;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    -webkit-transition: .3s;
+    transition: .3s;
+    width: 100%;
+    float: left;
+}
+
+.select_form_hyperlocal .lbl_text2 {
+    position: absolute;
+    font-size: 14px;
+    left: 5px;
+    pointer-events: none;
+    top: 20px;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    -webkit-transition: .3s;
+    transition: .3s;
+    font-weight: 400;
+    color: #666;
+    font-size: 13px;
+}
+
+.select_form_hyperlocal input.date_p {
+    background: url(images/datepicker.png) no-repeat left -3px;
+    background-position: 0 13px;
+}
+
+.select_form_hyperlocal .padg_l {
+    padding: 0 35px;
+}
+
+.hyperlocal-rate-card .load_type {
+    width: 100%;
+    float: left;
+    margin: 5px 0;
+}
+
+.hyperlocal-rate-card .file-upload, .hyperlocal-rate-card .file-download {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #FFFFFF;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, #ed3237 50%, #FFFFFF 50%);
+    background-size: 100% 200%;
+    transition: all 1s;
+    color: #FFFFFF;
+    font-size: 15px;
+    float: left;
+}
+
+.hyperlocal-rate-card input[type='file'] {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.hyperlocal-rate-card .lbl_text3 {
+    float: left;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 45px;
+}
+
+.hyperlocal-rate-card .Discounts_btn {
+    display: block;
+    color: #3c3c3c;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 15px;
+    float: right;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.hyperlocal-rate-card .add_btn_gray {
+    background-color: #747474;
+    color: #fff;
+    font-size: 17px;
+    padding: 6px 10px;
+    text-transform: capitalize;
+    border: 1px solid #6c6c6c;
+    margin-top: 15px;
+    outline: none;
+}
+
+.spot_t ul li input[type=radio]
+{
+    position: absolute;
+    visibility: hidden;
+}
+.spot_t ul li span
+{
+    top: 25px;
+    left: 0px;
+}
+.spot_t .width_cal li
+{
+    width: calc(100%/3);
+    float:left;
+}
+.spot_t .width_cal li span
+{
+    top: 21px;  
+}

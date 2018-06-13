@@ -1,0 +1,734 @@
+<style type="text/css">
+.left_heeding_n {
+    text-align: left !important;
+    padding-left: 10px !important;
+}
+</style>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">{{getUserActiveRole}}</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#services">Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#" class="active_c">Search List</a></li>
+            </ul>
+        </div>
+
+        <div class="blue_section">
+            <div class="blue_form blue_listing">
+
+                <div class="list_blue_100">
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <div class="blue_list_data">
+                            <div class="blue_left_1">{{searchData.location.city_name}},
+                                {{searchData.location.state_name}}
+                            </div>
+                             <div class="blue_left_1">
+                                 {{ searchData.profileType }}
+                            </div>
+                            <div class="blue_left_1">
+                                 {{ searchData.experience1 }} ( in Yrs)
+                            </div>
+                            <div class="blue_left_2">
+                                <span ng-repeat="t in searchData.vehicleType"> 
+                                    <span ng-show="$index!=0">|</span> 
+                                    {{t | stringFormat }}
+                                </span>
+                                <span ng-repeat="t in searchData.machineType"> 
+                                    <span ng-show="$index!=0">|</span> 
+                                    {{t | stringFormat }}
+                                </span>
+                            </div>
+<div class="blue_left_3">
+    <span ng-repeat="t in searchData.employmentType"> 
+        <span
+        ng-show="$index!=0">|</span> {{ t | stringFormat }} 
+       </span>
+</div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <div class="modify_div">
+                            <a href="javascript: void(0)" class="modify_btn_blue" ng-click="modifyData()">Modify</a>
+                            <a href="javascript: void(0)" ng-click="postCard()" class="post_btn_blue">Post</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list_blue_100">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                        <div class="ratings_div">
+                            <ul class="ratings_ul">
+                                <li ng-click="toggleFilter()">Ratings</li>
+                                <li ng-click="toggleFilter()">Vehicle Type</li>
+                                <li ng-click="toggleFilter()">Employment Type</li>
+                              <!--  <li>Experience</li> -->
+                                <li ng-click="toggleFilter()">Salary</li>
+                                <li ng-click="toggleFilter()">Qualification</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="rilters_right" ng-click="toggleFilter()"><i class="fa fa-bars"></i> Filters</div>
+                    </div>
+
+                </div>
+
+                <div class="list_blue_100">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                        <div class="close_list_main mb-10">
+                            <ul class="close_list_ul">
+                                <li ng-repeat="t in searchData.rating" ng-click="removeRating($index)">{{t |
+                                    stringFormat}}
+                                </li>
+                                <li ng-repeat="t in searchData.vehicleType" ng-click="removeVehicleType($index)">{{t |
+                                    stringFormat}}
+                                </li>
+                                <li ng-repeat="t in searchData.machineType" ng-click="removeMachineType($index)">{{t |
+                                    stringFormat}}
+                                </li>
+                                <li>Rs. {{searchData.salary.min}} - {{searchData.salary.max}}</li>
+                                <!--<li>{{searchData.experience.min}} - {{searchData.experience.max}} Years</li>-->
+                                <li ng-repeat="t in searchData.qualification" ng-click="removeQualification($index)">{{t
+                                    | stringFormat}}
+                                </li>
+                                <li ng-repeat="t in searchData.employmentType" ng-click="removeEmploymentType($index)">
+                                    {{t | stringFormat}}
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div ng-show="filClearValue" ng-click="clearAll()" class="clear_right">Clear All</div>
+                    </div>
+
+                </div>
+
+                <div class="white_bg" ng-show="showFilters">
+                    <div class="scroller-div">
+                        <div class="fillter_div" >
+                            <div class="scroll_div">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="rating_heading">RATINGS</div>
+                                    <div class="state_dist_blue">
+                                        <div class="rating_input">
+                                            <input id="Excellent" type="checkbox" class="check_box check_box_1"
+                                                   ng-click="setRating('EXCELLENT')"
+                                                   ng-checked="filterData.rating.indexOf('EXCELLENT')!=-1">
+                                            <label for="Excellent">Excellent</label>
+                                        </div>
+                                        <div class="rating_input">
+                                            <input id="Good" type="checkbox" class="check_box check_box_1"
+                                                   ng-click="setRating('GOOD')" ng-checked="filterData.rating.indexOf('GOOD')!=-1">
+                                            <label for="Good">Good</label>
+                                        </div>
+                                        <div class="rating_input">
+                                            <input id="Average" type="checkbox" class="check_box check_box_1"
+                                                   ng-click="setRating('AVERAGE')"
+                                                   ng-checked="filterData.rating.indexOf('AVERAGE')!=-1">
+                                            <label for="Average">Average</label>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scroll_div" ng-hide="searchData.profileType!='DRIVER'">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <!-- <div class="sellr_field">
+                                        <input type="text" class="search_i" required="">
+                                        <label class="sel_text">VEHICLE TYPE</label>
+                                    </div> -->
+                                    <div class="rating_heading">VEHICLE TYPE</div>
+
+
+                                    <div class="sellers_det_box">
+
+                                        <div class="col-lg-12 col-md-12 col-sm-8">
+                                            <div class="row">
+                                                <div class="rating_input" ng-repeat="v in vehicleTypes">
+                                                    <input id="vehicle-{{$index}}" type="checkbox" class="check_box check_box_1"
+                                                           ng-click="setVehicleType(v.name)"
+                                                           ng-checked="filterData.vehicleType.indexOf(v.name)!=-1">
+                                                    <label for="vehicle-{{$index}}">{{v.name}}</label>
+                                                </div>
+                                                <!-- <div class="rating_input">
+                                                    <input id="lmv" type="checkbox" class="check_box check_box_1" ng-click="setVehicleType('LMV')" ng-checked="searchData.vehicleType.indexOf('LMV')!=-1">
+                                                    <label for="lmv">LMV</label>
+                                                </div>
+                                                <div class="rating_input">
+                                                    <input id="mmv" type="checkbox" class="check_box check_box_1" ng-click="setVehicleType('MMV')" ng-checked="searchData.vehicleType.indexOf('MMV')!=-1">
+                                                    <label for="mmv">MMV</label>
+                                                </div>
+                                                <div class="rating_input">
+                                                    <input id="hmv" type="checkbox" class="check_box check_box_1" ng-click="setVehicleType('HMV')" ng-checked="searchData.vehicleType.indexOf('HMV')!=-1">
+                                                    <label for="hmv">HMV</label>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scroll_div" ng-hide="searchData.profileType!='SKILLED'">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <!-- <div class="sellr_field">
+                                        <input type="text" class="search_i" required="">
+                                        <label class="sel_text">MACHINE TYPE</label>
+                                    </div> -->
+                                    <div class="rating_heading">MACHINE TYPE</div>
+
+                                    <div class="sellers_det_box">
+
+                                        <div class="col-lg-12 col-md-12 col-sm-8">
+                                            <div class="row">
+                                                <div class="rating_input" ng-repeat="v in machineTypes">
+                                                    <input id="machine-{{$index}}" type="checkbox" class="check_box check_box_1"
+                                                           ng-click="setMachineType(v.name)"
+                                                           ng-checked="filterData.machineType.indexOf(v.name)!=-1">
+                                                    <label for="machine-{{$index}}">{{v.name}}</label>
+                                                </div>
+                                                <!-- <div class="rating_input">
+                                                    <input id="lmv" type="checkbox" class="check_box check_box_1" ng-click="setVehicleType('LMV')" ng-checked="searchData.vehicleType.indexOf('LMV')!=-1">
+                                                    <label for="lmv">LMV</label>
+                                                </div>
+                                                <div class="rating_input">
+                                                    <input id="mmv" type="checkbox" class="check_box check_box_1" ng-click="setVehicleType('MMV')" ng-checked="searchData.vehicleType.indexOf('MMV')!=-1">
+                                                    <label for="mmv">MMV</label>
+                                                </div>
+                                                <div class="rating_input">
+                                                    <input id="hmv" type="checkbox" class="check_box check_box_1" ng-click="setVehicleType('HMV')" ng-checked="searchData.vehicleType.indexOf('HMV')!=-1">
+                                                    <label for="hmv">HMV</label>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scroll_div">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="Experience_range">
+
+                                        <div class="range_slider_div">
+                                            <div class="slider_heading">EXPERIENCE</div>
+                                            <div class="slider_range_right">
+                                               <div class="amout_range_div">
+                                                    <rzslider data-rz-slider-model="searchData.experience.min"
+                                                        data-rz-slider-high="searchData.experience.max">
+                                                         <div my-slider="searchData.experience" ng-model="exp" id="slider-range" ng-mouseup="filterMouseUp()">
+                                                         </div>
+                                                    </rzslider>
+                                                    <p class="amout_range">{{searchData.experience.min}} - {{searchData.experience.max}} Years</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="range_slider_div">
+                                            <div class="slider_heading">Salary</div>
+                                            <div class="slider_range_right">
+                                                <div class="amout_range_div">
+                                                    <rzslider data-rz-slider-model="searchData.salary.min"
+                                                        data-rz-slider-high="searchData.salary.max">
+                                                    <div my-slider="searchData.salary" ng-mouseup="filterMouseUp()"></div>
+                                                    </rzslider>
+                                                    <p><p class="amout_range"><i class='fa fa-inr'></i>{{searchData.salary.min}} - <i class='fa fa-inr'></i>{{searchData.salary.max}}</p></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scroll_div">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="rating_heading">QUALIFICATION</div>
+                                    <div class="state_dist_blue">
+                                        <div class="rating_input">
+                                            <input id="SSLC" type="checkbox" class="check_box check_box_1"
+                                                   ng-click="setQualification('SSLC')"
+                                                   ng-checked="filterData.qualification.indexOf('SSLC')!=-1">
+                                            <label for="SSLC">SSLC</label>
+                                        </div>
+                                        <div class="rating_input">
+                                            <input id="Intermediate" type="checkbox" class="check_box check_box_1"
+                                                   ng-click="setQualification('INTERMEDIATE')"
+                                                   ng-checked="filterData.qualification.indexOf('INTERMEDIATE')!=-1">
+                                            <label for="Intermediate">Intermediate</label>
+                                        </div>
+                                        <div class="rating_input">
+                                            <input id="Graduate" type="checkbox" class="check_box check_box_1"
+                                                   ng-click="setQualification('GRADUATE')"
+                                                   ng-checked="filterData.qualification.indexOf('GRADUATE')!=-1">
+                                            <label for="Graduate">Graduate</label>
+                                        </div>
+
+                                        <div class="rating_input">
+                                            <input id="POST_GRADUATE" type="checkbox" class="check_box check_box_1"
+                                                   ng-click="setQualification('POST_GRADUATE')"
+                                                   ng-checked="filterData.qualification.indexOf('POST_GRADUATE')!=-1">
+                                            <label for="POST_GRADUATE">Post Graduate</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scroll_div">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="rating_heading">EMP TYPE</div>
+                                    <div class="state_dist_blue">
+                                        <div class="rating_input">
+                                            <input id="FULL_TIME" type="checkbox" class="check_box check_box_1"
+                                                   ng-click="setEmploymentType('FULL_TIME')"
+                                                   ng-checked="filterData.employmentType.indexOf('FULL_TIME')!=-1">
+                                            <label for="FULL_TIME">Full Time</label>
+                                        </div>
+                                        <div class="rating_input">
+                                            <input id="PART_TIME" type="checkbox" class="check_box check_box_1"
+                                                   ng-click="setEmploymentType('PART_TIME')"
+                                                   ng-checked="filterData.employmentType.indexOf('PART_TIME')!=-1">
+                                            <label for="PART_TIME">Part time</label>
+                                        </div>
+                                        <div class="rating_input">
+                                            <input id="CONTRACT" type="checkbox" class="check_box check_box_1"
+                                                   ng-click="setEmploymentType('CONTRACT')"
+                                                   ng-checked="filterData.employmentType.indexOf('CONTRACT')!=-1">
+                                            <label for="CONTRACT">Contract</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!--blue_form-->
+
+
+            <div class="list_head_100">
+                <div class="list_head">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="list_heading left_heeding_n">Name</div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="list_heading">Vehicle Type</div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="list_heading">Experience</div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="list_heading">Qualification</div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="list_heading">Salary (<span><img src="../images/rupee_white.png"
+                                                                     alt="logistiks logo"/></span>)
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="list_head_data_show">
+
+                    <div ng-repeat="s in searchResults">
+                        <div class="datashow_list border_four">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="data_cont">{{s.seller_first_name}} {{s.seller_last_name}}<span> <img
+                                        src="../images/p.jpg" alt="logistiks logo"/></span>
+                                </div>
+                                <div class="data_cont">
+                                    <div class="color_more_1"></div>
+                                    <div class="color_more_2"></div>
+                                    <div class="color_more_3"></div>
+                                    <div class="color_more_4"></div>
+                                    <div class="color_more_5"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <!-- <div class="data_cont_center" ng-if="s.seller_vehicle_type!=undefined">
+                                    {{s.seller_vehicle_type | arrayToBackSlashString}}
+                                </div> -->
+                                <div class="data_cont_center" ng-if="s.seller_vehicle_type!=undefined">
+                                    <span class="search-result-multi" ng-repeat="v in s.seller_vehicle_type">{{v}}</span>
+                                </div>
+                                <div class="data_cont_center" ng-if="s.seller_vehicle_type==undefined">
+                                    <span class="search-result-multi">N/A</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_cont_center">{{s.seller_experience}}</div>
+                            </div>
+
+                            <!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_cont_center">{{s.seller_qualification | arrayToBackSlashString}}</div>
+                            </div> -->
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_cont_center">
+                                  <span class="search-result-multi" ng-repeat="q in s.seller_qualification">{{q}}</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_cont_center">{{s.seller_salary}}</div>
+
+                            </div>
+
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                <div class="row">
+                                    <div class="div_100"><a href="javascript: void(0)" ng-click="goToBookNow($index)">Book
+                                        Now</a></div>
+                                    <div class="detail_100">
+                                        <!-- <div class="detail_btn_plus" ng-click="openDetails($index)"><a href="javascript:void"><i class="fa fa-plus" aria-hidden="true"></i> Details</a></div>
+                                        <div class="mes_icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div> -->
+                                        <span class="detail_btn_plus" ng-click="openDetails($index)"><span
+                                                ng-show="!isDetailsHidden($index)">+</span><span
+                                                ng-show="isDetailsHidden($index)">-</span> Details</span>
+                                        <div class="mes_icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div ng-show="isDetailsHidden($index)">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-9">
+                                <div class="blue_details">
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">contact number</div>
+                                            <div class="blue_contact_vlue">{{s.details.cur_mobile}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">Email</div>
+                                            <div class="blue_contact_vlue">{{s.details.email}}</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">DoB</div>
+                                            <div class="blue_contact_vlue">{{s.details.date_of_birth}}</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">Blood Group</div>
+                                            <div class="blue_contact_vlue">{{s.details.blood_group}}</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="blue_details">
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">pan number</div>
+                                            <div class="blue_contact_vlue">{{s.details.pan_no}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">aadhar no</div>
+                                            <div class="blue_contact_vlue">{{s.details.aadhar_no}}</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">ration no</div>
+                                            <div class="blue_contact_vlue">{{s.details.ration_card_no}}</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">licence no</div>
+                                            <div class="blue_contact_vlue">{{s.details.licence_no}}</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="blue_details">
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">lic policy</div>
+                                            <div class="blue_contact_vlue">{{s.details.lic_policy}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">health policy</div>
+                                            <div class="blue_contact_vlue">{{s.details.health_policy}}</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">medical policy</div>
+                                            <div class="blue_contact_vlue">{{s.details.medical_policy}}</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <div class="blue_contact_number">
+                                            <div class="blue_contact_heading">languages</div>
+                                            <div class="blue_contact_vlue">{{getLanguages(s.details.languages)}}</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="not-found" ng-if="!searchResults.length">
+                        <p>Record Not Found </p>
+                    </div>
+                    <!--enddd-->
+                    <!-- <div class="datashow_list">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="data_cont">Trair Trans<span> <img src="../images/p.jpg" alt="logistiks logo" /></span> <span class="spon_h">Sponsered</span></div>
+                            <div class="data_cont">
+                                <div class="color_more_1"></div>
+                                <div class="color_more_2"></div>
+                                <div class="color_more_3"></div>
+                                <div class="color_more_4"></div>
+                                <div class="color_more_5"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="data_cont_center">LMV/MMV</div>
+
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="data_cont_center">3-5</div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="data_cont_center">SSLC</div>
+
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="data_cont_center">16, 000.00</div>
+
+                        </div>
+
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            <div class="row">
+                                <div class="div_100"><a href="#">Contact</a></div>
+                                <div class="detail_100">
+                                    <span class="detail_btn_plus">+ Details</span>
+                                    <div class="mes_icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> -->
+                    <!-- <div class="datashow_list">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="data_cont">Trair Trans<span> <img src="../images/p.jpg" alt="logistiks logo" /></span> <span class="spon_h">Sponsered</span></div>
+                            <div class="data_cont">
+                                <div class="color_more_1"></div>
+                                <div class="color_more_2"></div>
+                                <div class="color_more_3"></div>
+                                <div class="color_more_4"></div>
+                                <div class="color_more_5"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="data_cont_center">LMV/MMV</div>
+
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="data_cont_center">3-5</div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="data_cont_center">SSLC</div>
+
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="data_cont_center">16, 000.00</div>
+
+                        </div>
+
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            <div class="row">
+                                <div class="div_100"><a href="#">Contact</a></div>
+                                <div class="detail_100">
+                                    <div class="detail_btn_plus" id="contact_click"><a href="javascript:void"><i class="fa fa-plus" aria-hidden="true"></i> Details</a></div>
+                                    <div class="mes_icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> -->
+
+
+                </div>
+
+            </div>
+        </div> <!--end of blue_section-->
+
+        <div class="modal fade bluecoller_modufy_popup" id="modificationModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="blue_section">
+                            <div class="blue_form no_space">
+                                <div class="blue_form_one">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="select_form_intra mb-24">
+                                            <select class="input_ani" ng-model="formData.profileType">
+                                                <option ng-repeat="e in profileTypes" value="{{e.value}}">{{e.key}}
+                                                </option>
+                                            </select>
+                                            <span class="form-error" ng-show="formError.profileType">Select a Profile</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="blue_form_one">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <div class="select_form_intra mb-24">
+                                            <input type="text" class="input_ani" required="" ng-model="formData.locationPH"  onkeypress='return (event.keyCode > 64 && event.keyCode < 91) || (event.keyCode > 96 && event.keyCode < 123) || event.keyCode == 8'
+                                                   typeahead="location.city_name+', '+ location.state_name for location in searchLocations($viewValue)"
+                                                   typeahead-on-select="selectedLocation($item, $model, $label)"
+                                                   autocomplete="off">
+                                            <label class="lbl_text2">Location</label>
+                                            <span class="form-error" ng-show="formError.location">Select Valid Location</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="select_form_intra mb-24" ng-show="formData.profileType != 'SKILLED'">
+                                            <select class="input_ani" ng-model="formData.vehicleType">
+                                                <option ng-repeat="type in vehicleTypes"
+                                                        value="{{type.name=='Vehicle Type' && 'Vehicle Type' || type.name}}">
+                                                    {{type.name}}
+                                                </option>
+                                            </select>
+                                            <span class="form-error" ng-show="formError.vehicleType">Select Vehicle Type</span>
+                                        </div>
+                                        <div class="select_form_intra mb-24" ng-show="formData.profileType == 'SKILLED'">
+                                            <select class="input_ani" ng-model="formData.machineType">
+                                                <option ng-repeat="type in machineTypes"
+                                                        value="{{type.name=='Machine Type' && 'Machine Type' || type.name}}">
+                                                    {{type.name}}
+                                                </option>
+                                            </select>
+                                            <span class="form-error" ng-show="formError.machineType">Select Machine Type</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="select_form_intra mb-24">
+                                            <select class="input_ani" ng-model="formData.employmentType">
+                                                <option ng-repeat="e in employmentTypes" value="{{e.value}}">{{e.key}}
+                                                </option>
+                                            </select>
+                                            <span class="form-error"
+                                                  ng-show="formError.employmentType">Select Employment Type</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <div class="select_form_intra mb-24">
+                                            <input type="text" class="input_ani" maxlength="2" required=""
+                                                   ng-model="formData.experience1"
+                                                   onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                            <label class="lbl_text2">Experience</label>
+                                            <span class="form-error" ng-show="formError.experience1">Enter Experience</span>
+                                        </div>
+                                    </div>  
+
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <div class="select_form_intra mb-24">
+                                            <select class="input_ani" ng-model="formData.salaryType">
+                                                <option ng-repeat="e in salaryTypes" value="{{e.value}}">{{e.key}}
+                                                </option>
+                                            </select>
+                                            <span class="form-error" ng-show="formError.salaryType">Select Salary Type</span>
+                                        </div>
+                                    </div>                              
+
+                                </div>
+
+                                <div class="blue_form_one">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12"></div>
+                                    <div class="col-lg-4 col-md-10 col-sm-10 col-xs-12">
+                                        <div class="vehicle_main">
+                                            <div class="vehicle_box">
+                                                <div class="vehicle_img_box"><img src="../images/vehicle.jpg" alt="logistiks logo" /></div>
+                                                <div class="vehicle_img_box_contain">
+                                                    <span>Vehicle Dimensions *</span>
+                                                    <span>20x8x12</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="blue_form_one">
+                                    <div class="col-lg-12">
+                                        <div class="submit_btn_blue">
+                                            <input type="submit" value="MODIFY" class="submit_btn" ng-click="modify()">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div> <!--blue_form-->
+                        </div> <!--end of blue_section-->
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <!-- <button type="button" class="btn red-btn flat-btn ok-btn message_send_button" ng-click="PostMessage">Send message</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .ui-slider {
+        width: 100%;
+        float: left;
+        height: 5px;
+    }
+
+    .ui-slider-handle {
+        width: 10px !important;
+        border-radius: 0;
+    }
+
+    .amout_range {
+        width: 100%;
+        float: left;
+        margin-top: 15px;
+    }
+    .bluecoller_modufy_popup .modal-header{border-bottom: 0px;}
+    .bluecoller_modufy_popup .modal-footer{border-top:0px;}
+</style>

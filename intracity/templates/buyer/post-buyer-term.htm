@@ -1,0 +1,1523 @@
+<style>
+   
+    .padding_l {
+        padding-left: 32px;
+        padding-bottom: 7px;
+    }
+    .input_ani~label.active{top: -4px!important;}
+    .input_time{padding: 10px 0 5px 27px!important;}
+    
+    .lbl_day {
+        position: absolute;
+        font-size: 16px;
+        left: 46px;
+        pointer-events: none;
+        top: 15px;
+        -moz-transition: .3s;
+        -o-transition: .3s;
+        -webkit-transition: .3s;
+        transition: .3s;
+        font-weight: 400;
+        color: #666;
+    }
+    .add-on-1 {
+    top: 15px!important;
+}
+.add-on-2{top: 3px!important;}
+.time-lab{top: 4px!important;}
+    .pad-12{ padding: 12px 0 0 0;}
+    
+    .input_ani:focus~.lbl_day {
+        top: -5px;
+        font-size: 13px;
+        -moz-transition: .3s;
+        -o-transition: .3s;
+        -webkit-transition: .3s;
+        transition: .3s;
+        color: #b6b6b6;
+    }
+    
+    .input_ani:valid~lbl_day {
+        top: -5px;
+        font-size: 13px;
+        -moz-transition: .3s;
+        -o-transition: .3s;
+        -webkit-transition: .3s;
+        transition: .3s;
+        color: #b6b6b6;
+    }
+    .nm{ margin: 0px;}
+   
+	.ato:focus {border-bottom: solid 1px #b6b6b6; padding: 2px 0 27px 34px;transition: .3s;}
+    .notification-popup{ width: 450px;}
+    .notification-popup .modal-content{border-radius: 0px;}
+    .notification-popup .modal-content .popup{padding: 42px 20px;}
+
+    .select_form_intra input,
+    .left_v_from input,
+    .date_selection .left_v_from input {
+        box-shadow: none;
+    }
+	
+                                    
+</style>
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="javascript:void(0)">{{getUserActiveRole}}</a><span class="crum-2"><i class="fa  fa-angle-right"></i></span></li>
+                <li><a href="#services">Services</a><span class="crum-2"><i class="fa  fa-angle-right"></i></span></li>
+                <li><a href="javascript:void(0)" class="active_c">Intracity Post</a></li>
+            </ul>
+        </div>
+
+        <div class="location_sec">
+                    <!-- {{ routes  }} -->
+            <form method="post" name="buyerTerm" id="BuyerPostForm" ng-app>
+                <!--{{ dataSpot.type }} {{ dataSpot.type_basis }}-->
+                <div class="spot_t" ng-init="dataSpot.type='spot'">
+                    <ul>
+                        <li>
+                            <input type="radio" ng-checked="true" ng-click="showHideType('spot',dataSpot,dataLoads)" ng-model="dataSpot.type" value="spot" id="spot" data-target="spot_d" />
+                            <label for="spot">Spot</label>
+                            <span></span>
+                        </li>
+                        <li>
+                            <input type="radio" ng-model="dataSpot.type" ng-click="showHideType('term',dataSpot,dataLoads)" value="term" id="term" data-target="term_d" />
+                            <label for="term">Term</label>
+                            <span></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="main_intra intra_main activeintra" id="spot_d">
+                    <div class="spot_t" ng-init="dataSpot.type_basis='hours'">
+                        <ul>                            
+
+                            <li>
+                                <input type="radio" ng-checked="true" value="distance_basis" ng-click="showHideSpot('distance_basis',dataSpot)" ng-model="dataSpot.type_basis" id="Distance" name="type_basis" data-target="Distance_cont1" />
+                                <label for="Distance">Distance Basis</label>
+                                <span></span>
+                            </li>
+
+                            <li>
+                                <input type="radio"  value="hours" ng-model="dataSpot.type_basis" ng-click="showHideSpot('hours',dataSpot)" id="Hour" name="type_basis" data-target="Hour_cont1" />
+                                <label for="Hour">Hour Basis</label>
+                                <span></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="Hour_cont1" class="intra_main activeintra">
+                        <div class="row nm">
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                            <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerTerm.title.$invalid]">
+                                <input type="text" id="title" class="input_ani title" autocomplete="off" name="title" ng-model="dataSpot.title" required="" />
+                                <label class="lbl_text2">Title*</label>
+                                <span class="help-inline" style="color:red;" ng-show="city_validation">Please enter a title </span>
+                                <!--<span class="help-inline" style="color:red;" ng-show="submitted && buyerTerm.city.$error.required">Please select city </span>-->
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                            <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerTerm.city.$invalid]">
+                                <input type="text" class="input_ani city alphaNumeric" autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)" name="city" ng-model="dataSpot.city" required="" typeahead="city as (city.city_name) for city in cities | filter:$viewValue" />
+                                <label class="lbl_text2">Select City *</label>
+                               
+                                <!--<span class="help-inline" style="color:red;" ng-show="submitted && buyerTerm.city.$error.required">Please select city </span>-->
+                                 <span class="help-inline" style="color:red;" ng-show="city_validation">Please select a valid city </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                            <div class="date_selection" ng-class="{true: 'error'}[submitted && buyerTerm.departure.$invalid]">
+
+                                <span class="left_v_from">
+                            <input id="departure" type="text" ng-model="dataSpot.departure" fromcalendar name="departure" 
+                                class="last_date input_date_p input_ani departure"  required autocomplete="off" readonly = "readonly" />
+                                <label class="lbl_text2 padg_l city_align">Pickup Date <span>*</span></label>
+                            </span>
+                                <!--<span class="help-inline" style="color:red;" ng-show="submitted && buyerTerm.departure.$error.required">Please enter Departure *</span>-->
+                                <span class="help-inline" style="color:red;" ng-show="departure_validation">Please enter Departure </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                            <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerTerm.hd_slab.$invalid]">
+
+                                <select ng-model="dataSpot.hd_slab" class="hd_slab selectpicker" selectpicker name="hd_slab" ng-options="y.distance_hour for (x,y) in hourDistanceSlabs track by y.id" required>
+                                    <option value="">Hour Distance Slab*</option>                                
+
+                                </select>
+                                <!--<span class="help-inline" style="color:red;" ng-show="submitted && buyerTerm.hd_slab.$error.required">Please enter Hours and Distance</span>-->
+                                <span class="help-inline" style="color:red;" ng-show="hd_validation">Please enter Hours and Distance</span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin_input">
+                            <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerTerm.no_of_vehicles.$invalid]">
+                                <input type="text" min='0' ng-model="dataSpot.no_of_vehicles" id="no_of_vehicles" name="no_of_vehicles" maxlength="5" class="input_ani valid-number no_of_vehicles" required>
+
+                                <label class="lbl_text2">Number of Vehicles Needed * </label>
+                                <!--<span class="help-inline" style="color:red;" ng-show="submitted && buyerTerm.no_of_vehicles.$error.required">Please enter Number of Vehicle</span>-->
+                                 <span class="help-inline" style="color:red;" ng-show="no_of_vehicles_validation">Please enter Number of Vehicle</span>
+                                 <span class="help-inline" style="color:red;" ng-show="zero_no_of_vehicles">Please Enter Value More Than Zero.</span>
+                                
+                            </div>
+                        </div>
+                        
+                        
+                        
+
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                            
+                            <div class="reporting_time_spot   js-label-datepicker input-prepend date clsbid_close_time">
+                                <span class="add-on add-on-1"><i class="fa fa-clock-o"></i></span>
+                                <input id="vehicle_reporting_time" class="input_ani  padding_l disable-bg-white" readonly="readonly" jsplaceholder="" name="vehicle_reporting_time" type="text" ng-model="dataSpot.vehicle_reporting_time"  required="">
+                                <label class="lbl_day">Vehicle Reporting Time * </label>
+                                <span class="help-inline" style="color:red;" ng-show="vehicle_reporting_time_validation">Please Enter Timming </span> 
+
+                                
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-4 col-md-3 col-sm-4 col-xs-12 margin_input">
+                            <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerTerm.vehicle_reporting_location.$invalid]">
+                                <input type="text" id="vehicle_reporting_location" maxlength="30" class="input_ani vehicle_reporting_location alphaNumeric" autocomplete="off"  ng-model="dataSpot.vehicle_reporting_location" required="" ng-keyup="validateReportingLocation(dataSpot)" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue" typeahead-on-select="validateReportingLocation(dataSpot)" />
+                               
+                                <label class="lbl_text2">Vehicle Reporting Location *</label>
+                                <!--<span class="help-inline" style="color:red;" ng-show="submitted && buyerTerm.vehicle_reporting_location.$error.required">Please enter proper Vehicle Reporting Location</span>-->
+                                <span class="help-inline" style="color:red;" ng-show="reporting_location_validation">Please enter proper Vehicle Reporting Location</span>
+                            </div>
+                        </div>
+                        <div ng-if="dataSpot.type_basis=='hours'" ng-include="'templates/buyer/price-type.html'"></div>
+                        <div ng-include="'templates/buyer/estimated-weight.html'">
+                        
+                        </div>
+                       </div>
+
+                    </div>
+
+                    <div id="Distance_cont1" class="intra_main" ng-if="dataSpot.type_basis=='distance_basis'">
+                       
+                       
+                       
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                            <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerpost.title.$invalid]">
+                                <input type="text" id="title" class="input_ani title" autocomplete="off" name="city" ng-model="dataSpot.title" required="" />
+                                <label class="lbl_text2">Title*</label>
+                                <span class="help-inline" style="color:red;" ng-show="city_validation">Please enter a title </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                            <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerpost.city.$invalid]">
+                                <input type="text" id="buyerTermCity" class="input_ani d_city alphaNumeric" autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)" name="city" ng-model="dataSpot.city" required="" typeahead="city as (city.city_name) for city in cities | filter:$viewValue" />
+                                <label class="lbl_text2">Select City *</label>
+                               
+                                <span class="help-inline" style="color:red;" ng-show="city_validation">Please select a valid city</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                           
+                        <div class="date_selection" ng-class="{true: 'error'}[submitted && buyerTerm.departure.$invalid]">
+
+                                <span class="left_v_from">
+                                <input type="text" ng-model="dataSpot.d_valid_from" fromcalendar name="departure" class="departure dt-icon d_valid_from dt-icon input_ani"  required autocomplete="off" readonly = 'readonly'>
+
+                              <label class="lbl_text2 padg_l city_align">Pickup Date <span>*</span></label>
+                            </span>
+                                <span class="help-inline" style="color:red;" ng-show="d_valid_from_validation">Please enter Departure *</span>
+                            </div>
+
+
+                            
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                            <div class="select_form_intra">
+                                <select class=" selectpicker" selectpicker ng-model="dataSpot.d_vehicle_reporting_time" ng-options="x for x in timeslot track by x">
+                                    <option value="">Vehicle Reporting Time *</option>
+                                </select>
+                                <span class="help-inline" style="color:red;" ng-show="d_vehicle_reporting_time_validation">Please enter Vehicle Reporting Time </span>
+                                 
+                            </div>
+                        </div>
+                      
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin_input">
+                            
+                            <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerpost.from_location.$invalid]">
+                                <input type="text" id="buyer" typeahead-on-select="removeToCity(dataSpot.d_from_location)"  class="input_ani d_from_location  alphaNumeric" autocomplete="off" ng-model="dataSpot.d_from_location" required="" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue" />
+                                <label class="lbl_text2">Select From Location *</label>                               
+
+                                <span class="help-inline" style="color:red;" ng-show="form_location_validation">Please select a Valid From Location</span>
+                            </div>
+                            
+                         
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin_input">
+                           
+
+                            <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerpost.to_location.$invalid]">
+                                <input type="text" id="buyer" class="input_ani d_to_location  alphaNumeric" autocomplete="off" ng-model="dataSpot.d_to_location" typeahead-on-select= "calculateDistance(dataSpot.d_from_location.locality_name,dataSpot.d_to_location.locality_name)" required="" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue" />
+                                <label class="lbl_text2">Select To Location *</label>
+                                
+                                <span class="help-inline" style="color:red;" ng-show="d_to_location_validation">Please select a valid To Location</span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin_input">
+                            <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerpost.no_of_vehicle.$invalid]">
+                                <input type="text" min = '0' class="input_ani d_no_of_vehicle valid-number" maxlength="5" ng-model="dataSpot.d_no_of_vehicle" name="d_no_of_vehicle" required>
+                                <label class="lbl_text2">Number of Vehicles Needed *</label>
+                                <span class="help-inline" style="color:red;" ng-show="d_no_of_vehicle_validation">Please enter Number of Vehicle</span>
+                                <span class="help-inline" style="color:red;" ng-show="zero_d_no_of_vehicle">Please enter value more than 0.</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                            <div class="select_form_intra">
+
+                                <select ng-model="dataSpot.d_vehicle_type_any" class="d_vehicle_type_any selectpicker" selectpicker name="vehicle_type_any" required ng-options="y.vehicle_type for (x,y) in vehicles track by y.id">
+                                    <option value="">Vehicle Type (Any) *</option>                                    
+                                </select>
+                                <span class="help-inline" style="color:red;" ng-show="d_vehicle_type_any_validation">Please enter Vehicle Type</span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                            
+                                <div class="select_form_intra">
+                                    <div class="vichel_dimensin">
+                                        <span class="v_images"><img src="images/dimension_v.png" /></span>
+                                        <div class="vi_text">
+                                            <span class="v_text">Vehicle Dimensions<span>*</span></span><br />
+
+                                            <span class="w_fullwidth" ng-if="dataSpot.d_vehicle_type_any" ng-repeat="vehicle in vehicles | filter:{id:dataSpot.d_vehicle_type_any.id}:true | filter:search:strict">
+                                            {{ vehicle.dimension }}
+                                        </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin_input">
+                            <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerpost.material_type.$invalid]">
+                                <select ng-model="dataSpot.d_material_type" name="material_type" class="d_material_type selectpicker" selectpicker required ng-options="y.name for (x,y) in materialType track by y.id" ng-change="$parent.setSection()">
+                                    <option value="">Material Type *</option>                                
+                                </select>
+                                <span class="help-inline" style="color:red;" ng-show="d_material_type_validation">Please enter Material Type</span>
+                            </div>
+                        </div>
+                       
+                        <div ng-if="dataSpot.type_basis=='distance_basis'" ng-include="'templates/buyer/price-type.html'"></div>
+                        
+                    </div>
+                    
+                    <div class="clearfix"></div>
+                    
+                    <div class="load_type">
+
+                        <div class="add_more_btn">
+                            <div class="add_m_b">
+                                <input type="hidden" name="material_type">
+                                <input type="button" class="button_serch" ng-click="addMore(dataSpot,dataLoads)" name="button" value="Add" />
+
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                        <div class="row">
+                            <div class="c_details">
+                                <div>
+                                    <div>                                        
+                                        <table class="table tbl_t">
+                                            <tr>
+                                                <th>
+                                                    <div class="tabel-head-text">CITY</div>
+                                                </th>
+
+                                                <th>
+                                                    <div class="tabel-head-text" ng-if="dataSpot.type_basis == 'distance_basis'">FROM LOCATION</div>
+
+                                                    <div class="tabel-head-text" ng-if="dataSpot.type_basis == 'hours'">Date &amp; Time</div>
+                                                </th>
+
+                                                <th>
+                                                    <div class="tabel-head-text" ng-if="dataSpot.type_basis == 'distance_basis'">TO LOCATION</div>
+
+                                                    <div class="tabel-head-text" ng-if="dataSpot.type_basis == 'hours'">Distance Hours</div>
+                                                </th>
+
+                                                <th>
+                                                    <div class="tabel-head-text" ng-if="dataSpot.type_basis == 'distance_basis'">MATERIAL TYPE</div>
+
+                                                    <div class="tabel-head-text" ng-if="dataSpot.type_basis == 'hours'">Location</div>
+                                                </th>
+
+                                                <th>
+                                                    <div class="tabel-head-text" ng-if="dataSpot.type_basis == 'distance_basis'">VEHICLE TYPE</span>
+                                                        <div class="tabel-head-text" ng-if="dataSpot.type_basis == 'hours'">Number of Vehicle</div>
+                                                </th>
+
+                                                <th>
+                                                    <div class="tabel-head-text">Action</div>
+                                                </th>
+                                            </tr>
+                                            <tr ng-if="dataSpot.type_basis=='hours'" ng-repeat="(key, value) in listdataSpot track by $index">
+                                                <td>
+                                                    <div class="tabel-data-text w_fullwidth" ng-if="value.city">
+                                                        {{ value.city.city_name }}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class=" tabel-data-text w_fullwidth">
+                                                        {{ value.departure | date: "dd/MM/yyyy" }} &amp; {{ value.vehicle_reporting_time }}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="tabel-data-text">
+                                                        {{ value.hd_slab.distance_hour }}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="tabel-data-text">
+                                                        {{ value.vehicle_reporting_location.locality_name }}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <!--<div ng-if="value.no_of_vehicles">
+                                                        {{ value.no_of_vehicles }}
+                                                    </div>-->
+                                                </td>
+                                                <td>
+                                                    <a href="javascript:void(0)" class="data-edit" ng-click="editSpotDistance(key,value)"> 
+                                                        <i class="fa fa-edit">  </i>
+
+                                                    </a>
+                                                    <a href="javascript:void(0)" class="delete_img" ng-click="deleteSpotDistance(key)">
+                                                        <i class="fa fa-trash">  </i>
+                                                    </a>
+                                                </td>
+
+
+                                            </tr>
+                                    <!-- Listing of Distance Basis start -->
+                                            <tr ng-if="dataSpot.type_basis=='distance_basis'" ng-repeat="(key, value) in listDistancedataSpot track by $index">
+                                                <td>
+                                                 
+                                                        <div class="tabel-data-text w_fullwidth" ng-if="value.city"> 
+                                                        {{ value.city.city_name }}
+                                                        </div>
+                                                    
+                                                </td>
+                                                <td>
+                                                    
+                                                    <span class="tabel-data-text w_fullwidth" ng-if="value.d_from_location">
+                                                        {{ value.d_from_location.locality_name }}
+                                                    </span>
+                                                    
+                                                </td>
+                                                <td>        
+                                                        
+                                                            <span class="tabel-data-text w_fullwidth" ng-if="value.d_to_location">
+                                                            {{ value.d_to_location.locality_name }}
+                                                        </span>
+                                                        
+                                                </td>
+                                                <td>
+                                                    
+                                                    <span class="tabel-data-text w_fullwidth">
+                                                    {{ value.d_material_type.name }}
+                                                     </span>
+                                                    
+                                                </td>
+                                                <td>
+                                                    
+                                                    <span class="tabel-data-text w_fullwidth" ng-if="value.d_vehicle_type_any">
+                                                    {{ value.d_vehicle_type_any.vehicle_type }}
+                                                    </span>
+                                                    
+                                                </td>
+                                                <td>
+                                                <!--<div class="col-md-2"><span class="w_fullwidth">PRICE</span></div>-->
+                                                <div class="edit_del">
+                                                    <a href="javascript:void(0)" ng-click="editSpotDistance(key,value)">
+                                                        <i class="fa fa-edit" ></i>    
+                                                    </a>
+                                                    <a href="javascript:void(0)" class="delete_img" ng-click="deleteSpotDistance(key)">
+                                                        <i class="fa fa-trash" ></i>    
+                                                    </a>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        </div>
+                                       
+
+                                        <!-- Listing of Distance Basis start -->
+                                        <div class="buyer_post_data" ng-if="dataSpot.type_basis=='distance_basis'">
+                                            <table class="table tbl_t">
+                                            
+                                            </table>
+                                        </div>
+                                        <!-- Listing of Distance Basis end -->
+                                    </div>
+                                   </div>
+                                </div>
+                                <!--end of c_details-->
+
+
+                                <div class="date_formt">
+                                    <div class="date_f_sub">
+                                        <div class="col-lg-4 col-md-4 col-sm-6">
+                                            <div class="last_d pad-12">Last Date/Time for Quote</div>
+
+                                        </div>
+
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                            <div class="date_selection">
+                                                <div class="input_date">
+                                                    <span class="left_v_from">
+                                                    <input type="text" ng-model="dataSpot.last_date" fromcalendar id="last_date_quote_submission" class="input_ani input_date_p last_date dt-icon dt-icon"  autocomplete="off" readonly = "readonly" required="" />
+                                                    <label class="lbl_text2 padg_l date-top">Date <span>*</span></label>
+                                                    <span class="help-inline" style="color:red;" ng-show="spot_hour_last_date">Please Enter Last Date </span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                                  
+                                      <div id="intracity_spot_time_icon_add" class="js-label-datepicker input-prepend date clsbid_close_time">
+                                                    <span class="add-on add-on-2"><i class="fa fa-clock-o"></i></span>
+                                                    <input id="last_time_quote_submission" class="input_ani term_last_time input_time  disable-bg-white clsFTLTBidCloserTime js-placeholder" readonly="readonly" jsplaceholder name="last_time_quote_submission_spot" type="text" ng-model="dataSpot.last_time" placeholder="Time *"  required>
+                                                       <!-- <label class="lbl_day time-lab text-input-placeholder js-placeholder-text">Time *</label> -->
+                                                        <span class="help-inline" style="color:red;" ng-show="spot_hour_last_time">Please Enter Last time </span>
+                                                    
+                                                </div>
+
+                                        </div>
+
+
+
+                                        <div class="spot_t" ng-init="dataSpot.post_type_term=2">
+                                            <ul>
+                                                <li>
+                                                    <input type="radio" id="PostPublic" ng-model="dataSpot.post_type_term" ng-checked="true" value="2" ng-click="showHide('public')">
+                                                    <label for="PostPublic" class="ab_c">Post Public</label>
+                                                    <span></span>
+                                                </li>
+                                                <li>
+                                                    <input type="radio" id="PostPrivate" ng-model="dataSpot.post_type_term" ng-click="showHide('private')" value="1">
+                                                    <label for="PostPrivate" class="ab_c">Post Private</label>
+                                                    <span></span>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+
+                                        <div class="col-md-12 padding-none">
+                                            <div class="clearfix"></div>
+                                            <div class="col-md-4 m-top-10 typeahed-search" ng-show="isSellerVisible">
+                                                <input type="text" class="form-control form-control1" id="sellerList" ng-model="dataSpot.visibleToSellers" name="seller_list" placeholder="Seller Name (Auto Search)" ng-required="dataSpot.isPublic=='private'" />
+                                                <label ng-show="!dataSpot.visibleToSellers && errorRaised" class="error">Seller is required</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="terms_a">
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="admin_input margin_t">
+                                                    <input id="Accept" ng-model="dataSpot.term_condition" type="checkbox" class="check_box term_condition">
+                                                    <label for="Accept" class="term_condition">Accept Terms &amp; Conditions (Digital Contract)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End of date_formt-->
+
+                            </div>
+
+                            <div class="search_btn">
+
+                                <div class="serch_vichel">
+
+                                    <input type="button" class="button_serch" ng-if="dataSpot.type_basis == 'hours'" ng-click="getQuote(listdataSpot,dataSpot)" name="button" value="Get Quote" />
+                                    <input type="button" class="button_serch" ng-if="dataSpot.type_basis == 'distance_basis'" ng-click="getQuote(listDistancedataSpot,dataSpot)" name="button" value="Get Quote" />
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--End of load_type-->
+
+                    </div>
+
+                    <div class="main_intra intra_main" id="term_d" ng-init="dataTerm.type_basis = 'term_hours'">
+                        <div class="spot_t">
+                            <ul>
+                                <li>
+                                    <input type="radio" ng-model="dataTerm.type_basis" value="term_distance" ng-click="showHideSpot('term_distance',dataSpot)" id="Distance1" name="hour" data-target="Distance_cont" />
+                                    <label for="Distance1">Distance Basis</label>
+                                    <span></span>
+                                </li>
+                                <li>
+                                    <input type="radio" ng-checked="true" ng-model="dataTerm.type_basis" value="term_hours" ng-click="showHideSpot('term_hours',dataSpot)" id="Hour1" name="hour" data-target="Hour_cont" checked/>
+                                    <label for="Hour1">Hour Basis</label>
+                                    <span></span>
+                                </li>
+                                
+                            </ul>
+                        </div>
+
+                        <div id="Hour_cont" class="intra_main activeintra">
+                        <div class="row nm">
+                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                <div class="select_form_intra">
+                                     <input type="text" id="title" class="input_ani term_title" autocomplete="off" name="title" ng-model="dataTerm.title_hour" required="" />
+                                     <label class="lbl_text2">Title*</label>
+                                     <span class="help-inline" style="color:red;" ng-show="term_hour_city_validation">Please enter a title</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                <div class="select_form_intra">
+                                     <input type="text" id="buyer" class="input_ani term_city_id alphaNumeric" autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)" name="city" ng-model="dataTerm.term_city_id" required="" typeahead="city as (city.city_name) for city in cities | filter:$viewValue" />
+                                     <label class="lbl_text2">Select City *</label>
+                                       <span class="help-inline" style="color:red;" ng-show="term_hour_city_validation">Please Select Valid City</span>
+                                   
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                <div class="select_form_intra">
+                                    <select ng-model="dataTerm.hd_slab_term" class="hd_slab_term" name="hd_slab selectpicker" selectpicker ng-options="y.distance_hour for (x,y) in hourDistanceSlabs track by y.id" required>
+                                    <option value="">Hour Distance Slab *</option>                                
+                                   </select>
+                                    <span class="help-inline" style="color:red;" ng-show="term_hour_hd_validation">Please Select Hour Distance Slab </span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                <div class="select_form_intra">
+                                    <select ng-model="dataTerm.d_vehicle_type_term" name="vehicle_type_any" class="d_vehicle_type_term selectpicker" selectpicker required ng-options="y.vehicle_type for (x,y) in vehicles track by y.id">
+                                    <option value="">Vehicle Type * </option>                                    
+                                </select>
+                                 <span class="help-inline" style="color:red;" ng-show="term_hour_d_vehicle_type_term">Please Select Vehicle Type </span>
+                                </div>
+                            </div>
+                       
+                          
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin_input">
+                                <div class="date_selection">
+                                    <span class="left_v_from">
+                                    <input id="inrea_term_hour_date" type="text" class="dt-icon valid_from_term input_ani" ng-model="dataTerm.valid_from_term" fromcalendar  readonly='readonly'>
+                                    <label class="lbl_text2 padg_l city_align">Valid From <span>*</span></label>
+                                </span>
+                                <span class="help-inline" style="color:red;" ng-show="term_hour_valid_from_term">Please Select From Date </span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin_input">
+                                <div class="date_selection">
+                                    <span class="left_v_from">
+                                    <input type="text" class="dt-icon valid_to_term input_ani" ng-model="dataTerm.valid_to_term" tocalendar  id="buyerPostTermValidTo" readonly="readonly">
+                                    <label class="lbl_text2 padg_l city_align">Valid To <span>*</span></label>
+                                </span>
+                                 <span class="help-inline" style="color:red;" ng-show="term_hour_valid_to_term">Please Select To Date </span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin_input">
+                                <div class="select_form_intra">
+
+                                    <input id="no_of_vehicles_term" min = '0' type="text" ng-model="dataTerm.no_of_vehicles_term" class="input_ani no_of_vehicles_term valid-number" maxlength="5" required="">
+                                    <label class="lbl_text2">Number of Vehicles Needed *</label>
+                                    <span class="help-inline" style="color:red;" ng-show="term_hour_no_of_vehicles_term">Please Select Number of Vehicles Needed </span>
+                                    <span class="help-inline" style="color:red;" ng-show="zero_no_of_vehicles_term">Please enter value more than 0. </span>
+                                </div>
+                            </div>
+                            
+                        
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin_input">
+                                
+                                <div class="reporting_time_spot  js-label-datepicker input-prepend date clsbid_close_time">
+                                    <span class="add-on add-on-1"><i class="fa fa-clock-o"></i></span>
+                                    <input id="intra_term_hour" class="input_ani padding_l  vehicle_reporting_time_term disable-bg-white clsFTLTBidCloserTime js-placeholder ng-pristine ng-untouched ng-invalid ng-invalid-required" readonly="readonly" jsplaceholder="" name="vehicle_reporting_time" type="text" ng-model="dataTerm.vehicle_reporting_time_term"  required="">
+                                    <label class="lbl_day text-input-placeholder js-placeholder-text">Vehicle Reporting Time *</label>
+                                   <span class="help-inline" style="color:red;" ng-show="term_hour_vehicle_reporting_time_term">Please Enter Vehicle Reporting Time </span>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin_input">
+                                <div class="select_form_intra">
+                                    <input type="text" id="buyer" class="input_ani vehicle_reporting_location_term alphaNumeric" autocomplete="off"  ng-model="dataTerm.vehicle_reporting_location_term" required="" typeahead="location as (location.locality_name) for location in locations" />
+                                   
+                                    <label class="lbl_text2">Vehicle Reporting Location *</label>
+                                     <span class="help-inline" style="color:red;" ng-show="term_hour_vehicle_reporting_location_term">Please Enter Vehicle Reporting Location </span>
+                                </div>
+                            </div>
+                         </div>
+                        </div>
+
+                        <div id="Distance_cont" class="intra_main">
+                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                <div class="select_form_intra">
+                                    <input type="text" id="title" class="input_ani term_distance_title" autocomplete="off" name="title" ng-model="dataTerm.term_distance_title" required/>
+                                    <label class="lbl_text2">Title *</label>
+                                    <span class="help-inline" style="color:red;" ng-show="term_distance_title">Please enter a title. </span>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                <div class="select_form_intra">
+                                    <input type="text" id="buyer" class="input_ani term_distance_city_id alphaNumeric" autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)" name="city" ng-model="dataTerm.term_distance_city_id" typeahead="city as (city.city_name) for city in cities | filter:$viewValue" required/>
+                                    <label class="lbl_text2">Select City *</label>
+                                    <span class="help-inline" style="color:red;" ng-show="term_distance_cityId">Please Enter valid City </span>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                
+
+                                <div class="select_form_intra">
+                                    <input type="text" ng-model="dataTerm.no_of_vehicle_dTerm" class="input_ani no_of_vehicle_dTerm valid-number" maxlength="5" required="">
+                                    <label class="lbl_text2">Number of Vehicles Needed *</label>
+                                    <span class="help-inline" style="color:red;" ng-show="term_distance_no_of_vehicle_dTerm">Please Enter Number of Vehicles Needed. </span>
+                                    <span class="help-inline" style="color:red;" ng-show="zero_no_of_vehicle_dTerm">Please Enter Value More Than 0. </span>
+                                </div>
+
+
+                               <!--  <div class="reporting_time_spot  js-label-datepicker input-prepend date clsbid_close_time">
+                                    <span class="add-on add-on-1"><i class="fa fa-clock-o"></i></span>
+                                    <input id="vehicle_reporting_time_dTerm" class="input_ani vehicle_reporting_time_dTerm padding_l  disable-bg-white clsFTLTBidCloserTime js-placeholder ng-pristine ng-untouched ng-invalid ng-invalid-required" readonly="readonly" jsplaceholder name="vehicle_reporting_time" type="text" ng-model="dataTerm.vehicle_reporting_time_dTerm" required="">
+                                    <label class="lbl_day text-input-placeholder js-placeholder-text">Vehicle Reporting Time *</label>
+                                    <span class="help-inline" style="color:red;" ng-show="term_distance_vehicle_reporting_time_dTerm">Please Enter Timming </span>
+                                </div> -->
+                            
+
+
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                <div class="select_form_intra">
+                                    <input type="text" id="buyer" typeahead-on-select="removeToCity(dataTerm.from_location)"  class="input_ani from_location alphaNumeric" autocomplete="off" ng-model="dataTerm.from_location" required="" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue" />
+                                    <label class="lbl_text2">Select From Location *</label>
+                                    <span class="help-inline" style="color:red;" ng-show="term_distance_from_location">Please Enter valid From Location </span>
+                                   
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                <div class="select_form_intra">
+                                    <input type="text" id="buyer" class="input_ani to_location alphaNumeric" autocomplete="off" ng-model="dataTerm.to_location" required="" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue" />
+                                    <label class="lbl_text2">Select To Location *</label>
+                                      <span class="help-inline" style="color:red;" ng-show="term_distance_to_location">Please Enter valid To Location </span>
+                                   
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin_input">
+                                <div class="date_selection">
+                                    <span class="left_v_from">
+                                    <input id="intra_term_distance_from" type="text" ng-model="dataTerm.valid_from_dTerm" fromcalendar id="" class="input_ani dt-icon valid_from_dTerm" required="" />
+                                    <label class="lbl_text2 padg_l city_align">Valid From <span>*</span></label>
+                                </span>
+                                 <span class="help-inline" style="color:red;" ng-show="term_distance_valid_from_dTerm">Please Enter From Date </span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin_input">
+                                <div class="date_selection">
+                                    <span class="left_v_from">
+                                    <input type="text" ng-model="dataTerm.valid_to_dTerm" tocalendar id="validTodTerm" class="dt-icon valid_to_dTerm input_ani" required="">
+                                     <label class="lbl_text2 padg_l city_align">Valid To<span>*</span></label>
+                                <span class="help-inline" style="color:red;" ng-show="term_distance_valid_to_dTerm">Please Enter To Date </span>
+                                </span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 margin_input">
+                            
+
+<div class="reporting_time_spot  js-label-datepicker input-prepend date clsbid_close_time">
+                                    <span class="add-on add-on-1"><i class="fa fa-clock-o"></i></span>
+                                    <input id="vehicle_reporting_time_dTerm" class="input_ani vehicle_reporting_time_dTerm padding_l  disable-bg-white clsFTLTBidCloserTime js-placeholder ng-pristine ng-untouched ng-invalid ng-invalid-required" readonly="readonly" jsplaceholder name="vehicle_reporting_time" type="text" ng-model="dataTerm.vehicle_reporting_time_dTerm" required="">
+                                    <label class="lbl_day text-input-placeholder js-placeholder-text">Vehicle Reporting Time *</label>
+                                    <span class="help-inline" style="color:red;" ng-show="term_distance_vehicle_reporting_time_dTerm">Please Enter Timming </span>
+                                </div>
+
+
+
+                             <!--    <div class="select_form_intra">
+                                    <input type="text" ng-model="dataTerm.no_of_vehicle_dTerm" class="input_ani no_of_vehicle_dTerm valid-number" maxlength="5" required="">
+                                    <label class="lbl_text2">Number of Vehicles Needed *</label>
+                                    <span class="help-inline" style="color:red;" ng-show="term_distance_no_of_vehicle_dTerm">Please Enter Number of Vehicles Needed. </span>
+                                    <span class="help-inline" style="color:red;" ng-show="zero_no_of_vehicle_dTerm">Please Enter Value More Than 0. </span>
+                                </div> -->
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                <div class="select_form_intra">
+                                    <select ng-model="dataTerm.vehicle_type_any_dTerm" class="vehicle_type_any_dTerm selectpicker" selectpicker name="vehicle_type_any" required ng-options="y.vehicle_type for (x,y) in vehicles track by y.id">
+                                    <option value="">Vehicle Type (Any) *</option>                                    
+                                </select>
+                                <span class="help-inline" style="color:red;" ng-show="term_distance_vehicle_type_any_dTerm">Please Enter Number of Vehicles Needed </span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                <div class="row">
+                                    <div class="select_form_intra">
+                                        <div class="vichel_dimensin">
+                                            <span class="v_images"><img src="images/dimension_v.png" /></span>
+                                            <div class="vi_text">
+                                                <span class="v_text">Vehicle Dimensions<span>*</span></span><br />
+                                                <span> {{ dataTerm.vehicle_type_any_dTerm.dimension }} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                <div class="select_form_intra">                                    
+                                    <select ng-model="dataTerm.material_type_dTerm" name="material_type" class="d_material_type selectpicker" selectpicker required ng-options="y.name for (x,y) in materialType track by y.id">
+                                        <option value="">Material Type *</option>                                
+                                    </select>
+                                    <span class="help-inline" style="color:red;" ng-show="term_distance_material_type_dTerm">Please Enter Material Type </span>
+                                </div>
+                            </div>
+                            <div ng-include="'templates/buyer/estimated-weight.html'">
+
+                            </div>
+
+                        </div>
+                        <div class="load_type">
+
+                            <div class="add_more_btn">
+                                <div class="add_m_b">
+
+                                    <input type="button" ng-model="dataTerm.addMore" ng-click="addMore(dataTerm,dataLoads)" class="button_serch" name="button" value="Add" />
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                            <div class="row">
+                                <div class="c_details">
+                                    <div class="c_sub">
+                                        <div class="c_type">
+                                            <span>CITY</span>
+                                            <span>FROM</span>
+                                            <span>TO</span>
+                                            <span ng-show="dataTerm.type_basis == 'term_distance'">MATERIAL TYPE</span>
+                                            <span>VEHICLE TYPE</span>
+                                            <span>REPORTING TIME</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="c_sub" ng-if="dataTerm.type_basis == 'term_hours'" ng-repeat="(key, value) in listdataTerm track by $index">
+                                        <div class="d_type">
+                                            <span>
+                                            <span class="w_fullwidth" ng-if="value.term_city_id">
+                                                {{ value.term_city_id.city_name }}
+                                            </span>
+                                            </span>
+                                            <span>{{value.valid_from_term}}</span>
+                                            <span>{{value.valid_to_term}}</span>
+                                            <span>{{ value.d_vehicle_type_term.vehicle_type }}</span>
+                                            <span>{{ value.vehicle_reporting_time_term }}</span>
+                                            <div class="edit_del">
+                                                <span ng-click="editTermHour(key,value)">
+                                                <i class="fa fa-edit red" title="Edit"></i>
+
+                                            </span>
+                                                <span class="delete_img" ng-click="deleteTermHour(key)">
+                                               <!--  <img src="images/delete_icons.png" /> -->
+                                               <i class="fa fa-trash red" title="Delete"></i>
+                                            </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- list Term Distance -->
+                                    <div class="c_sub" ng-if="dataTerm.type_basis == 'term_distance'" ng-repeat="(key, value) in listDistancedataTerm track by $index">
+                                        <div class="d_type">
+                                            <span class="w_fullwidth" ng-if="value.term_distance_city_id"> 
+                                            {{ value.term_distance_city_id.city_name }}
+                                        </span>
+
+                                            <span class="w_fullwidth" ng-if="value.from_location">
+                                            {{ value.from_location.locality_name }}
+                                        </span>
+
+                                            <span class="w_fullwidth" ng-if="value.to_location">
+                                            {{ value.to_location.locality_name }}
+                                        </span>
+                                            <span>{{ value.material_type_dTerm.name }}</span>
+                                            <span class="w_fullwidth" ng-if="value.vehicle_type_any_dTerm">
+                                            {{ value.vehicle_type_any_dTerm.vehicle_type }}                                        
+                                        </span>
+                                            <span>{{ value.vehicle_reporting_time_dTerm }}</span>
+                                            <div class="edit_del">
+                                            <span ng-click="editTermDistance(key,value)"><i class="fa fa-edit"></i></span>
+                                                <span class="delete_img" ng-click="deleteTermDistance(key)">
+                                                <i class="fa fa-trash"></i>
+                                            </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <!--end of c_details-->
+
+                                <div class="emi_main">
+
+                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                        <div class="select_form_intra">
+                                            <input type="text" min = '0' ng-model="dataTerm.emd_amount" class="input_ani emd_amount valid-number" required="">
+                                            <label class="lbl_text2">EMD Amount * </label>
+                                            <span class="help-inline" style="color:red;" ng-show="term_hour_emd_amount">Please Enter EMD Amount</span>
+                                            <span class="help-inline" style="color:red;" ng-show="zero_emd_amount">Please Value More Than Zero</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                        <div class="select_form_intra">
+                                            <select ng-model="dataTerm.emd_mode" class="emd_mode selectpicker" selectpicker>
+                                                                <option value="">EMD Mode * </option>
+                                                                <option value="1">Demand Draft</option>
+                                                                <option value="2"> Paysticks(online)</option>
+                                                            </select>
+                                                            <span class="help-inline" style="color:red;" ng-show="term_hour_emd_mode_term">Please Enter EMD Mode </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+
+                                        <div class="select_form_intra">
+                                            <select ng-model="dataTerm.award_criteria" class="award_criteria selectpicker" selectpicker>
+                                                                <option value="">Award Criteria * </option>
+                                                                <option value="1">L1</option>
+                                                                <option value="2">Negotiation</option>
+
+                                                            </select>
+                                                              <span class="help-inline" style="color:red;" ng-show="term_hour_award_criteria">Please Enter award_criteria</span>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!--End of emi-->
+
+                                <div class="emi_main">
+                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                        <div class="select_form_intra">
+                                            <select ng-model="dataTerm.contract_allotment" class="contract_allotment selectpicker" selectpicker>
+                                                                <option value="">Contract Allotment * </option>
+                                                                <option value="1">Multiple</option>
+                                                                <option value="2">Single</option>
+                                                            </select>
+                                                            <span class="help-inline" style="color:red;" ng-show="term_hour_contract_allotment">Please Enter contract allotment</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                        <div class="select_form_intra">
+                                            <select ng-model="dataTerm.payment_term" class="payment_term selectpicker" selectpicker>
+                                                <option value="">Payment Terms * </option>
+                                                <option value="1">Advance</option>
+                                                <option value="2">Credit</option>
+                                            </select>
+                                            <span class="help-inline" style="color:red;" ng-show="term_hour_payment_term">Please Enter payment term</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input" ng-if="dataTerm.payment_term == 2">
+                                        <div class="select_form_intra">
+                                            <input type="text" ng-model="dataTerm.no_of_days" class="input_ani no_of_days" required="">
+                                            <label class="lbl_text2">No of days * </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                                        <div class="select_form_intra">
+                                            <select ng-model="dataTerm.payment_method" class="payment_method selectpicker" selectpicker>
+                                                                <option value="">Payment Method * </option>
+                                                                <option value="1">Credit Card</option>
+                                                                <option value="2">Debit Card</option>
+                                                                <option value="3">NEFT/RTGS</option>
+                                                                <option value="4">Net Banking</option>
+                                            </select>
+                                            <span class="help-inline" style="color:red;" ng-show="term_hour_payment_method">Please Enter payment Method</span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+
+                                <div class="price_inc">
+                                    <div class="price_child margin_input">
+                                        <div class="col-md-2">
+                                            <div class="p_inclun">Price Inclusive</div>
+                                        </div>
+                                        <div class="col-lg-8" id="price-inclusive">
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                <div class="select_form_intra">
+                                                    <input type="text" ng-model="dataTerm.price_inclusive[0]" class="input_ani" required="">
+                                                    <label class="lbl_text2">Max 5 fields-each field Free Text 20 Char</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-2 col-md-2">
+                                                <div class="add_c">
+                                                    <a style="cursor:pointer" ng-click="addMorePriceInclusive()">Add</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="price_child margin_input">
+                                        <div class="col-md-2">
+                                            <div class="p_inclun">Price Exclusive</div>
+                                        </div>
+
+
+                                        <div class="col-lg-8" id="price-exclusive">
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">                                                
+                                                <div class="select_form_intra">
+                                                    <input type="text" ng-model="dataTerm.price_exclusive[0]" class="input_ani" required="">
+                                                    <label class="lbl_text2">Max 5 fields-each field Free Text 20 Char</label>
+                                                </div>                                                
+                                            </div>
+                                            <div class="col-lg-2 col-md-2">
+                                                <div class="add_c">
+                                                    <a style="cursor:pointer" ng-click="addMorePriceExclusive()">Add</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end of price_inc-->
+
+
+
+
+
+
+                                <div class="rf_eligblit">
+                                    <div class="rf_eligb_child">
+                                        <div class="col-lg-12">
+                                            <div class="eligibilty">
+                                                RFP Eligibility
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="row margin_b">
+                                                <div class="col-lg-4 col-md-4">
+                                                    <div class="no_text">
+                                                        No.of Own Trucks
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="select_form_intra">
+                                                        <input type="text"min = '0' ng-model="dataTerm.no_of_own_truck" class="input_ani valid-number no_of_own_truck" maxlength="3" required="">
+                                                        <label class="lbl_text2">No.of Own Trucks *</label>
+                                                        <span class="help-inline" style="color:red;" ng-show="term_hour_no_of_own_truck_term">Please Enter No.of Own Trucks </span>
+                                                        <span class="help-inline" style="color:red;" ng-show="zero_term_hour_no_of_own_truck_term">Please Enter More Than Zero. </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row margin_b">
+                                                <div class="col-lg-4 col-md-4">
+                                                    <div class="no_text">
+                                                        Average Turn Over last three years (In Lakhs)
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="select_form_intra">
+                                                        <input type="text" min= '0' ng-model="dataTerm.average_turn_over" class="input_ani valid-number average_turn_over" maxlength="10" required="">
+                                                        <label class="lbl_text2">Average Turn Over (In Lakhs) *</label>
+                                                        <span class="help-inline" style="color:red;" ng-show="term_hour_average_turn_over_term">Please Enter average turn over </span>
+                                                        <span class="help-inline" style="color:red;" ng-show="zero_average_turn_over">Please Enter More Than Zero. </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row margin_b">
+                                                <div class="col-lg-4 col-md-4">
+                                                    <div class="no_text">
+                                                        Income Tax Assessee
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="spot_tt" ng-init="dataTerm.income_tax_assesse = 0">
+                                                        <ul>
+                                                            <li>
+                                                                <input type="radio" ng-model="dataTerm.income_tax_assesse" id="Yes1" value="1" name="income_tax_assesse">
+                                                                <label for="Yes1">Yes</label>
+                                                                <span></span>
+                                                            </li>
+                                                            <li>
+                                                                <input type="radio" ng-model="dataTerm.income_tax_assesse" id="no1" value="0" name="income_tax_assesse">
+                                                                <label for="no1">No</label>
+                                                                <span></span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row margin_b">
+                                                <div class="col-lg-4 col-md-4">
+                                                    <div class="no_text">
+                                                        No. of years in Business
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="select_form_intra">
+                                                        <input type="text" min = '0' ng-model="dataTerm.no_of_years" class="input_ani valid-number" maxlength="3" required="">
+                                                        <label class="lbl_text2">No. of years *</label>
+                                                        <span class="help-inline" style="color:red;" ng-show="term_hour_no_of_years_term">Please Enter no of years </span>
+                                                        <span class="help-inline" style="color:red;" ng-show="zero_no_of_years">Please Enter value more than zero. </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row margin_b">
+                                                <div class="col-lg-4 col-md-4">
+                                                    <div class="no_text">
+                                                        Term Contract with other companies
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5 col-md-5">
+                                                    <div class="spot_tt" ng-init="dataTerm.term_contract_woc = 0">
+                                                        <ul>
+                                                            <li>
+                                                                <input type="radio" ng-model="dataTerm.term_contract_woc" id="Yes" value="1" name="term_contract_woc">
+                                                                <label for="Yes">Yes</label>
+                                                                <span></span>
+                                                            </li>
+                                                            <li>
+                                                                <input type="radio" ng-model="dataTerm.term_contract_woc" id="no" value="0" name="term_contract_woc">
+                                                                <label for="no">No</label>
+                                                                <span></span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="date_formt">
+                                    <div class="date_f_sub">
+                                        <div class="col-lg-4 col-md-4 col-sm-6">
+
+                                            <div class="last_d">Last Date/Time for Quote</div>
+
+                                        </div>
+
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                            <div class="date_selection">
+                                                <div class="input_date">
+
+                                                  <span class="left_v_from">
+                                                    <input id="intra_term_last_date" type="text" ng-model="dataTerm.term_last_date" class="dt-icon input_ani valid_from_dTerm term_last_date" tocalendar id="buyerPostTermlastDate" readonly='readonly' required>
+                                                    <label class="lbl_text2 margin_date">Date<span>*</span></label>
+                                                </span>
+                                                
+                                                <span class="help-inline" style="color:red;" ng-show="term_hour_term_last_date_term">Please Enter Last Date </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                            <div class="date_selection">
+                                                <!--<div class="input_date">
+                                                    <span class="left_v_from">
+                                                    <input type="text"  ng-model="dataTerm.term_last_time" class="input_date_p_time" placeholder="Time"
+                                                    ></span>
+
+
+                                                </div>-->
+
+                                                <div id="intracity_term_time_icon_add" class="js-label-datepicker input-prepend date clsbid_close_time">
+                                                    <span class="add-on add-on-2"><i class="fa fa-clock-o"></i></span>
+                                                    <input id="last_time_quote_submission_term" class="input_ani term_last_time input_time  disable-bg-white clsFTLTBidCloserTime js-placeholder" readonly="readonly" jsplaceholder name="last_time_quote_submission" type="text" ng-model="dataTerm.term_last_time" placeholder="Time *"  required>
+                                                       <!-- <label class="lbl_day time-lab text-input-placeholder js-placeholder-text">Time *</label> -->
+                                                        <span class="help-inline" style="color:red;" ng-show="term_hour_term_last_time_term">Please Enter Last time </span>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+                                        <div class="spot_t_box">
+                                            <div class="col-lg-12">
+                                                <div class="bid_text">Bid Terms &amp; Conditions</div>
+                                            </div>
+
+
+
+                                            <div class="m-top-15" ng-repeat="termUploadDocx in termUploadDocxs">
+                                                <div class="col-md-12 padding-none">
+                                                    <span style="display: none;" class="box-number-delete">2</span>
+                                                    <div class="documents-terms">
+                                                        <div class="col-md-4 form-control-fld">
+                                                            <div class="upload-fld">
+
+                                                                <input type="file" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" ng-model="termUploadDocx.term_upload_docx" class="form-control form-control1 update_txt upload-change chrome-alignment" ng-model-instant onchange="angular.element(this).scope().setBidTermsDocument(this)" id="terms_condtion_types_term_defualt">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 form-control-fld">
+                                                        <input type="button" class="documents-add btn add-btn add_btn_new" value="Add +" ng-click="addDocx()" ng-if="$index==0">
+                                                        <a ng-click="removeBidDocument($index)" class="removeCont"><i class="fa fa-trash-o m-top-15" ng-hide="$index==0"></i></a>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="spot_t_box">
+                                            <div class="col-md-6">
+                                                <textarea rows="10" cols="30" ng-model="dataTerm.comments" class="textarea_box" name="buyer_notes" id="buyer_notes" placeholder="Comments"></textarea>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="spot_t" ng-init="dataTerm.is_private_public = 2">
+                                            <ul>
+                                                <li>
+                                                    <input type="radio" ng-checked="true" id="Public_Post" name="private_post_term" ng-model="dataTerm.is_private_public" ng-click="showHide('public')" value="2">
+                                                    <label for="Public_Post">Post Public</label>
+                                                    <span></span>
+                                                </li>
+                                                <li>
+                                                    <input type="radio" id="Private_Post" name="private_post_term" ng-click="showHide('private')" ng-model="dataTerm.is_private_public" value="1">
+                                                    <label for="Private_Post">Post Private</label>
+                                                    <span>
+                                                    
+                                                </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-12 padding-none">
+                                            <div class="clearfix"></div>
+                                            <div class="col-md-4 m-top-10 typeahed-search" ng-show="isSellerVisible">
+                                                <input type="text" class="form-control form-control1" id="sellerListTerm" ng-model="dataTerm.visibleToSellers" name="seller_list" placeholder="Seller Name (Auto Search)" ng-required="dataSpot.isPublic=='private'" />
+                                                <label ng-show="!dataSpot.visibleToSellers && errorRaised" class="error">Seller is required</label>
+                                            </div>
+                                        </div>
+                                        <div class="terms_a">
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="admin_input margin_t">
+                                                    <input id="AcceptTerm" type="checkbox" ng-model="dataTerm.term_condition" class="check_box">
+                                                    <label for="AcceptTerm" class="term_condition_">Accept Terms &amp; Conditions (Digital Contract)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End of date_formt-->
+
+                            </div>
+
+                            <div class="search_btn">
+
+                                <div class="serch_vichel">
+
+                                    <input type="button" class="button_serch" ng-if="dataTerm.type_basis=='term_hours'" name="button" value="Float RFP" ng-click="storeTerm(listdataTerm,dataTerm,1)" />
+
+                                    <input type="button" class="button_serch" ng-if="dataTerm.type_basis=='term_distance'" name="button" value="Float RFP" ng-click="storeTerm(listDistancedataTerm,dataTerm,1)" />
+                                </div>
+                                <div class="serch_vichel saveas_draft">
+                                    <input type="button" class="button_serch" ng-if="dataTerm.type_basis=='term_hours'" name="button" value="Save As Draft" ng-click="storeTerm(listdataTerm,dataTerm,0)" />
+
+                                    <input type="button" class="button_serch" ng-if="dataTerm.type_basis=='term_distance'" name="button" value="Save As Draft" ng-click="storeTerm(listDistancedataTerm,dataTerm,0)" />
+                                </div>
+                            </div>
+                        </div>
+                        <!--End of load_type-->
+
+                    </div>
+                    <!--end of main_intra-->
+
+                    <!--end of main_intra-->
+            </form>
+            </div>
+
+            <!--end of location_sec-->
+        </div>
+
+     <div class="modal fade" id="QuoteConfirmationPopup" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content statusText" style="overflow: hidden;padding: 0 10px 10px">
+                <div class="modal-body popup" id="responsetext">
+
+                </div>
+                <div>
+                    <button type="button" class="btn btn-default pull-right" data-type="" ng-click="closeConfirmationPopup()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addRoutePopup" role="dialog">
+        <div class="modal-dialog modal-lg notification-popup">
+            <div class="modal-content statusText" style="overflow: hidden;padding: 0 10px 10px">
+                <div class="modal-body popup" id="responsetext">
+                    Add atleast one Route
+                </div>
+                <div>
+                    <button type="button" class="btn btn-default pull-right" data-type="" ng-click="closeRoutePopup()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOK NOW POPUP -->
+
+
+        <script>
+     $(document).on("focus click keyup keypress blur change",'#last_time_quote_submission', function(e){
+    $(".hour.disabled, .minute.disabled").addClass("timeDisable");
+    //Checking Bid Closure date
+    var lastBidDate = $('#last_date_quote_submission').val();
+    
+    if(lastBidDate == null || lastBidDate == ''){
+        
+        return false;
+    }
+    $("#intracity_spot_time_icon_add").datetimepicker({
+        format: 'hh:ii',
+        autoclose: true,
+        startView: 1,
+        maxView: 1,
+        minuteStep:2,
+        linkField: "last_time_quote_submission",
+        linkFormat: "hh:ii"
+    }).on("show", function(e){
+        var lastBidDate = $('#last_date_quote_submission').val();
+        var currDate = moment().format('DD/MM/YYYY');
+        if(lastBidDate == currDate){
+            var lBd = $('#last_date_quote_submission').val().split('/').reverse();
+            var TimeZoned = new Date( lBd[0], (lBd[1]-1), lBd[2], moment().format('H'), moment().format('mm'), moment().format('ss'));
+        }else{
+            var lBd = $('#last_date_quote_submission').val().split('/').reverse();
+            var TimeZoned = new Date( lBd[0], (lBd[1]-1), lBd[2]);
+        }
+        $('#intracity_spot_time_icon_add').datetimepicker('setStartDate', TimeZoned);
+        
+        
+    }).on("change", function(e){
+        
+        $(this).parent().find('label').addClass('text-input-placeholder_pos_top');
+        
+
+    });    
+});
+
+
+//     intra_term_hour
+
+
+            $(document).on("focus click keyup keypress blur change", '#intra_term_hour', function(e) {
+                $(".hour.disabled, .minute.disabled").addClass("timeDisable");
+                //Checking Bid Closure date
+                var lastBidDate = $('#inrea_term_hour_date').val();
+                $("#err_ftl_spot_close_time").html('');
+                if (lastBidDate == null || lastBidDate == '') {
+                    $("#err_ftl_spot_close_time").html('Select Last Date first');
+                    return false;
+                }
+                $("#intra_term_hour").datetimepicker({
+                    format: 'hh:ii',
+                    autoclose: true,
+                    startView: 1,
+                    maxView: 1,
+                    minuteStep: 2,
+                    linkField: "intra_term_hour",
+                    linkFormat: "hh:ii"
+                }).on("show", function(e) {
+            
+                     var lastBidDate = $('#inrea_term_hour_date').val();
+                    var currDate = moment().format('DD/MM/YYYY');
+            
+            if(lastBidDate == currDate){
+            var lBd = $('#inrea_term_hour_date').val().split('/').reverse();
+            var TimeZoned = new Date( lBd[0], (lBd[1]-1), lBd[2], moment().format('H'), moment().format('mm'), moment().format('ss'));
+        }else{
+            var lBd = $('#inrea_term_hour_date').val().split('/').reverse();
+            var TimeZoned = new Date( lBd[0], (lBd[1]-1), lBd[2]);
+        }
+
+
+                    $('#intra_term_hour').datetimepicker('setStartDate', TimeZoned);
+
+                }).on("change", function(e) {
+
+                    $(this).parent().find('label').addClass('text-input-placeholder_pos_top');
+                    //$(this).closest('label').addClass('text-input-placeholder_pos_top');
+
+                });
+            });
+
+
+
+$(document).on("focus click keyup keypress blur change", '#vehicle_reporting_time', function(e) {
+                
+$(".hour.disabled, .minute.disabled").addClass("timeDisable");   
+    var lastBidDate_ = $('#departure').val();
+    if(lastBidDate_ == null || lastBidDate_ == ''){
+        return false;
+    }
+
+                //Checking Bid Closure date
+                          
+                
+                $("#vehicle_reporting_time").datetimepicker({
+                    format: 'hh:ii',
+                    autoclose: true,
+                    startView: 1,
+                    maxView: 1,
+                    minuteStep: 2,
+                    linkField: "vehicle_reporting_time",
+                    linkFormat: "hh:ii"
+                }).on("show", function(e) {
+                    
+        var lastBidDate_ = $('#departure').val();
+        var currDate = moment().format('DD/MM/YYYY');
+        if(lastBidDate_ == currDate){
+            var lBd = $('#departure').val().split('/').reverse();
+            var TimeZoned = new Date( lBd[0], (lBd[1]-1), lBd[2], moment().format('H'), moment().format('mm'), moment().format('ss'));
+        }else{
+            var lBd = $('#departure').val().split('/').reverse();
+            var TimeZoned = new Date( lBd[0], (lBd[1]-1), lBd[2]);
+        }
+        $('#vehicle_reporting_time').datetimepicker('setStartDate', TimeZoned);
+        
+
+                }).on("change", function(e) {
+                   // alert("reach");
+                   // $(this).parent().find('label').addClass('text-input-placeholder_pos_top');
+ 
+                });
+            });
+
+
+
+$(document).on("focus click keyup keypress blur change", '#last_time_quote_submission_term', function(e) {
+                
+$(".hour.disabled, .minute.disabled").addClass("timeDisable");   
+    var lastBidDate_ = $('#intra_term_last_date').val();
+    if(lastBidDate_ == null || lastBidDate_ == ''){
+        return false;
+    }
+
+                //Checking Bid Closure date
+                          
+                
+                $("#last_time_quote_submission_term").datetimepicker({
+                    format: 'hh:ii',
+                    autoclose: true,
+                    startView: 1,
+                    maxView: 1,
+                    minuteStep: 2,
+                    linkField: "last_time_quote_submission_term",
+                    linkFormat: "hh:ii"
+                }).on("show", function(e) {
+                    
+        var lastBidDate_ = $('#intra_term_last_date').val();
+        var currDate = moment().format('DD/MM/YYYY');
+        if(lastBidDate_ == currDate){
+            var lBd = $('#intra_term_last_date').val().split('/').reverse();
+            var TimeZoned = new Date( lBd[0], (lBd[1]-1), lBd[2], moment().format('H'), moment().format('mm'), moment().format('ss'));
+        }else{
+            var lBd = $('#intra_term_last_date').val().split('/').reverse();
+            var TimeZoned = new Date( lBd[0], (lBd[1]-1), lBd[2]);
+        }
+        $('#last_time_quote_submission_term').datetimepicker('setStartDate', TimeZoned);
+        
+
+                }).on("change", function(e) {
+                    $(this).parent().find('label').addClass('text-input-placeholder_pos_top');
+ 
+                });
+            });
+
+
+
+
+$(document).on("focus click keyup keypress blur change", '#vehicle_reporting_time_dTerm', function(e) {
+                
+$(".hour.disabled, .minute.disabled").addClass("timeDisable");   
+    var lastBidDate_t = $('#intra_term_distance_from').val();
+    if(lastBidDate_t == null || lastBidDate_t == ''){
+        return false;
+    }
+
+                //Checking Bid Closure date
+                          
+                
+                $("#vehicle_reporting_time_dTerm").datetimepicker({
+                    format: 'hh:ii',
+                    autoclose: true,
+                    startView: 1,
+                    maxView: 1,
+                    minuteStep: 2,
+                    linkField: "vehicle_reporting_time_dTerm",
+                    linkFormat: "hh:ii"
+                }).on("show", function(e) {
+                    
+        var lastBidDate_t = $('#intra_term_distance_from').val();
+        var currDate_td = moment().format('DD/MM/YYYY');
+        if(lastBidDate_t == currDate_td){
+            var lBd = $('#intra_term_distance_from').val().split('/').reverse();
+            var TimeZoned = new Date( lBd[0], (lBd[1]-1), lBd[2], moment().format('H'), moment().format('mm'), moment().format('ss'));
+        }else{
+            var lBd = $('#intra_term_distance_from').val().split('/').reverse();
+            var TimeZoned = new Date( lBd[0], (lBd[1]-1), lBd[2]);
+        }
+        $('#vehicle_reporting_time_dTerm').datetimepicker('setStartDate', TimeZoned);
+        
+
+                }).on("change", function(e) {
+                    $(this).parent().find('label').addClass('text-input-placeholder_pos_top');
+ 
+                });
+            });
+
+
+
+
+
+            $(function() {
+                $(".material_type li").click(function() {
+                    var value = $(this).attr("value");
+                    $("input[name='material_type']").val(value);
+                })
+            })
+          
+                        
+        </script>

@@ -1,0 +1,1238 @@
+<style type="text/css">
+    .filter-result {
+        display: none;
+    }
+
+    .no-border {
+        border: 0px;
+    }
+
+    .mb15 {
+        margin-bottom: 15px;
+        width: 100%;
+        float: left;
+    }
+
+    .filter-result-toggle {
+        cursor: pointer;
+    }
+
+    .no-padding {
+        padding: 0px;
+    }
+
+    .pop-edit-btn,
+    .pop-delete-btn {
+        cursor: pointer;
+    }
+</style>
+<style>
+    .Modify-btn {
+        background: none;
+        border: none;
+    }
+
+    .modal-dialog {
+        width: 95%;
+        margin: 30px auto;
+        padding: 30px;
+    }
+
+    .padlr-5 {
+        padding: 0 5px;
+        box-sizing: border-box;
+    }
+
+    .Modify-btn {
+        background-color: #fff;
+        border: 2px solid #ed3237;
+        border-radius: 5px;
+        color: #555;
+        cursor: pointer;
+        display: block;
+        font-size: 20px;
+        font-weight: 500;
+        margin: auto 0 auto auto;
+        padding: 2px 19px;
+        position: relative;
+        width: auto;
+        z-index: 9;
+        font-size: 15px;
+    }
+
+    .Modify-btn:hover {
+        background: #ed3237;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .vi_text {
+        padding-top: 13px;
+    }
+
+    .modify_search_detail .modal-header {
+        border-bottom: 0px;
+    }
+    /*.modify_search_detail .modal-body {padding: 40px 30px 20px;}*/
+
+    .pop-pad {
+        padding: 40px 30px 20px;
+        border-radius: 0px;
+    }
+
+    .mb-24 {
+        margin-bottom: 24px;
+        width: 100%;
+        float: left;
+    }
+
+    .pop-pad .vi_text {
+        font-size: 16px;
+    }
+
+    .user_search_result {
+        width: 100%;
+        float: left;
+        font-size: 16px;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+    }
+
+    .user_search_result_modify {
+        width: 100%;
+        float: left;
+        margin: 0px;
+    }
+
+    .user_search_result_modify li {
+        margin-bottom: 10px;
+    }
+
+    /* CSS Document */
+
+    .right_search_bar {
+        width: 100%;
+        float: left;
+        padding: 10px 0;
+    }
+
+    .right_search_bar .search_bar_tab {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .right_search_bar .search_bar_tab li {
+        display: inline-block;
+        padding: 10px 19px;
+        position: relative;
+    }
+
+    .right_search_bar .search_bar_tab li a {
+        text-decoration: none;
+        font-size: 18px;
+        color: #616161;
+    }
+
+    .right_search_bar .search_bar_tab li a.active_c {
+        color: #333;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .hyperlocal-rc-flow {
+        width: 100%;
+        float: left;
+        background: #fff;
+        margin: 0 0 15px 0;
+    }
+
+    .hyperlocal-rate-card {
+        width: 100%;
+        float: left;
+    }
+
+    .select_form_hyperlocal {
+        width: 100%;
+        float: left;
+        padding: 6px 0;
+        position: relative;
+    }
+
+    .select_form_hyperlocal select {
+        width: 100%;
+        float: left;
+        padding: 13px 2px;
+        border-radius: 3px;
+        font-size: 14px;
+        color: #666;
+        border: none;
+        border-bottom: #ccc solid 1px;
+        outline: none;
+    }
+
+    .select_form_hyperlocal input {
+        border: none;
+        width: 100%;
+        float: left;
+        position: relative;
+        padding: 13px 38px;
+        outline: none;
+        border-bottom: solid 1px #e0e0e0;
+    }
+
+    .select_form_hyperlocal .input_ani:focus~label,
+    .input_ani:valid~label {
+        top: 0px;
+        font-size: 12px;
+        color: #666;
+    }
+
+    .select_form_hyperlocal .input_ani {
+        padding: 20px 0 5px 5px;
+        border: none;
+        outline: none;
+        border-bottom: solid 1px #e0e0e0;
+        font-size: 16px;
+        -moz-transition: .3s;
+        -o-transition: .3s;
+        -webkit-transition: .3s;
+        transition: .3s;
+        width: 100%;
+        float: left;
+    }
+
+    .select_form_hyperlocal .lbl_text2 {
+        position: absolute;
+        font-size: 14px;
+        left: 5px;
+        pointer-events: none;
+        top: 20px;
+        -moz-transition: .3s;
+        -o-transition: .3s;
+        -webkit-transition: .3s;
+        transition: .3s;
+        font-weight: 400;
+        color: #666;
+    }
+
+    .select_form_hyperlocal input.date_p {
+        background: url(images/datepicker.png) no-repeat left -3px;
+        background-position: 0 13px;
+    }
+
+    .select_form_hyperlocal .padg_l {
+        padding: 0 35px;
+    }
+
+    .hyperlocal-rate-card .load_type {
+        width: 100%;
+        float: left;
+        margin: 5px 0;
+    }
+
+    .hyperlocal-rate-card .file-upload,
+    .hyperlocal-rate-card .file-download {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 4px solid #FFFFFF;
+        overflow: hidden;
+        background-image: linear-gradient(to bottom, #ed3237 50%, #FFFFFF 50%);
+        background-size: 100% 200%;
+        transition: all 1s;
+        color: #FFFFFF;
+        font-size: 15px;
+        float: left;
+    }
+
+    .hyperlocal-rate-card input[type='file'] {
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .hyperlocal-rate-card .lbl_text3 {
+        float: left;
+        color: #666;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 45px;
+    }
+
+    .hyperlocal-rate-card .Discounts_btn {
+        display: block;
+        color: #3c3c3c;
+        border: none;
+        outline: none;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px 15px;
+        float: right;
+        cursor: pointer;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .hyperlocal-rate-card .add_btn_gray {
+        background-color: #747474;
+        color: #fff;
+        font-size: 17px;
+        padding: 6px 10px;
+        text-transform: capitalize;
+        border: 1px solid #6c6c6c;
+        margin-top: 15px;
+        outline: none;
+    }
+
+    .on_time {
+        width: 100%;
+        float: left;
+    }
+
+    .on_time .p_details {
+        width: 30%;
+        float: left;
+        padding: 8px 0;
+    }
+
+    .on_time .p_details .pro_img {
+        width: 30%;
+        float: left;
+    }
+
+    .on_time .p_details .pro_img span {
+        width: 100%;
+        float: left;
+        padding: 0 10px;
+    }
+
+    .on_time .p_details .pro_img .bottom_img {
+        width: 100%;
+        float: left;
+    }
+
+    .on_time .p_details .pro_img .bottom_img ul {
+        list-style: none;
+        margin: 0;
+        padding: 0 10px;
+        width: 100%;
+        float: left;
+    }
+
+    .on_time .p_details .pro_img .bottom_img ul li {
+        display: inline-block;
+        padding: 4px 1px;
+    }
+
+    .on_time .p_details .pro_img .bottom_img .text_pr {
+        width: 100%;
+        float: left;
+    }
+
+    .on_time .p_details .pro_img .bottom_img .text_pr span {
+        width: 23px;
+        float: left;
+        padding: 0 10px;
+        font-size: 10px;
+        color: #8b8b8e;
+    }
+
+    .on_time .p_details .pro_disc {
+        width: 70%;
+        float: left;
+    }
+
+    .on_time .p_details .pro_disc ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .on_time .p_details .pro_disc ul li {
+        padding: 0 14px;
+        display: block;
+        float: left;
+        width: 100%;
+        color: #747578;
+        font-size: 14px;
+        position: relative;
+    }
+
+    .on_time .p_details .pro_disc ul li span {
+        width: 100%;
+        float: left;
+    }
+
+    .on_time .p_details .pro_disc ul li span {
+        width: 100%;
+        float: left;
+    }
+
+    .on_time .p_discerption {
+        width: 70%;
+        float: right;
+    }
+
+    .on_time .p_discerption .p_disc_sub {
+        width: 100%;
+        float: left;
+        padding: 4px 0;
+        margin-top: 6px;
+        margin-bottom: 20px;
+    }
+
+    .on_time .p_discerption .p_disc_sub .price_t {
+        padding: 0;
+        margin: 0;
+        color: #747578;
+        font-size: 16px;
+        line-height: 22px;
+        margin: 0 0 8px 0;
+    }
+
+    .on_time .p_discerption .table_detail {
+        width: 100%;
+        float: left;
+    }
+
+    .on_time .p_discerption .table_detail .p_terms_t {
+        width: 25%;
+        float: left;
+        min-height: 80px;
+    }
+
+    .on_time .p_discerption .table_detail .p_terms_t h2 {
+        display: block;
+        font-weight: bold;
+        color: #000;
+        font-size: 15px;
+        line-height: 22px;
+        text-transform: uppercase;
+        padding: 5px 0;
+    }
+
+    .on_time .p_discerption .table_detail .p_terms_t p {
+        font-size: 13px;
+        color: #a2a1a1;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+    }
+
+    .p_terms_t {
+        width: 25%;
+        float: left;
+        min-height: 80px;
+    }
+
+    .p_terms_t h2 {
+        display: block;
+        font-weight: bold;
+        color: #000;
+        font-size: 15px;
+        line-height: 22px;
+        text-transform: uppercase;
+        padding: 5px 0;
+    }
+
+    .detail-minus:after {
+        content: "";
+        display: none;
+    }
+
+    .p_terms_t p {
+        font-size: 13px;
+        color: #a2a1a1;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+    }
+
+    .detail_b1 {
+        float: left;
+        margin-top: 1px;
+        padding: 4px 0px 0 62px;
+        font-size: 17px;
+        cursor: pointer;
+        position: relative;
+        width: 85%;
+        margin-right: 0;
+    }
+
+    .detail_b1:before {
+        content: "";
+        position: absolute;
+        left: 40px;
+        top: 14px;
+        width: 12px;
+        height: 1px;
+        background: #808080;
+    }
+
+    .detail_b1:after {
+        content: "";
+        position: absolute;
+        left: 46px;
+        top: 9px;
+        height: 12px;
+        width: 1px;
+        background: #808080;
+    }
+
+    .msg-icon {
+        outline: none;
+        line-height: 35px;
+        float: left;
+        width: 15%;
+    }
+
+    .msg-icon .fa {
+        font-size: 16px;
+        padding: 0 0 0 5px;
+        border-left: 1px solid #bfbfbf;
+
+    }
+
+    .notification-popup {
+        width: 450px;
+    }
+
+    .notification-popup .modal-content {
+        border-radius: 0px;
+    }
+
+    .notification-popup .modal-content .popup {
+        padding: 42px 20px;
+    }
+</style>
+
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">Hyperlocal</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#">Buyer</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#hp-search-buyer">Search</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#hp-buyer-search-list" class="active_c">Results</a></li>
+
+            </ul>
+        </div>
+
+        <div class="intra_city_list">
+
+            <!--  {{buyerSearch}}  -->
+            <!--    {{buyerSearch.location[0].distance|json}}  -->
+
+            <div class="loc_det">
+
+                <div class="col-lg-9">
+                <div class="row">
+                    <ul class="loc_list">
+                        <li> {{buyerSearch.from_location.locality_name}} </li>
+                        <li ng-repeat="(key,value) in buyerSearch.location">- to - {{value.tolocation.locality_name}}</li>
+                        <li>{{buyerSearch.departingDate}}</li>
+                        <li>{{buyerSearch.category.name}}</li>
+                        <li>{{buyerSearch.service_type.value}}</li>
+                        <li ng-repeat="(key,value) in buyerSearch.location">{{value.parcelweight.value}} {{value.NoParcel}}
+                        </li>
+
+                        <!--  <li>Garments</li>
+                                                <li>3 KG</li>
+                                                <li>5 Unint</li>
+                                                <li>5 KMs</li>
+                                                <li>High Priority Less than 4 Hour Delivery</li> -->
+                    </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="right_setg space_top">
+                       
+                            <ul class="list-inline pull-right m-bottom-0">
+                                <li>
+                                    <div class="search-modify modify_border" data-toggle="modal" ng-click="modifySearch(buyerSearch)"><span>Modify</span></div>
+                                </li>
+                                <li>
+                                    <a href="#/hp-buyer-post">
+                                        <div class="search-modify"><span>Post</span></div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="loc_det filter-result-toggle">
+                <ul class="filter_s">
+                    <li>PRICE RS.</li>
+                    <!-- <li>PAYMENT MODE</li> -->
+                    <!--    <li>TRACKING</li> -->
+                    <li>RATING</li>
+                    <li>Seller</li>
+                </ul>
+                <span class="rilters_right"><i class="fa fa-bars"></i>Filters</span>
+            </div>
+
+            <div ng-if="filterdata!=''"  class="loc_det ">
+                <ul class="partners">
+
+
+                    <li ng-click="removefilter(key,value)" ng-repeat="(key,value) in filterdata">
+                        {{value.username}}
+                    </li>
+
+
+                </ul>
+                <span class="rilters_right" ng-click="clearall()">CLEAR ALL</span>
+            </div>
+
+            <div class="loc_det">
+                <div class="loc_det padding_30 filter-result tr-t">
+                    <div class="col-lg-3">
+                        <div class="sellr_field mb15">
+                           
+                        </div>
+                        <div class="slider_range_right">
+                            <div class="amout_range_div">
+                                <div class="Experience_range">
+                                <div class="range_slider_div">
+                                    <div class="slider_heading">Price</div>
+                                    <div class="slider_range_right">
+                                        <div class="amout_range_div">
+                                            <rzslider data-rz-slider-model="price.min"
+                                                data-rz-slider-high="price.max">
+                                            <div my-slider="price" ng-mouseup="filterMouseUp()"></div>
+                                            </rzslider>
+                                            <p><p class="amout_range"><i class='fa fa-inr'></i>{{ price.min }} - <i class='fa fa-inr'></i>{{ price.max }}</p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-lg-3">                                            
+                                            <div class="sellr_field mb15">
+                                                <input type="text" class="search_i ng-pristine ng-untouched ng-invalid ng-invalid-required" required="" ng-model="data.username">
+                                                <label class="sel_text">Payment Mode</label>
+                                            </div>
+                                            <div class="input_right_box_left">
+                                                <div class="admin_input margin_t">
+                                                    <input id="Partners" type="checkbox" class="check_box check_box_1">
+                                                    <label for="Partners">Net Banking</label>
+                                                </div>
+                                                <div class="admin_input margin_t">
+                                                    <input id="NairTrans" type="checkbox" class="check_box check_box_1">
+                                                    <label for="NairTrans">Paytm</label>
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+                    <!--  <div class="col-lg-3"> 
+                                            <div class="sellr_field mb15">
+                                                <input type="text" class="search_i ng-pristine ng-untouched ng-invalid ng-invalid-required" required="" ng-model="data.username">
+                                                <label class="sel_text">Tracking</label>
+                                            </div>
+
+                                            <div class="input_right_box_left">
+
+                                                <div class="admin_input margin_t">
+                                                    <input id="Partners" type="checkbox" class="check_box check_box_1">
+                                                    <label for="Partners">Milestone</label>
+                                                </div>
+                                                <div class="admin_input margin_t">
+                                                    <input id="NairTrans" type="checkbox" class="check_box check_box_1">
+                                                    <label for="NairTrans">Realtime</label>
+                                                </div>
+                                            </div>
+                                        </div>
+ -->
+                    <div class="col-lg-3">
+                        <div class="sellr_field mb15">
+                            <input type="text" class="input_ani ng-pristine ng-untouched ng-invalid ng-invalid-required" required />
+                            <label class="lbl_text2">Rating</label>
+                        </div>
+
+                        <div class="input_right_box_left">
+
+                            <div class="admin_input margin_t">
+                                <input id="Partners" type="checkbox" class="check_box check_box_1">
+                                <label for="Partners">Top Sellers(Order)</label>
+                            </div>
+                            <div class="admin_input margin_t">
+                                <input id="NairTrans" type="checkbox" class="check_box check_box_1">
+                                <label for="NairTrans">Top Sellers(Rated)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="sellr_field mb15">
+                            <input type="text" class="input_ani ng-pristine ng-untouched ng-invalid ng-invalid-required" ng-model="data.username" required />
+                            <label class="lbl_text2">Seller</label>
+                        </div>
+                        <div class="sellers_det">
+                        <div class="input_right_box_left">
+
+                            <div class="admin_input margin_t" ng-repeat="(key,value) in sellerList |  filter:data.username">
+                                <input id="v1{{ value.id }}" type="checkbox" ng-click="selectSeller(value.id,value)" class="check_box check_box_1">
+                                <label for="v1{{ value.id }}"> {{ value.username }} </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    </div>
+
+                    <!--<div class="col-lg-3">
+                        <div class="row">
+                            <div class="date_selection select_form_intra">
+                                <span class="left_v_from">
+                                            <input  type="text" id="from_calendar" ng-model="data.from_date" fromcalendar class="date_p input_ani" required="">
+                                            <label class="lbl_text2 padg_l">Date </label>
+                                            </span>
+                            </div>
+                        </div>
+                    </div>-->
+
+
+                </div>
+
+
+
+                <!---->
+
+                <!-- <div class="search_results_heading">Search Result</div> -->
+
+                <div class="hyperlocal_gray">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="vendor_name_heading">Vendor Name </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="vendor_name_heading"> Service</div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="vendor_name_heading">Category</div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="vendor_name_heading">Date</div>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <div class="vendor_name_heading">Price</div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="vendor_name_heading"></div>
+                    </div>
+                </div>
+                <div class="data_box_bg">
+                    <!-- {{ searchResult | filter:NewSellerNameFilter|filter:priceRange|filter:{ from_date:data.from_date} }} -->
+                    <div class="white_bg" ng-repeat="val in searchResult |filter:NewSellerNameFilter|filter:{ from_date:data.from_date} track by $index">
+                        <div ng-if="((val.price >= price.min) && (val.price <= price.max))">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="vendor_img_box">
+                                <div class="vendor_detail">{{val.vendor}}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="vendor_date">
+                                {{val.service_type|getobjectvalue:servicetype}}
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="vendor_date">
+                                <!-- {{categories}} -->
+                                {{val.product_category|getName:categories.data}}
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="vendor_date">{{val.from_date||datefilter|date:'dd/MM/yyyy' }}
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            <div class="text-left">
+                                {{val.price}}
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="sep_div1">
+                                <input id="Submit1" type="submit" ng-click="bookNow(val,$index)" value="Book Now" class="book_btn no-border pull-right">
+                                <!-- <a href="#" class="book_btn">Book Now</a> -->
+                            </div>
+                            <div class="detail_b1 toggle-minus-{{$index}}" ng-click="showHideDetail($index)" data-id="{{ $index }}">Detail
+                            </div>
+                            <a href="javascript:void(0)" data-toggle="modal" ng-click="sendMessageModal(val)" data-target="#messageModal" class="pull-right msg-icon">
+                                <i class="fa fa-envelope-o"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                        <!-- popup code -->
+<div class="modal fade ng-scope in" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="   messageModalLabel" style="display: none;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form id="MessageData" class="ng-pristine ng-valid">
+                <div class="modal-header">
+                    <h3 style="float:left" id="status">
+
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+
+                    <h4 class="sub-head red margin-left-none margin-bottom">New Message</h4>
+                    <div>
+                        <input id="quoteObject" class="form-control" placeholder="Form Object" readonly="readonly" name="quoteObject" type="hidden" value="">
+
+                        <input id="from_name" class="form-control" placeholder="From: ABC co ltd PVT" readonly="readonly" name="message_from" type="text" value="">
+                    </div>
+                    <div>
+                        <input id="to_name" class="form-control" placeholder="To: XYZ co ltd PVT" readonly="readonly" name="message_to" type="text" value="">
+                    </div>
+
+                    <div>
+                        <input id="message_subject" class="form-control margin-bottom-4 valid" placeholder="Subject *" readonly="readonly" name="message_subject" type="text" value="message_subject">
+
+
+                    </div>
+
+                    <div><textarea id="message_body" class="form-control message-body" placeholder="Body *" name="message_body" cols="50" rows="10"></textarea></div>
+
+                    <div class=""><i class="fa fa-paperclip"></i>
+
+                        <label for="message_attachment" class="">Attachment </label>
+                        <div>
+                            <!--Removed [] in name attribute for below message attachment field because attachment not saving in ajax, If you need add in conditional -- Ramu-->
+                            <!--<input id="message_attachment" class="filestyle btn-file file-upload" multiple="1" name="message_attachment"  type="file">-->
+                            <!-- <input id="r_message_attachment"
+                                       class="filestyle btn-file file-upload"
+                                       multiple="1" name="r_message_attachment"
+                                       ng-model-instant onchange="angular.element(this).scope().setDocument(this)"
+                                       type="file"> -->
+                            <input id="r_message_attachment" class="filestyle btn-file file-upload ng-isolate-scope" name="message_attachment" fileread="message_attachment" type="file">
+                            <div id="message_attachment_display"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn red-btn flat-btn ok-btn message_send_button" ng-click="sendMessage(message_attachment)">Send message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+                        <div class="on_time filter-result" id="detail-{{$index}}" style="display:none;">
+                            <div class="p_details">
+                                <div class="pro_img">
+                                    <span><img src="../images/elephant_ig.png"></span>
+                                    <div class="bottom_img">
+                                        <ul>
+                                            <li><img src="../images/g_icons.png"></li>
+                                            <li><img src="../images/man_icon.png"></li>
+                                            <li><img src="../images/b_icon.png"></li>
+                                        </ul>
+                                        <div class="text_pr">
+                                            <span>30</span><span>145</span><span>1195</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pro_disc">
+                                    <ul>
+                                        <li class="red_c">
+                                            <span>On time Placement</span>
+                                            <span class="star-cb-group">
+                                                                <input type="radio" id="rating-5" name="rating" value="5"><label for="rating-5">5</label>
+                                                                <input type="radio" id="rating-4" name="rating" value="4"><label for="rating-4">4</label>
+                                                                <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear"><label for="rating-0">0</label>
+                                                            </span>
+                                        </li>
+                                        <li class="orang_c">
+                                            <span>On time Delivery </span>
+                                            <span class="star-cb-group">
+                                                                <input type="radio" id="rating-5" name="rating" value="5"><label for="rating-5">5</label>
+                                                                <input type="radio" id="rating-4" name="rating" value="4"><label for="rating-4">4</label>
+                                                                <input type="radio" id="rating-3" name="rating" value="3"><label for="rating-3">3</label>
+                                                                <input type="radio" id="rating-1" name="rating" value="1"><label for="rating-1">1</label>
+                                                                <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear"><label for="rating-0">0</label>
+                                                            </span>
+                                        </li>
+                                        <li class="lighto_c">
+                                            <span>Milestone Update </span>
+                                            <span class="star-cb-group">
+                                                                <input type="radio" id="rating-5" name="rating" value="5"><label for="rating-5">5</label>
+                                                                <input type="radio" id="rating-2" name="rating" value="2"><label for="rating-2">2</label>
+                                                                <input type="radio" id="rating-1" name="rating" value="1"><label for="rating-1">1</label>
+                                                                <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear"><label for="rating-0">0</label>
+                                                            </span>
+                                        </li>
+                                        <li class="pa_c">
+                                            <span>Documentation </span>
+                                            <span class="star-cb-group">
+                                                                <input type="radio" id="rating-5" name="rating" value="5"><label for="rating-5">5</label>
+                                                                <input type="radio" id="rating-4" name="rating" value="4"><label for="rating-4">4</label>
+                                                                <input type="radio" id="rating-3" name="rating" value="3"><label for="rating-3">3</label>
+                                                                <input type="radio" id="rating-2" name="rating" value="2"><label for="rating-2">2</label>
+                                                                <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear"><label for="rating-0">0</label>
+                                                            </span>
+                                        </li>
+                                        <li class="green_c">
+                                            <span>Delivery Quality </span>
+                                            <span class="star-cb-group">
+                                                                <input type="radio" id="rating-5" name="rating" value="5"><label for="rating-5">5</label>
+                                                                <input type="radio" id="rating-4" name="rating" value="4"><label for="rating-4">4</label>
+                                                                <input type="radio" id="rating-3" name="rating" value="3"><label for="rating-3">3</label>
+                                                                <input type="radio" id="rating-2" name="rating" value="2"><label for="rating-2">2</label>
+                                                                <input type="radio" id="rating-1" name="rating" value="1"><label for="rating-1">1</label>
+                                                                <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear"><label for="rating-0">0</label>
+                                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="p_discerption padlr-5">
+                                <div class="p_disc_sub">
+                                    <p class="price_t">
+
+
+                                    </p>
+                                    <div class="table_detail">
+                                        <div class="p_terms_t">
+                                            <h2>PAYMENT TERM</h2>
+                                            <p>Credit: N/A </p>
+                                        </div>
+                                        <div class="p_terms_t">
+                                            <h2>Fragile Charges</h2>
+                                            <p class="ng-binding">Rs.{{val.additional_charges}}
+                                            </p>
+                                            <!--  <p></p> -->
+                                        </div>
+
+                                        <div class="p_terms_t">
+                                            <h2>Service Type</h2>
+                                            <p class="ng-binding">{{val.service_type|getobjectvalue:servicetype}}</p>
+                                            <p></p>
+                                        </div>
+
+
+                                        <div class="p_terms_t">
+                                            <h2>Product Category</h2>
+                                            <p class="ng-binding">{{val.product_category|getName:categories.data}}</p>
+                                            <p></p>
+                                        </div>
+
+
+                                        <div class="p_terms_t">
+                                            <h2>Base Price</h2>
+                                            <p class="ng-binding">Rs. {{val.base_price}}
+
+
+                                            </p>
+
+                                        </div>
+
+                                        <div class="p_terms_t">
+                                            <h2>Charge per extra Km</h2>
+                                            <p class="ng-binding">Rs. {{val.rate_per_extra_kms}}</p>
+                                            <p></p>
+                                        </div>
+
+                                        <div class="p_terms_t">
+                                            <h2>Number of Parcels included</h2>
+                                            <p class="ng-binding">{{val.num_parcels_included}}
+                                            </p>
+                                            <p></p>
+                                        </div>
+
+                                        <div class="p_terms_t">
+                                            <h2>DISCOUNT</h2>
+                                            <!--<p>Flat Rs.5000.00</p>-->
+                                            <p>N/A</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="p_terms_t">
+                                            <h2>Additional cost per extra parcel</h2>
+                                            <p class="ng-binding">Rs.{{val.additional_cost_per_ext_parcel}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--p_discerption-->
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="white_bg" ng-if="!searchResult.length" style="text-align:center">
+                    <p>Data not available</p>
+                </div>
+                
+            </div>
+            <!--End of intra_city_list-->
+        </div>
+        <!--end of right_search_p-->
+    </div>
+
+    <!--model box-->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content modify_search_detail pop-pad">
+                <button type="button" class="close" data-dismiss="modal" ng-click="dismiss_form()">&times;</button>
+                <span class="user_search_result">On <b> {{buyerSearch.departingDate}}</b>From<b> {{buyerSearch.from_location.locality_name}}</b>                Service type is<b> {{buyerSearch.service_type.value}}</b> Category is <b>{{buyerSearch.category.name}} </b><br></span>
+                <ul class="loc_list user_search_result_modify" style="list-style-type: none; padding: 0px;">
+                    <li ng-repeat="(key,value) in buyerSearch.location"> To - <b>{{value.tolocation.locality_name}}</b> Weight <b>{{value.parcelweight.value}} </b> No.of parcel
+                        <b> {{value.NoParcel}}</b>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <!--<div class="edit_fontawesome">-->
+                        <span class="pop-edit-btn"><i class="fa fa-pencil-square-o" aria-hidden="true" ng-model = "edited" ng-click="form_show(value,buyerSearch)"></i></span>                        &nbsp&nbsp&nbsp&nbsp&nbsp
+                        <span class="pop-delete-btn"><i class="fa fa-trash" aria-hidden="true" ng-click="removeItem1($index)"></i></span>
+                    </li>
+
+
+                </ul>
+
+                <button type="button" ng-click="edit_form()" id="Search" class="submit_btn">Add </button>
+
+
+
+                <div class="hyperlocal_search_form">
+
+                    <!--<form id="searchForm" name="searchForm" method="post" ng-show="show_form">-->
+                        <form id="searchForm" name="searchForm" method="post">
+                        <button type="button" class="close_button" ng-click="dismiss_form()">&times;</button>
+                        <div class="row">
+                            <div class="col-lg-3 form-group">
+                                <input type="text" id="city" name="city" placeholder="{{buyerSearch.city.city_name}}" value="{{Editdata.city.city_name}}"
+                                    autocomplete="off" class="input_ani" typeahead-on-select="onSelect($item, $model, $label)"
+                                    ng-model="buyerSearch.city.city_name" typeahead="city as (city.city_name) for city in cities | filter:$viewValue"
+                                />
+                                <label class="lbl_text2 ">City <span>*</span></label>
+                            </div>
+                            <div class="col-lg-3">
+                                <span class="left_v_from">
+                                <input type="text" class="input_ani"  id = "departingDate" placeholder = "{{buyerSearch.departingDate}}" ng-model="buyerSearch.departingDate" fromcalendar="" name ="departingDate" class="form_input" >
+                                   <label class="lbl_text2 ">Date <span>*</span></label>
+                                </span>
+                            </div>
+                            <div class="col-lg-3 form-group" id="service">
+                                <!-- {{servicetype}} -->
+                                <select id="ServiceType" class="input_ani" ng-model="buyerSearch.service_type" ng-options="y.value for (x,y) in servicetype track by y.id">
+                                <option value="">Service type</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="fragile_bg form-group">
+                                    <div class="col-lg-3">Fragile</div>
+                                    <!--{{editData.fragile}} -->
+                                    <!--{{ !empty(value.last_date) && value.last_date || '' }}-->
+
+                                    <div class="col-lg-9" ng-init="data.fragile==buyerSearch.fragile">
+                                        <!--<div class="col-lg-9" ng-if= "{{Editdata.fragile}} == '0'" ng-init="data.fragile = 0">-->
+                                        <!--<div class="col-lg-9" ng-if = "{{Editdata.fragile}} = '0'" ng-init="data.fragile = 0">-->
+
+                                        <div class="col-lg-6 col-md-6 col-xs-6">
+                                            <input type="radio" id="frag_yes" ng-model="buyerSearch.fragile" name="fragile" ng-value="1" />
+                                            <label for="frag_ye">Yes</label>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-xs-6">
+                                            <input type="radio" ng-model="buyerSearch.fragile" id="frag_no" name="fragile" ng-value="0" />
+                                            <label for="frag_no">No</label>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+                            <div class="col-lg-3 col-md-3" id="cat">
+                                <select name="category" class="input_ani" ng-model="buyerSearch.category" ng-options="y.name for (x,y) in categories.data track by y.id"
+                                    id="product_category">
+                                             <option value="">Material type</option>
+                                                                
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-3 ">
+                                <div class="select_form_intra">
+                                    <input type="text" autocomplete="off" name="from_location" value="Editdata.from_location" id="from_location" placeholder="{{Editdata.from_location}}"
+                                        ng-model="buyerSearch.from_location" class="input_ani" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+                                        required="">
+                                    <label class="lbl_text2">From location <span>*</span></label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 ">
+                                <div class="select_form_intra">
+
+                                    <input type="text" autocomplete="off" placeholder="{{editData.tolocation.locality_name}}" name="to_location" id="to_location"
+                                        ng-model="editData.tolocation" class="input_ani" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue">
+                                    <label class="lbl_text2 ">To location <span>*</span></label>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3 text-right">
+                                <div class="add_location" ng-hide="hide_add_button" ng-click="addLocation(editData)">
+                                    <button class="btn red-btn submit_btn"> Add Location</button></div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-3 form-group">
+
+                                <select id="weight" class="input_ani" name="weight" ng-model="editData.parcelweight" ng-options="y.value for (x,y) in weight track by y.id">
+                                 
+                                <option value = "">Weight</option>
+                               
+                                 
+                            </select>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 form-group">
+                                <div class="select_form_intra">
+                                    <input name="NoParcel" id="parcel" ng-model="editData.NoParcel" type="text" value="{{editData.NoParcel}}" class="input_ani distance_rate"
+                                        maxlength="5" />
+                                    <label class="lbl_text2 ">No of Parcel<span>*</span></label>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+
+                            </div>
+
+                            <div class="col-lg-3">
+
+                            </div>
+
+
+
+                        </div>
+
+                </div>
+                </form>
+                <div class="col-lg-3 no-padding">
+                    <button type="button" id="Search" ng-click="searchModified(buyerSearch)" class="submit_btn">Search</button>
+                </div>
+            </div>
+            <!--</div>-->
+
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="routeAlreadyExistsPopup" role="dialog">
+    <div class="modal-dialog modal-lg notification-popup">
+        <div class="modal-content statusText" style="overflow: hidden;padding: 0 10px 10px">
+            <div class="modal-body popup" id="responsetext">
+                This route is already added to cart.
+            </div>
+            <div>
+                <button type="button" class="btn btn-default pull-right" data-type="" ng-click="closeRouteAlreadyExistsPopup()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--model box end here-->
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.filter-result-toggle').click(function () {
+            $(".tr-t").slideToggle();
+        });
+    });
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#filters_click").click(function () {
+            $("#filters_show").toggle('fast');
+
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $(".click-detail-data").load("click", function () {
+
+            $("#detail-0").slideToggle('fast');
+        });
+    });
+
+</script>
+
+
+<script>
+    $(".subresult").hide();
+    $(document).on('click', ".show_hide", function () {
+
+        var id = $(this).attr('data-id');
+
+
+        $("#open_show" + id).toggle();
+        $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
+    });
+
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $(".search_i").click(function () {
+            $(".open_search").show();
+        });
+
+        $(".close_btn_close").click(function () {
+            $(".open_search").hide();
+        });
+        var gwid = $(".scroll_div").width();
+        var twid = $(".loc_det").width();
+        var acwid = gwid / twid * 100;
+        var len = $(".scroll_div").length;
+        var towid = acwid * len + 9;
+        $(".fillter_div").css({ "width": "" + towid + "%" });
+    });
+
+</script>

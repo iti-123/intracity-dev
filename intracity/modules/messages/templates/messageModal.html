@@ -1,0 +1,56 @@
+<!-- Message Modal start -->
+<div class="modal fade" id="messageReplyModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel"
+     ng-controller="MessageCtrl">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form id="MessageReplyData">
+                <div class="modal-header">
+                    <h3 style="float:left" id="replyStatus"></h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+
+                    <h4 class="sub-head red margin-left-none margin-bottom">Reply Message</h4>
+                    <div>
+                        <input id="quoteObject" class="form-control form-control1" placeholder="Form Object"
+                               readonly="readonly" name="quoteObject" type="hidden" value="">
+
+                        <input id="from_name" class="form-control form-control1" placeholder="From: ABC co ltd PVT"
+                               readonly="readonly" name="message_from" type="text" value="">
+                    </div>
+                    <div>
+                        <input id="to_name" class="form-control form-control1" placeholder="To: XYZ co ltd PVT"
+                               readonly="readonly" name="message_to" type="text" value="">
+                    </div>
+
+                    <div>
+                        <input id="message_subject" class="form-control form-control1 margin-bottom-4 valid"
+                               placeholder="Subject *" readonly="readonly" name="message_subject" type="text"
+                               value="message_subject">
+                    </div>
+
+                    <div><textarea id="message_body" class="form-control form-control1 message-body"
+                                   placeholder="Body *" name="message_body" cols="50" rows="10"></textarea></div>
+
+                    <div class=""><i class="fa fa-paperclip"></i>
+
+                        <label for="message_attachment" class="">Attachment </label>
+                        <div>
+
+                            <input id="r_message_attachment" class="filestyle btn-file file-upload"
+                                   name="message_attachment" fileread="message_attachment" type="file">
+                            <div id="message_attachment_display"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn red-btn flat-btn ok-btn"
+                            ng-click="replyMessage(message_attachment)">Send message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

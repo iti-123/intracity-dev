@@ -1,0 +1,639 @@
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+
+                <li><a href="#">Buyer</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#">Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+
+                <li><a href="#" class="active_c">Intra City Post</a></li>
+            </ul>
+        </div>
+        <div class="location_sec heght_100">
+            <form id="buyerPost" name="buyerpost" action="post" ng-app>
+                <div class="spot_t">
+                    <ul>
+                        <li>
+                            <input type="radio" ng-model="data.type" value="spot" id="spot" data-target="id1"
+                                   name="selector">
+                            <label for="spot">Distance</label>
+                            <span></span>
+                        </li>
+                        <li>
+                            <input type="radio" ng-model="data.type" value="term" id="term" data-target="id2"
+                                   name="selector">
+                            <label for="term">Hour</label>
+                            <span></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="load_type">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerpost.city.$invalid]">
+                            <select ng-model="data.city" name="city"
+                                    ng-options="y.id as y.city_name for (x, y) in cities" required>
+                                <option value=""> Select City</option>
+                            </select>
+
+                            <span class="help-inline" style="color:red"
+                                  ng-show="submitted && buyerpost.city.$error.required">Please select city</span>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="date_selection select_form_intra"
+                             ng-class="{true: 'error'}[submitted && buyerpost.from_date.$invalid]">
+                            <span class="left_v_from">
+                                <input ng-model="data.from_date" name="from_date" type="text" id="departing"
+                                       class="date_p input_ani" required>
+                                <label class="lbl_text2 padg_l">Rate Card Valid From date<span>*</span></label>
+
+                            <span class="help-inline" style="color:red"
+                                  ng-show="submitted && buyerpost.from_date.$error.required">Please enter From Date</span>
+
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="date_selection select_form_intra"
+                             ng-class="{true: 'error'}[submitted && buyerpost.to_date.$invalid]">
+                            <span class="left_v_from">
+                                <input ng-model="data.to_date" name="to_date" type="text" id="returning1"
+                                       class="date_p input_ani" required>
+                                <label class="lbl_text2 padg_l">Rate card valid till date<span>*</span></label>
+
+                            <span class="help-inline" style="color:red"
+                                  ng-show="submitted && buyerpost.to_date.$error.required">Please enter To Date</span>
+
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="load_type intra_main activeintra" id="id1">
+
+                    <div class="load_type">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="select_form_intra"
+                                 ng-class="{true: 'error'}[submitted && buyerpost.tracking_type.$invalid]">
+                                <select ng-model="data.tracking_type" name="tracking_type"
+                                        ng-options="type for type in trackings" required>
+                                    <option value="">Tracking Type Available</option>
+                                </select>
+
+                                <span class="help-inline" style="color:red"
+                                      ng-show="submitted && buyerpost.tracking_type.$error.required">Please select Tracking Type</span>
+
+                            </div>
+                        </div>
+
+
+                        <div class="load_type">
+                            <div class="col-md-3 pull-right text-right">
+                                <button type="submit" class="btn btn-primary btn-large" ng-click="submitted=true"
+                                        class="Add_Routes_btn">Add Routes
+                                </button>
+                                <!--<input type="submit" id="" value="Add Routes" ng-click="submitted=true" >-->
+
+                            </div>
+
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="select_form_intra"
+                                     ng-class="{true: 'error'}[submitted && buyerpost.from_time.$invalid]">
+                                    <input ng-model="data.from_time" name="from_time" type="number" class="input_ani"
+                                           min="1" max="12" only-digits required>
+                                    <label class="lbl_text2">from</label>
+
+                                    <span class="help-inline" style="color:red"
+                                          ng-show="submitted && buyerpost.from_time.$error.required">Please enter From Time</span>
+                                    <span class="error"
+                                          ng-show="buyerpost.from_time.$error.number">Not valid number!</span>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="time_slot_text">Time Slot</div>
+                            </div>
+
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="select_form_intra"
+                                     ng-class="{true: 'error'}[submitted && buyerpost.to_time.$invalid]">
+                                    <input ng-model="data.to_time" name="to_time" type="number" min="1" max="12"
+                                           class="input_ani" required>
+                                    <label class="lbl_text2">To</label>
+
+                                    <span class="help-inline" style="color:red"
+                                          ng-show="submitted && buyerpost.to_time.$error.required">Please enter To Time</span>
+                                    <span class="error"
+                                          ng-show="buyerpost.to_time.$error.number">Not valid number!</span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="select_form_intra"
+                                     ng-class="{true: 'error'}[submitted && buyerpost.time_slot.$invalid]">
+                                    <select ng-model="data.time_slot" name="time_slot" required>
+                                        <option value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+
+                                    <span class="help-inline" style="color:red"
+                                          ng-show="submitted && buyerpost.time_slot.$error.required">Please select Time Slot</span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="load_type">
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="select_form_intra"
+                                     ng-class="{true: 'error'}[submitted && buyerpost.base_distance.$invalid]">
+                                    <input ng-model="data.base_distance" name="base_distance" type="number" min="1"
+                                           class="input_ani" required>
+                                    <label class="lbl_text2">Base distance</label>
+
+                                    <span class="help-inline" style="color:red"
+                                          ng-show="submitted && buyerpost.base_distance.$error.required">Please enter Base Distance</span>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="select_form_intra"
+                                     ng-class="{'has-error': buyerpost.rate_per_base_distance.$invalid}">
+                                    <input type="number" ng-model="data.rate_per_base_distance"
+                                           ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01"
+                                           name="rate_per_base_distance" class="input_ani" required>
+                                    <label class="lbl_text2">Rate per base distance</label>
+
+                                    <span class="help-inline" style="color:red"
+                                          ng-show="submitted && buyerpost.rate_per_base_distance.$error.required">Please provide Rate</span>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="select_form_intra"
+                                     ng-class="{true: 'error'}[submitted && buyerpost.extra_cost_per_km.$invalid]">
+                                    <input type="text" ng-model="data.extra_cost_per_km" name="extra_cost_per_km"
+                                           class="input_ani" required>
+                                    <label class="lbl_text2">Cost per extra km</label>
+
+                                    <span class="help-inline" style="color:red"
+                                          ng-show="submitted && buyerpost.extra_cost_per_km.$error.required">Please provide cost per extra KM</span>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="load_type">
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="select_form_intra"
+                                     ng-class="{true: 'error'}[submitted && buyerpost.vehicle_type.$invalid]">
+                                    <select ng-model="data.vehicle_type" name="vehicle_type"
+                                            ng-options="y.id as y.vehicle_type for (x,y) in vehicles" required>
+                                        <option value="">Vehicle type</option>
+                                    </select>
+
+                                    <span class="help-inline" style="color:red"
+                                          ng-show="submitted && buyerpost.vehicle_type.$error.required">Please select Vehicle Type</span>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+
+                                <input type="button" ng-model="data.rate_per_base_distance" id="item_add_discounts"
+                                       value="Add" class="add_btn_gray">
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="load_type intra_main" id="id2">
+
+                        <div class="load_type">
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="select_form_intra"
+                                     ng-class="{true: 'error'}[submitted && buyerpost.vehicle_type_additional_wc.$invalid]">
+                                    <select ng-model="data.vehicle_type_additional_wc" name="vehicle_type_additional_wc"
+                                            ng-options="y.id as y.vehicle_type for (x,y) in vehicles" required>
+                                        <option value="">Vehicle type</option>
+                                    </select>
+
+                                    <span class="help-inline" style="color:red"
+                                          ng-show="submitted && buyerpost.vehicle_type_additional_wc.$error.required">Please select Additional Vehicle Type</span>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="select_form_intra">
+                                    <input type="text" class="input_ani" required="">
+                                    <label class="lbl_text2">Base Time / Base Distance</label>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="select_form_intra">
+                                    <input type="text" class="input_ani" required="">
+                                    <label class="lbl_text2">Base cost for each base time</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="load_type">
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="select_form_intra">
+                                    <input type="text" class="input_ani" required="">
+                                    <label class="lbl_text2">Additional hour charge</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="select_form_intra">
+                                    <input type="text" class="input_ani" required="">
+                                    <label class="lbl_text2">Additional km charge</label>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+
+                                <input type="button" id="item_add_discounts" value="Add" class="add_btn_gray">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="load_type">
+                        <div class="col-lg-12">
+                            <div class="font_normal_b">Additional common costs</div>
+                        </div>
+                    </div>
+
+
+                    <div class="load_type">
+                        <div class="col-lg-12">
+                            <div class="font_normal_Labour">Waiting charges</div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="select_form_intra"
+                                 ng-class="{true: 'error'}[submitted && buyerpost.vehicle_type_additional_wc.$invalid]">
+                                <select ng-model="data.vehicle_type_additional_wc" name="vehicle_type_additional_wc"
+                                        ng-options="y.id as y.vehicle_type for (x,y) in vehicles" required>
+                                    <option value="">Vehicle type</option>
+                                </select>
+
+                                <span class="help-inline" style="color:red"
+                                      ng-show="submitted && buyerpost.vehicle_type_additional_wc.$error.required">Please select Additional Vehicle Type</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="select_form_intra"
+                                 ng-class="{true: 'error'}[submitted && buyerpost.cost_per_extra_km.$invalid]">
+                                <input type="text" ng-model="data.cost_per_extra_km" name="cost_per_extra_km"
+                                       class="input_ani" required>
+                                <label class="lbl_text2">Cost per extra km</label>
+
+                                <span class="help-inline" style="color:red"
+                                      ng-show="submitted && buyerpost.cost_per_extra_km.$error.required">Please select Additional Cost Per Extra KM</span>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="load_type">
+
+                        <div class="col-lg-12">
+                            <div class="font_normal_Labour">Over dimension charges</div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="select_form_intra"
+                                 ng-class="{true: 'error'}[submitted && buyerpost.vehicle_type_additional_odc.$invalid]">
+                                <select ng-model="data.vehicle_type_additional_odc" name="vehicle_type_additional_odc"
+                                        ng-options="y.id as y.vehicle_type for (x,y) in vehicles" required>
+                                    <option value="">Vehicle type</option>
+                                </select>
+
+
+                                <span class="help-inline" style="color:red"
+                                      ng-show="submitted && buyerpost.vehicle_type_additional_odc.$error.required">Please select Additional Vehicle Type (ODC)</span>
+
+
+                            </div>
+                        </div>
+
+
+                        <!--<div class="load_type">
+
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerpost.base_volume.$invalid]">
+                                        <input type="text" ng-model="data.base_volume" name="base_volume" class="input_ani" required>
+                                        <label class="lbl_text2">Base volume</label>
+
+                                        <span class="help-inline" style="color:red" ng-show="submitted && buyerpost.base_volume.$error.required">Please enter Base Volume</span>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerpost.cost_per_unit_ve.$invalid]">
+                                        <input type="text" ng-model="data.cost_per_unit_ve" name="cost_per_unit_ve" class="input_ani" required>
+                                        <label class="lbl_text2">Cost per Unit volume extra</label>
+
+                                        <span class="help-inline" style="color:red" ng-show="submitted && buyerpost.cost_per_unit_ve.$error.required">Please enter Cost pre Unit Extra Volume</span>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="load_type">
+                                <div class="col-lg-12">
+                                    <div class="font_normal_Labour">Labour charges</div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerpost.labour.$invalid]">
+                                        <input type="text" class="input_ani" ng-model="data.labour" name="labour" required>
+                                        <label class="lbl_text2">No. of helpers needed</label>
+
+                                        <span class="help-inline" style="color:red" ng-show="submitted && buyerpost.labour.$error.required">Please give No. of Helpers</span>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerpost.base_charge_per_labour.$invalid]">
+                                        <input type="text" class="input_ani" name="base_charge_per_labour" ng-model="data.base_charge_per_labour" required>
+                                        <label class="lbl_text2">Base charge per Labour</label>
+
+                                        <span class="help-inline" style="color:red" ng-show="submitted && buyerpost.base_charge_per_labour.$error.required">Please enter Base Charge</span>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerpost.additional_charge_per_labour.$invalid]">
+                                        <input type="text" ng-model="data.additional_charge_per_labour" class="input_ani" name="additional_charge_per_labour" required>
+                                        <label class="lbl_text2">Additional Charges per Labour for higher floor pick up..</label>
+
+                                        <span class="help-inline" style="color:red" ng-show="submitted && buyerpost.additional_charge_per_labour.$error.required">Please enter Additional Charge Labour</span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="load_type">
+
+
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerpost.toll_charge.$invalid]">
+                                        <input type="text" ng-model="data.toll_charge" name="toll_charge" class="input_ani" required>
+                                        <label class="lbl_text2">Octroi/Toll charges</label>
+
+                                        <span class="help-inline" style="color:red" ng-show="submitted && buyerpost.toll_charge.$error.required">Please enter Troll Charge</span>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="select_form_intra" ng-class="{true: 'error'}[submitted && buyerpost.others_at_actuals.$invalid]">
+                                        <input type="text" ng-model="data.others_at_actuals" name="others_at_actuals" class="input_ani" required="">
+                                        <label class="lbl_text2">Others at actuals</label>
+
+
+                                        <span class="help-inline" style="color:red" ng-show="submitted && buyerpost.toll_charge.$error.required">Please enter Other Actuals</span>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+
+                            <div class="load_type">
+                                <div class="col-md-3 pull-right text-right">
+                                    <button type="submit" class="btn btn-primary btn-large" ng-click="submitted=true" class="Add_Routes_btn">Add Routes</button>
+                                    <!-- <input type="button" id="" ng-click="addRout()" value="Add Routes" class="Add_Routes_btn" invalids="0">-->
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="font_normal">Rate Card (Routes)</div>
+                    </div>
+                </div>
+
+
+                <div class="table_heading">
+                    <div class="col-md-3">From</div>
+                    <div class="col-md-2">To</div>
+
+                    <div class="col-md-2">Vehicle Type</div>
+                    <div class="col-md-1">Buyers</div>
+                    <div class="col-md-1">Price</div>
+                    <div class="col-md-1"></div>
+                </div>
+
+
+                <div class="load_type">
+                    <div class="col-md-3 pull-right text-right">
+                        <a class="Discounts_btn" id="Discounts_id" data-toggle="collapse" data-target="">Discounts</a>
+                    </div>
+                </div>
+
+
+                <div class="load_type" id="Discounts_show">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" class="input_ani" required="">
+                            <label class="lbl_text2">Name (Auto Fill)</label>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="select_form_intra">
+                            <select>
+                                <option>Precent</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" class="input_ani" required="">
+                            <label class="lbl_text2">Discount</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" class="input_ani" required="">
+                            <label class="lbl_text2">Credit Days</label>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <input type="button" id="item_add_discounts" value="Add" class="add_btn_gray">
+                    </div>
+
+
+                </div>
+
+
+                <div class="load_type">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="Tracking_Type">
+                            <div class="font_normal_text">Payment Terms</div>
+
+                            <ul class="select_inline">
+                                <li>
+                                    <div class="admin_input">
+                                        <input id="Cash" type="checkbox" class="check_box">
+                                        <label for="Cash">Cash(Escrow*)</label>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="admin_input">
+                                        <input id="NEFT" type="checkbox" class="check_box">
+                                        <label for="NEFT">NEFT/RTGS</label>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="admin_input">
+                                        <input id="Credit" type="checkbox" class="check_box">
+                                        <label for="Credit">Credit Card</label>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="admin_input">
+                                        <input id="Debit" type="checkbox" class="check_box">
+                                        <label for="Debit">Debit Card</label>
+                                    </div>
+                                </li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="load_type">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <textarea class="textarea" id="" cols="150" rows="10"
+                                  placeholder="Notes/ Terms &amp; Conditions (Optional)-Max 500 words"
+                                  name="terms_conditions"></textarea>
+                    </div>
+                </div>
+
+                <div class="load_type">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+                        <ul class="select_inline">
+                            <li>
+                                <div class="admin_input">
+                                    <input id="post_Public" type="radio" name="post_type" class="check_box">
+                                    <label for="post_Public">Post Public</label>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="admin_input">
+                                    <input id="post_Private" type="radio" name="post_type" class="check_box">
+                                    <label for="post_Private">Post Private</label>
+                                </div>
+                            </li>
+
+
+                        </ul>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="load_type">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+
+                        <div class="post_public">
+                            <div class="admin_input">
+                                <input id="Accept" type="checkbox" class="check_box">
+                                <label for="Accept">Accept Terms &amp; Conditions (Digital Contract)</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="div_btn">
+                            <input type="button" id="" value="Confirm" class="Confirm_post_btn" invalids="0">
+                            <input type="button" id="" value="Save as Draft" class="Add_Routes_btn" invalids="0">
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+        </div>
+        <!--end of location_sec-->
+    </div>
+    <!--end of right_search_p-->
+</div>
+

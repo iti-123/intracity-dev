@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hyperlocal</title>
+
+    <style>
+        .fragile_bg {
+            background: rgba(255, 255, 255, 0.57);
+            padding: 10px 0;
+            float: left;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    .hyperlocal_search_form .spot_t {width: 100%; float: left;}
+    .hyperlocal_search_form .spot_t ul {list-style: none;margin: 0;padding: 0;}
+    .hyperlocal_search_form .spot_t ul li {position: relative;float:left;padding:15px 6px;display:inline-block;z-index: 0;
+}
+.hyperlocal_search_form .spot_t ul li input[type="radio"] {
+    position: absolute;
+    visibility: hidden;
+}
+.hyperlocal_search_form .spot_t ul li label {
+    display: inline-block;
+    position: relative;
+    font-size: 17px;
+    padding: 3px 2px 0 33px;
+    margin: 6px auto;
+    z-index: 9;
+    cursor: pointer;
+    -webkit-transition: all .25s linear;
+    -moz-transition: all .25s linear;
+    -o-transition: all .25s linear;
+    transition: all .25s linear;
+    color: #555555;
+    font-weight: normal;
+    font-family: FuturaBT-Book;
+}
+.hyperlocal_search_form .spot_t ul li input[type="radio"]:checked ~ label {
+    color: #555555;
+}
+.hyperlocal_search_form .spot_t ul li span {
+    display: block;
+    position: absolute;
+    border: 1px solid #bdbfc1;
+    border-radius: 100%;
+    height: 14px;
+    width: 14px;
+    top: 30px;
+    left: 20px;
+    z-index: 5;
+}
+.hyperlocal_search_form .spot_t ul li input[type="radio"]:checked ~ span {
+    border: 1px solid #999;
+}
+.hyperlocal_search_form .spot_t ul li input[type="radio"]:checked ~ span::before {
+    background: #333;
+}
+</style>
+
+</head>
+
+<body ng-app="hyperlocal" ng-controller="searching">
+<!--<div class="wrapper padding_main">
+</div>
+<div class="wrapper menu">
+</div>-->
+<div class="wrapper padding_main ng-scope">
+    <div class="container-fluid">
+        <div class="wrapper">
+            <div class="hyperlocal_index">
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243647.31697966583!2d78.2679615687059!3d17.41229980306334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C+Telangana!5e0!3m2!1sen!2sin!4v1490178589784"
+                            frameborder="0" style="border:0;width:100%;height:750px;" allowfullscreen></iframe>
+                </div>
+
+                <div class="hyperlocal_search_form">
+                    <form name="searchForm" method="post" ng-submit="StartSearch()">
+                            <div class="spot_t" ng-init="data.type=1">
+                                    <ul>
+                                        <li>
+                                            <input ng-click="showHide(data.type,data)" id="spot" data-target="id1" value="1" name="selectorType" ng-model="data.type" checked="" type="radio">
+                                            <label for="spot">Spot</label>
+                                            <span></span>
+                                        </li>
+                                        <li>
+                                            <input ng-click="showHide(data.type,data)" value="2" ng-model="data.type" id="term" data-target="id2" name="selectorType" type="radio">
+                                            <label for="term">Term</label>
+                                            <span></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                        <div class="row">
+                            <div class="h_form_input">
+                                <div class="col-lg-9 form-group">
+
+                                    <input type="text" id="city" name="city" autocomplete="off" class="input_ani"
+                                           typeahead-on-select="onSelect($item, $model, $label)"
+                                           ng-model="data.city_id.id" required=""
+                                           typeahead="city as (city.city_name) for city in cities | filter:$viewValue" />
+                                        <label id="mcity" class="lbl_text2 city_align">Select City *</label>
+                                </div>
+                            </div>
+                            <div class="h_form_input form-group">
+                                <div class="col-lg-9">
+                                <span class="left_v_from">
+                                   
+                                    <input type="text" id="departingDate" fromcalendar="" ng-model="data.departingDate"
+                                           name="departingDate" class="input_ani form_input" required="" />
+                                         <label id="mdepartingDate" class="lbl_text2 city_align">Date *</label>
+                                        </span>
+                                </div>
+                            </div>
+
+
+                            <!--<div class="h_form_input">
+                                <div class="col-lg-9">
+                                    <div class="fragile_bg">
+                                        <div class="col-lg-3">Fragile</div>
+
+
+
+                                        <div class="col-lg-9">
+
+                                            <label class="radio-inline">
+                                                <input type="radio" id = "frag_yes" name="fragile" value = "yes"/> Yes
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio"  id = "frag_no"  name="fragile" value = "no"/> No
+                                            </label>
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>-->
+
+
+                            <div class="h_form_input">
+                                <div class="col-lg-9 col-md-9 form-group">
+                                    <input type="text" autocomplete="off" name="fromLocation" id="from_location"
+                                           ng-model="data.from_location" class="input_ani"
+                                           typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+                                           required="" />
+                                           <label id="mfrom_location" class="lbl_text2 city_align">From Location *</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="m-left">
+                                        <!--<div class="add_location">Add<br />Location</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h_form_input">
+                                <div class="col-lg-9 col-md-9 form-group">
+                                    <input type="text" autocomplete="off" name="tolocation" id="to_location"
+                                           ng-model="data.to_location"
+                                           class="input_ani"
+                                           typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+                                           required="" />
+                                         <label id="mto_location" class="lbl_text2 city_align">To Location *</label>
+
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="m-left">
+                                        <!--<div class="add_location">Add<br />Location</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="h_form_input">
+                                <div class="col-lg-9 col-md-9 form-group">
+                                    <select id="material" name = "material">
+                                        <option value = "">Select Material Type</option>
+                                         <option value = "Material1"> Material1</option>
+
+                                    </select>
+                                </div>
+                            </div> -->
+                            <!--<div class="h_form_input">
+                                <div class="col-lg-9 col-md-9 form-group">
+                                    <select id="weight" name="weight">
+                                        <option value = "">Weight</option>
+                                         <option value = "Weight1">Weight1</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="m-left">
+                                         <div class="weight_radio">
+                                        <input id="kg" name = "weight_para" type="radio" value ="kg" checked />
+                                        <label for="kg">kg</label>
+                                        </div>
+                                        <div class="weight_radio">
+                                            <input id="gm" name = "weight_para" type="radio" value ="gm" />
+                                            <label for="gm">gm</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>-->
+
+
+                            <div class="h_form_input">
+
+                                <div class="col-lg-3">
+                                    <button type="button" id="search" class="submit_btn">Search</button>
+                                    <!--                        <input  ng-bind = "searchFormSubmit" type="submit" class="submit_btn" />-->
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+</html>
+<style>
+    .page_div {
+        background: #fff;
+        display: table;
+        width: 100%;
+        float: left;
+    }
+</style>

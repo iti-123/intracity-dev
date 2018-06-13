@@ -1,0 +1,443 @@
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">Seller</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                <li><a href="#">Services</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                <li><a href="#">Hyperlocal</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                <li><a href="#" class="active_c">{{post[0].post_transaction_id}}</a></li>
+            </ul>
+        </div>
+
+
+        <div class="div_100">
+            <div class="col-lg-9">
+                <div class="row">
+                    <ul class="buyer_ul">
+                        <li class="tab_10 active_buyer" data-tab="Messages">
+                            <a href="javascript:void(0);">All</a>
+                        </li>
+                        <li class="tab_10" data-tab="Offers">
+                            <a href="javascript:void(0);">PUBLIC</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="back_post">
+                    <a href="#/hp-buyer-list" class="back_red_btn">Back to Post</a>
+                    <!-- <a href="#/seller-rate-card-edit/{{post[0].id}}" class="back_edit">Edit</a> -->
+                    <a href="javascript:void(0);" class="delete_gray"><i ng-click="deletePost(post[0].id);"
+                                                                         class="fa fa-trash" title="Delete"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- {{post}} -->
+        <div class="white_bg">
+
+            <div class="c_6">
+                <div class="col-md-2 data-fld">
+                    <span class="data-head">POST TO:</span>
+                    <span class="data-value break-word">
+
+                                                   {{ post[0].is_private_public==0 && 'Public' || 'Private' }}
+                                                    </span>
+                </div>
+
+                <!--  <div class="col-md-2 data-fld">
+                     <span class="data-head">VALID FROM</span>
+                     <span class="data-value break-word">{{post[0].valid_from}}</span>
+                 </div>
+
+
+                 <div class="col-md-2 data-fld">
+                     <span class="data-head">VALID TO</span>
+                     <span class="data-value break-word">{{post[0].valid_to}}</span>
+                 </div>
+
+
+                 <div class="col-md-2 data-fld">
+                     <span class="data-head">TRACKING</span>
+                     <span class="data-value break-word">{{ post[0].tracking==1 && 'Mile Stone' || 'Real Time' }}</span>
+                 </div> -->
+
+                <div class="col-md-2 data-fld">
+                    <span class="data-head">ROUTES</span>
+                    <span class="data-value break-word">{{ post[0].get_all_route.length}}</span>
+                </div>
+
+                <div class="clearfix"></div>
+
+
+            </div>
+
+            <div class="div_100 space10">
+                 <div class="c_8">
+<ul class="filter_list">
+    <li>NOTIFICATIONS</li>
+    <li> <i class="fa fa-envelope-o"> </i> MESSAGES </li>
+    <li> <i class="fa fa-file-text-o"> </i> OFFER </li>
+    <li> <i class="fa fa-thumbs-o-up"> </i> LEADS</li>
+    <li> <i class="fa fa-line-chart"> </i>  Market Analytics </li>
+    <li> <i class="fa fa-file-text-o"> </i> Documentation</li>
+   
+</ul>
+</div>
+                <div class="c_8">
+                    <ul class="filter_list">
+                     
+                        <li>FROM LOCATION</li>
+                        <li>TO LOCATION</li>
+                         <!--<li>STATUS</li>-->
+
+                       
+                       <!--  <li>Seller Name</li>
+                        <li>Order Date</li>
+                        <li>ORDER NO.</li> -->
+                    </ul>
+                </div>
+                <div class="c_2">
+
+                    <span class="rilters_click click_a contact_click1"><i class="fa fa-bars"></i> Filters </span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="white_bg overflow open_a d_box1" style="display:none;">
+            <div class="scroller-div">
+                <div class="fillter_div">
+                    <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <div class="select_form_intra">
+                                    <input type="text" ng-model="data.fromlocation" class="input_ani" required="">
+                                    <label class="lbl_text2">From Location</label>
+                                    <span class="search_icon"><i class="fa fa-search"></i></span>
+                                </div>
+
+                                <div class="filter_from_location">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <ul class="post_inline">
+                                                <li ng-repeat="type in locations |filter:data.fromlocation">
+                                                    <div class="admin_input">
+                                                        <input type="checkbox" ng-click="selectfromlocation(type.id)"
+                                                               id="l{{type.id}}" class="check_box">
+                                                        <label for="l{{type.id}}">{{type.locality_name}}</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <div class="select_form_intra">
+                                    <input ng-model="tolocation" type="text" class="input_ani" ng-model="data.value"
+                                           required="">
+                                    <label class="lbl_text2">To Location</label>
+                                    <span class="search_icon"><i class="fa fa-search"></i></span>
+                                </div>
+
+                                <div class="filter_from_location">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <ul class="post_inline">
+                                                <li ng-repeat="type in locations |filter:tolocation">
+                                                    <div class="admin_input">
+                                                        <input type="checkbox" ng-click="selectlocationto(type.id)"
+                                                               id="type{{type.id}}" class="check_box">
+                                                        <label class="text-capitalize" for="type{{type.id}}">{{type.locality_name}}</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+
+                                <!--<div class="select_form_intra">
+                                    <input type="text" class="input_ani" ng-model="data.vehicle_type" required=""/>
+                                    <label class="lbl_text2">Status</label>
+                                    <span class="search_icon"><i class="fa fa-search"></i></span>
+                                </div>-->
+                                
+                                <!--<div class="filter_from_location">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <ul class="post_inline">
+                                                <li ng-repeat="status in post_Status |filter:data.vehicle_type"
+                                                    >
+                                                    <div class="admin_input">
+                                                     
+                                                        <input type="checkbox" ng-click="postStatus(status.id)"
+                                                                id="status{{status.id}}" class="check_box">
+                                                        <label for="status{{status.id}}">{{status.value}}</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="cart heght_100">
+
+        <div class="loc_det">
+            <div class="gray_bg">
+
+                <div class="col-lg-9">
+                    <div class="row">
+
+                        <div class="col-lg-2">
+                            <div class="heading_text">City</div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="heading_text">Service</div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="heading_text">Category</div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="heading_text">STATUS</div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="row">
+                        <div class="heading_text padding_left">NOTIFICATIONS</div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="white_bg" ng-repeat="(key, value) in post">
+            <div ng-repeat="(key, val) in value.get_all_route |filter:fromFilter|filter:toFilter|filter:statusFilter">
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="normal_text">{{ val.city_name}}</div>
+
+                        </div>
+
+
+                        <div class="col-lg-2">
+                            <div class="normal_text">{{value.servicetype|getobjectvalue:servicetype}}</div>
+                        </div>
+
+
+                        <div class="col-lg-2">
+                            <div class="normal_text">{{value.category|getName:categories}}</div>
+                        </div>
+
+                        <div class="col-lg-1">
+                            <div class="normal_text" ng-if="value.post_status==0">Draft</div>
+                            <div class="normal_text" ng-if="value.post_status==1">Open</div>
+                            <div class="normal_text" ng-if="value.post_status==2">Deleted</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3">
+
+                    <div class="info_links">
+                        <a href=""><i class="fa fa-envelope-o"></i></a>
+                        <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                        <a href=""><i class="fa fa-bullseye"></i><span class="vlue">0</span></a>
+                        <a href=""><i class="fa fa-line-chart"><span class="vlue">0</span></i></a>
+                        <a href=""><i class="fa fa-file-text-o"></i><span class="vlue">1</span></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div> <!--end of location_sec-->
+
+<div class="cart heght_100">
+    <div class="cart heght_100 ng-scope">        
+    <div class="loc_det">
+        <div class="gray_bg">
+
+            <div class="col-lg-9">
+                <div class="row">
+
+                    <div class="col-lg-2">
+                        <div class="heading_text">City</div>
+                    </div>
+                    <!--  <div class="col-lg-2">
+                        <div class="heading_text">TO</div>
+                        </div> -->
+                    <div class="col-lg-3">
+                        <div class="heading_text">VEHICLE TYPE</div>
+                    </div>
+
+                    <div class="col-lg-3">
+                    <div class="heading_text">TRANSIT DAY</div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="heading_text">PRICE</div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="row">
+                    <div class="heading_text padding_left"></div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="white_bg">
+  
+        <div  class="ng-scope">
+            <div class="col-lg-9">
+                <div class="row">
+                  
+                    <div class="col-lg-2">
+                        <div class="normal_text ng-binding">Hyderabad
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="normal_text"><span class="ng-binding">NOT AVAILABLE</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                            <div class="normal_text"><span class="ng-binding">15 Days</span>
+                            </div>
+                        </div>
+    
+
+                    <div class="col-lg-2">
+                        <div class="normal_text">
+                            <span ng-if="true" class="ng-binding ng-scope"> 
+                                RS: 15000 /-
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="ml-5">
+                    <div class="row mb-5">
+                        <a class="seller_btn_submit text-center pull-right ng-scope" ng-if="value.buyer_status != 'DENY'" ng-click="firmQuoteAction($index, 'ACCEPT')"> Counter Offer  </a>
+                        
+                    </div>
+                    <div class="row mb-5">
+                           <a class="ng-scope" ng-if="value.buyer_status != 'DENY'" ng-click="firmQuoteAction($index, 'ACCEPT')"> Decline  </a><a class="seller_btn_submit text-center pull-right ng-scope" ng-if="value.buyer_status != 'DENY'" ng-click="firmQuoteAction($index, 'ACCEPT')"> Book Now  </a>
+                    </div>
+                </div>
+            </div>
+
+           
+          <div class="row ng-scope" ng-if="true">
+                <div class="col-sm-3"> 
+                    <h5> <strong> Quote </strong> </h5>
+                    <p class="ng-binding">
+                        Rs. 15000 /-
+                    </p>
+                </div>
+                <div class="col-sm-3">
+                    <h5><strong> Transit Day </strong> </h5>
+                    <p class="ng-binding">
+                        15 Days
+                    </p>
+                </div>
+
+                <div class="col-sm-3"> 
+                    <input class="input_ani ng-pristine ng-untouched ng-valid" ng-model="" placeholder="Counter Offer "> 
+                </div>
+                <div class="col-sm-3 mt-19">
+                       <a class="seller_btn_submit text-center pull-right ng-scope" ng-if="value.buyer_status != 'DENY'" ng-click="firmQuoteAction($index, 'ACCEPT')"> Submit  </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+</div> <!--end of right_search_p-->
+</div>
+
+<script>
+
+
+    $(document).ready(function () {
+        $(".contact_click").click(function () {
+            $(".d_box").slideToggle("slow");
+        });
+
+        $('.contact_click').click(function () {
+            $(this).next('.d_box').slideToggle('500');
+            $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
+        });
+
+    });
+
+
+    $(document).ready(function () {
+        $(".contact_click1").click(function () {
+            $(".d_box1").slideToggle("slow");
+        });
+
+        $('.contact_click1').click(function () {
+            $(this).next('.d_box1').slideToggle('500');
+
+        });
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var gwid = $(".scroll_div").width();
+        var twid = $(".loc_det").width();
+        var acwid = gwid / twid * 100;
+        var len = $(".scroll_div").length;
+        var towid = acwid * len + 9;
+        $(".fillter_div").css({"width": "" + towid + "%"});
+    });
+</script>
+<style>
+.mb-5{ margin-bottom: 5px;}
+</style>

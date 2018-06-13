@@ -1,0 +1,10 @@
+<!-- Additional configuration required for Logistiks Shipping -->
+
+
+<lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-dataimporthandler-.*\.jar"/>
+<lib dir="${solr.install.dir:../../../..}/dist/" regex="mysql-connector-java-.*\.jar"/>
+<requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">
+<lst name="defaults">
+    <str name="config">${solr.install.dir}/server/solr/logistiksdev/conf/logistiks-dataimporthandler-config.xml</str>
+</lst>
+</requestHandler>

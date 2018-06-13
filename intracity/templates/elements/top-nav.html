@@ -1,0 +1,172 @@
+<style>
+    .menu_ul ul .menu_ul ul li.dropdown {
+        position: relative;
+    }
+
+    .menu_ul ul li.dropdown ul.dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .menu_ul ul li.dropdown .dropdown-content li {
+        width: 100%;
+        float: left;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .menu_ul ul li.dropdown .dropdown-content li a {
+        color: black;
+        padding: 8px 16px;
+        text-decoration: none;
+        display: block;
+        color: #555;
+        text-align: left;
+    }
+
+    .menu_ul ul li.dropdown .dropdown-content a:hover {
+        background-color: #ec3434;
+        color: #fff;
+    }
+
+    .menu_ul ul li.dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>
+<div ng-controller="HeaderCtrl">
+    <div class="container-fluid padding_main">
+        <div class="row">
+            <div class="col-lg-9 col-md-9">               
+                <div class="menu_ul">
+                    <ul ng-if="!sideBar.isComunity">
+                        <li><a ui-sref-active="active" class="active" ui-sref="home">Home</a></li>
+                        <li><a ui-sref-active="active" class="active" id="serviceActive" ui-sref="services">Services</a>
+                        </li>
+                        <li><a ui-sref-active="active" class="active" ui-sref="products">Products</a></li>
+                    </ul>
+                    <ul ng-if="sideBar.isComunity">
+                        <li><a ui-sref-active="active" class="active" ui-sref="community">Profile</a></li>
+                        <li><a ui-sref-active="active" class="active" ui-sref="connection">Connection</a>
+                        </li>
+                        <li><a ui-sref-active="active" class="active" ui-sref="individuals">Members</a></li>
+                        <li><a ui-sref-active="active" class="active" ui-sref="community-services-listing">Services</a></li>
+                        <li><a ui-sref-active="active" class="active" ui-sref="community-jobs({type:'full-time'})">Jobs</a></li>
+                        <li><a ui-sref-active="active" class="active" ui-sref="article-list({type:'paid'})">Articles</a></li>
+                        <li><a ui-sref-active="active" class="active" ui-sref="event-list({type:'paid'})">Events</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div class="menu_ul right_sec">
+                    <ul>
+                        <li ng-if="getUserActiveRole == 'Buyer' && !sideBar.isComunity">                            
+                            <a  href="#cart"><span><i class="fa fa-shopping-cart"></i></span><span class="count_cart">{{ cartCount }}</span></a>
+                        </li>
+
+                        <li><a href="index.html">Help</a></li>
+                        
+                        <li class="dropdown" ng-if="!sideBar.isComunity">
+                            <a href="javascript:void(0)" class="dropbtn active">{{ getUserActiveRole }}</a>
+                            <ul class="dropdown-content">
+                                <li><a href="javascript:void(0);" ng-click="roleSwitcherModel()">{{ switchRole }}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="sellerBuyerToggleModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel">
+        <div class="modal-dialog modal-lg bs-popup" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <h2 class="sp-toogle-title">
+                        <p>Are you sure you want to toggle as <span id="toggle_seller_role_name"> {{ switchRole }} </span> ?</p>
+                    </h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="button_serch" ng-click="roleSwitcher()">Yes</button>
+                    <button type="button" class="button_serch" data-dismiss="modal">No</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .sp-toogle-title {
+        text-align: left;
+        font-size: 18px;
+        color: #666666;
+        padding-left: 20px;
+    }
+
+    .bs-popup {
+        width: 600px !important;
+    }
+
+    .bs-popup .modal-content {
+        border-radius: 0px;
+        border-bottom: 0px;
+    }
+
+    .bs-popup .modal-header {
+        min-height: 16.43px;
+        padding: 15px;
+        border-bottom: 0px;
+    }
+
+    .bs-popup .modal-body {
+        display: table;
+        width: 100%;
+        padding: 0 15px 15px;
+    }
+
+    .bs-popup .modal-body h2 {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .bs-popup .button_serch {
+        border: none;
+        background: #ed3237;
+        color: #fff;
+        font-size: 18px;
+        padding: 4px 10px;
+        margin: 0 8px 0 0;
+        font-weight: 600;
+    }
+
+    .bs-popup .modal-footer {
+        padding: 10px 20px 15px 15px;
+    }
+
+    .modal-dialog {
+        margin: 124px auto 0;
+    }
+
+    button.close {
+        background: transparent none repeat scroll 0 0;
+        border: 0 none;
+        cursor: pointer;
+        line-height: 15px;
+        padding: 5px;
+        position: absolute;
+        right: 5px;
+        top: 2px;
+        z-index: 10;
+        font-size: 30px;
+    }
+</style>

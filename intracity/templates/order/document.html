@@ -1,0 +1,139 @@
+<table class="table tbl_t orderMaster">
+        <thead>
+           <tr>
+              <th> NAME </th>
+              <th  ng-show="!showIntraHyper">  </th>
+              <th  ng-show="showIntraHyper"> ROUTE </th>
+              <th> ORDER NUMBER </th>
+              <th><span> DOCUMENT </span></th>
+           </tr>
+        </thead>
+        <tbody  ng-repeat="(key,order) in orderlists" ng-if="billingStatus.length">
+           <tr>
+              <td  ng-show="showIntraHyper">
+                 <span ng-show="order.seller_name"> {{ order.seller_name }} </span>
+                 <span ng-show="order.sellerName"> {{ order.sellerName }} </span>
+              </td>
+              <td ng-show="showBlueCollar">
+                 <span class="font"> {{ order.bcFirstName+ ' ' + order.bcLasttName}}</span>
+              </td>
+
+              <td>
+                <span class="data-value break-word" ng-show="showIntraHyper">
+                    <span ng-if="order.from_location"> {{ order.from_location }} to </span>
+                    <span ng-if="!order.from_location"> N/A </span>
+                    {{ order.to_location }}
+                    
+                </span>
+                <span class="data-value break-word" ng-show="showBlueCollar">
+                <span>   {{ order.bcLicenceValidFrom }} </span>
+                </span>
+            </td>
+              <td>
+                 {{ order.order_no }}
+              </td>
+            <td>
+
+                <a href="javascript:void(0)" ng-click="displayDocumentUpload(key)">
+                        <span>
+                            <img src="../images/upload-icon.png" alt="IN" class="align">    
+                            </span>  
+                    Upload 
+                </a>
+            </td>
+              
+           </tr>
+           <tr id="displayDocumentUpload-{{ key }}" style="display:none">
+               <td colspan="4">
+                    <div class="individualOrderDocumentsDetails">                          
+                        <div class="col-md-12 show-data-div">
+                           <div class="col-md-12 data-div">
+                              <div class="col-md-12">
+                                <h5  class="{{order.errClass}} text-center">  {{ order.successMessage }} </h5>
+                                 <div class="individualOrderDocuments">
+                                    <form method="POST" accept-charset="UTF-8" autocomplete="off" enctype="multipart/form-data" class="orderDocumentsUploadform">
+                                        
+                                       <div class="col-md-2 padding-left-none data-fld">
+                                          Billing Documents
+                                       </div>
+                                       <div class="col-md-3">
+                                          <div>
+                                             <input ng-model="order.document.title" class="form-control form-control1 js-placeholder clsTitle" type="text"  name="document_title" placeholder="Title *">
+                                          </div>
+                                       </div>
+                        
+                                       <div class="col-md-7 documents-terms">
+                                        <div class="col-md-12 padding-none text-box">
+                                            <div class="m-top-15">
+                                                <div class="col-md-12 padding-none">
+                                                    <span style="display: none;" class="box-number-delete">2</span>
+                                                    <div class="documents-terms">
+                                                        <div class="col-md-4 form-control-fld">
+                                                            <div class="upload-fld">
+                                                                <input type="file" upload-file="order.document.file"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 form-control-fld">
+                                                        <input type="button" class="documents-add btn add-btn add_btn_new" ng-click="uploadOrderDocument(order.document,key)" value="Upload">
+                                                        
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                        <div class="clearfix"></div>                                      
+                                    </div>
+                                 </div>
+                                    </form>
+                                 </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-12 p-top-10" ng-repeat="(odKey, orderDocument) in order.orderDocuments">
+                                    
+                                       
+                                    <div class="col-md-2 padding-left-none data-fld">
+                                            {{ orderDocument.title }}
+                                    </div>
+                                    <div class="col-md-1 padding-left-none data-fld">
+                                            <!-- ng-click="downloadDocument(orderDocument.attachment)" -->
+                                        <a class="text-underline"  href="{{ storagePath+''+orderDocument.attachment }}" target="_blank" >Download</a>
+                                    </div>
+                                    <div class="col-md-1 padding-left-none data-fld">
+                                        <a class="text-underline" href="{{ storagePath+''+orderDocument.attachment }}" target="_blank">Print</a>
+                                    </div>
+                                    <div class="col-md-1 padding-left-none data-fld">
+                                        <a class="text-underline emailOrderDocument" href="javascript:void(0)" ng-click="emailDocument(orderDocument,order)">Email</a>
+                                    </div>
+                                </div>
+                                                                 
+                                          <!--div class="col-md-12">
+                                    <p> <strong> Transaction Reference Number : 12356859 </strong></p>
+                                 </div-->
+                              </div>
+                           </div>
+                        </div>
+                        </div>
+               </td>
+           </tr>
+            
+        </tbody>
+        <tbody ng-if="!billingStatus.length">
+           <tr>
+              <td colspan="4" style="text-align:center">
+                 No Records Found
+              </td>
+           </tr>
+        </tbody>
+     </table>
+
+     <div class="modal fade" id="DocumentPopup" role="dialog">
+        <div class="modal-dialog modal-lg notification-popup">
+            <div class="modal-content statusText" style="overflow: hidden;padding: 0 10px 10px">
+                <div class="modal-body popup" id="responseText">
+                    
+                </div>
+                <div>
+                    <button type="button" class="btn btn-default pull-right" data-type="" ng-click="closeDocumentPopup()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>

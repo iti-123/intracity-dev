@@ -1,0 +1,163 @@
+﻿﻿<style>
+.fragile_bg {
+background:none;
+padding: 10px 0;
+float: left;
+width: 100%;
+font-size: 16px;
+font-weight: normal;
+font-family: 'FuturaBT-Medium';
+}
+.try {
+width: 50%;
+height: 100px;
+background-color: red;
+position: relative;
+float: right;
+}
+.page_div {
+background: #fff;
+display: table;
+width: 100%;
+float: left;
+}
+.lbl_text2
+{
+left: 17px;
+}
+.align_text
+{
+left: 0px!important;
+}
+</style>
+<script src="bootstrap/js/common.js"></script>
+<div class="wrapper">
+    <div class="hyperlocal_index">
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243647.31697966583!2d78.2679615687059!3d17.41229980306334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C+Telangana!5e0!3m2!1sen!2sin!4v1490178589784" frameborder="0" style="border:0;width:100%;height:750px;" allowfullscreen></iframe>
+        </div>
+        <div class="hyperlocal_search_form">
+            <form id="searchForm" name="searchForm" method="post" >
+                <div class="row">
+                    <div class="h_form_input">
+                        <div class="col-lg-9">
+                            <input type="text" id="city" name="city" placeholder="" autocomplete="off" class="input_ani" typeahead-on-select="onSelect($item, $model, $label)" ng-model="data.city"  typeahead="city as (city.city_name) for city in cities | filter:$viewValue" / required>
+                            <label id="mcity" class="lbl_text2">Select City</label>
+                            <!-- <span class="help-inline" style="color:red;" ng-show="hp_buyer_city_validation">Please Enter a valid City</span> -->
+                        </div>
+                    </div>
+                    <div class="h_form_input form-group">
+                        <div class="col-lg-9">
+                            <span class="left_v_from">
+                                <input type="text"  id="departingDate" ng-model="data.departingDate" fromcalendar="" name ="departingDate" class="form_input input_ani" placeholder="" required>
+                                <label class="lbl_text2">Date</label>
+                            </span>
+                            <span id="mdepartingDate" class="help-inline" style="color:red;" ng-show="hp_buyer_departingDate_validation">Please Enter Date</span>
+                        </div>
+                    </div>
+                    <div class="h_form_input" >
+                        <div class="col-lg-9 form-group btn-none" id= "service">
+                            <!-- {{servicetype}} -->
+                            <select  id="ServiceType" ng-model="data.service_type" ng-options="y.value for (x,y) in servicetype" class="selectpicker" selectpicker>
+                                <option value="">Service Type</option>
+                            </select>
+                            <span class="help-inline" style="color:red;" ng-show="hp_buyer_departingDatservice_type_validation">Please Enter Service Type</span>
+                        </div>
+                    </div>
+                    <div class="h_form_input">
+                        <div class="col-lg-9">
+                            <div class="fragile_bg form-group">
+                                <div class="col-lg-3"><div class="row">Fragile</div></div>
+                                <div class="col-lg-9 hp-search-buyer-radio" ng-init="data.fragile=0">
+                                    <div class="spot_t">
+                                        <ul>
+                                            <li>
+                                                <input type="radio" id="frag_yes" ng-model="data.fragile" name="fragile" value="1" />
+                                                <label for="frag_yes">Yes</label>       
+                                            </li>
+                                            <li>
+                                                <input type="radio" ng-model="data.fragile" id="frag_no" name="fragile" value="0" />
+                                                <label for="frag_no"> No</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h_form_input form-group">
+                        <div class="col-lg-9 col-md-9 btn-none" id="cat">
+                            
+                            <select name="category" ng-model="data.category" ng-options="y.name for (x,y) in categories" id="product_category" class="selectpicker" selectpicker>
+                                <option value="">Material Type </option>
+                            </select>
+                            <span class="help-inline" style="color:red;" ng-show="hp_buyer_category_validation">Please Enter Material Type</span>
+                        </div>
+                    </div>
+                    <div class="h_form_input form-group">
+                        <div class="col-lg-9 col-md-9 ">
+                            <div class="select_form_intra">
+                                <input type="text" autocomplete="off" name="to_location" id="from_location" ng-model="data.location.fromLocation" class="input_ani" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue" required>
+                                <label id="mfrom_location" class="lbl_text2 align_text">From location <span>*</span></label>
+                                
+                                <!-- <span class="help-inline" style="color:red;" ng-show="hp_buyer_fromLocation_validation">Please Enter From location Type</span>
+                            </div> -->
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="m-left">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h_form_input form-group" ng-show="multipleLocation" ng-repeat="(key, value) in multipleLocation">
+                        <div class="col-lg-9 col-md-9"><b>From : {{value.fromLocation.locality_name}}
+                            To:  {{value.tolocation.locality_name }} ,Total: {{value.NoParcel}} parcels,Total Weight: {{value.parcelweight.value}} </b>
+                        </div>
+                        <span style="cursor:pointer" ng-click="removeItem($index)"> &times; </span>
+                    </div>
+                    <div class="h_form_input form-group">
+                        <div class="col-lg-9 col-md-9 ">
+                            <div class="select_form_intra">
+                                <input type="text" autocomplete="off"  name="to_location" id="to_location" ng-model="data.location.tolocation" class="input_ani" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue" required/>
+                                <label id="to_location" class="lbl_text2" ng-show="data.from_location">To location <span>*</span></label>
+                                <span class="help-inline" style="color:red;" ng-show="hp_buyer_tolocation_validation">Please Enter To location Type</span>
+                                <label class="lbl_text2 align_text">To location</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="m-left">
+                                <div class="add_location"  ng-click="addLocation(data.location,data)">{{addloc}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h_form_input">
+                        <div class="col-lg-9 col-md-9 form-group btn-none">
+                            <!--<input type = "text" ng-model="data.location.parcelweight" ng-show="data.location.tolocation" name="weight"  class="form-control distance_rate input_ani"
+                            placeholder="Total Weight" />-->
+                            <select  id = "weight" min = '0'name="weight" ng-model="data.location.parcelweight" ng-options="y.value for (x,y) in weight" class="selectpicker" selectpicker>
+                                <option value="">Total Weight</option>
+                            </select>
+                            <span class="help-inline" style="color:red;" ng-show="hp_buyer_parcelweight_validation">Please Enter Weight</span>
+                        </div>
+                        <div class="col-lg-3">
+                        </div>
+                    </div>
+                    <div class="h_form_input">
+                        <div class="col-lg-9 col-md-9 form-group">
+                            <input name="NoParcel" min ='0'id= "parcel" maxlength="5" ng-model="data.location.NoParcel" type="text" value="" class="input_ani distance_rate" required />
+                            <span class="help-inline" style="color:red;" ng-show="hp_buyer_NoParcel_validation">Please Enter No. of parcel</span>
+                            <label class="lbl_text2">Number of parcels</label>
+                        </div>
+                        <div class="col-lg-3">
+                        </div>
+                    </div>
+                    
+                    <div class="h_form_input">
+                        <div class="col-lg-3">
+                            <button type="button" ng-click="StartSearch(data.location)"  class="submit_btn">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

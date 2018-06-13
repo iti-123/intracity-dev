@@ -1,0 +1,113 @@
+
+<style>
+    .page_div {
+       display: inherit;
+       /* width: 100%; */
+       /* float: left; */
+    }
+    .right_section {
+        display: inherit;
+    }
+</style>
+<div class="wrapper page1 center_body">
+    <div class="header_strip">
+        <div class="container-fluid">
+            <div class="header_recomd">
+                <ul>
+                    <li ng-class="{'active_bottom':tab.followFresh}"><a href="javascript:void(0);" ng-click="getTab('followFresh')">Follow fresh perspective</a></li>
+                    <li ng-class="{'active_bottom':tab.following}"><a href="javascript:void(0);" ng-click="getTab('following')"> {{ totalFollowing }} Following</a></li>
+                    <li ng-class="{'active_bottom':tab.followers}"><a href="javascript:void(0);" ng-click="getTab('followers')"> {{ totalFollowers }} Followers</a></li>
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="follow_recm">
+            <p>
+                Follow people to see their posts in your feed
+            </p> 
+        </div>
+        <div class="table_div_100">
+            <div class="table_data" ng-class="{'activeclass':tab.followFresh}">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="col-md-3" ng-repeat="follower in followers">
+                    <div class="user_profile_img">
+                        <div class="profile-userpic">
+                            <img src="../images/profile_pic.jpg" class="img-responsive" alt="">
+                        </div>
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name bold">
+                                <a href="#/community/profile/{{ follower | getSlug }}"> {{ follower.username }} </a>
+                            </div>
+                            <div class="profile-usertitle-job">
+                                <div class="text-normal" ng-if="follower.seller">{{follower.seller.name}}</div>
+                                <div class="text-normal" ng-if="follower.buyer">{{follower.buyer.name +' '+ follower.buyer.lastname}}</div>
+                            </div>
+                            <div class="profile-usertitle-job">
+                                <a href="#/community/profile/{{ follower | getSlug }}">  More description here </a>
+                            </div>
+                        </div>
+                        <div class="follow_btn">
+                            <div class="btn_flw"  ng-click="follow(follower.id)"><sapn class="icons_p"><i class="fa fa-plus" aria-hidden="true"></i></sapn> Follow</div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="table_data" ng-class="{'activeclass':tab.following}">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-md-3"  ng-repeat="following in myFollowing">
+                        <div class="user_profile_img">
+                            <div class="profile-userpic">
+                                <img src="../images/profile_pic.jpg" class="img-responsive" alt="">
+                            </div>
+                            <div class="profile-usertitle">
+                                <div class="profile-usertitle-name bold">
+                                    <a href="#/community/profile/{{ following.user | getSlug }}">{{ following.user.username }}</a>
+                                </div>
+                                <div class="profile-usertitle-job">
+                                    Developer
+                                </div>
+                                <div class="profile-usertitle-job">
+                                    <a href="#/community/profile/{{ following.user | getSlug }}">More description here </a>
+                                </div>
+                            </div>
+                            <div class="follow_btn">
+                                <div class="btn_flw" ng-click="unFollow(following.id)"><sapn class="icons_p"><i class="fa fa-minus" aria-hidden="true"></i></sapn>Unfollow</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table_data" ng-class="{'activeclass':tab.followers}">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-md-3" ng-repeat="myFollower in myFollowers">
+                        <div class="user_profile_img">
+                            <div class="profile-userpic">
+                                <img src="../images/profile_pic.jpg" class="img-responsive" alt="">
+                            </div>
+                            <div class="profile-usertitle">
+                                <div class="profile-usertitle-name bold">
+                                    <a href="#/community/profile/{{ myFollower.follower_user | getSlug }}"> {{ myFollower.follower_user.username }} </a>
+                                </div>
+                                <div class="profile-usertitle-job">
+                                    Developer
+                                </div>
+                                <div class="profile-usertitle-job">
+                                    <a href="#/community/profile/{{ myFollower.follower_user | getSlug }}"> More description here </a>
+                                </div>
+                            </div>
+                            <div class="follow_btn">
+                                <div class="btn_flw"><sapn class="icons_p"><i class="fa fa-plus" aria-hidden="true"></i></sapn> Follow</div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            </div>
+        </div>
+    
+</div>

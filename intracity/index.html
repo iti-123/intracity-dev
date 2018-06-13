@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <title id="appTitle">Logistiks </title>
+    <meta charset="utf-8"/>
+    <meta name="description" content="logistiks ">
+    <meta name="keywords" content="logistiks">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/logistiks.css" rel="stylesheet"/>
+    <link href="css/jquery-ui.css" rel="stylesheet"/>
+    <link href="css/bootstrap-datepicker.css" rel="stylesheet"/>
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link rel='shortcut icon' href="../images/favicon.gif"/>
+    <link rel="stylesheet" type="text/css" href="css/rzslider.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="css/cdn/jquery.dataTables.min.css">
+    
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.js"></script>
+    
+    <!-- out -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-select.min.css">
+    <script src="js/cdn/bootstrap-select.min.js"></script>
+    <!-- out -->
+    <script src="js/cdn/jquery-ui.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="js/cdn/jquery.dataTables.min.js"></script>
+    <script src="js/authenticationLibrary.js" type="text/javascript"></script>
+    <!--<script src="js/bootstrap-datepicker.js"></script>-->
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/app/constant.js"></script>
+    <script src="js/app/jquery.tokeninput.js"></script>
+    <script src="js/app/jquery.tokenize.js"></script>
+    <!--<script src="js/app/angular.min.js"></script>-->
+    <script src="js/cdn/angular.min.js"></script>
+    <script src="js/cdn/angular-filter.js"></script>
+    <script src="js/angular-chosen.min.js"></script>
+
+    <!-- pusher-js -->
+    <script src="//js.pusher.com/3.0/pusher.min.js"></script>
+
+    <!-- pusher-angular -->
+    <script src="js/cdn/pusher-angular.min.js"></script>
+
+    <script type="text/javascript" src="js/app/ngStorage.js"></script>
+    <script src="js/app/angular-route.js"></script>
+    <script src="js/app/app.js"></script>
+    <script src="js/app/config.constants.js"></script>
+    <script src="js/app/angular-ui-router.min.js"></script>
+
+
+    <script src="js/app/config.router.js"></script>
+    <script src="js/ocLazyLoad.min.js" type="text/javascript"></script>
+    <script src="js/ui-bootstrap-tpls-0.9.0.js"></script>
+    <script src="js/cdn/rzslider.js"></script>
+
+    <script src="js/controller/lgAppCtrl.js"></script>
+    <script src="js/controller/seller/SellerCtrl.js"></script>
+    <script src="js/controller/order/OrderCtrl.js"></script>
+    <script src="js/services/apiServices.js"></script>
+    <script src="js/JavaScript.js"></script>
+    <script src="js/app.numeric.js"></script>
+    <script src="js/commonvalidation.js"></script>
+    <script src="js/directive/calenderdirective.js"></script>
+    <script src="js/dcalendar.picker.js"></script>
+    <script src="js/app/filter.js"></script>
+    <script src="js/cdn/angular-animate.min.js"></script>
+    <script src="js/cdn/angular-aria.min.js"></script>
+    <script src="js/cdn/angular-messages.min.js"></script>
+    <script src="js/cdn/angular-material.min.js"></script>
+    <script src="js/cdn/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script src="js/cdn/bootstrapValidator.min.js" type="text/javascript"></script>
+    <script src="js/rxjs/dist/rx.js" type="text/javascript"></script>
+    
+    <script src="js/rxjs/dist/rx.angular.min.js" type="text/javascript"></script>
+
+
+    <link href="css/cdn/bootstrapValidator.min.css"
+          rel="stylesheet"
+          type="text/css"/>
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIPRKw3YzdZT485CRpPeiMMLel1-hmZIQ" type="text/javascript"></script>
+
+
+    <style>
+        .loaderGif {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: rgba(0, 0, 0, .5) url('images/page-loader.gif') 50% 50% no-repeat;
+            background-size: 150px 150px;
+        }
+
+        .loading {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: rgba(0, 0, 0, .5) url('images/page-loader.gif') 50% 50% no-repeat;
+            background-size: 150px 150px;
+        }
+
+        .list-block1i {
+            width: 100%;
+            float: left;
+            list-style: none;
+            padding: 0px;
+            line-height: 28px;
+        }
+
+        .list-block1i ul li {
+            list-style: none;
+        }
+
+        .text-center1 {
+            text-align: center;
+            font-size: 23px
+        }
+
+        .daa {
+            width: 90%;
+        }
+
+        .link {
+            cursor: pointer;
+        }
+
+        .popup {
+            position: relative;
+            padding: 50px 20px;
+            font-size: 17px;
+            line-height: 29px;
+            text-align: center;
+        }
+
+        .page_div {
+            background: #fff;
+            display: table;
+        }
+
+        .page_base {
+            float: left;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .modal-dialog {
+            margin: 60px auto 0;
+        }
+
+        #booknow-popup .modal-dialog {
+            margin-top: 60px;
+            width: 1260px;
+        }
+
+        #booknow-popup .modal-dialog .modal-header {
+            border-bottom: 0px;
+        }
+
+        #booknow-popup .modal-dialog .modal-header .modal-title {
+            font-size: 30px;
+            color: #333333;
+        }
+
+        #booknow-popup .modal-dialog .modal-body-inner h4 {
+            font-size: 17px;
+            margin: 15px 0 10px 0;
+        }
+
+        #booknow-popup .modal-dialog .modal-body-inner .list-block1i li {
+            font-size: 17px;
+            padding: 3px 0;
+        }
+
+        #booknow-popup .modal-dialog .modal-body-inner p {
+            font-size: 17px;
+        }
+
+        #booknow-popup .modal-footer {
+            border-top: 0px;
+        }
+
+        #booknow-popup .modal-footer .flat-btn {
+            background: #ed3237;
+            color: #fff;
+            font-size: 19px;
+            border-radius: 0px;
+            padding: 7px 16px;
+            box-sizing: border-box;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            // alert("jhvjh");
+        });
+    </script>
+</head>
+
+<body ng-app="lgApp" ng-controller="lgAppCtrl">
+<div class="loaderGif" id="loaderGif" style="display:none"></div>
+<!-- application header  -->
+<div class="wrapper padding_main" ng-include="'templates/elements/header.html'"></div>
+<!-- application top-nav  -->
+<div class="wrapper menu" ng-include="'templates/elements/top-nav.html'"></div>
+
+
+<div class="wrapper page1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="intracity_page padding_main">
+                <div class="page_base">
+                    <div class="page_div">
+                        
+                        <div class="left_section">
+                            <div ng-if="sideBar.isLeftPannel">
+                                <div class="row" ng-include="'templates/elements/left-nav.html'"></div>
+                            </div>
+                            <div ng-if="sideBar.isProfile">
+                                <div class="row" ng-include="'templates/elements/profile-left-nav.html'"></div>
+                            </div>
+                            <div ng-if="sideBar.isEvent" >
+                                <div class="row" ng-include="'templates/elements/event-left-nav.html'"></div>
+                            </div>
+                            <div ng-if="sideBar.isArtilce" >
+                                <div class="row" ng-include="'templates/elements/article-left.htm'"></div>
+                            </div>
+                            <div ng-if="sideBar.isMember" >
+                                <div class="row" ng-include="'templates/elements/member-left.htm'"></div>
+                            </div>
+                            <div ng-if="sideBar.isJob" >
+                                <div class="row" ng-include="'templates/elements/job-left.htm'"></div>
+                            </div>
+
+                            <div ng-if="sideBar.isServices" >
+                                <div class="row" ng-include="'templates/elements/services-cmt-left.html'"></div>
+                            </div>
+                        </div>
+
+                        <div class="right_section">
+                            <div class="row ui-view"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-footer" ng-include="'templates/elements/footer.html'"> Loading</div>
+</div>
+
+<!-- Seller Buyer Post Modal  -->
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content waitText" style="overflow: hidden;padding: 0 10px 10px">
+            <div class="modal-body popup" id="responsetext">
+
+            </div>
+            <div>
+                <button type="button" class="btn btn-default pull-right" data-type="" data-dismiss="modal"
+                        ng-click="closeModel()">OK
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BOOK NOW POPUP -->
+
+
+<div class="modal fade in" id="settings" role="dialog" aria-hidden="false" style="display: none;">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <form method="POST" action="http://stagenew.logistiks.com/usersettingadd" accept-charset="UTF-8"
+              id="user_setting"><input name="_token" type="hidden" value="W0XzM9Li3u6BzWsmsjHU24abGjAZpHFvegARtGnL">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <div class="modal-body">
+                    <div id="settings_status_message_flash" class="" style="display: none">
+                        <p class="text-success col-sm-12 text-center alert-success settings_status_message">
+
+                        </p>
+                    </div>
+                    <div class="col-md-12 modal-form">
+                        <h3>Spot Enquiry</h3>
+                        <div class="popup-check-1">
+                            <ul>
+                                <li>
+                                    <input name="se_rel_enqs" disabled="" checked="checked" type="checkbox">
+                                    <span class="lbl padding-8">
+                        </span> Display related enquiries under rate card if matching
+                                    within "validity period" :
+                                    <input disabled="" checked="checked" type="checkbox"><span
+                                        class="lbl padding-8"></span>To,
+                                    <input disabled="" checked="checked" type="checkbox"><span
+                                        class="lbl padding-8"></span>From,
+                                    <input disabled="" checked="checked" type="checkbox"><span
+                                        class="lbl padding-8"></span>Load
+                                    Type
+                                    <input disabled="" checked="checked" type="checkbox"><span
+                                        class="lbl padding-8"></span> Vehicle Type
+                                </li>
+
+                                <li>
+                                    <input name="se_par_rel_enqs" checked="checked" type="checkbox"><span
+                                        class="lbl padding-8"> Display Partly related enquiries <input name="se_os_enq"
+                                                                                                       checked="checked"
+                                                                                                       type="checkbox"><span
+                                        class="lbl padding-8"></span>From
+                                        ( From Location of Operating States ) will be shown in a separate file in the post
+                                        master main page
+                                        </span>
+                                </li>
+                                <li>
+                                    <input name="se_unrelated_enqs" checked="checked" type="checkbox">
+                                    <span class="lbl padding-8"> Display Unrelated enquiries will be shown
+                        in a separate file in the post master main page (the same will apply if there is no rate card)
+                            </span></li>
+                            </ul>
+                        </div>
+                        <h3>Spot Lead</h3>
+                        <div class="popup-check-1">
+                            <ul>
+                                <li>
+                                    <input disabled="" checked="checked" name="sl_rel_post" type="checkbox">
+
+                                    <span class="lbl padding-8"></span> Display related public post under rate card if
+                                    matching within "validity period" :
+                                    <input disabled="" checked="checked" name="sl_rel_to" type="checkbox"><span
+                                        class="lbl padding-8"></span>To,
+                                    <input disabled="" checked="checked" name="sl_rel_from" type="checkbox"><span
+                                        class="lbl padding-8"></span>From,
+                                    <input disabled="" checked="checked" name="sl_rel_load_type" type="checkbox">
+                                    <span
+                                            class="lbl padding-8"></span>Load Type
+                                    <input disabled="" checked="checked" name="sl_vehice_type" type="checkbox">
+                                    <span
+                                            class="lbl padding-8"></span>Vehicle Type
+                                </li>
+
+                                <li>
+                                    <input name="sl_partly_post" checked="checked" type="checkbox">
+
+                                    <span class="lbl padding-8"></span> Display Partly related public posts <input
+                                        name="sl_os_posts"
+                                        checked="checked" type="checkbox"><span class="lbl padding-8"></span> From (
+                                    From
+                                    Location of Operating States ) will be shown in a separate file in the post master
+                                    main page
+                                </li>
+
+                                <li>
+                                    <input name="sl_unrel_post" checked="checked" type="checkbox">
+                                    <span class="lbl padding-8"></span> Display Unrelated public post will be shown in
+                                    a separate file in the post master main page
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- If condition START-->
+                        <h3>Term Enquiries</h3>
+                        <div class="popup-check-1">
+                            <ul>
+                                <li>
+                                    <input disabled="" checked="checked" name="te_all_enqs" type="checkbox">
+
+
+                                    <span class="lbl padding-8"> Display all enquires with atleast <span
+                                            class="popup-txt-feld">
+                        <input disabled="" class="form-control form-control1 js-placeholder" placeholder="50%"
+                               type="text"></span>                                        of the routes having matching public rate card or term contracts in the post master
+                                        mainpage i.e No unrelated route enquries (less than 50%) to be shown in mainpage
+                                        </span>
+                                </li>
+                                <li>
+                                    <input name="te_partly_rel_enqs" checked="checked" type="checkbox">
+
+                                    <span class="lbl padding-8"></span> Display Partly related enquiries <input
+                                        name="te_os_enqs"
+                                        checked="checked" type="checkbox"><span class="lbl padding-8"></span>From ( From
+                                    Location of Operating States ) will be shown in a separate file in the post master
+                                    mainpage (2)
+                                </li>
+                                <li>
+                                    <input name="te_unrel_enqs" checked="checked" type="checkbox">
+                                    <span class="lbl padding-8"></span> Display Unrelated enquiries will be shown in
+                                    a separate file in the post master mainpage (3) (the same will apply if there is
+                                    no rate card or term contract)
+                                </li>
+                            </ul>
+                        </div>
+                        <h3>Term Leads</h3>
+                        <div class="popup-check-1">
+                            <ul>
+                                <li>
+                                    <input disabled="" checked="checked" name="sl_rel_enqs" type="checkbox">
+
+                                    <span class="lbl padding-8"></span> Display all enquires with atleast <span
+                                        class="popup-txt-feld">
+                        <input disabled="" class="form-control form-control1 js-placeholder" placeholder="50%"
+                               type="text"></span> of the routes having matching public rate card or term contracts or
+                                    bid profile match
+                                    in the post master mainpage i.e No unrelated route enquries (less than 50%) to be
+                                    shown in mainpage
+                                </li>
+
+                                <li>
+                                    <input name="sl_partly_rel_enqs" checked="checked" type="checkbox">
+                                    <span class="lbl padding-8"> Display Partly related     enquiries <input
+                                            name="sl_os_enqs" checked="checked" type="checkbox"><span
+                                            class="lbl padding-8"></span>From
+                                        ( From Location of Operating States ) will be shown in a separate file in the post
+                                        master mainpage (2)
+                                        </span>
+                                </li>
+
+                                <li>
+                                    <input name="sl_unrel_enqs" checked="checked" type="checkbox">
+                                    <span class="lbl padding-8"></span> Display Unrelated enquiries will be shown in
+                                    a separate file in the post master mainpage (3) (the same will apply if there is
+                                    no rate card or term contract)
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- If condition END-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn flat-btn red-btn" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Message Modal start -->
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form id="MessageData">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <h4 class="sub-head red margin-left-none margin-bottom">New Message</h4>
+                        <div>
+                            <input id="quoteObject" class="form-control form-control1" placeholder="Form Object"
+                                   readonly="readonly" name="quoteObject"
+                                   type="hidden" value="">
+
+                            <input id="from_name" class="form-control form-control1" placeholder="From: ABC co ltd PVT"
+                                   readonly="readonly" name="message_from"
+                                   type="text" value="">
+                        </div>
+                        <div>
+                            <input id="to_name" class="form-control form-control1" placeholder="To: XYZ co ltd PVT"
+                                   readonly="readonly" name="message_to"
+                                   type="text" value="">
+                        </div>
+
+                        <div>
+                            <input id="message_subject" class="form-control form-control1 margin-bottom-4 valid"
+                                   placeholder="Subject *" readonly="readonly"
+                                   name="message_subject" type="text" value="message_subject">
+                        </div>
+
+                        <div><textarea id="message_body" class="form-control form-control1 message-body"
+                                       placeholder="Body *"
+                                       name="message_body" cols="50" rows="10"></textarea></div>
+
+                        <div class=""><i class="fa fa-paperclip"></i>
+
+                            <label for="message_attachment" class="">Attachment </label>
+                            <div>
+                                <!--Removed [] in name attribute for below message attachment field because attachment not saving in ajax, If you need add in conditional -- Ramu-->
+                                <input id="message_attachment" class="filestyle btn-file file-upload" multiple="1"
+                                       name="message_attachment" type="file">
+
+                                <div id="message_attachment_display"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn red-btn flat-btn ok-btn message_send_button"
+                                ng-click="PostMessage">Send message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   <script type="text/javascript">
+        $(document).ready(function() { 
+
+            $("input").on("click",function(){   
+            //alert('sdfsdfsd');         
+            $(this).next('label').addClass('active');
+        });
+
+          
+           
+        });
+
+    </script>
+   
+    
+
+
+
+</body>
+
+</html>

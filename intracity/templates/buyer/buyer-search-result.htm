@@ -1,0 +1,920 @@
+<style>
+    .filter-result {
+        display: none;
+    }
+
+    .Modify-btn {
+        background: none;
+        border: none;
+        font-family: FuturaBT-Medium;
+        font-weight: 500;
+    }
+
+    .modal-dialog {
+        width: 95%;
+        margin: 30px auto;
+        padding: 30px;
+    }
+
+    .padlr-5 {
+        padding: 0 5px;
+        box-sizing: border-box;
+    }
+
+    .Modify-btn {
+        background-color: #fff;
+        border: 2px solid #ed3237;
+        border-radius: 5px;
+        color: #555;
+        cursor: pointer;
+        display: block;
+        font-size: 20px;
+        font-weight: 500;
+        margin: auto 0 auto auto;
+        padding: 2px 19px;
+        position: relative;
+        width: auto;
+        z-index: 9;
+        font-size: 15px;
+    }
+
+    .Modify-btn:hover {
+        background: #ed3237;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .modify_search_detail .select_form_intra {
+        margin: 25px 0;
+        width: 100%;
+        float: left;
+    }
+
+    .pull-left-temp {
+        float: left;
+    }
+
+    .dt-show:after {
+        content: "";
+        display: none;
+    }
+
+    .modal-content .modal-header {
+        border-bottom: 0px;
+        padding: 10px 15px 0 15px;
+    }
+
+    .p_terms_t {
+        width: 25%;
+        float: left;
+        min-height: 80px;
+    }
+
+    .p_terms_t h2 {
+        display: block;
+        font-weight: bold;
+        color: #000;
+        font-size: 15px;
+        line-height: 22px;
+        text-transform: uppercase;
+        padding: 5px 0;
+    }
+
+    .p_terms_t p {
+        font-size: 13px;
+        color: #a2a1a1;
+        padding: 0;
+        margin: 0;
+    }
+
+    .track-us {
+        width: 100%;
+        float: left;
+    }
+
+    .track-box {
+        float: left;
+    }
+
+    .no-pad {
+        padding: 0px !important;
+    }
+
+    .modal-header .close {
+        margin-top: 4px;
+    }
+
+    .detail-minus:after {
+        content: "";
+        display: none;
+    }
+
+    .notification-popup {
+        width: 450px;
+    }
+
+    .notification-popup .modal-content {
+        border-radius: 0px;
+    }
+
+    .notification-popup .modal-content .popup {
+        padding: 42px 20px;
+    }
+</style>
+
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+
+                <li><a href="javascript:void(0)">{{getUserActiveRole}}</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#services">Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="javascript:void(0)" class="active_c">Intracity Search</a></li>
+
+            </ul>
+        </div>
+
+        <div class="intra_city_list">
+            <div class="loc_det">
+                <ul class="loc_list">
+
+                    <li>
+                        <span ng-show="buyerSearch.type == '2'">{{ buyerSearch.fromLocation.locality_name}} </span>
+                        <span ng-show="buyerSearch.type == '1'"> {{ buyerSearch.reporting.locality_name}} </span> &nbsp;
+                    </li>
+
+                    <li ng-if="buyerSearch.toLocation.locality_name && buyerSearch.type == '2'"> To {{ buyerSearch.toLocation.locality_name }}
+                    </li>
+                    <li>
+                        <span ng-show="buyerSearch.type == '2'"> {{ buyerSearch.dispatchDate | date : "dd/MM/y" }}  </span>
+                        <span ng-show="buyerSearch.type == '1'"> {{ buyerSearch.date | date : "dd/MM/y" }} </span>
+                    </li>
+                    <li>
+                        <span ng-show="buyerSearch.time_slot">
+                            {{ buyerSearch.time_slot }} {{ buyerSearch.period }}
+                        </span>
+                    </li>
+                    <li ng-show="buyerSearch.type == '1'"> {{ buyerSearch.base_hour.distance_hour }}</li>
+                    <li>
+                        <span ng-show="buyerSearch.type == '2'"> {{ buyerSearch.vehiclesType.vehicle_type }} </span>
+                        <span ng-show="buyerSearch.type == '1'"> {{ buyerSearch.hour_vehicle_type.vehicle_type}} </span>
+                    </li>
+                </ul>
+                <div class="right_setg space_top">
+                    <div class="cell-1">
+                        <ul class="list-inline pull-right m-bottom-0">
+                            <li>
+                                <a class="search-modify Modify-btn" data-toggle="modal" ng-click="modifySearch(buyerSearch)">Modify</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" ng-click="navigateToBuyerPost(buyerSearch)" class="search-modify"><span>Post</span></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="loc_det">
+                <ul class="filter_s">
+                    <li>Price</li>
+                    <li>SELLER</li>
+                    <!--<li>RATING</li>-->
+                    <li>VEHICLE TYPE</li>
+                    <!--<li>PRICE Rs.</li>-->
+                    <li>TRANSIT HOURS</li>
+                    <li>TRACKING</li>
+                </ul>
+                <span class="rilters_right"><i class="fa fa-bars"></i>Filters</span>
+            </div>
+
+            <div ng-if="filterdata!=''" class="loc_det ">
+                <ul class="partners">
+
+
+                    <li ng-click="removefilter(key,value)" ng-repeat="(key,value) in filterdata">
+                        {{value.username||value.vehicle_type||value.value}}
+                    </li>
+
+
+                </ul>
+                <span class="rilters_right" ng-click="clearall()">CLEAR ALL</span>
+            </div>
+
+            <div class="loc_det filter-result">
+                <div class="scroller-div">
+                    <div class="fillter_div">
+
+                        <div class="scroll_div">
+                            <div class="Experience_range">
+                                <div class="range_slider_div">
+                                    <div class="slider_heading">Price</div>
+                                    <div class="slider_range_right">
+                                        <div class="amout_range_div">
+                                            <rzslider data-rz-slider-model="price.min"
+                                                data-rz-slider-high="price.max">
+                                            <div my-slider="price" ng-mouseup="filterMouseUp()"></div>
+                                            </rzslider>
+                                            <p><p class="amout_range"><i class='fa fa-inr'></i>{{ price.min }} - <i class='fa fa-inr'></i>{{ price.max }}</p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="scroll_div">
+                            <div class="sellr_field">
+                                <input type="text" class="search_i" required="" ng-model="data.username">
+                                <label class="sel_text">SELLERS</label>
+                            </div>
+                            <div class="sellers_det">
+                                <div class="state_dist">
+                                    <div class="col-lg-12 col-md-6 col-sm-8">
+                                        <div class="row">
+                                            <div class="admin_input margin_t">
+                                                <input id="Partners" type="checkbox" class="check_box check_box_1">
+                                                <label for="Partners">Partners (All)</label>
+                                            </div>
+
+                                            <div class="admin_input margin_t" ng-repeat="(key,value) in sellerList |  filter:data.username">
+                                                <input id="{{ value.username|removeSpace }}" type="checkbox" ng-click="selectSeller(value.username,value)" class="check_box check_box_1">
+                                                <label for="{{ value.username|removeSpace }}"> {{ value.username
+                                                    }} </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="scroll_div">
+                            <div class="sellr_field">
+                                <input type="text" class="search_i" required="" ng-model="data.vehicle_name">
+                                <label class="sel_text">VEHICLE TYPE</label>
+                            </div>
+                            <div class="sellers_det">
+                                <div class="state_dist">
+                                    <div class="col-lg-12 col-md-6 col-sm-8">
+                                        <div class="row">
+                                            <div class="admin_input margin_t" ng-repeat="(key, value) in vehicles | filter:data.vehicle_name">
+                                                <input id="{{ value.vehicle_type|removeSpace }}" type="checkbox" class="check_box check_box_1" ng-click="selectNewVehicleType(value.vehicle_type,value)">
+                                                <label for="{{ value.vehicle_type|removeSpace }}"> {{ value.vehicle_type
+                                                    }} </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="scroll_div">
+                            <div class="">
+                                <!-- <span class="transit_t"><b>PRICE</b> Rs.</span> -->
+                                <span class="transit_d1">
+                                   <!--  <div>
+                                        <rzslider    rz-slider-model="slider.min" rz-slider-high="slider.max" rz-slider-options="slider.options"></rzslider>
+                                    </div>  -->
+                                </span>
+                            </div>
+                            <div class="div_100 top_space">
+                                <div class="text_div">TRANSIT HOURS</div>
+                                <div class="sellers_det">
+                                    <div class="input_right_box pull-left-temp">
+                                        <div class="admin_input margin_t" ng-repeat="(key,value) in TRANSIT_HOUR">
+                                            <input id="{{value.value}}" type="checkbox" ng-click="transitSelect(value.id,value);" class="check_box check_box_1">
+                                            <label for="{{value.value}}">{{value.value}} Hour</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="scroll_div">
+                            <div class="div_100 top_space">
+                                <div class="text_div track-us">TRACKING</div>
+                                <div class="input_right_box track-box">
+                                    <div class="admin_input margin_t" ng-repeat="(key, value) in trackings">
+                                        <input ng-click="selecttrackingType(value.id,value)" id="{{ value.value|removeSpace  }}" type="checkbox" value="{{ value.id }}"
+                                            class="check_box check_box_1">
+                                        <label for="{{ value.value|removeSpace }}"> {{ value.value }} </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--{{cartValue.payload[0].lkp_service_id}}-->
+            <div class="vechile_list_main">
+                <div class="v_list_bar">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-xs-12">
+                            <div class="v_name">
+                                <span>Name</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-xs-12">
+                            <div class="v_type">
+                                <div class="col-lg-3 col-md-3 col-xs-12"><span>VEHICLE TYPE</span></div>
+                                <div class="col-lg-3 col-md-3 col-xs-12"><span>TRANSIT HOURS</span></div>
+                                <div class="col-lg-3 col-md-3 col-xs-12"><span class="drop_d">PRICE </span></div>
+                                <div class="col-lg-3 col-md-3 col-xs-12"><span></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list_trans bs_book_detail_list" ng-repeat="(key, value) in searchResult|filter:NewVehicleTypeFilter|filter:NewtrackingFilter|filter:NewSellerFilter|filter:NewtrnsitFilter">
+                    <div ng-if="((value.finalPrice >= price.min) && (value.finalPrice <= price.max))" class="bg-white bsr-book-detail">
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                            <div class="nair_trns">
+                                <span class="logo_t no-pad">
+                                            {{ !empty(value.seller) && value.seller || '' }}                                         
+                                        </span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                            <div class="nairs_v">
+                                <div class="vech_ts">
+                                    <div class="col-lg-3 col-md-3 col-xs-12">
+                                        <span> {{ value.vehicle }} </span>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-xs-12">
+                                        <span> {{ value.transit_hour && value.transit_hour+' Hrs' || 'N/A' }} </span>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-xs-12">
+                                        <span style="color:#79848a;" class="b_strng">
+                                                    Rs  {{ value.finalPrice | number: 0 }} 
+                                                 <font color="#79848a" ng-if="value.type_basis == 2">
+                                                        ( For  {{ value.forDistance | number: 2 }} Km)
+                                                </font>
+                                                <font color="#79848a" ng-if="value.type_basis == 1">
+                                                        ( For {{ value.base_time }} Hrs )
+                                                </font>
+                                                </span>
+
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-xs-12">
+                                        <div class="sep_div1">
+                                            <input id="Submit1" type="submit" ng-click="bookNow(value,$index)" value="Book Now" class="book_btn">
+                                        </div>
+                                        <div class="detail_b1 toggle-minus-{{$index}}" ng-click="showHideDetail($index)" data-id="{{ $index }}">Detail
+                                        </div>
+
+                                        <a href="javascript:void(0)" ng-click="sendMessageModal(value)" data-toggle="modal" data-target="#messageModal" class="pull-right msg-icon">
+                                            <i class="fa fa-envelope-o"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="on_time" style="display:none" id="detail-{{ $index }}">
+                        <div class="p_details">
+                            <div class="pro_img">
+                                <span><img src="../images/elephant_ig.png"></span>
+                                <div class="bottom_img">
+                                    <ul>
+                                        <li><img src="../images/g_icons.png"></li>
+                                        <li><img src="../images/man_icon.png"></li>
+                                        <li><img src="../images/b_icon.png"></li>
+                                    </ul>
+                                    <div class="text_pr">
+                                        <span>30</span><span>145</span><span>1195</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pro_disc">
+                                <ul>
+                                    <li class="red_c">
+                                        <span>On time Placement</span>
+                                        <span class="star-cb-group">
+                                                                <input type="radio" id="rating-5" name="rating"
+                                                                       value="5"><label for="rating-5">5</label>
+                                                                <input type="radio" id="rating-4" name="rating"
+                                                                       value="4"><label for="rating-4">4</label>
+                                                                <input type="radio" id="rating-0" name="rating"
+                                                                       value="0" class="star-cb-clear"><label
+                                                for="rating-0">0</label>
+                                                            </span>
+                                    </li>
+                                    <li class="orang_c">
+                                        <span>On time Delivery </span>
+                                        <span class="star-cb-group">
+                                                                <input type="radio" id="rating-5" name="rating"
+                                                                       value="5"><label for="rating-5">5</label>
+                                                                <input type="radio" id="rating-4" name="rating"
+                                                                       value="4"><label for="rating-4">4</label>
+                                                                <input type="radio" id="rating-3" name="rating"
+                                                                       value="3"><label for="rating-3">3</label>
+                                                                <input type="radio" id="rating-1" name="rating"
+                                                                       value="1"><label for="rating-1">1</label>
+                                                                <input type="radio" id="rating-0" name="rating"
+                                                                       value="0" class="star-cb-clear"><label
+                                                for="rating-0">0</label>
+                                                            </span>
+                                    </li>
+                                    <li class="lighto_c">
+                                        <span>Milestone Update < 
+                                            {{ value.orderStatus == 5 && '100%' || '' }} 
+                                            {{ value.orderStatus == 4 && '75%' || '' }} 
+                                            {{ value.orderStatus == 3 && '50%' || '' }} 
+                                            {{ value.orderStatus == 2 && '25%' || '' }}
+                                        </span>&nbsp;
+                                        <!--<span class="star-cb-group">
+                                            <input type="radio" id="rating-5" name="rating" value="5"><label for="rating-5"></label>
+                                            <input type="radio" id="rating-2" name="rating" value="2"><label for="rating-2"></label>
+                                            <input type="radio" id="rating-1" name="rating" value="1"><label for="rating-1"></label>
+                                            <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear"><label for="rating-0"></label>
+                                        </span>-->
+                                    </li>
+                                    <li class="pa_c">
+                                        <span>Documentation </span>
+                                        <span class="star-cb-group">
+                                                                <input type="radio" id="rating-5" name="rating"
+                                                                       value="5"><label for="rating-5">5</label>
+                                                                <input type="radio" id="rating-4" name="rating"
+                                                                       value="4"><label for="rating-4">4</label>
+                                                                <input type="radio" id="rating-3" name="rating"
+                                                                       value="3"><label for="rating-3">3</label>
+                                                                <input type="radio" id="rating-2" name="rating"
+                                                                       value="2"><label for="rating-2">2</label>
+                                                                <input type="radio" id="rating-0" name="rating"
+                                                                       value="0" class="star-cb-clear"><label
+                                                for="rating-0">0</label>
+                                                            </span>
+                                    </li>
+                                    <li class="green_c">
+                                        <span>Delivery Quality </span>
+                                        <span class="star-cb-group">
+                                                                <input type="radio" id="rating-5" name="rating"
+                                                                       value="5"><label for="rating-5">5</label>
+                                                                <input type="radio" id="rating-4" name="rating"
+                                                                       value="4"><label for="rating-4">4</label>
+                                                                <input type="radio" id="rating-3" name="rating"
+                                                                       value="3"><label for="rating-3">3</label>
+                                                                <input type="radio" id="rating-2" name="rating"
+                                                                       value="2"><label for="rating-2">2</label>
+                                                                <input type="radio" id="rating-1" name="rating"
+                                                                       value="1"><label for="rating-1">1</label>
+                                                                <input type="radio" id="rating-0" name="rating"
+                                                                       value="0" class="star-cb-clear"><label
+                                                for="rating-0">0</label>
+                                                            </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="p_discerption padlr-5">
+                            <div class="p_disc_sub">
+                                <p class="price_t">
+
+
+                                    <div class="table_detail">
+                                        <div class="p_terms_t">
+                                            <h2>Title</h2>
+                                            <p>{{ value.title }}</p>
+                                        </div>
+                                        <div class="p_terms_t">
+                                            <h2>PAYMENT TERM</h2>
+                                            <p>Credit: N/A </p>
+                                        </div>
+                                        <div class="p_terms_t">
+                                            <h2>Labour Charges</h2>
+                                            <p>Rs.{{value.lc_base_charge_per_labour *value.lc_no_helpers}}
+                                            </p>
+                                            <!--  <p></p> -->
+                                        </div>
+
+                                        <div class="p_terms_t">
+                                            <h2>VEHICLE TYPE</h2>
+                                            <p>{{!empty(value.vehicle)&& value.vehicle || ''}}</p>
+                                            <p></p>
+                                        </div>
+
+
+                                        <div class="p_terms_t">
+                                            <h2>TRACKING</h2>
+                                            <p>{{ value.tracking !='' && (value.tracking|getobjectvalue:trackings) || 'N/A'}}</p>
+                                            <p></p>
+                                        </div>
+
+
+                                        <div class="p_terms_t">
+                                            <h2>Base Price</h2>
+                                            <p>Rs. {{ !empty(value.rate_base_distance) && value.base_distance*value.rate_base_distance
+                                                || '' }} {{ !empty(value.base_time) && value.base_time*value.cost_base_time
+                                                || '' }}
+
+                                                <span ng-if="value.base_distance"> ( For  {{ value.base_distance }} Km)</span>
+                                                <span ng-if="value.base_time">( For {{ value.base_time }} Hrs )</span>,
+                                            </p>
+
+                                        </div>
+
+                                        <div class="p_terms_t">
+                                            <h2>Charge per extra Km</h2>
+                                            <p>Rs.{{!empty(value.cost_per_extra_hour) && value.cost_per_extra_hour || 'N/A'
+                                                }}
+                                            </p>
+                                            <p></p>
+                                        </div>
+
+                                        <div class="p_terms_t">
+                                            <h2>Waiting Charges</h2>
+                                            <p>{{!empty(value.wc_cost_per_extra_hr) && value.wc_cost_per_extra_hr || 'N/A' }},
+                                                <br/> Inclusive of Toll,Exclusive Of Service Tax. {{!empty(value.lc_addtnl_chrg)
+                                                && value.lc_addtnl_chrg || 'N/A' }}
+                                            </p>
+                                            <p></p>
+                                        </div>
+
+                                        <div class="p_terms_t">
+                                            <h2>DISCOUNT</h2>
+                                            <p ng-show="value.discount">Flat Rs. {{ value.discount }} </p>
+                                            <p ng-show="!value.discount">N/A</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="p_terms_t">
+                                            <h2>Additional charges for higher floors without lift</h2>
+                                            <p>Rs.{{!empty(value.lc_addtnl_chrg) && value.lc_addtnl_chrg || '' }}</p>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <!--p_discerption-->
+                    </div>
+                    <!-- Detail end here-->
+                </div>
+            </div>
+            <div class="white_bg" ng-if="(searchResult.len == 0  && searchResult.len == 2) || (searchResult|filter:NewVehicleTypeFilter|filter:NewtrackingFilter|filter:NewSellerFilter|filter:NewtrnsitFilter).length == 0" style="text-align:center">
+                <p>Data not available</p>
+            </div>
+        </div>
+
+        <!--End of intra_city_list-->
+    </div>
+    <!--end of right_search_p-->
+</div>
+
+<!-- Message Modal start -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form id="MessageData">
+                <div class="modal-header">
+                    <h3 style="float:left" id="status">
+
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+
+                    <h4 class="sub-head red margin-left-none margin-bottom">New Message</h4>
+                    <div>
+                        <input id="quoteObject" class="form-control form-control1" placeholder="Form Object" readonly="readonly" name="quoteObject"
+                            type="hidden" value="">
+
+                        <input id="from_name" class="form-control form-control1" placeholder="From: ABC co ltd PVT" readonly="readonly" name="message_from"
+                            type="text" value="">
+                    </div>
+                    <div>
+                        <input id="to_name" class="form-control form-control1" placeholder="To: XYZ co ltd PVT" readonly="readonly" name="message_to"
+                            type="text" value="">
+                    </div>
+
+                    <div>
+                        <input id="message_subject" class="form-control form-control1 margin-bottom-4 valid" placeholder="Subject *" readonly="readonly"
+                            name="message_subject" type="text" value="message_subject">
+
+
+                    </div>
+
+                    <div><textarea id="message_body" class="form-control form-control1 message-body" placeholder="Body *" name="message_body"
+                            cols="50" rows="10"></textarea></div>
+
+                    <div class=""><i class="fa fa-paperclip"></i>
+
+                        <label for="message_attachment" class="">Attachment </label>
+                        <div>
+                            <!--Removed [] in name attribute for below message attachment field because attachment not saving in ajax, If you need add in conditional -- Ramu-->
+                            <!--<input id="message_attachment" class="filestyle btn-file file-upload" multiple="1" name="message_attachment"  type="file">-->
+                            <!-- <input id="r_message_attachment"
+                                       class="filestyle btn-file file-upload"
+                                       multiple="1" name="r_message_attachment"
+                                       ng-model-instant onchange="angular.element(this).scope().setDocument(this)"
+                                       type="file"> -->
+                            <input id="r_message_attachment" class="filestyle btn-file file-upload" name="message_attachment" fileread="message_attachment"
+                                type="file">
+                            <div id="message_attachment_display"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn red-btn flat-btn ok-btn message_send_button" ng-click="sendMessage(message_attachment)">Send message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content modify_search_detail">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                    
+                <div class="spot_t" ng-init="data.type=2">
+                    <ul>
+                        <li>
+                            <input type="radio" id="spot" data-target="id1" value="2" name="selector" ng-click="showHide(data.type)" ng-model="data.type"
+                                checked="">
+                            <label for="spot">Distance</label>
+                            <span></span>
+                        </li>
+                        <li>
+                            <input type="radio" value="1" ng-model="data.type" id="term" data-target="id2" ng-click="showHide(data.type)" name="selector">
+                            <label for="term">Hour</label>
+                            <span></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="load_type intra_main activeintra" id="id1" ng-if="data.type == 2">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                           
+                            <!-- <select id="city" ng-change="onSelect(data.city)" ng-model="data.city" ng-options="y.city_name for (x, y) in cities track by y.id" class="ng-pristine ng-untouched ng-valid">
+                                <option value="" class="" selected="selected"> Select City </option>
+                            </select>  -->
+                            <input type="text" id="city" class="input_ani" ng-change="onSelect(data.city)" autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)"
+                                ng-model="data.city" required="" typeahead="city as (city.city_name) for city in cities | filter:$viewValue"
+                            />
+                            <label class="lbl_text2">Select City <span>*</span></label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+
+                            <input type="text" autocomplete="off" id="fromLocation" ng-model="data.fromLocation" class="input_ani ng-pristine ng-untouched ng-invalid ng-invalid-required"
+                                name="from_location" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+                                required="" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-12-8736">
+
+
+                            <label class="lbl_text2">From location <span>*</span></label>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+
+                            <input type="text" autocomplete="off" id="toLocation" ng-model="data.toLocation" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+                                class="input_ani ng-pristine ng-untouched ng-invalid ng-invalid-required" name="to_location"
+                                required="" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-13-5658">
+
+                            <label class="lbl_text2">To Location <span>*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="date_selection select_form_intra">
+                            <!--<span class="left_v_from">
+                                        <input type="text" id="valid_to_date" tocalendar ng-model="data.dispatchDate" autocomplete="off" name="valid_to_date" class="date_p input_ani ng-pristine ng-untouched hasDatepicker ng-invalid ng-invalid-required" required="">
+                                                    <label class="lbl_text2 padg_l">Dispatch Date<span>*</span></label>
+                            <span class="tooptip_left">
+                                                        <a href="#" tooltip="Please specify atleast one of these: Delivery or Dispatch date." > <i class="glyphicon glyphicon-info-sign"></i></a></span>
+                            </span>-->
+
+                            <span class="left_v_from">
+                                        <input type="text" autocomplete="off" id="valid_to_date" tocalendar
+                                               ng-model="data.dispatchDate" class="date_p input_ani" required="">
+                                                    <label class="lbl_text2 padg_l">Dispatch Date<span>*</span></label>
+                            <span class="tooptip_left">
+                                <a href="javascript:void(0)"
+                                   tooltip="Please specify atleast one of these: Delivery or Dispatch date."> <i
+                                        class="glyphicon glyphicon-info-sign"></i></a></span>
+                            </span>
+
+                        </div>
+                    </div>
+
+                    <div class="spot_t">
+<!-- 
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="row">
+                                 <div class="col-md-7">
+                                    <div class="select_form_intra">
+                                        <select ng-model="data.time_slot"  ng-options="x for x in timeslot track by x" class="selectpicker" selectpicker>
+                                            <option value="" class="selectpicker" selectpicker selected="selected">Time Slot</option>
+                                            <option label="2-3" value="string:2-3">2-3</option>
+                                            <option label="3-4" value="string:3-4">3-4</option>
+                                            <option label="4-5" value="string:4-5">4-5</option>
+                                            <option label="5-6" value="string:5-6">5-6</option>
+                                            <option label="6-7" value="string:6-7">6-7</option>
+                                        </select>
+                                    </div>
+                                </div> 
+                                 <div class="col-md-5">
+                                    <div class="select_form_intra">
+                                        <select ng-model="data.period" class="selectpicker" selectpicker ng-init="data.period = 'AM'">
+                                            <option value="">Time Period</option>
+                                            <option ng-selected="true" value="AM" selected="selected">AM</option>
+                                            <option value="PM">PM</option>
+                                        </select>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div> -->
+
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="select_form_intra">
+                                <select id="vehicle_type1" class="selectpicker" selectpicker ng-model="data.vehiclesType" ng-options="y.vehicle_type for (x, y) in vehicles track by y.id">
+                                    <option value=""> Vehicle type</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="row">
+                                {{ vehicle_type }}
+                                <div class="select_form_intra">
+                                    <div class="vichel_dimensin">
+                                        <span class="v_images"><img src="images/dimension_v.png"></span>
+                                        <div class="vi_text">
+                                            <span class="v_text">Vehicle Dimensions<span>*</span></span><br>
+                                            <span class="ng-binding"> {{ data.vehiclesType.dimension }} </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="load_type intra_main" id="id2" ng-if="data.type == 1">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="select_form_intra">
+                                <input type="text" id="hour_city" ng-change="onSelect(data.city)" class="input_ani" autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)"
+                                    ng-model="data.hour_city" required="" typeahead="city as (city.city_name) for city in cities | filter:$viewValue"
+                                />
+                                <label class="lbl_text2">Select City<span>*</span></label>
+                                <!--<select id="hour_city"  ng-model="data.hour_city" ng-options="y.city_name for (x, y) in cities">
+                                         <option value=""> Select City </option>
+                                        </select>-->
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="select_form_intra">
+                                <input type="text" autocomplete="off" ng-model="data.reporting" typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+                                    class="input_ani reporting" required>
+
+                                <label class="lbl_text2">Reporting Location<span></span></label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="select_form_intra">
+
+                                <select ng-model="data.base_hour" class="selectpicker" selectpicker ng-options="y.distance_hour for (x,y) in hourDistanceSlabs track by y.id">
+                                    <option value="">Base hour</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="date_selection select_form_intra">
+                                <span class="left_v_from">
+                                                        
+                                <input type="text" autocomplete="off" id="date" tocalendar ng-model="data.date"
+                                       id="valid_to_date" class="date_p input_ani" required="">
+                                 <label class="lbl_text2 padg_l">Date<span>*</span></label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="select_form_intra">
+                                <select id="vehicle_type" class="selectpicker" selectpicker ng-model="data.hour_vehicle_type" ng-options="y.vehicle_type for (x, y) in vehicles track by y.id">
+                                    <option value=""> Vehicle type</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="select_form_intra">
+                                        <select ng-model="data.time_slot" class="selectpicker" selectpicker ng-options="x for x in timeslot track by x">
+                                            <option value="">Time Slot</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="select_form_intra">
+                                        <select ng-model="data.period" class="selectpicker" selectpicker ng-init="data.period = 'AM'">
+                                            <option value="">Time Period</option>
+                                            <option ng-selected="true" value="AM" selected="selected">AM</option>
+                                            <option value="PM">PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="load_type">
+                    <div class="search_btn">
+                        <div class="serch_vichel">
+                            <input type="button" class="button_serch" id="searchSeller" ng-click="searchModified(data)" name="button" value="Search">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="routeAlreadyExistsPopup" role="dialog">
+    <div class="modal-dialog modal-lg notification-popup">
+        <div class="modal-content statusText" style="overflow: hidden;padding: 0 10px 10px">
+            <div class="modal-body popup" id="responsetext">
+                This route is already added to cart.
+            </div>
+            <div>
+                <button type="button" class="btn btn-default pull-right" data-type="" ng-click="closeRouteAlreadyExistsPopup()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* $(document).ready(function() {
+         alert("dfsfsfsd");
+        $(".detail_b1").on('click', function(e) {
+            e.preventDefault();
+            var id = $(this).attr("data-id");
+             $(this).addClass("detail-minus");
+               
+            // console.log(id);
+            $("#detail-" + id).slideToggle("slow", function() {
+                // Animation complete.
+            });
+        });
+    });*/
+
+</script>
+<!-- <script>
+    $(document).ready(function() {
+        $(".detail_b1").on('click', function(e) {
+            e.preventDefault();
+            var id = $(this).attr("data-id");
+            // console.log(id);
+            $("#detail-" + id).slideToggle("slow", function() {
+                // Animation complete.
+            });
+        });
+    });
+</script> -->
+<script>
+    $(document).ready(function () {
+        $(".rilters_right").click(function () {
+            $(".filter-result").slideToggle('show');
+        });
+        $('.detail_b1').click(function () {
+            $(this).toggleClass("dt-show");
+        });
+
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        var gwid = $(".scroll_div").width();
+        var twid = $(".loc_det").width();
+        var acwid = gwid / twid * 100;
+        var len = $(".scroll_div").length;
+        var towid = acwid * len + 9;
+        $(".fillter_div").css({ "width": "" + towid + "%" });
+    });
+
+</script>

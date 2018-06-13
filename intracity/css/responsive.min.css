@@ -1,0 +1,303 @@
+﻿@media only screen and (max-width:1217px) and (min-width:1002px) {
+    .search {
+        width: 170px;
+    }
+    .search .search_bar {
+        width: 200px;
+    }
+    .search .search_bar .keyword {
+        width: 50px !important;
+    }
+    .search .search_bar input[type="text"] {
+        padding: 4px 51px !important;
+    }
+    .dealers_main .loin_log .l_detail .training_m .training_menu li {
+        margin-left: 24px !important;
+    }
+}
+
+@media only screen and (max-width:1001px) {
+    .search {
+        width: 100%;
+        padding: 17px 22px !important;
+    }
+    .search .search_bar {
+        width: 100%;
+    }
+    .search .search_bar .keyword {
+        width: 50px !important;
+    }
+    .search .search_bar input[type="text"] {
+        padding: 4px 51px !important;
+    }
+    .login_d {
+        position: absolute;
+        bottom: 15px;
+        right: 0;
+    }
+    .top_nav .top_menu {
+        width: 250px;
+        position: fixed;
+        left: -279px;
+        top: 0;
+        height: 100vh;
+        background: #353535;
+        z-index: 17;
+        margin-left: 0 !important;
+    }
+    .top_nav .top_menu.left_body {
+        left: 0 !important;
+        transition: .5s;
+        -moz-transition: .5s;
+        -o-transition: .5s;
+        -webkit-transition: .5s;
+    }
+    .top_nav .top_menu.left_body ul {
+        width: 100%;
+    }
+    .top_nav .top_menu.left_body ul li {
+        display: block;
+        float: none !important;
+        border-bottom: #404040 solid 1px;
+        padding: 7px 10px !important;
+    }
+    .top_nav .top_menu.left_body ul li a {
+        color: #fff !important;
+    }
+    .top_nav .top_menu .close_i {
+        position: absolute;
+        top: 0;
+        right: -29px;
+        width: 30px;
+        height: 30px;
+        background: #ed3237;
+        text-align: center;
+    }
+    .top_nav .top_menu .close_i i {
+        font-size: 17px;
+        color: #fff;
+        line-height: 26px;
+        cursor: pointer;
+    }
+    .menu_icon {
+        position: absolute;
+        right: 25px;
+        top: 32px;
+    }
+    .menu_icon i {
+        font-size: 20px;
+        cursor: pointer;
+        font-size: 31px;
+        color: #353535;
+    }
+    .tab_content ul li {
+        display: block !important;
+        padding: 7px 0;
+        width: 100% !important;
+        text-align: left !important;
+        position: relative;
+        line-height: 0 !important;
+        padding: 9px 0 !important;
+    }
+    .tab_content ul li.active_b::before {
+        display: none;
+    }
+    .tab_content ul li a {
+        background: #ed3237;
+        color: #fff !important;
+        position: relative;
+        border-radius: 3px;
+    }
+    .tab_content ul li a .cins_spand {
+        width: 0;
+        height: 20px;
+        position: absolute;
+        right: 34px;
+        top: 8px;
+    }
+    .tab_content ul li a .cins_spand i {
+        font-size: 24px;
+    }
+    .tab_content .market_tab .image_mart {
+        max-width: 122px !important;
+    }
+    .tab_content .market_tab .mart_text {
+        max-width: 400px !important;
+        padding: 19px 11px !important;
+        width: 100%;
+        text-align: left;
+        font-size: 16px;
+    }
+    .dealers_main .loin_log .l_detail .training_m .training_menu li {
+        margin-left: 0 !important;
+        width: 24% !important;
+    }
+    .dealers_main .loin_log .l_detail .training_m .training_menu li a {
+        font-size: 12px !important;
+    }
+    .dealers_main .loin_log .netw_content .net_text {
+        padding: 8px 8px !important;
+    }
+    .training_menu1 li {
+        margin-left: 2px !important;
+        margin-bottom: 22px;
+        width: 80%;
+    }
+    .training_menu1 li a {
+        font-size: 17px !important;
+    }
+    .tab_domas .tab_dom_sub .domastic li {
+        margin-right: 0 !important;
+    }
+    .message_tab .message_sub_tab .menu_sub_msg {
+        border-bottom: none !important;
+    }
+    .message_tab .message_sub_tab .menu_sub_msg li {
+        width: 100%;
+        padding: 10px 0 !important;
+    }
+    .message_tab .message_sub_tab .menu_sub_msg li a {
+        width: 100%;
+        float: left;
+        box-shadow: none !important;
+        background: #ed3237 !important;
+        border-radius: 3px;
+        color: #fff !important;
+    }
+    .message_tab .message_sub_tab .menu_sub_msg li.active_mesg a {
+        padding: 10px 10px !important;
+    }
+    .message_tab .message_sub_tab .menu_sub_msg li:before {
+        display: none;
+    }
+    .message_tab .message_sub_tab .menu_sub_msg li:after {
+        display: none;
+    }
+    .message_tab .message_sub_tab .message_b_main {
+        min-height: auto !important;
+    }
+    .message_tab .message_sub_tab .message_b_main .trade_assurc .trade_sub .trade-text p {
+        font-size: 15px !important;
+        padding: 6px 16px !important;
+    }
+    .message_tab .message_sub_tab .message_b_main .trade_assurc .trade_sub .trade-text p:after {
+        left: -6px !important;
+    }
+    .l_franchies {
+        min-height: auto !important;
+    }
+}
+
+@media only screen and (max-width:990px) {
+    .count_div .col-sm-4 .count_box {
+        margin-bottom: 30px;
+    }
+    .count_div .col-sm-4 .count_box:before {
+        content: "";
+        position: absolute;
+        right: -15px;
+        width: 100% !important;
+        height: 1px !important;
+        background: #d8d8d8;
+        top: inherit !important;
+        bottom: -15px;
+    }
+    .count_div .col-sm-4:nth-child(5) .count_box:before,
+    .count_div .col-sm-4:nth-child(4) .count_box:before {
+        display: none;
+    }
+    .foo_box .f_box {
+        width: 50% !important;
+    }
+    .foo_box .f_box:before {
+        width: 80% !important;
+        height: 1px !important;
+        content: "";
+        left: 10%;
+        bottom: 0;
+        top: inherit !important;
+    }
+    .footer_link ul li {
+        padding-bottom: 8px !important;
+    }
+    .logo {
+        text-align: center;
+    }
+    .top_menu {
+        padding: 15px 0 !important;
+    }
+}
+
+@media only screen and (max-width:768px) {
+    .count_div .col-sm-4 .count_box {
+        margin-bottom: 30px;
+    }
+    .count_div .col-sm-4 .count_box:before {
+        content: "";
+        position: absolute;
+        right: 0 !important;
+        width: 100% !important;
+        height: 1px !important;
+        background: #d8d8d8;
+        top: inherit !important;
+        bottom: -15px;
+    }
+    .count_div .col-sm-4:nth-child(5) .count_box:before,
+    .count_div .col-sm-4:nth-child(4) .count_box:before {
+        display: block;
+    }
+    .foo_box .f_box {
+        width: 100% !important;
+    }
+    .foo_box .f_box:before {
+        width: 80% !important;
+        height: 1px !important;
+        content: "";
+        left: 10%;
+        bottom: 0;
+        top: inherit !important;
+    }
+    .menu .menu_ul ul li {
+        float: left;
+        padding: 0 5px !important;
+    }
+    .page .page_content .register_form .reg_form_tab ul li:first-child {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        width: 100% !important;
+    }
+    .footer_link ul li {
+        padding-bottom: 12px !important;
+    }
+    .profile_img {
+        margin-top: 8px;
+    }
+}
+
+@media only screen and (max-width:767px) {
+    .user_img_bg {
+        float: left;
+        width: 100%;
+        text-align: center;
+        padding: 8px 0;
+    }
+    .user_img_bg .user_img {
+        float: none !important;
+        display: inline-flex;
+    }
+    .admin_page .grid_row .row_text .notification {
+        text-align: center;
+    }
+    .admin_page .grid_row .row_text .notification .noti_ul {
+        float: none !important;
+        display: inline-flex;
+    }
+}
+
+@media only screen and (max-width:500px) {
+    .top_nav .top_menu ul li {
+        list-style-type: none;
+        float: left;
+        padding: 0 3px !important;
+    }
+}

@@ -1,0 +1,629 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">Blue Collar Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#" class="active_c">Verification</a></li>
+            </ul>
+        </div>
+
+
+        <div class="blue_section">
+            <div class="registration_slect">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+
+                        <!-- <select class="select_control">
+                            <option>List of Registration Number</option>
+
+
+                        </select> -->
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Account Type</label>
+                            <span class="text_field">{{sellerData.profile_type}}</span>
+                        </div>
+
+                </div>
+            </div>
+
+            <div class="blue_form">
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">First Name</label>
+                            <span class="text_field">{{sellerData.first_name}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Last Name</label>
+                            <span class="text_field">{{sellerData.last_name}}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Date of birth</label>
+                            <span class="text_field">{{sellerData.date_of_birth}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Blood Group</label>
+                            <span class="text_field">{{sellerData.blood_group}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Current Address (Door No.)</label>
+                            <span class="text_field">{{sellerData.cur_house_no}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Street Name</label>
+                            <span class="text_field">{{sellerData.cur_street}}</span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Locality</label>
+                            <span class="text_field">{{sellerData.cur_locality}}</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Pin Code</label>
+                            <span class="text_field">{{sellerData.cur_pincode}}</span>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+
+                    </div>
+
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">City / State</label>
+                            <span class="text_field">{{ sellerData.cur_city.city_name }} , {{ sellerData.cur_district.district_name }} , {{ sellerData.cur_state.state_name }} </span>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Landline</label>
+                            <span class="text_field">{{sellerData.cur_landline}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Mobile</label>
+                            <span class="text_field">{{sellerData.cur_mobile}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Mobile 2</label>
+                            <span class="text_field">{{sellerData.cur_alt_mobile}}</span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="blue_form_one" ng-if="sellerData.per_house_no!=''&&sellerData.per_house_no!=null">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Permanent Address (Door No.)</label>
+                            <span class="text_field">{{sellerData.per_house_no}}</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Street Name</label>
+                            <span class="text_field">{{sellerData.per_street}}</span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Locality</label>
+                            <span class="text_field">{{sellerData.per_locality}}</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Pin Code</label>
+                            <span class="text_field">{{sellerData.per_pincode}}</span>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="blue_form_one" ng-if="sellerData.per_house_no!=''&&sellerData.per_house_no!=null">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+
+                    </div>
+
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">City / State</label>
+                            <span class="text_field">{{ sellerData.per_city.city_name }}, {{ sellerData.per_district.district_name }} , {{ sellerData.per_state.state_name }}</span>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="blue_form_one" ng-if="sellerData.per_house_no!=''&&sellerData.per_house_no!=null">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Landline</label>
+                            <span class="text_field">{{sellerData.per_landline}}</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Mobile</label>
+                            <span class="text_field">{{sellerData.per_mobile}}</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Mobile 2</label>
+                            <span class="text_field">{{sellerData.per_alt_mobile}}</span>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Email ID</label>
+                            <span class="text_field">{{sellerData.email}}</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Pan Card No</label>
+                            <span class="text_field">{{sellerData.pan_no}}</span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Aadhar Card No.</label>
+                            <span class="text_field">{{sellerData.aadhar_no}}</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Ration Card No.</label>
+                            <span class="text_field">{{sellerData.ration_card_no}}</span>`
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                         <div class="uploaded_file" ng-show="sellerData.panDocs != 'pdf'">
+                            <a target="_blank" href="{{getImageUrl(sellerData.pan_document)}}"><img
+                                    src="{{getImageUrl(sellerData.pan_document)}}"
+                                    onerror="images/Document-Icon-300;x300.png"></a>
+                        </div>
+                        <div class="uploaded_file" ng-show="sellerData.panDocs == 'pdf'">
+                            <a target="_blank" href="{{getImageUrl(sellerData.pan_document)}}"><img
+                                    src="{{getImageUrl('bluecollar/docs/adobe-pdf-icon-logo-vector-01.png')}}" onerror="images/Document-Icon-300;x300.png"></a>
+                        </div>
+                        <div class="upload_img"></div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="uploaded_file" ng-show="sellerData.adhDocs != 'pdf'">
+                            <a target="_blank" href="{{getImageUrl(sellerData.aadhar_document)}}"><img
+                                    src="{{getImageUrl(sellerData.aadhar_document)}}"
+                                    onerror="images/Document-Icon-300;x300.png"></a>
+                        </div>
+                         <div class="uploaded_file" ng-show="sellerData.adhDocs == 'pdf'">
+                            <a target="_blank" href="{{getImageUrl(sellerData.aadhar_document)}}"><img
+                                    src="{{getImageUrl('bluecollar/docs/adobe-pdf-icon-logo-vector-01.png')}}"
+                                    onerror="images/Document-Icon-300;x300.png"></a>
+                        </div>
+                        <div class="upload_img"></div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="uploaded_file" ng-show="sellerData.ratDocs != 'pdf'">
+                            <a target="_blank" href="{{getImageUrl(sellerData.ration_card_document)}}"><img src="{{getImageUrl(sellerData.ration_card_document)}}"
+                                onerror="images/Document-Icon-300;x300.png"/></a>
+                        </div>
+                        <div class="uploaded_file" ng-show="sellerData.ratDocs == 'pdf'">
+                            <a target="_blank" href="{{getImageUrl(sellerData.ration_card_document)}}"><img src="{{getImageUrl('bluecollar/docs/adobe-pdf-icon-logo-vector-01.png')}}" onerror="images/Document-Icon-300;x300.png"/></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="select_form_intra">
+                                    <label class="lbl_new">Qualification</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="select_form_intra">
+                                    <label class="lbl_new">Board / School</label>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="select_form_intra">
+                                    <label class="lbl_new">University</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="select_form_intra">
+                                    <label class="lbl_new">Village / City</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="select_form_intra">
+                                    <label class="lbl_new">Pcrcentage (%)</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <div class="row">
+                            <div class="add_name_heading"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blue_form_one" ng-repeat="q in sellerData.qualification">
+                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12">
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="data_vlue">{{q.qualification}}</div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="data_vlue">{{q.board}}</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_vlue">{{q.institution}}</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_vlue">{{q.state_or_city}}</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_vlue">{{q.percentage}}</div>
+                            </div>
+                            <div class="line_gray"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <div class="row">
+                            <div class="uploaded_file" ng-show="q.doc != 'pdf'">
+                                <a target="_blank" href="{{getImageUrl(q.document)}}"><img
+                                        src="{{getImageUrl(q.document)}}"></a>
+                            </div>
+                            <div class="uploaded_file" ng-show="q.doc == 'pdf'">
+                                <a href="{{getImageUrl(q.document)}}" target="_blank"><img src="{{getImageUrl('bluecollar/docs/adobe-pdf-icon-logo-vector-01.png')}}"></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Current Salary</label>
+                            <span class="text_field">{{ sellerData.current_salary }}</span>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Salary Type</label>
+                            <span class="text_field">{{ sellerData.salary_type }}</span>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra">
+                            <label class="lbl_new">Total Experience</label>
+                            <span class="text_field">{{ sellerData.total_experience }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <content ng-if="sellerData.profile_type=='DRIVER'||sellerData.profile_type=='SKILLED'">
+
+                    <div class="blue_form_one space_div">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <span ng-show="sellerData.profile_type=='DRIVER'">Vehicle Types</span>
+                                    <span ng-show="sellerData.profile_type=='SKILLED'">Machine Types</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="blue_form_one">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="bike_100">
+                                <div class="transport_vlue" ng-repeat="t in sellerData.vehicle_types">
+                                    {{t.vehicle_type.name}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blue_form_one">
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="select_form_intra">
+                                <label class="lbl_new">Licence Number</label>
+                                <span class="text_field">{{sellerData.licence_no}}</span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="select_form_intra">
+                                <label class="lbl_new">State</label>
+                                <span class="text_field">{{sellerData.licence_state}}</span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+
+                            <div class="select_form_intra">
+                                <label class="lbl_new">Valid From</label>
+                                <span class="text_field">{{sellerData.licence_valid_from}}</span>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="select_form_intra">
+                                <label class="lbl_new">Valid To</label>
+                                <span class="text_field">{{sellerData.licence_valid_to}}</span>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="select_form_intra">
+                                <label class="lbl_new">Transport Endosment</label>
+                                <span class="text_field">{{sellerData.licence_transport_endorsement}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            <div class="row">
+                                <div class="uploaded_file" ng-show="sellerData.licDocs != 'pdf'">
+                                    <a href="{{getImageUrl(sellerData.licence_doc)}}" target="_blank"><img src="{{getImageUrl(sellerData.licence_doc)}}"></a>
+                                </div>
+                                <div class="uploaded_file" ng-show="sellerData.licDocs == 'pdf'">
+                                   <a href="{{getImageUrl(sellerData.licence_doc)}}" target="_blank"><img src="{{getImageUrl('bluecollar/docs/adobe-pdf-icon-logo-vector-01.png')}}"></a>
+                                 </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="blue_form_one">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="select_form_intra">
+                                <label class="lbl_new">Vehicle Type</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="select_form_intra">
+                                <label class="lbl_new">Experience (Years)</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="select_form_intra">
+                                <label class="lbl_new">Employer Name</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="select_form_intra">
+                                <label class="lbl_new">Location</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="select_form_intra">
+                                <label class="lbl_new">Salary</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blue_form_one" ng-repeat="e in sellerData.experience">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="select_form_intra">
+                                <span class="text_field">{{e.vehicle_type}}</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="select_form_intra">
+                                <span class="text_field">{{e.experience}}</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="select_form_intra">
+                                <span class="text_field">{{e.employer_name}}</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="select_form_intra">
+                                <span class="text_field">{{e.location}}</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="select_form_intra">
+                                <span class="text_field">{{e.salary}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </content>
+
+                <div class="blue_form_one space_div2">
+
+                    <div class="lic_div">
+                        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
+                            <h4>Lic Policy</h4>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-4">
+                            <div class="checkbox_blue">
+                                <label for="Accept">{{sellerData.lic_policy}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lic_div">
+                        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
+                            <h4>Health Policy</h4>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-4">
+                            <div class="checkbox_blue">
+                                <label for="Accept">{{sellerData.health_policy}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lic_div">
+                        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
+                            <h4>Medical Policy</h4>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-4">
+                            <div class="checkbox_blue">
+                                <label for="Accept">{{sellerData.medical_policy}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lic_div">
+                        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
+                            <h4>Language</h4>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-4">
+                            <div class="checkbox_blue">
+                                <label for="Accept">Speak</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-4">
+                            <div class="checkbox_blue">
+                                <label for="NairTrans">Read</label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-4">
+                            <div class="checkbox_blue">
+                                <label for="NairTrans">Write</label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-4">
+                            <div class="add_blue"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="lic_div" ng-repeat="l in sellerData.languages">
+                        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+                            <h4>{{l.language}}</h4>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
+                            <div class="lic_cont" ng-show="l.speak">Speak</div>
+                        </div>
+
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
+                            <div class="lic_cont" ng-show="l.read">Read</div>
+                        </div>
+
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
+                            <div class="lic_cont" ng-show="l.write">Write</div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-1">
+                    <button class="submit_btn" ng-click="verifySeller()">{{verify}}</button>
+                </div>
+
+                </div>
+            </div> <!--blue_form-->
+        </div> <!--end of blue_section-->
+    </div>
+</div>
+

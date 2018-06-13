@@ -1,0 +1,580 @@
+<div class="col-lg-12 col-md-12 col-sm-12">
+   <div class="right_serch_p">
+      <div class="right_search_bar">
+         <ul class="search_bar_tab">
+            <li><a href="#">Buyer</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+            <li><a href="#">Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+            <li><a href="#">Hyperlocal</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+            <li><a href="#" class="active_c">{{post[0].post_transaction_id}}</a></li>
+         </ul>
+      </div>
+      <div class="div_100">
+         <div class="col-lg-9">
+            <div class="row">
+               <ul class="buyer_ul">
+                  <li class="tab_10 active_buyer" data-tab="Messages">
+                     <a href="javascript:void(0);">All</a>
+                  </li>
+                  <li class="tab_10" data-tab="Offers">
+                     <a href="javascript:void(0);">PUBLIC</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="col-md-3">
+            <div class="back_post">
+               <a href="#/hp-buyer-list" class="back_red_btn">Back to Post</a>
+               <a href="javascript:void(0);" class="delete_gray"><i ng-click="deletePost(post[0].id);"
+                  class="fa fa-trash" title="Delete"></i></a>
+            </div>
+         </div>
+      </div>
+      <!--{{quotedata[0].post}}-->
+      <div class="white_bg">
+          <div class="loc_det bg-white-new">
+               <div class="col-md-10">
+                  <div class="col-md-2 data-fld npl">
+                     <span class="data-head">CONTRACT TYPE:</span>
+                     <span class="data-value break-word ng-binding">{{ quotedata[0].post.is_private_public == 0 && 'Public' || 'Private'  }}</span>
+                  </div>
+                  <div class="col-md-2 data-fld">
+                     <span class="data-head">TITLE:</span>
+                     <span class="data-value break-word ng-binding">{{ !empty(quotedata[0].post.title) && quotedata[0].post.title || 'N/A' }}</span>
+                  </div>
+                  <div class="col-md-2 data-fld" ng-if="quotedata[0].post.lead_type == 2">
+                     <span class="data-head">VALID FROM:</span>
+                     <span class="data-value break-word ng-binding">{{ !empty(quotedata[0].valid_from) && quotedata[0].valid_from |datefilter|date:'dd/MM/yyyy' || 'N/A' }}</span>
+                  </div>
+                  <div class="col-md-2 data-fld" ng-if="quotedata[0].post.lead_type == 2">
+                     <span class="data-head">VALID TO:</span>
+                     <span class="data-value break-word ng-binding">{{ !empty(quotedata[0].valid_to) && quotedata[0].valid_to |datefilter|date:'dd/MM/yyyy' || 'N/A' }}</span>
+                  </div>
+                  <div class="col-md-2 data-fld" ng-if="quotedata[0].post.lead_type == 1">
+                     <span class="data-head">Depart Date:</span>
+                     <span class="data-value break-word ng-binding">{{ !empty(quotedata[0].depart_date) && quotedata[0].post.depart_date |datefilter|date:'dd/MM/yyyy' || 'N/A' }}</span>
+                  </div>
+                  <div class="col-md-2 data-fld">
+                     <span class="data-head">EMD :</span>
+                     <span class="data-value break-word ng-binding">{{ !empty(quotedata[0].emd_amount) && quotedata[0].emd_amount || 'N/A' }}</span>
+                  </div>
+               </div>
+               <div class="col-md-2">
+                  <div class="col-md-12 text-right">
+                     <div class="views_font">Views 0</div>
+                     <div class="a_link" id="detail_click">
+                        <a href="javascript:void"><i class="fa-plus fa" aria-hidden="true"></i>
+                        Details</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="click-data-detail" class="detail-click-data d_box">
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">EMD MODE:</span>
+                  <span class="data-value break-word ng-binding">{{ !empty(quotedata[0].post.emd_mode) && quotedata[0].post.emd_mode || 'N/A' }}</span>
+               </div>
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">AWARD CRITERIA:</span>
+                  <span class="data-value break-word ng-binding">{{ !empty(quotedata[0].post.award_criteria) && quotedata[0].post.award_criteria || 'N/A' }}</span>
+               </div>
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">CONTRACT ALLOTMENT:</span>
+                  <span class="data-value break-word ng-binding">{{ !empty(quotedata[0].post.contract_allotment) && quotedata[0].post.contract_allotment || 'N/A' }}</span>
+               </div>
+               <!-- <div class="col-md-2 data-fld npl">
+                  <span class="data-head">PAYMENT TERMS:</span>
+                  <span class="data-value break-word ng-binding">Private</span>
+               </div> -->
+               <!-- <div class="col-md-2 data-fld npl">
+                  <span class="data-head">PAYMENT METHOD:</span>
+                  <span class="data-value break-word ng-binding">Private</span>
+               </div> -->
+               <!--<div class="col-md-2 data-fld npl">
+                  <span class="data-head">PRICE INCLUSIVE:</span>
+                  <span class="data-value break-word ng-binding">{{quotedata[0].post.no_of_years}}</span>
+               </div>-->
+               <div class="clearfix"></div>
+               <!--<div class="col-md-2 data-fld npl">
+                  <span class="data-head">PRICE EXCLUSIVE:</span>
+                  <span class="data-value break-word ng-binding">{{quotedata[0].post.no_of_years}}</span>
+               </div>-->
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">NO. OF OWN TRUCKS:</span>
+                  <span class="data-value break-word ng-binding">{{ !empty(quotedata[0].post.no_of_trucks) && quotedata[0].post.no_of_trucks || 'N/A'  }}</span>
+               </div>
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">AVERAGE TURN OVER LAST THREE YEARS:</span>
+                  <span class="data-value break-word ng-binding">{{ !empty(quotedata[0].post.average_turn_over) && quotedata[0].post.average_turn_over || 'N/A' }}</span>
+               </div>
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">NO. OF YEARS IN BUSINESS:</span>
+                  <span class="data-value break-word ng-binding">{{ !empty(quotedata[0].post.no_of_years) && quotedata[0].post.no_of_years || 'N/A' }}</span>
+               </div>
+               <!--<div class="col-md-2 data-fld npl">
+                  <span class="data-head">TERM CONTRACT WITH OTHER COMPANIES:</span>
+                  <span class="data-value break-word ng-binding">Private</span>
+               </div>-->
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">LAST DATE/TIME FOR QUOTE:</span>
+                  <span class="data-value break-word ng-binding">{{ quotedata[0].post.last_date|datefilter|date:'dd/MM/yyyy' }} {{ quotedata[0].post.last_time }}</span>
+               </div>
+               <div class="clearfix"></div>
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">POST PUBLIC/PRIVATE:</span>
+                  <span class="data-value break-word ng-binding">{{(quotedata[0].post.is_private_public==0) && 'Public' || 'Private' }}</span>
+               </div>
+               {{value}}
+               {{ !empty(value.seller) && value.seller || '' }}  
+               <div class="col-md-2 data-fld npl">
+                  <span class="data-head">BID DOCUMENTS:</span>
+                  <span class="data-value break-word ng-binding">Private</span>
+               </div>
+               
+            </div>
+        
+        
+         <!-- for notification -->
+         <div class="bg-white-new">
+            <div class="info-links font-bold-black text-uppercase wp-100">
+            <div class="notif_list">
+                <h4 class="pull-left mlr">NOTIFICATIONS</h4>
+                <a href="javascript:void(0)" class=" tab-data-show tabs-showdiv" data-showdiv="ftl-buyer-messages"><i class="fa fa-envelope-o"></i>  Messages<span class="badge" style="display: none;">0</span></a>
+                <a href="javascript:void(0)" class=" tab-data-show active tabs-showdiv" data-showdiv="ftl-buyer-quotes"><i class="fa fa-file-text-o"></i> Offers<span class="badge ml-5">{{quotedata[0].quotes.length}}</span></a>
+                <a href="javascript:void(0)" class=" tab-data-show tabs-showdiv"><i class="fa fa-bullseye "></i> Leads<span class="badge"></span></a>
+                <a href="javascript:void(0)" class=" tab-data-show tabs-showdiv"><i class="fa fa-line-chart"></i> Market Analytics</a>
+                <a href="javascript:void(0)" class="tab-data-show tabs-showdiv"><i class="fa fa-file-text-o"></i> Documentation</a>
+            </div>
+            </div>
+        </div>
+        <!-- for notification -->
+         <!--end of location_sec-->
+         <div class="cart heght_100">
+            <!-- for spot only start here-ng-show="quotedata[0].post.lead_type==1" -->  
+            <div class="cart heght_100 ng-scope" ng-show="quotedata[0].post.lead_type==1">
+               <div class="loc_det" >
+                  <div class="gray_bg">
+                     <div class="col-lg-9">
+                        <div class="row">
+                           <div class="col-lg-2">
+                              <div class="heading_text">City</div>
+                           </div>
+                           <div class="col-lg-3">
+                              <div class="heading_text">Category</div>
+                           </div>
+                           <div class="col-lg-3">
+                              <div class="heading_text">Service</div>
+                           </div>
+                           <div class="col-lg-2">
+                              <div class="heading_text">PRICE</div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-lg-3">
+                        <div class="row">
+                           <div class="heading_text padding_left"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="white_bg">
+                  <div  class="ng-scope" ng-repeat=" value in quotedata[0].quotes">
+                     <div class="col-lg-9">
+                        <div class="row" >
+                           <div class="col-lg-2">
+                              <div class="normal_text ng-binding">Hyderabad
+                              </div>
+                           </div>
+                           <div class="col-lg-3">
+                              <div class="normal_text"><span class="ng-binding">{{quotedata[0].post.category|getName:categories}}</span>
+                              </div>
+                           </div>
+                           <div class="col-lg-2">
+                              <div class="normal_text"><span class="ng-binding">{{quotedata[0].post.servicetype|getobjectvalue:servicetype}}</span>
+                              </div>
+                           </div>
+                           <div class="col-lg-2">
+                              <div class="normal_text">
+                                 <span  class="ng-binding"> 
+                                 Rs. {{value.initial_quote_price}}
+                                 </span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-lg-3">
+                        <div class="ml-5">
+                           <div class="row mb-5">
+                                <a class="seller_btn_submit text-center  pull-right" ng-if="value.status == 1" ng-click="displayFirmQuoteAction($index, 'ACCEPT')"> Counter Offer  </a>
+                                <a class="detail_b1 detail_m padd_after" ng-class="{'active':value.isActive}" ng-if="value.status >=2 && value.status != 5" ng-click="viewDetails($index)"> Detail  </a> 
+                                <a class="seller_btn_submit text-center  pull-right" ng-if="value.status ==5" ng-click="viewDetails($index)"> Quote Declined   </a>
+                            </div>
+                           <div class="row mb-5" ng-if="value.status < 5">
+                                <a class="book_d" ng-show="value.status != 4" ng-click="buyerQuoteAction($index, 'DENIED_QUOTE')"> Decline  </a>
+                                <a class="book_d" ng-show="value.status == 4"> Quote Accepted  </a>
+                                <a class="seller_btn_submit text-center  pull-right book_n" ng-if="value.buyer_status != 'DENY'"
+                                ng-click="bookNow(quotedata[0], value)"> Book Now  </a>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row nm ng-scope" ng-if="true" id="quote-action-{{ $index}}" style="display:none">                        
+                        <div class="col-sm-3"> <!--value.buyer_status == 'COUNTER'-->
+                            <input ng-model="value.buyerPrice" class="input_ani valid-number" maxlength="6" placeholder="Counter Offer " /> 
+                        </div>
+                        <div class="col-sm-3 mt-5">
+                                <a class="seller_btn_submit text-center  pull-right" ng-if="value.buyer_status != 'DENY'"
+                                ng-click="buyerQuoteAction($index, 'COUNTER_BY_BUYER')"> Submit  </a>
+                        </div>
+                     </div>
+
+                     <div class="row"  id="quote-detail-{{ $index}}" style="display:none">
+                            
+                        <div class="col-sm-3" ng-show="value.buyer_quote_price"> 
+                            Quoted Price : RS: {{ value.buyer_quote_price }} /-
+                        </div>
+
+                        <div class="col-sm-3" ng-show="value.seller_quote_price && value.status >= 3"> 
+                            Final Quoted Price : RS: {{ value.seller_quote_price }} /-
+                        </div>
+                        <div class="col-sm-3" ng-show="value.seller_final_transit_days"> 
+                            Final Transit Day : RS: {{ value.seller_final_transit_days }} /-
+                        </div>
+                            
+                    </div>
+                  </div>
+                  <!-- for spot only end  here-->  
+               </div>
+            </div>
+            <!--include indendt-->
+            <!-- <div ng-show="quotedata[0].post.lead_type==2" ng-include="'modules/hyperlocal/buyer/templates/orderindent.htm'"> -->
+            <div class="bg-white-new" ng-show="quotedata[0].post.lead_type == 2">
+               <div class="col-md-10">
+                  <div class="heading_text-new">
+                     SELLER
+                  </div>
+               </div>
+               <div class="col-md-2">            
+                  <span class="rilters_click click_a" id="filters_click"><i class="fa fa-bars"></i> Filters </span>            
+               </div>
+            </div>
+            <div class="loc_det" id="filters_show" ng-show="quotedata[0].post.lead_type == 2">
+               <div class="scroller-div">
+                  <div class="fillter_div">
+                     <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <div class="select_form_intra">
+                                 <input type="text" class="input_ani" required="" ng-model="data.username">
+                                 <label class="lbl_text2">SELLERS</label>
+                                 <span class="search_icon"><i class="fa fa-search"></i></span>
+                              </div>
+                              <div class="filter_from_location location_scroller">
+                                 <div class="col-lg-12">
+                                    <div class="row">
+                                       <ul class="post_inline">
+                                          <li>
+                                             <div class="admin_input">
+                                                <div class="admin_input ng-scope" ng-repeat="seller in sellerList | filter:data.username">
+                                                   <input type="checkbox"  class="check_box check_box_1" ng-click="selectNewSellerName(seller.id)" id="val{{seller.id}}">
+                                                   <label for="vl{{seller.id}}" class="ng-binding">{{seller.username}}</label>
+                                                </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="scroll_div">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                           <div class="row">
+                              <div class="select_form_intra">
+                                 <input type="text" autocomplete="off" class="input_ani ng-pristine ng-untouched ng-invalid ng-invalid-required">   
+                                 <label class="lbl_text2">RATING</label>
+
+                                 
+                              </div>
+                              <div class="filter_from_location location_scroller">
+                                 <div class="col-lg-12">
+                                    <div class="row">
+                                       <ul class="post_inline">
+                                          <li>
+                                             <div class="admin_input">
+                                                <div class="admin_input ng-scope" >
+                                                   <input type="checkbox" class="check_box check_box_1" ng-click="selectNewSellerName(seller.id)" id="vl1044">
+                                                   <label for="vl1044" class="ng-binding">Placement</label>
+                                                </div>
+                                                <div class="admin_input ng-scope" >
+                                                   <input type="checkbox" class="check_box check_box_1" ng-click="selectNewSellerName(seller.id)" id="vl1051">
+                                                   <label for="vl1051" class="ng-binding">Quality</label>
+                                                </div>
+                                                
+                                             </div>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     
+                  </div>
+               </div>
+            </div>
+            <div class="loc_det" ng-show="quotedata[0].post.lead_type == 2">
+               <span>
+                  <table class="table tbl_t orderMaster">
+                     <thead>
+                        <tr>
+                           <th> NAME </th>
+                           <th> QUOTED ROUTES </th>
+                           <th> PERCENTAGE</th>
+                           <th> L1 </th>
+                           <th> L2</th>
+                           <th> OTHERS</th>
+                           <th>
+                              <div class="info_links"> NOTIFICATIONS</div>
+                           </th>
+                        </tr>
+                     </thead>
+
+                     <tbody ng-repeat="(key,quotevalue) in quotedata[0].quotes">
+                        <tr>
+                           <td> {{quotevalue.postedto.username}} </td>
+                           <td>1/1</td>
+                           <td>N/A</td>
+                           <td>1</td>
+                           <td>0</td>
+                           <td>0</td>
+                           <td>
+                              <div class="contract-data">
+                                 <div class="sep_div1">
+                                    <!-- <input id="Submit1" type="submit"  value="Cancel Contract" class="book_btn"> -->
+                                 </div>
+                                 <div class="main-over-lap">
+                                    <div class="detail_b1 toggle-minus-{{key}}"  ng-click="showHideDetail(key)" id="buyer-post-detail-btn{{key}}" data-id="">Detail
+                                    </div>
+                                    <a href="javascript:void(0)"  data-toggle="modal" data-target="#messageModal" class="pull-right msg-icon">
+                                    <i class="fa fa-envelope-o"></i>
+                                    </a>
+                                 </div>
+                           </td>
+                        </tr>                        
+                        <tr  style="display:none" id="detail-tabel-data-row{{key}}">
+                          <td colspan="7" class="border-none">
+                              <table class="new-tabel-inner">
+                                <tr>
+                                  <td>
+                                    <tr>
+                                      <td class="border-none"><b>Accept Select Routes</b></td>
+                                      <td class="text-right border-none"><b>Accept Select Lowest Routes</b></td>
+                                    </tr>                          
+                                    <tr>
+                                      <td colspan="2" class="text-right border-none">
+                                       <div class="col-md-2 right_aligns">
+                                        <div class="row">
+                                        <div class="select_form_intra">
+                                         <select  ng-change="showquoterow(key,quotevalue.contract.Route)" ng-model="quotevalue.contract.Route" id="lowestRoutes{{key}}" ng-options=" y.value for (x,y) in lowestRoutes" class="unit selectpicker" selectpicker>
+                                            <option value="">Select Lowest Route</option>
+                                        </select>
+                                     </div>
+                                     </div>
+                                  </div>
+                                      </td>
+                                    </tr>
+                                  </td> 
+                                </tr>
+                              </table>
+                            </td>
+                        </tr>
+
+                  <tr class="detail-table-content">
+                  <td colspan="7">
+                  <form name="contractform_{{ key }}" id="contractform" enctype="multipart/form-data">
+                  <table style="display:none" id="detail-tabel-data{{key}}" class="table tbl_t orderMaster tbl_padding" >
+                  <thead>
+                  <tr>
+                  <th>FROM</th>                    
+                  <th>CATEGORY</th>
+                  <th>SERVICE</th>
+                  <th>QUANTITY</th>                    
+                  <th>QUOTE</th>
+                  <th>RANK</th>                   
+                  <th>
+                  RATE
+                  </th>
+                  <th>
+                  QUANTITY
+                  </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                  <td>{{ quotedata[0].city.city_name }}</td>
+                  <td>{{ quotedata[0].post.category|getName:categories }}</td>
+                  <td>{{ quotedata[0].post.servicetype|getobjectvalue:servicetype }}</td> 
+                  <td>{{ quotedata[0].max_no_parcel }}</td>
+                  <td>{{ quotedata[0].quotes[0].initial_quote_price }}</td>
+                  <td>0</td>
+                  <td> 
+                  <div class="form-desable">
+                    <span ng-show="quotevalue.status!=2">{{!empty(quotevalue.contract.contract_price) && quotevalue.contract.contract_price || '0.00' }}</span>
+                    <span ng-show="quotevalue.status==2">{{!empty(quotevalue.buyer_quote_price) && quotevalue.buyer_quote_price || '0.00' }}</span>
+                  </div>              
+                  </td>                     
+                  <td> 
+                  <div class="form-desable">
+                  <span ng-show="quotevalue.status!=2">{{!empty(quotevalue.contract.contract_quantity) && quotevalue.contract.contract_quantity || '0.00' }}</span>
+                  <span ng-show="quotevalue.status==2">{{!empty(quotevalue.buyer_quote_quality) && quotevalue.contract.contract_quantity || '0.00' }}</span>
+                  </td>
+                  </div>
+                  </tr>
+                  <tr>                
+                  <td td colspan="8" class="no-border">
+                  <div class="generate_data">
+                  <div class="col-md-12 text-right" ng-show="quotevalue.contract_status!=1">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-9 text-right npr new-generate-data">       
+                  </div>
+                  </div>
+                  </div>
+                  </td> 
+                  </tr>
+                  <!--style="display:none" class="genratecontractrow" id="genratecontractrow{{key}}"-->
+                  <tr class="genratecontractrow" style="display: none;" id="genratecontractrow{{key}}">
+                    <td>
+                      <input type="checkbox"  id="chk{{key}}" ng-model="quotevalue.contract.check" ng-click="rowenable(key)" > &nbsp; {{quotedata[0].city.city_name}}
+                    </td>
+                    <td>{{ quotedata[0].post.category|getName:categories }}</td>
+                    <td>{{ quotedata[0].post.servicetype|getobjectvalue:servicetype }}</td>
+                    <td>{{ quotedata[0].max_no_parcel }}</td>
+                    <td>{{ quotedata[0].quotes[0].initial_quote_price }}</td>
+                    <td>0</td>
+                    <td> <div class="form-desable">
+                    <input type="text" disabled  placeholder="0.00" id="contract_rate_{{ key }}" required name="contract_rate_{{ key }}" ng-model="quotevalue.contract.contract_price"  value="" style="width:70px;">  
+                    <span class="help-inline" style="color:red;" ng-show="contractform_{{ key }}.contract_rate_{{ key }}.$dirty && contractform_{{ key }}.contract_rate_{{ key }}.$invalid">Please fill value </span>
+                    </div> </td>
+                    <td>
+                      <div class="form-desable">
+                    <input type="text"  disabled  placeholder="0.00" id="contract_qty_{{ key }}" required name="contract_qty_{{ key }}" ng-model="quotevalue.contract.contract_quantity"  value="" style="width:70px;">
+                    <span class="help-inline" style="color:red;" ng-show="contractform_{{ key }}.contract_qty_{{ key }}.$dirty && contractform_{{ key }}.contract_qty_{{ key }}.$invalid">Please fill value </span></div>
+                    </td>
+                  </tr>
+                 
+                  <tr>                
+                  <td td colspan="8" class="no-border">
+                  <div class="generate_data">
+                  <div class="col-md-12 text-right" ng-show="quotevalue.contract_status!=1">
+                  <div class="col-md-3">
+                    <input type="file" upload-file="quotevalue.contract.documentfile" id="contract_files{{key}}" name="contract_files{{key}}" style="display:none" class="form-control form-control1 update_txt contract_files" value="" >
+                  </div>
+                   
+                  <span style="float:left;">{{ quotevalue.contract.documentfile.name }}</span>
+                  <div class="col-md-9 text-right npr new-generate-data">   
+                     <span class="form-error" style="float:left;color:red;" ng-show="formError.contract">Enter Valid File</span>    
+                     <input type="text" placeholder="Title" required class="generate_data_input " ng-model="quotevalue.contract.contract_title"  name="contract_title_{{key}}" id="contract_title_{{key}}" value="" style="display:none"> 
+                     <span class="help-inline" style="color:red;" ng-show="contractform_{{ key }}.contract_title_{{ key }}.$dirty && contractform_{{ key }}.contract_title_{{ key }}.$invalid">Please fill value </span>                                                       
+                    
+                     <input type="button" id="generate_data{{key}}" ng-disabled="contractform_{{ key }}.$invalid" value="Generate Contract" ng-click="GenerateContract(quotedata[0],quotevalue,key)" style="display:none"  class="generate_data-btn"> 
+                     
+                     <input  ng-show="(quotevalue.quotation_type=='FIRM' || quotevalue.status!=0) && quotevalue.status!=4"  type="button"  id="Contract" value="Contract" ng-click="showcontract(key)" class="generate_data-btn ml5"> 
+                    <!-- <input ng-show="quotevalue.status==2"  type="button"  id="Counteroffer" value="Counter Offer Submited"  class="generate_data-btn">
+                     <input ng-show="quotevalue.status==3"  type="button"  id="Counteroffer" value="Counter Offer Received"  class="generate_data-btn">  -->
+                     
+                     <!--<input ng-show="quotevalue.quotation_type=='COMPETITIVE' && quotevalue.buyer_quote_price==null && quotevalue.status!=4"  type="button"  id="Counteroffer" value="Counter Offer" ng-click="counterOffer(quotedata[0],quotevalue,key)" class="generate_data-btn">--> 
+                  </div>
+                  </div>
+                     <input  ng-show="(quotevalue.contract_status == 1 || quotevalue.status == 7) && quotevalue.status != 6" type="button" ng-click="cancelcontract(quotedata[0],quotevalue,key)"  id="Contract" value="Cancel  Contract"  class="generate_data-btn">
+                     <input  ng-show="quotevalue.status==6 " type="button"   id="Contract" value="Contract Canceled"  class="generate_data-btn">
+                     <input  ng-show="quotevalue.status==4" type="button"   id="Contract" value="Contract Accepted"  class="generate_data-btn">
+                  </div>
+                  </td> 
+                  </tr>
+                  </tbody> 
+                  </table>
+                  </form>
+                        </td>
+                         </tr>
+                     </tbody>
+                  </table>
+                  
+                  
+               </span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!--end of right_search_p-->
+</div>
+<script>
+   $(document).ready(function () {
+       $(".contact_click").click(function () {
+           $(".d_box").slideToggle("slow");
+       });
+   
+       $('.contact_click').click(function () {
+           $(this).next('.d_box').slideToggle('500');
+           $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
+       });
+   
+   });
+   
+   
+   $(document).ready(function () {
+       $(".contact_click1").click(function () {
+           $(".d_box1").slideToggle("slow");
+       });
+   
+       $('.contact_click1').click(function () {
+           $(this).next('.d_box1').slideToggle('500');
+   
+       });
+        $('#filters_click').click(function () {
+           $("#filters_show").slideToggle("slow");
+   
+       });
+        $('#detail_click').click(function () {
+           $("#click-data-detail").slideToggle("slow");
+   
+       });
+         $('#buyer-post-detail-btn').click(function () {
+           $("#detail-tabel-data").slideToggle();
+   
+       });
+        
+   
+   });
+</script>
+<script>
+   $(document).ready(function () {
+       var gwid = $(".scroll_div").width();
+       var twid = $(".loc_det").width();
+       var acwid = gwid / twid * 100;
+       var len = $(".scroll_div").length;
+       var towid = acwid * len + 9;
+       $(".fillter_div").css({"width": "" + towid + "%"});
+   });
+</script>
+
+<style>
+   .mb-5{ margin-bottom: 5px;}
+   .new-generate-data { position: relative;}
+   .new-generate-data input{ 
+   /*float: left;
+   width: 22%;*/
+   }
+   .generate_data-btn {float: right;}
+   .generate_data_input{width: 18%;
+   position: absolute;
+   right: 19%;}
+   .detail-table-content td{padding: 0px !important;border-top: 0px !important}
+   .border-none{ border:0px !important;}
+   .new-tabel-inner{ width: 100% }
+   .data-selection-table{ width: 100%;}
+   .tbl_padding tr td{padding:5px 8px!important;}
+   .ml5{margin-left: 5px;}
+   
+</style>

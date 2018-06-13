@@ -1,0 +1,282 @@
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <form name="search" id="search">
+        <div class="right_serch_p">
+            <div class="right_search_bar">
+                <ul class="search_bar_tab">
+                    <li><a href="javascript:void(0)">{{getUserActiveRole}}</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                    <li><a href="#services">Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                    <li><a href="javascript:void(0)" class="active_c">Intra City Search</a></li>
+                </ul>
+            </div>
+            <div class="location_sec">
+
+                <div class="spot_t" ng-init="data.type=2">
+                    <ul>
+                        <li>
+                            <input type="radio"  ng-click="showHide(data.type,data)" id="spot" data-target="id1" value="2"
+                                   name="selector" ng-model="data.type" checked="">
+                            <label for="spot">Distance</label>
+                            <span></span>
+                        </li>
+                        <li>
+                            <input type="radio" ng-click="showHide(data.type,data)" value="1" ng-model="data.type" id="term"
+                                   data-target="id2" name="selector">
+                            <label for="term">Hour</label>
+                            <span></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="load_type intra_main activeintra" id="id1">
+
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <input type="text" id="city" class="input_ani alphaNumeric" maxlength="50" ng-change="onSelect(data.city)"
+                                   autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)"
+                                   ng-model="data.city" required=""
+                                   typeahead="city as (city.city_name) for city in cities | filter:$viewValue"/>
+                                    <label class="lbl_text2">Select City <span>*</span></label>
+                                                        
+                                <span class="help-inline" style="color:red;" ng-show="data.errors.city">
+                                     {{ data.errors.city }}    
+                                </span>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" id="from_location" maxlength="30" ng-model="data.from_location"
+                                   class="input_ani alphaNumeric"
+                                   typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+                                   required="">
+                            <label class="lbl_text2">From location <span>*</span></label>
+
+                             <span class="help-inline" style="color:red;" ng-show="data.errors.fromLocation">
+                                     {{ data.errors.fromLocation }}    
+                                </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" id="to_location" ng-model="data.to_location"
+                                   typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+                                   class="input_ani alphaNumeric" maxlength="30" required="">
+                            <label class="lbl_text2">To Location <span>*</span></label>
+                             <span class="help-inline" style="color:red;" ng-show="data.errors.toLocation">
+                                     {{ data.errors.toLocation }}    
+                                </span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4 margin_input">
+                        <div class="date_selection select_form_intra">
+                            <span class="left_v_from">
+                                        <input type="text" autocomplete="off" maxlength="10" id="valid_to_date" tocalendar ng-model="data.valid_to_date" id="valid_to_date" class="date_p input_ani validateDate" readonly required="">
+                                            <label class="lbl_text2 padg_l">Dispatch Date<span>*</span></label>
+                                                <span class="tooptip_left">
+                                                    <a href="javascript:void(0)" tooltip="Please specify atleast one of these: Delivery or Dispatch date."> <i class="glyphicon glyphicon-info-sign"></i></a></span>
+                                                </span>
+                                                <span class="help-inline" style="color:red;" ng-show="data.errors.dispatchDate">
+                                                    {{ data.errors.dispatchDate }}    
+                                                </span>
+                                              
+                        </div>
+                    </div>
+
+                   
+                 <!--        <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 margin_input">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="select_form_intra">
+                                        <select ng-model="data.timeSlot" ng-options="x for x in timeSlot track by x"
+                                                class="ng-pristine ng-untouched ng-valid selectpicker" selectpicker>
+                                            <option value="" selected="selected"> Time</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="select_form_intra">
+                                        <select ng-model="data.period" ng-init="data.period = 'AM'" class="selectpicker" selectpicker>
+                                            <option value="">Time Period</option>
+                                            <option ng-selected="true" value="AM" selected="selected">AM</option>
+                                            <option value="PM">PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                            <div class="select_form_intra">
+                                <select id="vehicle_type1" ng-model="data.vehicle_type"
+                                        ng-options="y.vehicle_type for (x, y) in vehicles" class="selectpicker" selectpicker>
+                                    <option value=""> Vehicle type</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+                            <div class="row">
+                                <div class="select_form_intra">
+                                    <div class="vichel_dimensin">
+                                        <span class="v_images"><img src="images/dimension_v.png"></span>
+                                        <div class="vi_text">
+                                            <span class="v_text">Vehicle Dimensions<span></span></span><br>
+                                            <span> {{ data.vehicle_type.dimension }} </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    
+
+                </div>
+
+                <div class="load_type intra_main" id="id2">
+
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <input type="text" id="hour_city" ng-change="onSelect(data.city)" class="input_ani alphaNumeric"
+                                   autocomplete="off" typeahead-on-select="onSelect($item, $model, $label)"
+                                   ng-model="data.hour_city" required=""
+                                   typeahead="city as (city.city_name) for city in cities | filter:$viewValue"/>
+                            <label class="lbl_text2">Select City <span>*</span></label>
+                                                      
+                                <span class="help-inline" style="color:red;" ng-show="data.errors.city">
+                                     {{ data.errors.hour_city }}    
+                                </span>
+                            <!--<select id="hour_city"  ng-model="data.hour_city" ng-options="y.city_name for (x, y) in cities">
+                                      <option value=""> Select City </option>
+                                     </select>-->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" ng-model="data.reporting"
+                                   typeahead="location as (location.locality_name) for location in locations | filter:$viewValue"
+                                   class="input_ani reporting alphaNumeric" required>
+
+                            <label class="lbl_text2">Reporting Location<span>*</span></label>
+                             <span class="help-inline" style="color:red;" ng-show="data.errors.reporting">
+                                     {{ data.errors.reporting }}    
+                                </span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+
+                            <select ng-model="data.base_hour"
+                                    ng-options="y.distance_hour for (x,y) in hourDistanceSlabs track by y.id" class="selectpicker" selectpicker>
+                                <option value="">Base hour *</option>
+
+                            </select>
+                            <span class="help-inline" style="color:red;" ng-show="data.errors.base_hour">
+                                     {{ data.errors.base_hour }}    
+                                </span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 margin_input">
+                        <div class="date_selection select_form_intra">
+                            <span class="left_v_from">
+                                                    
+                            <input type="text" autocomplete="off" id="date" tocalendar ng-model="data.date"
+                                   id="valid_to_date" class="date_p input_ani" required="" readonly="readonly">
+                             <label class="lbl_text2 padg_l">Date<span>*</span></label>
+                            </span>
+                             <span class="help-inline" style="color:red;" ng-show="data.errors.date">
+                                     {{ data.errors.date }}    
+                                </span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <select id="vehicle_type" ng-model="data.hour_vehicle_type"
+                                    ng-options="y.vehicle_type for (x, y) in vehicles" class="selectpicker" selectpicker>
+                                <option value=""> Vehicle type</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin_input">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="select_form_intra">
+                                    <select ng-model="data.timeSlot" ng-options="x for x in timeSlot track by x" class="selectpicker" selectpicker>
+                                        <option value="">Time</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="select_form_intra">
+                                    <select ng-model="data.period" ng-init="data.period = 'AM'" class="selectpicker" selectpicker>
+                                        <option value="">Time Period</option>
+                                        <option ng-selected="true" value="AM" selected="selected">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="load_type">
+
+                    <div class="search_btn">
+                        <div class="serch_vichel">
+                            <input type="button" class="button_serch" id="searchSeller" ng-click="searchData()" name="button" value="Search">
+                        </div>
+                    </div>
+                </div>
+                <!--End of load_type-->
+
+            </div>
+            <!--end of location_sec-->
+        </div>
+        <!--end of right_search_p-->
+    </form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $('input[type="radio"]').click(function () {
+            var id = $(this).attr('data-target');
+            $('#' + id).addClass('activeintra').siblings().removeClass('activeintra');
+        });
+
+        if ($(window).width() < 1001) {
+            // $('.content_sub').hide();
+            $(".content_sub").removeClass("activetab");
+            $(".cins_spand").click(function () {
+                var v_id = $(this).attr("data-profile");
+                var collapsed = $(this).find('i').hasClass('fa-plus-square-o');
+                $('.cins_spand').find('i').removeClass('fa-minus-square-o');
+                $('.cins_spand').find('i').addClass('fa-plus-square-o');
+                if (collapsed)
+                    $(this).find('i').toggleClass('fa-plus-square-o fa-2x fa-minus-square-o fa-2x');
+
+                if ($("#" + v_id).hasClass("activetab_s")) {
+                    $("#" + v_id).removeClass("activetab_s");
+                    return false
+                }
+                else {
+                    $(".content_sub").removeClass("activetab_s");
+                    $("#" + v_id).addClass("activetab_s");
+
+                    return false
+                }
+
+            });
+
+        }
+
+    });
+
+
+</script>

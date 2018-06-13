@@ -1,0 +1,241 @@
+<div class="main_boby">
+        <div class="wrapper page1 center_body">
+            <div class="center_div">
+                <div class="container-fluid">
+                    <div class="row">                        
+                        <div class="intracity_page">
+                            <!-- <div class="left_section">
+                                <div class="row" ng-include="'templates/elements/profile-left-nav.html'"></div>                                
+                            </div> -->
+                            <div class="right_section left_menu_space">                                
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="feed_block" ng-repeat="(key, post) in posts.data">
+                                        <!-- {{posts.data}} -->
+                                        <div class="feed_block_box">
+                                            <div class="feed_user_detail">
+                                                <div class="feed_user_img_bg">
+                                                    <div class="feed_user_img" ng-class="{ 'profilePic':!post.postedby.user_pic }">
+                                                        <span ng-if="post.postedby.user_pic">                                                        
+                                                            <img src="images/user.jpg" alt="user">
+                                                        </span>
+                                                        <span ng-if="!post.postedby.user_pic" class="profilePic">                                                        
+                                                                {{ post.postedby.username | getChar }}
+                                                        </span>
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="feed_user_name_detail">
+                                                    <div class="feed_user_name">
+                                                        {{ post.postedby.username }}
+                                                    </div>
+                                                    <div class="feed_user_t"> {{ post.title }} </div>
+                                                </div>
+                                            </div>
+                                            <div class="feed_text" ng-init="post.limit=150">
+                                                <!-- {{ $sce.trustAsHtml(post.description) }} -->
+                                                <div ng-bind-html="$sce.trustAsHtml(seeLess(post.description,post.limit))"></div> 
+                                                <!-- {{ post.description | limitTo : post.limit }}  -->
+                                                <a href="javascript:void(0)" ng-click="viewAll(key,'more')" ng-show="post.description.length != post.limit" class="pull-right"> <b> See more </b></a>
+                                                <a href="javascript:void(0)" ng-click="viewAll(key,'less')" ng-show="post.description.length == post.limit" class="pull-right"><b> See less </b></a>
+                                                <br>
+                                                <img ng-if="post.file_path" src="{{ storagePath+''+post.file_path }}" class="img-responsive">
+                                            </div>
+                                            <div class="feed_bottom">
+                                                <div class="feed_bottom_left">
+                                                    <div class="view_like_share">
+                                                        <ul ng-init="post.isDisplayComent = true">
+                                                            <li class="active"><a href="#"><i class="fa fa-thumbs-o-up"></i> {{ !empty(post.article_likes.length) && post.article_likes.length || '0' }} </a></li>
+                                                            <li class="active"><a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i> 25</a></li>
+                                                            <!-- <li class="active"><a href="javascript:void(0)" onclick="myfunction(1);" class="view_all_comment">{{ !empty(post.comments[0].comment_likes.length) && post.comments[0].comment_likes.length || '0'  }} Comment</a></li> -->
+                                                            <li class="active"><a href="javascript:void(0)" ng-click="post.isDisplayComent == true ? post.isDisplayComent = false : post.isDisplayComent = true" class="view_all_comment">{{ !empty(post.comments[0].comment_likes.length) && post.comments[0].comment_likes.length || '0'  }} Comment</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="feed_bottom_right">
+                                                    <div class="info-links font-six">
+                                                        <a href="#">Like</a>
+                                                        <a href="#">Share</a>
+                                                        <a href="#">Follow</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- {{post.isDisplayComent}} -->
+                                            
+                                            <div ng-show="post.comments.length > 1" class="write_comment_new feed_text" ng-init="post.commentLimit = 1">
+                                                <a href="javascript:void(0)" ng-click="showPreviousComments(key,post.comments.length)">Show previous comments</a>
+                                            </div>
+                                            <!--  ng-init="c = post.comments[post.comments.length - 1]" -->
+                                            <div class="write_comment_new" ng-repeat="(cKey,c) in post.comments | limitTo:post.commentLimit">
+                                                <div class="comment_div">
+                                                    <div class="user_pic_comment default-pic reply-pic">
+                                                        <span ng-if="c.comment_users.user_pic">
+                                                            <img src="./images/dinesh.png">
+                                                        </span>
+                                                        <span ng-if="!c.comment_users.user_pic">
+                                                            {{ c.comment_users.username | getChar }}
+                                                        </span>
+                                                    </div>                                                        
+                                                    <div class="comment_cont"> 
+                                                        <div class="comment_diolog font-six">
+                                                            <div class="edit_delete">
+                                                                <ul>
+                                                                    <li><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</li>
+                                                                    <li><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</li>
+                                                                </ul>
+                                                            </div>
+                                                            <span class="comm_name ng-binding"> {{ c.comment_users.username }} </span>
+                                                            <strong>
+                                                                <input class="commenttxt" readonly="" type="text" value="{{ c.comment }}">
+                                                            </strong>
+                                                        </div>
+                                                        
+                                                        <div class="feed-links font-six">
+                                                            <span class="red_like" ng-click="like(c.id,2)">Like</span>
+                                                            <span class="red_like" ng-click="doReply(key,cKey)" >Reply</span>
+                                                            <span class="likes" ng-click="like(c.id,2)"><i class="fa fa-thumbs-o-up"></i> {{ c.comment_likes.length }} </span>
+                                                            <span class="likes" ng-click="viewRepliedComment(key,cKey)" ng-show="c.comment_reply.length"> More </span>
+                                                        </div>
+                                                        <div class="reply_comment" ng-if="c.isDisplayReplied" ng-repeat="(rKey,replied) in c.comment_reply">                                                            
+                                                            <div class="user_pic_comment">
+                                                                <img src="./images/dinesh.png">
+                                                            </div>
+                                                            <div class="comment_cont">
+                                                                <div class="comment_diolog font-six">
+                                                                    <div class="edit_delete">										
+                                                                        <ul>
+                                                                            <li><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</li>
+                                                                            <li><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <span class="comm_name ng-binding"> {{ replied.replyed_users.username }} </span>
+                                                                    <input class="commenttxt" readonly="" type="text" id="reply4" value="{{ replied.reply_text }}">
+                                                                </div>
+                                                                <div class="feed-links font-six">
+                                                                    <span class="red_like" ng-click="like(replied.id,3)">Like</span>
+                                                                    <span class="likes ng-binding"> <i ng-click="like(replied.id,3)" class="fa fa-thumbs-o-up"></i>  {{ replied.reply_likes.length }} </span>
+                                                                </div>
+                                                            </div>                                                               
+                                                        </div>
+                                                        
+                                                        <div class="comment_type" ng-if="c.isReply">
+                                                            <div class="userpic_comment"><i class="fa fa-user"></i></div>
+                                                            <span class="write_type">
+                                                                <input type="text" ng-model="c.reply" ng-keyup="replyComment(c,$event)" class="form-control">
+                                                            </span>
+                                                        </div>                                                                        
+                                                    </div>
+                                                </div> 
+                                                
+                                                
+                                            </div>
+                                            <div class="comment_view view_all" ng-show="post.isDisplayComent">
+                                                <div class="user_comment_d">
+                                                    <div class="comment_view_user_img">
+                                                        <div class="user_img">
+                                                            <img src="../images/user.jpg" alt="user">
+                                                        </div>
+                                                    </div>
+                                                    <div class="user_comment_view">
+                                                        <div class="comment_user_name">
+                                                                {{ post.postedby.username }}
+                                                        </div>
+                                                        <div class="user_comment_text">{{post.comments[0].comment}} 
+                                                            <!-- <a href="javascript:void();">See more</a> -->
+                                                        </div>
+                                                        <div class="comment_reply">
+                                                            <div class="view_like_share">
+                                                                <ul>
+                                                                    <li><a href="#"><i class="fa fa-thumbs-o-up"></i> Like </a></li>
+                                                                    <li><a href="#"><i class="fa fa-reply" aria-hidden="true"></i> Reply</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="write_comment_new">
+                                                <div class="comment_user_img">
+                                                    <!-- {{ Auth.getUserName() | getChar }} -->
+                                                    <div class="user_img">
+                                                        <img src="images/user.jpg" alt="user">
+                                                    </div>
+                                                </div>
+                                                <div class="enter_comment">
+                                                    <input type="text" ng-model="post.comment" >
+                                                </div>
+                                                <div class="comment_submit">
+                                                    <input type="submit" ng-keyup="comment(key,$event)" ng-click="comment(key,$event)" value="Post">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="follow_me">
+                                        <div class="follow-us">
+                                            <h2>FOLLOW</h2>
+                                            <!-- <loading></loading> -->
+                                            <div class="profile_f" ng-repeat="x in followers | limitTo:4">
+                                                <div class="user_img">
+                                                    <span ng-if="x.user_pic">                                                        
+                                                        <img  src="images/user-icons.png">
+                                                    </span>
+                                                    <span ng-if="!x.user_pic" class="default-pic">                                                        
+                                                            {{ x.username | getChar }}
+                                                    </span>
+                                                </div>
+                                                <div class="user_detail">
+                                                    <div class="text-bold"> <a href="#/community/profile/{{x | getSlug }}">  {{x.username}} </a> </div>
+                                                    <div class="text-normal" ng-if="x.seller">{{x.seller.name}}</div>
+                                                    <div class="text-normal" ng-if="x.buyer">{{x.buyer.name +' '+ x.buyer.lastname}}</div>
+                                                </div>
+                                                <div class="follow_btn">
+                                                    <button class="follow_m" type="text" ng-click="follow(x.id)" value="Follow">Follow</button>
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="view_all">
+                                                <div class="recommd"><a  href="#recommendation">View all recommendations</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="follow_me">
+                                        <div class="follow-us">
+                                            <h2>CONNECT</h2>
+                                            <div class="profile_f" ng-repeat="x in allusers | limitTo:4">
+                                                <div class="user_img">
+                                                    <span ng-if="x.user_pic">                                                        
+                                                        <img  src="images/user-icons.png">
+                                                    </span>
+                                                    <span ng-if="!x.user_pic" class="default-pic">                                                        
+                                                            {{ x.username | getChar }}
+                                                    </span>
+                                                </div>
+                                                <div class="user_detail">
+                                                    <div class="text-bold"> <a href="#/community/profile/{{x | getSlug }}">  {{x.username}} </a> </div>
+                                                    <div class="text-normal">{{x.designation && x.designation || 'N/A'}}</div>                                                   
+                                                </div>
+                                                <div class="follow_btn">
+                                                    <button class="follow_m" type="text" ng-click="sendInvitationForConnection('individual',x)" value="Follow">Connect</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<style>
+    .active_view_all {
+        max-height: 3000px;
+        padding: 7px 0px;
+       display: block;
+    }
+</style>

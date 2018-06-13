@@ -1,0 +1,48 @@
+.form-error {
+    color: red;
+    font-size: 12px;
+}
+
+md-content.datePicker {
+    margin-top: 18px;
+    overflow: hidden;
+}
+
+.invalid-data {
+    border-bottom: solid 1px red;
+}
+
+.text_field {
+       width: 100%;
+    float: left;
+    border: 1px solid #e0e0e0;
+    height: 35px;
+    padding: 4px;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.lbl_new {
+    position: relative;
+    color: #666;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.uploaded_file {
+    width: 100%;
+    float: left;
+    display: table;
+    text-align: center;
+}
+
+.uploaded_file img {
+    width: 30px;
+    vertical-align: middle;
+}
+
+select[disabled] {
+    opacity: 0.5;
+}
+.uploaded_file span{ width:100%;float:left;word-break: break-all;}
+.pageLoader{width: 100%;float: left;text-align: center;}

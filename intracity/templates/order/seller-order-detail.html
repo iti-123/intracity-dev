@@ -1,0 +1,401 @@
+<table class="table tbl_t orderMaster">
+        <thead>
+           <tr>
+              <th  ng-show="showIntraHyper && getUserActiveRole == 'Seller'"> To </th>
+              <th  ng-show="showIntraHyper && getUserActiveRole == 'Buyer'"> Date </th>
+              <th  ng-show="showBlueCollar"> Name </th>
+              <th> ORDER NUMBER </th>
+              <!-- <th> Pick Up Date </th> -->
+              <th><span ng-if="filterData.serviceType != 23">From Location </span></th>
+              <th><span ng-if="filterData.serviceType != 23">To Location</span></th>
+              <th><span ng-if="filterData.serviceType != 23"> Dispatch Date </span> </th>
+             <th></th>
+              <th>
+                 <div class="info_links"> NOTIFICATIONS</div>
+              </th>
+           </tr>
+        </thead>
+        <tbody  ng-repeat="(key,order) in orderlists">
+           <tr>
+            <td  ng-show="showIntraHyper && getUserActiveRole == 'Seller'">
+                 <span ng-show="order.seller_name"> {{ order.seller_name }} </span>
+                 <span ng-show="order.sellerName"> {{ order.sellerName }} </span>
+            </td>
+            <td  ng-show="showIntraHyper && getUserActiveRole == 'Buyer'">
+                    {{ order.created_at | dateStringFormat }}
+            </td>
+              <td ng-show="showBlueCollar">
+                 <span class="font"> {{ order.bcFirstName+ ' ' + order.bcLasttName}}</span>
+              </td>
+              <td>
+                 {{ order.order_no }}
+              </td>
+              <td>
+                 <span class="data-value break-word" ng-show="showIntraHyper">
+                 {{ order.from_location }}
+                 </span>
+                 <span class="data-value break-word" ng-show="showBlueCollar">
+                 <span ng-if="filterData.serviceType != 23">   {{ order.bcLicenceValidFrom }} </span>
+                 </span>
+              </td>
+              <td> 
+                 <span class="data-value break-word" ng-show="showIntraHyper">
+                 {{ order.to_location }}
+                 </span>
+                 <span class="data-value break-word" ng-show="showBlueCollar">
+                 <span ng-if="filterData.serviceType != 23">
+                 {{ order.bcLicenceValidTo }}
+                 </span>
+                 </span>
+              </td>
+              <td>
+                     <span ng-if="filterData.serviceType != 23"> {{ order.valid_from }} </span>
+              </td>
+              <td>
+                 <div class="seller" ng-if="getUserActiveRole == 'Seller' || getUserActiveRole == 'Buyer'">
+                    <div class="admin_input" ng-show="!order.isGSA" ng-if="getUserActiveRole == 'Seller'">
+                       <input ng-click="acceptPlaceTruckGSA(order,$index)" type="checkbox" id="gsa-{{ $index }}" class="gsa_accept check_box" value="{{ $index }}">
+                       <label for="gsa-{{ $index }}" class="lbl padding-8"> Accept GSA </label>
+                    </div>
+                    <span ng-show="order.isGSA && order.orderItemStatus==1">
+                    <span> GSA Accepted </span>
+                    </span>
+                    <span ng-show="order.isGSA && order.orderItemStatus==2">
+                         <div class="status-bar"></div>
+                         <span> Pick Due </span>
+                    </span>
+                    <span ng-show="order.isGSA && order.orderItemStatus ==3">
+                       <div class="status-bar">
+                          <div class="status-bar-left"></div>
+                       </div>
+                       <span> Intransit </span>
+                    </span>
+
+                    <span ng-show="order.isGSA && order.orderItemStatus ==4">
+                         <div class="status-bar">
+                         <div class="status-bar-left"></div>
+                         </div>
+                         <span> Reached destination </span>
+                     </span>
+
+                     <span ng-show="order.isGSA && order.orderItemStatus ==5">
+                         <div class="status-bar bg-green">
+                                <div class="status-bar-left"></div>
+                         </div>
+                         <span> Delivered </span>
+                     </span>
+                     <span ng-show="order.isGSA && order.orderItemStatus ==6">
+                        <div class="status-bar bg-green"> </div>
+                        <span> Delivery Confirmed </span>
+                    </span>
+                 </div>
+              </td>
+              <td>
+                 <div class="seller">
+                    <div class="contract-data">
+                       <div class="sep_div1" ng-if="getUserActiveRole == 'Seller'">
+                          <input ng-disabled="!order.isGSA" ng-show="order.orderItemStatus == 1" type="submit" ng-click="placeTruck(order,$index)" class="book_btn" value="Place Truck">
+                       </div>
+                       <div class="main-over-lap-1">
+                          <div class="detail_b1" ng-click="showHideDetail(order,$index)" data-id="{{ $index }}">Detail </div>
+                          <a href="javascript:void(0)" ng-click="showHideDetail($index)"
+                             data-toggle="modal" data-target="#messageModal" class="pull-right msg-icon">
+                          <i class="fa fa-envelope-o"></i>
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+              </td>
+           </tr>
+           <tr class="bg-gray addVehicle-{{ key }}" style="display:none">
+              <td colspan="7">
+                 <div class="col-md-12 shadow-div data-div pull-right">
+                    <div class="col-md-3 npl data-fld"> 
+                       <span class="data-head">CONSIGNOR</span> 
+                       <span class="data-value"> {{ order.consignor_name }} </span> 
+                    </div>
+                    <div class="col-md-3 npl data-fld"> 
+                       <span class="data-head">CONSIGNEE</span> 
+                       <span class="data-value"> {{ order.consignee_name }} </span> 
+                    </div>
+                    <div class="col-md-3 npl data-fld"> 
+                       <span class="data-head">LOAD tYPE</span> 
+                       <span class="data-value"> {{ order.loadType && order.loadType || 'N/A' }} </span> 
+                    </div>
+                    <div class="col-md-3 npl data-fld"> 
+                       <span class="data-head">VEHICLE TYPE</span> 
+                       <span class="data-value">{{ order.vehicleType && order.vehicleType || 'N/A' }}</span> 
+                    </div>
+                    <div class="col-md-3 npl data-fld"> 
+                       <span class="data-head">PRICE</span> 
+                       <span class="data-value"> RS: {{ order.price }} /- </span> 
+                    </div>
+                 </div>
+                 <div class="col-md-12 shadow-div pull-right" ng-if="order.orderItemStatus == 1 && order.isGSA && getUserActiveRole == 'Seller'">
+                    <form name="addVehicle_{{ key }}" novalidate>
+                       <div class="row">
+                          <div class="col-md-4 form-control-fld">
+                             <div class="input-prepend">
+                                <input id="vehicle_10" required ng-model="order.vehicleNumber" class="top-text-fld form-control form-control1 js-placeholder clsVehicleno seller_vehicles" placeholder="Vehicle Number *" name="text_vehicle_number_{{ key }}" type="text" value="">
+                                <span class="help-inline" style="color:red;" ng-show="addVehicle_{{ key }}.text_vehicle_number_{{ key }}.$dirty && addVehicle_{{ key }}.text_vehicle_number_{{ key }}.$invalid">Please fill Vehicle Number </span>
+                             </div>
+                          </div>
+                          <div class="col-md-4 form-control-fld">
+                             <div class="input-prepend">
+                                <input id="driver_10" required ng-model="order.driverName" class="top-text-fld form-control " placeholder="Driver Name *" name="text_driver_name_{{ key }}" type="text" value="">
+                                <span class="help-inline" style="color:red;" ng-show="addVehicle_{{ key }}.text_driver_name_{{ key }}.$dirty && addVehicle_{{ key }}.text_driver_name_{{ key }}.$invalid">Please fill Drivar Name </span>
+                             </div>
+                          </div>
+                          <div class="col-md-4 form-control-fld">
+                             <div class="input-prepend">
+                                <input id="mobile_10" required ng-model="order.driverMobileNo" class="top-text-fld form-control clsMobileno" placeholder="Driver Mobile Number *" name="text_driver_number_{{ key }}" type="text" value="" maxlength="10" minlength="10">
+                                <span class="help-inline" style="color:red;" ng-show="addVehicle_{{ key }}.text_driver_number_{{ key }}.$dirty && addVehicle_{{ key }}.text_driver_number_{{ key }}.$invalid">Please fill Driver Number </span>
+                             </div>
+                          </div>
+                       </div>
+                       <div class="row">
+                          <div class="col-md-4 form-control-fld">
+                             <button type="submit" value="AddVehicle" ng-disabled="addVehicle_{{ key }}.$invalid" ng-click="AddVehicle(order,key)" class="btn add-btn submit-inner book_btn mt-5 addPlaceTruck add-vehicle">Add Vehicle</button>
+                          </div>
+                       </div>
+                    </form>
+                 </div>
+              </td>
+           </tr>
+           <tr class="addVehicle-{{ key }}" style="display:none" ng-show="order.multipleVehicle">
+              <td colspan="7" ng-if="order.isGSA">
+                 <table class="table">
+                    <tr>
+                       <th>VEHICLE NUMBER </th>
+                       <th>DRIVER NAME</th>
+                       <th>DRIVER MOBILE NUMBER</th>
+                    </tr>
+                    <tr ng-repeat="(keyV, value) in order.multipleVehicle">
+                       <td> {{ value.vehicleNumber }} </td>
+                       <td> {{ value.driverName }} </td>
+                       <td> {{ value.driverMobileNo }} </td>
+                    </tr>
+                 </table>
+                 <table class="table" ng-if="order.orderItemStatus >= 3">
+                    <tr>
+                       <th colspan="6">CONSIGNMENT PICKUP DETAILS</th>
+                    </tr>
+                    <tr>
+                       <td>
+                          <h5 class="data-head">PICKUP DATE</h5>
+                          {{ order.consignmentPickupDetails.consignmentPickupDate }} 
+                       </td>
+                       <td>
+                          <h5 class="data-head">LR NUMBER</h5>
+                          {{ order.consignmentPickupDetails.lrNo }} 
+                       </td>
+                       <td>
+                          <h5 class="data-head">LR DATE</h5>
+                          {{ order.consignmentPickupDetails.lrDate }} 
+                       </td>
+                       <td>
+                          <h5 class="data-head">TRANSPORTER BILL NO</h5>
+                          {{ order.consignmentPickupDetails.billNumber }} 
+                       </td>
+                       <td>
+                          <h5 class="data-head">CUSTOMER DOCUMENT 1 (OPTIONAL)</h5>
+                          {{ order.consignmentPickupDetails.customerDoc1 }} 
+                       </td>
+                       <td>
+                          <h5 class="data-head">CUSTOMER DOCUMENT 2 (OPTIONAL)</h5>
+                          {{ order.consignmentPickupDetails.customerDoc2 }} 
+                       </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="6">
+                             <!-- Add location  -->
+                             <div ng-if="order.orderItemStatus == 3 && order.isGSA && getUserActiveRole == 'Seller'">
+                                 <form method="POST" accept-charset="UTF-8" name="transitDetails_{{ key }}"><input name="_token" type="hidden">
+                                     <div class="col-md-3 form-control-fld">
+                                         <div class="input-prepend">
+                                             <input  class="input_ani" ng-model="order.transitDetail.location" placeholder="Location *" name="location" type="text">
+                                           
+                                         </div>
+                                     </div>
+                                     <div class="col-md-3 form-control-fld">
+                                         <div class="input-prepend">
+                                             <input class="date_p input_ani" ng-model="order.transitDetail.date" placeholder="Date *" readonly="1" tocalendar type="text" value="">
+                                            
+                                             </div>
+                                     </div>
+                                     <div class="col-md-3 form-control-fld text-left">
+                                          <a class="book_btn red-btn flat-btn m-top-10 addTranistDetails" ng-click="addTransitDetail(order.transitDetail,key)">Add</a>
+                                     </div>
+                                 </form>
+                             </div>
+                             <div  ng-if="order.transitDetails">
+                                 <table class="table">
+                                     <tr>
+                                         <td colspan= "6"> Transit Detail </td>
+                                     </tr>
+                                     <tr>
+                                         <th colspan="3"> 
+                                                 Location
+                                         </th>
+                                         <th colspan="3"> 
+                                                 Date
+                                         </th>
+                                         
+                                     </tr>
+                                     
+                                     <tr ng-repeat="(tKey, transit) in order.transitDetails">
+                                         
+                                         <td colspan="3"> 
+                                             {{ transit.location }}
+                                         </td>
+                                         <td colspan="3"> 
+                                             {{ transit.date }}
+                                         </td>
+                                     </tr>
+                                     <tr ng-if="order.orderItemStatus == 3 && order.isGSA && getUserActiveRole == 'Seller'">
+                                         <td colspan="6">
+                                             <button type="button" value="confirmVehicle" ng-click="confirmTransitDetail(order,order.transitDetails)" class="btn book_btn red-btn pull-right ntsearch confirmVehicle"> Confirm </button>
+                                         </td>
+                                     </tr>
+                                 </table>
+                             </div>
+                        </td>
+                    </tr>
+
+                    
+                    
+                    <tr>
+                        <td colspan="6">
+                             <div ng-if="order.orderItemStatus == 4 && order.isGSA && getUserActiveRole == 'Seller'">
+                                     <div class="">
+                                             <form method="POST" accept-charset="UTF-8" name="consignmentDeliveryDetails_{{ key }}">
+                                                 <div class="">
+                                                     <div class="col-md-3 form-control-fld">
+                                                     <div class="input-prepend">
+                                                         <input class="date_p input_ani" tocalendar ng-model="order.deliveryDetail.date" placeholder="Delivery Date *"  type="text" value="">
+                                                         <!--<label for="delivery_date_label" class="text-input-placeholder js-placeholder-text">Delivery Date *</label>-->
+                                                       </div>
+                                                     </div>
+                                                     <div class="col-md-3 form-control-fld">
+                                                       <div class="input-prepend">
+                                                             <input ng-model="order.deliveryDetail.recipientName" class="input_ani" placeholder="Recipient Name *" type="text" >
+                                                             <!--<label for="delivery_driver_label" class="text-input-placeholder js-placeholder-text">Recipient Name *</label>-->
+                                                       </div>
+                                                     </div>
+                                                     <div class="clearfix margin-none"></div>
+                                                     <div class="col-md-3 form-control-fld">
+                                                       <div class="input-prepend">
+                                                             <input ng-model="order.deliveryDetail.recipientMobileNumber" class="input_ani" placeholder="Recipient Mobile Number *" type="text">
+                                                             <!--<label for="delivery_mobile_label" class="text-input-placeholder js-placeholder-text">Recipient Mobile Number *</label>-->
+                                                       </div>
+                                                     </div>
+                                                     <div class="col-md-3 form-control-fld">
+                                                       <div class="input-prepend">
+                                                             <input ng-model="order.deliveryDetail.freightAmount" class="input_ani" placeholder="Freight Amount (Optional)" type="text">
+                                                             <!--<label for="freight_amt_label" class="text-input-placeholder js-placeholder-text">Freight Amount (Optional)</label>-->
+                                                       </div>
+                                                     </div>
+                                                     <div class="col-md-3 form-control-fld">
+                                                       <div class="input-prepend">
+                                                             <input ng-model="order.deliveryDetail.additionalInformation" class="input_ani" placeholder="Additional Information (Optional)" type="text">
+                                                             <!--<label for="delivery_info_label" class="text-input-placeholder js-placeholder-text">Additional Information (Optional)</label>-->
+                                                       </div>
+                                                     </div>
+                                                     <div class="col-md-1 form-control-fld text-left pull-right p-right-10 show-submit-2">
+                                                       <button class="btn book_btn red-btn m-top-10 confirmConsignmentDeliveryDetails" ng-click="consignmentDeliveryDetails(order,order.deliveryDetail)">Confirm</button>
+                                                     </div>
+                                                 </div>
+                                             </form>
+                                         </div>
+                             </div>
+                        </td>
+                    </tr>
+
+                    <tr ng-if="order.orderItemStatus == 5 && order.isGSA">
+                         <th colspan="6">CONSIGNMENT DELIVERY DETAILS</th>
+                     </tr>
+                     <tr ng-if="order.orderItemStatus == 5 && order.isGSA">
+                         <td>
+                             <h5 class="data-head">DELIVERY DATE</h5>
+                             {{ order.deliveryDetail.date }} 
+                         </td>
+                         <td>
+                             <h5 class="data-head">RECIPIENT NAME</h5>
+                             {{ order.deliveryDetail.recipientName }} 
+                         </td>
+                         <td>
+                             <h5 class="data-head">RECIPIENT MOBILE</h5>
+                             {{ order.deliveryDetail.recipientMobileNumber }} 
+                         </td>
+                         <td>
+                             <h5 class="data-head">FREIGHT AMOUNT</h5>
+                             {{ order.deliveryDetail.freightAmount }} 
+                         </td>
+                         <td>
+                             <h5 class="data-head">ADDITIONAL INFORMATION</h5>
+                             {{ order.deliveryDetail.additionalInformation }} 
+                         </td>
+                     </tr>
+                 </table>
+              </td>
+           </tr>
+           <tr class="addVehicle-{{ key }}" style="display:none" ng-if="order.orderItemStatus == 1 && order.isGSA && getUserActiveRole == 'Seller'">
+              <td colspan="7">
+                 <div class="col-md-12 shadow-div pull-right">
+                    <button type="button" value="confirmVehicle" ng-click="confirmPlaceTruck(order,order.multipleVehicle)" class="btn book_btn red-btn pull-right ntsearch confirmVehicle"> Confirm </button>
+                 </div>
+              </td>
+           </tr>
+           <tr class="addVehicle-{{ key }}" style="display:none" ng-if="order.orderItemStatus == 2 && order.isGSA && getUserActiveRole == 'Seller'">
+              <td colspan="7">
+                 <form name="customerDetail-{{ key }}" ng-submit="confirmConsignmentPickup(order.consignment,key)">
+                    <div class="col-md-12 shadow-div margin-bottom m-top-15 pull-right">
+                       <div class="col-md-4 form-control-fld">
+                          <div class="input-prepend">
+                             <input type="text" name="consignment_pickup_date" placeholder="Pickup Date *" autocomplete="off" readonly tocalendar ng-model="order.consignment.consignmentPickupDate" class="date_p input_ani" >
+                          </div>
+                       </div>
+                       <div class="col-md-4 form-control-fld">
+                          <div class="input-prepend">
+                             <input class="input_ani" placeholder="LR Number *" name="lr_no" ng-model="order.consignment.lrNo" type="text" value="">
+                          </div>
+                       </div>
+                       <div class="col-md-4 form-control-fld">
+                          <div class="input-prepend">
+                             <input type="text" name="consignment_pickup_date" placeholder="LR Date *" autocomplete="off" readonly tocalendar ng-model="order.consignment.lrDate" class="date_p input_ani" >
+                          </div>
+                       </div>
+                       <div class="clearfix margin-none"></div>
+                       <div class="col-md-4 form-control-fld">
+                          <div class="input-prepend">
+                             <input id="bill_no_10" class="input_ani" placeholder="Transporter Bill Number *" ng-model="order.consignment.billNumber" name="bill_no" type="text" value="" maxlength="16">
+                          </div>
+                       </div>
+                       <div class="col-md-4 form-control-fld">
+                          <div class="input-prepend">
+                             <input id="info1_10" class="input_ani" placeholder="comment " ng-model="order.consignment.customerDoc1" name="info1" type="text" value="">
+                          </div>
+                       </div>
+                    <!--    <div class="col-md-4 form-control-fld">
+                          <div class="input-prepend">
+                             <input id="info2_10" class="input_ani" placeholder="Customer Doc 2 (Optional)" ng-model="order.consignment.customerDoc2" name="info2" type="text" value="">
+                          </div>
+                       </div> -->
+                       <div class="col-md-1 form-control-fld text-left pull-right p-right-10 show-submit-2">
+                          <input id="order_id_10" name="order_id" type="hidden" value="10">
+                          <button type="submit" class="btn book_btn  red-btn mt-5 confirmConsignmentPickup">Confirm</button>
+                       </div>
+                    </div>
+                 </form>
+              </td>
+           </tr>
+        </tbody>
+        <tbody ng-if="!orderlists.length">
+           <tr>
+              <td colspan="4" style="text-align:center">
+                 No Records Found
+              </td>
+           </tr>
+        </tbody>
+     </table>

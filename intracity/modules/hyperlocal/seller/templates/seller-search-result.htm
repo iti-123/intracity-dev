@@ -1,0 +1,208 @@
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">Seller</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#">Hyperlocal</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#">Search</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#" class="active_c">Results</a></li>
+
+            </ul>
+        </div>
+
+        <div class="intra_city_list">
+
+
+            <div class="loc_det">
+
+                <div class="col-lg-9">
+                    <ul class="loc_list">
+                        <li>Nagarjuna Circle - to - Picket</li>
+                        <li>02-11-2016</li>
+                        <li>02-11-2016</li>
+                        <li>Garments</li>
+                        <li>3 KG</li>
+                        <li>5 Unint</li>
+                        <li>5 KMs</li>
+                        <li>High Priority Less than 4 Hour Delivery</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="right_setg space_top">
+                        <div class="cell-1">
+                            <ul class="list-inline pull-right m-bottom-0">
+                                <li>
+                                    <div class="search-modify"><span>Modify</span></div>
+                                </li>
+                                <li>
+                                    <div class="search-modify"><span>Post</span></div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="search_results_heading">Filter Results</div>
+
+
+            <div class="loc_det padding_30">
+
+
+                <div class="col-lg-3">
+                    <div class="padding_15">
+                        <div class="text_mode">PRICE Rs.</div>
+                    </div>
+
+                    <div class="input_right_box_left">
+
+                                                <span class="transit_d">
+                                                    <span class="left_strans">100/-</span> <span class="right_strans">17,000/-</span>
+                                                </span>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="padding_15">
+                        <div class="text_mode">Payment Mode</div>
+                    </div>
+
+                    <div class="input_right_box_left">
+
+                        <div class="admin_input margin_t">
+                            <input id="Partners" type="checkbox" class="check_box check_box_1">
+                            <label for="Partners">Net Banking</label>
+                        </div>
+                        <div class="admin_input margin_t">
+                            <input id="NairTrans" type="checkbox" class="check_box check_box_1">
+                            <label for="NairTrans">Paytm</label>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="padding_15">
+                        <div class="text_mode">Tracking</div>
+                    </div>
+
+                    <div class="input_right_box_left">
+
+                        <div class="admin_input margin_t">
+                            <input id="Partners" type="checkbox" class="check_box check_box_1">
+                            <label for="Partners">Milestone</label>
+                        </div>
+                        <div class="admin_input margin_t">
+                            <input id="NairTrans" type="checkbox" class="check_box check_box_1">
+                            <label for="NairTrans">Realtime</label>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="padding_15">
+                        <div class="text_mode">Rating</div>
+                    </div>
+
+                    <div class="input_right_box_left">
+
+                        <div class="admin_input margin_t">
+                            <input id="Partners" type="checkbox" class="check_box check_box_1">
+                            <label for="Partners">Top Sellers(Order)</label>
+                        </div>
+                        <div class="admin_input margin_t">
+                            <input id="NairTrans" type="checkbox" class="check_box check_box_1">
+                            <label for="NairTrans">Top Sellers(Rated)</label>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!---->
+
+            <div class="search_results_heading">Search Results</div>
+
+
+            <div class="hyperlocal_gray">
+
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                    <div class="vendor_name_heading">Vendor Name</div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <div class="vendor_name_heading"> Service</div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <div class="vendor_name_heading">Category</div>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                    <div class="vendor_name_heading">Date</div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <div class="vendor_name_heading"></div>
+                </div>
+
+
+            </div>
+
+            <!--  {{searchResult}} -->
+            <div class="data_box_100">
+                <div class="data_contain_100" ng-repeat=" val in searchResult">
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                        <div class="vendor_img_box">
+
+                            <div class="vendor_detail">{{val.vendor}}</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="vendor_date">
+                            {{val.servicetype|getobjectvalue:servicetype}}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="vendor_date">
+                            {{val.category|getName:categories}}
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <div class="vendor_date">{{val.depart_date
+                            }}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="book_box">
+                            <a href="#" class="book_btn">Book Now</a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div> <!--End of intra_city_list-->
+    </div> <!--end of right_search_p-->
+</div>

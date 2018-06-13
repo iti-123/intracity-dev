@@ -1,0 +1,1059 @@
+<style>
+    .reg_submit {
+        display: inline-block;
+        margin: 10px 0;
+    }
+    .reg_submit input {
+        color: #555;
+        background: #fff;
+        border: 1px solid red;
+        padding: 12px;
+        font-size: 15px;
+    }
+    .reg_submit input:hover {
+        color: #fff;
+        background: red;
+    }
+    .ui-state-default{
+        background: none;
+    }
+</style>
+<form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="regForm" name="regForm" ng-submit="submitForm()" enctype="multipart/form-data">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">Blue Collar Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#" class="active_c">Registration</a></li>
+            </ul>
+        </div>
+
+        <div class="blue_section">
+            <div class="registration_slect">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="select_form_intra">
+                        <select class="" name="accountType" ng-model="formData.accountType">
+                            <option>Registration For</option>
+                            <option value="DRIVER">Pilot(Driver)</option>
+                            <option value="CLEANER">Co-Pilot(Cleaner)</option>
+                            <option value="SKILLED">Skilled</option>
+                            <option value="8">Semi Skilled</option>
+                        </select>
+                        <span class="form-error"
+                              ng-show="showError(formError.accountType)">Select an account type</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blue_form">
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" class="input_ani2"
+                                   only-letters-input name="firstName" ng-model="formData.firstName">
+                            <label class="lbl_text2">First Name</label>
+                            <span class="form-error"
+                                  ng-show="formError.firstName">Enter first name</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" class="input_ani2"
+                                   only-letters-input name="lastName" ng-model="formData.lastName">
+                            <label class="lbl_text2">Last Name</label>
+                            <span class="form-error"
+                                  ng-show="formError.lastName">Enter last name</span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="date_select">
+                            <input type="text" autocomplete="off" from-calendar
+                                   class="flight_control" name="birth" id="birth"
+                                   placeholder="Date of Birth" ng-model="formData.dob">
+                            <span class="calendar_icon"><img src="images/date_icons.png"></span>
+                            <!-- <md-content class="datePicker">
+                              <md-datepicker class="flight_control" name="dob" md-max-date="formPlaceholders.dateLimit" ng-model="formPlaceholders.dob" md-placeholder="DOB" ng-change="formData.dob = dobChange(formPlaceholders.dob)"></md-datepicker>
+                            </md-content> -->
+                            <span class="form-error"
+                                  ng-show="formError.dob">Enter DOB</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <select class="" name="bloodGroup" ng-model="formData.bg"
+                                    ng-options="b for b in bloodGroups">
+                                <!-- <option ng-repeat="b in bloodGroup">{{b}}</option> -->
+                            </select>
+                            <span class="form-error"
+                                  ng-show="(regForm.bloodGroup.$touched && regForm.bloodGroup.$invalid)||showError(formError.bg)">Enter blood group</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" sanitized-input
+                                   class="input_ani2"
+                                   name="currentAddressAddress" ng-model="formData.currentAddress.address">
+                            <label class="lbl_text2">Current Address (Door No.)</label>
+                            <span class="form-error"
+                                  ng-show="formError.currentAddress.address">Enter address</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" sanitized-input
+                                   class="input_ani2"
+                                   name="currentAddressStreet" ng-model="formData.currentAddress.street">
+                            <label class="lbl_text2">Street Name</label>
+                            <span class="form-error"
+                                  ng-show="formError.currentAddress.street">Enter street</span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" sanitized-input
+                                   class="input_ani2"
+                                   name="currentAddressLocality" ng-model="formData.currentAddress.locality">
+                            <label class="lbl_text2">Locality</label>
+                            <span class="form-error"
+                                  ng-show="formError.currentAddress.locality">Enter locality</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" class="input_ani" typeahead="name as (sugg.city_name +', '+ sugg.statename) for sugg in autocompCity('current',$viewValue)" typeahead-on-select="selectedCity($item, $model, $label, 'current')" maxlength="6" name="currentAddressPincode" ng-keyup="pincodeKeyup('current')" ng-model="formData.currentAddress.pincode"/>
+                            <label class="lbl_text2">Pin Code</label>
+                            <span class="form-error"
+                                  ng-show="formPlaceholders.currentAddressErrors.pincode">Invalid pincode</span>
+                            <span class="form-error"
+                                  ng-show="formError.currentAddress.pincode">Enter pincode</span>
+                        </div>
+                    </div>
+                </div>
+                 
+
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" class="input_ani" name="currentAddressState" only-letters-input
+                            ng-model="formPlaceholders.currentAddress.city"/>
+                            <label class="lbl_text2">City / District / State ( Auto Fill Based on Pin code )</label>
+                            <span class="form-error" ng-show="formError.currentAddress.city">Enter state</span>
+                        </div>
+                    </div>
+
+                </div>
+                <!--<div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+
+                    </div>
+
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off"
+                                   class="input_ani2"
+                                   name="currentAddressState" ng-disabled="formPlaceholders.currentAddressErrors.cityActive" only-letters-input
+                                   ng-model="formPlaceholders.currentAddress.city"
+                                   typeahead="name as (sugg.city_name +', '+ sugg.statename) for sugg in formPlaceholders.currentAddressSuggestions | filter:$viewValue | limitTo:8"
+                                   typeahead-on-select="selectedCity($item, $model, $label, 'current')">
+                            <label class="lbl_text2">City / District / State ( Auto Fill Based on Pin code )</label>
+                            <span class="form-error" ng-show="formError.currentAddress.city">Enter state</span>
+                        </div>
+                    </div>
+
+                </div>-->
+
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off"
+                                   class="input_ani2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                   minlength="6" maxlength="15" name="currentAddressLandline"
+                                   ng-model="formData.currentAddress.landline">
+                            <label class="lbl_text2">Landline</label>
+                            <span class="form-error"
+                                  ng-show="formError.currentAddress.landline">Enter landline</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off"
+                                   class="input_ani2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                   maxlength="10" name="currentAddressMobile" ng-keyup="formPlaceholders.currentAddressErrors.mobile = validateDigits(formData.currentAddress.mobile, 10)"
+                                   ng-model="formData.currentAddress.mobile">
+                            <label class="lbl_text2">Mobile</label>
+                            <span class="form-error" ng-show="formPlaceholders.currentAddressErrors.mobile">Invalid number</span>
+                            <span class="form-error"
+                                  ng-show="formError.currentAddress.mobile">Enter mobile</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off"
+                                   class="input_ani2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                   maxlength="10" name="currentAddressAltMobile"
+                                   ng-keyup="formPlaceholders.currentAddressErrors.mobile2 = validateDigitsCurrentAddress(formData.currentAddress.mobile2, 10)"
+                                   ng-model="formData.currentAddress.mobile2">
+                            <label class="lbl_text2">Mobile 2</label>
+                            <span class="form-error" ng-show="formPlaceholders.currentAddressErrors.mobile2">Invalid number</span>
+                            <span class="form-error"
+                                  ng-show="formError.currentAddress.mobile2">Enter alt mobile</span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" sanitized-input
+                                   class="input_ani2"
+                                   name="permanentAddress" ng-model="formData.permanentAddress.address">
+                            <label class="lbl_text2">Permanent Address (Door No.)</label>
+                            <span class="form-error"
+                                  ng-show="formError.permanentAddress.address">Enter address</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" sanitized-input
+                                   class="input_ani2"
+                                   name="permanentAddressStreet" ng-model="formData.permanentAddress.street">
+                            <label class="lbl_text2">Street Name</label>
+                            <span class="form-error"
+                                  ng-show="formError.permanentAddress.street">Enter street</span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" sanitized-input
+                                   class="input_ani2"
+                                   name="permanentAddressLocality" ng-model="formData.permanentAddress.locality">
+                            <label class="lbl_text2">Locality</label>
+                            <span class="form-error"
+                                  ng-show="formError.permanentAddress.locality">Enter locality</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" class="input_ani" maxlength="6"  name="permanentAddressPincode" typeahead="name as (sugg.city_name +', '+ sugg.statename) for sugg in autocompCity('permanent',$viewValue)" typeahead-on-select="selectedCity($item,$model,$label,'permanent')" ng-keyup="pincodeKeyup('permanent')"
+                            ng-model="formData.permanentAddress.pincode">
+                            <label class="lbl_text2">Pin Code</label>
+                            <span class="form-error" ng-show="formPlaceholders.permanentAddressErrors.pincode">Invalid pincode</span>
+                            <span class="form-error"
+                                  ng-show="formError.permanentAddress.pincode">Enter pincode</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off"
+                                   class="input_ani" only-letters-input no-special-char name="permanentAddressState" ng-model="formPlaceholders.permanentAddress.city"/>
+                            <label class="lbl_text2">City / District / State ( Auto Fill Based on Pin code )</label>
+                            <span class="form-error"
+                                  ng-show="formError.permanentAddress.city">Enter state</span>
+                        </div>
+                   </div>
+               </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off"
+                                   class="input_ani2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                   minlength="6" maxlength="15" name="permanentAddressLandline"
+                                   ng-model="formData.permanentAddress.landline">
+                            <label class="lbl_text2">Landline</label>
+                            <span class="form-error" ng-show="formPlaceholders.permanentAddressErrors.landline">Invalid number</span>
+                            <span class="form-error"
+                                  ng-show="formError.permanentAddress.landline">Enter landline</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off"
+                                   class="input_ani2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                   maxlength="10" name="permanentAddressMobile"
+                                   ng-keyup="formPlaceholders.permanentAddressErrors.mobile = validateDigits(formData.permanentAddress.mobile, 10)"
+                                   ng-model="formData.permanentAddress.mobile">
+                            <label class="lbl_text2">Mobile</label>
+                            <span class="form-error" ng-show="formPlaceholders.permanentAddressErrors.mobile">Invalid number</span>
+                            <span class="form-error"
+                                  ng-show="formError.permanentAddress.mobile">Enter Mobile</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" class="input_ani2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                            maxlength="10" name="permanentAddressAltMobile" ng-keyup="formPlaceholders.permanentAddressErrors.mobile2 = validateDigits(formData.permanentAddress.mobile2, 10)" ng-model="formData.permanentAddress.mobile2">
+                            <label class="lbl_text2">Mobile 2</label>
+                            <span class="form-error" ng-show="formPlaceholders.permanentAddressErrors.mobile2">Invalid number</span>
+                            <span class="form-error"
+                                  ng-show="formError.permanentAddress.mobile2">Enter Mobile</span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="email" class="input_ani2" name="email" ng-model="formData.ids.email" autocomplete="off" ng-keyup="formPlaceholders.permanentAddressErrors.email = checkEmail(formData.ids.email)"/>
+                            <label class="lbl_text2">Email ID</label>
+                            <span class="form-error"
+                                  ng-show="formError.ids.email">Invalid Email</span>
+                             <span class="form-error"
+                                  ng-show="formPlaceholders.permanentAddressErrors.email">Email ids already exists.</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" class="input_ani2"
+                                   maxlength="10" name="panNo" ng-keyup="validatePan()"
+                                   ng-model="formData.ids.pan">
+                            <label class="lbl_text2">Pan Card No.</label>
+                            <span class="form-error" ng-show="formPlaceholders.idsError.pan">Invalid Pan No.</span>
+                            <span class="form-error"
+                                  ng-show="formError.ids.pan">Enter Pan no</span>
+                        </div>
+                        <div class="select_form_intra">
+                          (ex-: ABCDE1234A)
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off"
+                                   class="input_ani2" maxlength="12"
+                                   name="adharNo"
+                                   ng-keyup="formPlaceholders.idsError.adhar = validateDigitsAdharNo(formData.ids.adhar, 12)"
+                                   ng-model="formData.ids.adhar">
+                            <label class="lbl_text2">Aadhar Card No.</label>
+                            <span class="form-error" ng-show="formPlaceholders.idsError.adhar">Invalid Adhar No.</span>
+                            <span class="form-error"
+                                  ng-show="formError.ids.adhar">Enter Aadhar no</span>
+                        </div>
+                        <div class="select_form_intra">
+                          (ex-: 1234567890123)
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off"
+                                   class="input_ani2" maxlength="12"
+                                   name="rationNo"
+                                   ng-keyup="formPlaceholders.idsError.ration = validateDigitsRationNo(formData.ids.ration, 12)"
+                                   ng-model="formData.ids.ration">
+                            <label class="lbl_text2">Ration Card No.</label>
+                            <span class="form-error"
+                                  ng-show="formPlaceholders.idsError.ration">Invalid Ration Card No.</span>
+                            <span class="form-error"
+                                  ng-show="formError.ids.ration">Enter Ration card no</span>
+                        </div>
+                        <div class="select_form_intra">
+                          (ex-: 1234567890123)
+                        </div>
+                    </div>
+               </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <label class="custom-file-upload">
+                            <input type="file" name="panDoc" fileread-with-name="formData.ids.panDoc"/> Upload
+                        </label>
+                        <div class="uploaded_file" ng-show="formData.ids.panDoc!=''&&formData.ids.panDoc!=undefined">
+                            <span>{{formData.ids.panDoc.name || formData.ids.panDoc.name && ''}}</span>
+                            <div ng-if="formData.ids.panDoc.type != 'application/pdf'">
+                              <img src="{{formData.ids.panDoc.doc}}" onerror="{{getImageUrl('bluecollar/docs/adobe-pdf-icon-logo-vector-01.png')}}">
+                            </div>
+                        </div>
+                        <div class="upload_img"></div>
+                        <span class="form-error"
+                              ng-show="showFileError(formData.ids.panDoc)||showError(formError.ids.panDoc)">Select valid file</span>
+                        <div class="upload_img"></div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <label class="custom-file-upload">
+                            <input type="file" name="adharDoc" fileread-with-name="formData.ids.adharDoc"/> Upload
+                        </label>
+                        <div class="uploaded_file"
+                             ng-show="formData.ids.adharDoc!=''&&formData.ids.adharDoc!=undefined">
+                            <span>{{formData.ids.adharDoc.name || formData.ids.adharDoc.name && ''}}</span>
+                            <div ng-if="formData.ids.adharDoc.type != 'application/pdf'">
+                               <img src="{{formData.ids.adharDoc.doc}}" onerror="images/Document-Icon-300x300.png">
+                            </div>
+                        </div>
+                        <span class="form-error"
+                              ng-show="showFileError(formData.ids.adharDoc)||showError(formError.ids.adharDoc)">Select valid file</span>
+                        <div class="upload_img"></div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <label class="custom-file-upload">
+                            <input type="file" name="rationDoc" fileread-with-name="formData.ids.rationDoc"/> Upload
+                        </label>
+                        <div class="uploaded_file"
+                             ng-show="formData.ids.rationDoc!=''&&formData.ids.rationDoc!=undefined">
+                            <span>{{formData.ids.rationDoc.name || formData.ids.rationDoc.name && ''}}</span>
+                            <div ng-if="formData.ids.rationDoc.type != 'application/pdf'">
+                               <img src="{{formData.ids.rationDoc.doc}}" onerror="images/Document-Icon-300x300.png">
+                            </div>
+                        </div>
+                        <span class="form-error"
+                              ng-show="showFileError(formData.ids.rationDoc)||showError(formError.ids.rationDoc)">Select valid file</span>
+                        <div class="upload_img"></div>
+
+                    </div>
+
+                </div>
+
+                <div class="blue_form_one">
+                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="select_form_intra">
+                                    <select class="" ng-model="formPlaceholders.qModelData.qualification">
+                                        <option ng-repeat="b in qualifications" value="{{b.value}}">{{b.key}}</option>
+                                    </select>
+                                    <!-- <input type="text" autocomplete="off" class="input_ani2"" ng-model="formPlaceholders.qModelData.qualification">
+                                    <label class="lbl_text2">Qualification</label> -->
+                                    <span class="form-error" ng-show="formPlaceholders.qModelError.qualification">Enter qualification</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="select_form_intra">
+                                    <input type="text" autocomplete="off" sanitized-input class="input_ani2" only-letters-input ng-model="formPlaceholders.qModelData.board">
+                                    <label class="lbl_text2">Board / School</label>
+                                    <span class="form-error" ng-show="formPlaceholders.qModelError.board">Enter Board/ School</span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="select_form_intra">
+                                    <input type="text" autocomplete="off" sanitized-input class="input_ani2" only-letters-input ng-model="formPlaceholders.qModelData.university">
+                                    <label class="lbl_text2">University</label>
+                                    <span class="form-error" ng-show="formPlaceholders.qModelError.university">Enter University</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="select_form_intra">
+                                    <input type="text" autocomplete="off" sanitized-input class="input_ani2"
+                                           ng-model="formPlaceholders.qModelData.city">
+                                    <label class="lbl_text2">Village / City</label>
+                                    <span class="form-error" ng-show="formPlaceholders.qModelError.city">Enter Village/City</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="select_form_intra">
+                                    <input type="text" autocomplete="off" class="input_ani2" maxlength="2"
+                                      onkeypress='return event.charCode >= 48 && event.charCode <= 57'ng-model="formPlaceholders.qModelData.percentage">
+                                    <label class="lbl_text2">Percentage (%)</label>
+                                    <span class="form-error" ng-show="formPlaceholders.qModelError.percentage">Enter Percentage</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <div class="row">
+                            <div class="add_name_heading" ng-click="addEducation()">Add</div>
+                            <span class="form-error" ng-show="showError(formError.qualificationsError)">Add qualifications</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blue_form_one" ng-repeat="q in formData.qualifications">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="data_vlue">{{q.qualification}}</div>
+                                <input type="hidden" name="qualifications[{{$index}}][qualification]">
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="data_vlue">{{q.board}}</div>
+                                <input type="hidden" name="qualifications[{{$index}}][board]">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_vlue">{{q.university}}</div>
+                                <input type="hidden" name="qualifications[{{$index}}][university]">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_vlue">{{q.city}}</div>
+                                <input type="hidden" name="qualifications[{{$index}}][city]">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_vlue">{{q.percentage}}</div>
+                                <input type="hidden" name="qualifications[{{$index}}][percentage]">
+                            </div>
+                            <div class="line_gray"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <div class="row">
+                            <div class="upload_btn" ng-click="deleteEducation($index)">Delete</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <!-- <div class="row">
+                            <div class="upload_btn" fileread="q.doc">Upload</div>
+                        </div> -->
+                        <label class="custom-file-upload" style="padding: 8px 10px; margin-top: 16px;">
+                            <input type="file" name="qualifications[{{$index}}][doc]" fileread-with-name="q.doc"/>
+                            Upload
+                        </label>
+                        <div class="uploaded_file" ng-show="q.doc!=''&&q.doc!=undefined">
+                            <span>{{q.doc.name || q.doc.name && ''}}</span>
+                            <div ng-if="q.doc.type != 'application/pdf'">
+                              <img src="{{q.doc.doc}}" onerror="images/Document-Icon-300x300.png">
+                            </div>
+                        </div>
+                        <span class="form-error" ng-show="showFileError(q.doc)">Select valid file</span>
+                        <span class="form-error" ng-show="showQulFileError($index)">Select file</span>
+                        <div class="upload_img"></div>
+                    </div>
+
+                </div>
+
+                <!-- <div class="blue_form_one">
+                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="data_vlue">SSLC</div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="data_vlue">ZPPH School</div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_vlue">Andhra University</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_vlue">Delhi</div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_vlue">6</div>
+                            </div>
+                            <div class="line_gray"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <div class="row">
+                            <div class="upload_btn">Upload</div>
+                        </div>
+                    </div>
+
+                </div> -->
+                <div class="blue_form_one space_div">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"> 
+                      <div class="select_form_intra">                       
+                            <select class="" ng-model="formData.salaryType">
+                                <option ng-repeat="e in salaryTypes" value="{{e.value}}">{{e.key}}</option>
+                            </select>
+                            <span class="form-error" ng-show="formError.salaryType">Invalid Salary Type</span>                        
+                    </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off"
+                                   class="input_ani2" maxlength="6" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                   name="currentSalary" ng-model="formData.currentSalary">
+                            <label class="lbl_text2">Current Salary</label>
+                            <span class="form-error"
+                                  ng-show="formError.currentSalary">Enter current salary</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off"
+                                   class="input_ani2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                   maxlength="2" name="totalExperience" ng-model="formData.totalExperience">
+                            <label class="lbl_text2">Total Experience(Years)</label>
+                            <span class="form-error"
+                                  ng-show="formError.totalExperience">Enter experience</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="blue_form_one space_div" ng-show="formData.accountType!='CLEANER'">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" ng-show="formData.accountType=='DRIVER'">
+                        
+                            <select class="input_ani2" ng-model="formPlaceholders.vehicleType"
+                                    ng-change="addVehicleType()">
+                                <option ng-repeat="type in formPlaceholders.vehicleTypes"
+                                        value="{{type.name=='Vehicle Type' && 'Vehicle Type' || type}}">{{type.name}}
+                                </option>
+                            </select>
+                            <span class="form-error"
+                                  ng-show="showError(formError.vehicleTypes)">Select vehicle types</span>
+                       
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" ng-show="formData.accountType=='SKILLED'">
+                        <div class="row">
+                            <select class="input_ani2" ng-model="formPlaceholders.machineType"
+                                    ng-change="addMachineType()">
+                                <option ng-repeat="type in formPlaceholders.machineTypes"
+                                        value="{{type.name=='Machine Type' && 'Machine Type' || type}}">{{type.name}}
+                                </option>
+                            </select>
+                            <span class="form-error"
+                                  ng-show="showError(formError.machineTypes)">Select machine types</span>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="row">
+                            <select class="select_control_1">
+                                <option>Light Motor Vehicle</option>
+                                <option>Drivers</option>
+                                <option>Bikers</option>
+                                <option>Cleaners</option>
+                                <option>Operators </option>
+
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="row">
+                            <select class="select_control_1">
+                                <option>Transport Vehicle</option>
+                                <option>Drivers</option>
+                                <option>Bikers</option>
+                                <option>Cleaners</option>
+                                <option>Operators </option>
+
+                            </select>
+                        </div>
+                    </div> -->
+
+                </div>
+
+                <div class="blue_form_one" ng-show="formData.accountType=='DRIVER'">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="bike_100">
+                            <div class="transport_vlue" ng-repeat="v in formData.vehicleTypes"><span
+                                    ng-click="removeVehicleType($index)">x</span>{{v.name}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blue_form_one" ng-show="formData.accountType=='SKILLED'">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="bike_100">
+                            <div class="transport_vlue" ng-repeat="v in formData.machineTypes"><span
+                                    ng-click="removeMachineType($index)">x</span>{{v.name}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span class="form-error" ng-show="formError.licence1">Enter File</span>
+                <div class="blue_form_one" ng-show="formData.accountType=='DRIVER'||formData.accountType=='SKILLED'">
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" maxlength="13"
+                                   class="input_ani2" no-special-char name="licenceNo"
+                                   ng-model="formData.licence.no">
+                            <label class="lbl_text2">Licence Number</label>
+                            <span class="form-error"
+                                  ng-show="formError.licence.no">Enter Licence no</span>
+                        </div>
+                        <div class="select_form_intra">
+                          (ex-: TN34567890123)
+                        </div>
+                        <label class="custom-file-upload">
+                            <input type="file" fileread-with-name="formData.licence.licenceDoc"> Upload
+                        </label>
+                        <div class="uploaded_file"
+                             ng-show="formData.licence.licenceDoc!=''&&formData.licence.licenceDoc!=undefined">
+                            <span>{{formData.licence.licenceDoc.name || formData.licence.licenceDoc.name && ''}}</span>
+                            <div ng-if="formData.licence.licenceDoc.type != 'application/pdf'">
+                              <img src="{{formData.licence.licenceDoc.doc}}" onerror="images/Document-Icon-300x300.png">
+                            </div>
+                        </div>
+                        <span class="form-error" ng-show="formError.licence.licenceDocs">Enter File</span>
+                        <span class="form-error"
+                              ng-show="showFileError(formData.licence.licenceDoc)">Invalid File</span>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off"
+                                   class="input_ani2" onkeypress='return (event.keyCode > 64 && event.keyCode < 91) || (event.keyCode > 96 && event.keyCode < 123) || event.keyCode == 8' name="licenceState"
+                                   ng-model="formData.licence.state">
+                            <label class="lbl_text2">State</label>
+                            <span class="form-error"
+                                  ng-show="formError.licence.state">Enter state</span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+
+                        <div class="date_select">
+                            <!-- <md-content class="datePicker">
+                              <md-datepicker class="flight_control" md-max-date="formPlaceholders.dateLimit" ng-model="formPlaceholders.licence.validFrom" md-placeholder="Valid From" ng-change="formData.licence.validFrom = dobChange(formPlaceholders.licence.validFrom)"></md-datepicker>
+                            </md-content> -->
+                            <input type="type" class="flight_control {{errorClass(formError.licence.validFrom)}}"
+                                   id="valid" placeholder="Valid From" calender
+                                   ng-model="formData.licence.validFrom">
+                            <span class="calendar_icon"><img src="images/date_icons.png"></span>
+                            <span class="form-error" ng-show="showError(formError.licence.validFrom)">Enter date</span>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="date_select">
+                            <!-- <md-content class="datePicker">
+                              <md-datepicker class="flight_control" md-min-date="formPlaceholders.dateLimit" ng-model="formPlaceholders.licence.validTo" md-placeholder="Valid To" ng-change="formData.licence.validTo = dobChange(formPlaceholders.licence.validTo)"></md-datepicker>
+                            </md-content> -->
+                            <input type="type" class="flight_control {{errorClass(formError.licence.validTo)}}" id="to"
+                                   placeholder="Valid To" to-calendar ng-model="formData.licence.validTo">
+                            <span class="calendar_icon"><img src="images/date_icons.png"></span>
+                            <span class="form-error" ng-show="showError(formError.licence.validTo)">Enter date</span>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off"
+                                   class="input_ani2" no-special-char
+                                   name="licenceEndosment" ng-model="formData.licence.transportEndorsement">
+                            <label class="lbl_text2">Transport Endosment</label>
+                            <span class="form-error"
+                                  ng-show="formError.licence.transportEndorsement">Enter Endosment</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="blue_form_one" ng-show="formData.accountType=='DRIVER'||formData.accountType=='SKILLED'">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" class="input_ani2" no-special-char
+                            only-letters-input ng-model="formPlaceholders.expModelData.vehicleType">
+                            <label class="lbl_text2">Vehicle Type</label>
+                            <span class="form-error"
+                                  ng-show="formPlaceholders.expModelError.vehicleType">Required Field</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" class="input_ani2" maxlength="2"
+                                   ng-model="formPlaceholders.expModelData.experience"
+                                   onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                            <label class="lbl_text2">Experience (Years)</label>
+                            <span class="form-error"
+                                  ng-show="formPlaceholders.expModelError.experience">Required Field</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" class="input_ani2" maxlength="20"  onkeypress='return (event.keyCode > 64 && event.keyCode < 91) || (event.keyCode > 96 && event.keyCode < 123) || event.keyCode == 8' name="licenceState"
+                                   ng-model="formPlaceholders.expModelData.employerName">
+                            <label class="lbl_text2">Employer Name</label>
+                            <span class="form-error" ng-show="formPlaceholders.expModelError.employerName">Required Field</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="select_form_intra">
+                            <input type="text" autocomplete="off" class="input_ani2" maxlength="30" no-special-char
+                                   ng-model="formPlaceholders.expModelData.location">
+                            <label class="lbl_text2">Location</label>
+                            <span class="form-error"
+                                  ng-show="formPlaceholders.expModelError.location">Required Field</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <div class="select_form_intra">
+                           <input type="text" autocomplete="off" class="input_ani2 valid-number" maxlength="6" no-special-char onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                   ng-model="formPlaceholders.expModelData.salary">
+                            <label class="lbl_text2">Salary</label>
+                            <span class="form-error"
+                                  ng-show="formPlaceholders.expModelError.salary">Invalid Input</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <div class="row">
+                            <div class="upload_btn" ng-click="addExperience()">Add</div>
+                            <span class="form-error" ng-show="showError(formError.experience)">Add experience<span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blue_form_one" ng-show="formData.accountType=='DRIVER'||formData.accountType=='SKILLED'"
+                     ng-repeat="e in formData.experience">
+                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="data_vlue">{{e.vehicleType}}</div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="data_vlue">{{e.experience}}</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_vlue">{{e.employerName}}</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_vlue">{{e.location}}</div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="data_vlue">{{e.salary}}</div>
+                            </div>
+                            <div class="line_gray"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                        <div class="row">
+                            <div class="upload_btn" ng-click="deleteExperience($index)">Delete</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blue_form_one space_div2">
+
+                    <div class="lic_div">
+                        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
+                            <div class="lic_cont">Lic Policy</div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            <div class="checkbox_blue">
+                                <input id="AcceptLic" type="checkbox" class="check_box" ng-click="licClick($event)"
+                                       ng-checked="AcceptCheck(formData.lic.status)">
+                                <label for="AcceptLic">Yes</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            <div class="checkbox_blue">
+                                <input id="DenyLic" type="checkbox" class="check_box" ng-click="licClick($event)"
+                                       ng-checked="DenyCheck(formData.lic.status)">
+                                <label for="DenyLic">No</label>
+                            </div>
+                        </div>
+                        <input type="hidden" ng-model="formData.lic.status">
+                    </div>
+                    <div class="lic_div">
+                        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
+                            <div class="lic_cont">Health Policy</div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            <div class="checkbox_blue">
+                                <input id="AcceptHP" type="checkbox" class="check_box" ng-click="hpClick($event)"
+                                       ng-checked="AcceptCheck(formData.healthPol.status)">
+                                <label for="AcceptHP">Yes</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            <div class="checkbox_blue">
+                                <input id="DenyHP" type="checkbox" class="check_box" ng-click="hpClick($event)"
+                                       ng-checked="DenyCheck(formData.healthPol.status)">
+                                <label for="DenyHP">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lic_div">
+                        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
+                            <div class="lic_cont">Medical Policy</div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            <div class="checkbox_blue">
+                                <input id="AcceptMP" type="checkbox" class="check_box" ng-click="mpClick($event)"
+                                       ng-checked="AcceptCheck(formData.medicalPol.status)">
+                                <label for="AcceptMP">Yes</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            <div class="checkbox_blue">
+                                <input id="DenyMP" type="checkbox" class="check_box" ng-click="mpClick($event)"
+                                       ng-checked="DenyCheck(formData.medicalPol.status)">
+                                <label for="DenyMP">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lic_div">
+                        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
+                            <div class="lic_cont">Employment Type</div>
+                            <span class="form-error" ng-show="formError.employmentType">Select at least one</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            <div class="checkbox_blue">
+                                <input id="full_time" type="checkbox" class="check_box"
+                                       ng-model="formPlaceholders.employmentType.fullTime">
+                                <label for="full_time">Full Time</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            <div class="checkbox_blue">
+                                <input id="part_time" type="checkbox" class="check_box"
+                                       ng-model="formPlaceholders.employmentType.partTime">
+                                <label for="part_time">Part Time</label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            <div class="checkbox_blue">
+                                <input id="contract" type="checkbox" class="check_box"
+                                       ng-model="formPlaceholders.employmentType.contract">
+                                <label for="contract">Contract</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="lic_div">
+                        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
+                            <select class="select_control_2" ng-model="formPlaceholders.langModelData.language">
+                                <option>Language</option>
+                                <option>English</option>
+                                <option>Hindi</option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            <div class="checkbox_blue">
+                                <input id="speak" type="checkbox" class="check_box"
+                                       ng-model="formPlaceholders.langModelData.speak">
+                                <label for="speak">Speak</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            <div class="checkbox_blue">
+                                <input id="read" type="checkbox" class="check_box"
+                                       ng-model="formPlaceholders.langModelData.read">
+                                <label for="read">Read</label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            <div class="checkbox_blue">
+                                <input id="write" type="checkbox" class="check_box"
+                                       ng-model="formPlaceholders.langModelData.write">
+                                <label for="write">Write</label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                            <div class="add_blue" ng-click="addLanguage()">Add</div>
+                            <span class="form-error" ng-show="showError(formError.languages)">Add languages</span>
+                        </div>
+
+                    </div>
+
+                    <div class="lic_div" ng-repeat="l in formData.languages">
+                        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+                            <div class="lic_cont">{{l.language}}</div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
+                            <div class="lic_cont" ng-show="l.speak">Speak</div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
+                            <div class="lic_cont" ng-show="l.read">Read</div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
+                            <div class="lic_cont" ng-show="l.write">Write</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div> <!--blue_form-->
+        </div> <!--end of blue_section-->
+    </div>
+    <!-- <span class="reg_submit"><input type="submit"></span> -->
+
+    <div class="col-lg-1"><span><input type="submit" ng-disabled="first !== true" class="book_btn submit_btn"></span></div>
+
+</form>
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                User has been Registered Successfully !
+
+            </div>
+            <div class="modal-footer">
+
+                <!-- <button type="button" class="btn red-btn flat-btn ok-btn message_send_button" ng-click="PostMessage">Send message</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+ $(document).ready(function(){
+    $(".input_ani2").focusin(function(){
+    $(this).next().addClass("active");
+    });
+     $(".input_ani2").focusout(function(){
+   if($(this).val()==""){
+    $(this).next().removeClass("active");
+    }
+    else{
+       $(this).next().addClass("active");
+    }
+    });
+  
+    
+  });
+ </script>
+<script type="text/javascript" src="bootstrap/js/common.js"></script>  
+

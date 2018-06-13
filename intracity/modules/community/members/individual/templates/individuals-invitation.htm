@@ -1,0 +1,76 @@
+
+<div class="left_menu_space right_section_community ">    
+    <div class="col-md-12 col-sm-8 col-xs-12">
+        <div class="row">
+            <div class="right_serch_p titile_gray">
+                <div class="right_search_bar">
+                    <ul class="search_bar_tab">
+                        <li><a href="#">Community</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                        <li><a href="#">Members</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                        <li><a href="#">Individual</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                        <li><a href="#" class="active_c">Invitation</a></li>
+                        <!--<li><a href="#">Vasan Transport</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                        <li><a href="#">Connections</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+                        <li><a href="#" class="active_c">New Partners</a></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="row">
+            <div class="right_serch_p">
+                <div class="main-right">
+                    <!-- Search Block Starts Here -->
+                    <div class="search-block inner-block-bg">
+                        <div class="cell-1 cell-1-80">
+                            <ul class="list-inline m-bottom-0 m-top-5 font-bold-black">
+                                <li><a href="#">INVITATION</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Search Block Ends Here -->
+                    <!-- Table Starts Here -->
+                    <div class="table-div">
+                        <div class="invitation_bg">
+                            <div class="col-md-12">
+                                <form ng-submit="invitationForm.$valid && sendBulkInvitation(data)" name="invitationForm" novalidate>
+                                        <div class="form-group">                                                
+                                            <select chosen multiple name="emailIds" placeholder-text-multiple="To: Email id (Multiple email ids)" options="allusers" ng-model="data.emailIds" required ng-options="a.id as a.username for a in allusers">
+                                            </select>
+                                            <span class="has-error" ng-show="invitationForm.$submitted && invitationForm.emailIds.$error.required">
+                                                Choose atleast one user to send invitation
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea rows="10" name="message" required ng-model="data.message" class="form-control textarea" placeholder="Message (user input) "></textarea>
+                                            <span class="has-error" ng-show="invitationForm.$submitted && invitationForm.message.$error.required">
+                                                Please enter message
+                                            </span>
+                                        </div>
+                                        <button class="search-modify pull-right m-bottom-15" type="submit"><span>Invite</span></button>                                        
+                                </form>                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Table Starts Here -->
+                </div>
+            </div>
+        </div><!--end of right_search_p-->
+    </div>
+</div>
+
+<div class="modal fade" id="InvitationModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content waitText statusText" style="overflow: hidden;padding: 0 10px 10px">
+            <div class="modal-body popup" id="responsetext">
+            </div>
+            <div>
+                <button type="button" class="btn btn-default pull-right" data-type="" data-dismiss="modal"
+                        ng-click="closeSellerCard()">OK
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<table class="table tbl_t orderMaster">
+        <thead>
+            <tr>
+                <th  ng-show="showIntraHyper"> Name </th>
+                <th  ng-show="showBlueCollar"> Name </th>
+                <th> DATE </th>
+                <th>
+                    SUBJECT
+                </th>
+            </tr>
+        </thead>
+        <tbody  ng-repeat="(key,message) in OrderMessages">
+            <tr>
+                <td  ng-show="showIntraHyper"> {{message.username}} </td>
+                <td  ng-show="showBlueCollar"> {{message.username}} </td>
+                <td> {{message.created_date}} </td>
+                <td>
+                    {{message.subject}}
+                </td>
+            </tr>            
+        </tbody>
+        <tbody ng-if="!OrderMessages.length">
+           <tr>
+              <td colspan="6" style="text-align:center">
+                 No Records Found
+              </td>
+           </tr>
+        </tbody>
+    </table>

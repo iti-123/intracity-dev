@@ -1,0 +1,275 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="right_serch_p">
+        <div class="right_search_bar">
+            <ul class="search_bar_tab">
+                <li><a href="#">{{getUserActiveRole}}</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#services">Services</a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                <li><a href="#" class="active_c">Post</a></li>
+            </ul>
+        </div>
+
+
+        <div class="blue_section">
+            <div class="blue_form no_space">
+                <div class="blue_form_one">
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <select class="selectpicker" selectpicker ng-model="formData.profileType">
+                                <option value=""> Profile Type <span> *</span></option>
+                                <option ng-repeat="e in profileTypes" value="{{e.value}}">{{e.key}}</option>
+                            </select>
+                            <span class="form-error" ng-show="formError.profileType">Select Profile Type</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="blue_form_one">
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <input type="text" class="input_ani" required="" ng-model="formData.locationPH" id="location" maxlength="30" required="" typeahead="location.city_name+', '+ location.state_name for location in searchResults | filter:$viewValue"
+                            typeahead-on-select="selectedLocation($item, $model, $label)" autocomplete="off" ng-keyup="searchLocations()">
+                            <label class="lbl_text2">Location<span>*</span></label>
+                            <span class="form-error" ng-show="formError.location">Enter Location</span>
+                        </div>
+                    </div>
+
+                    <!-- onkeypress='return (event.keyCode > 64 && event.keyCode < 91) || (event.keyCode > 96 && event.keyCode < 123) || event.keyCode == 8' -->
+
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input"
+                         ng-show="formData.profileType == 'DRIVER'||formData.profileType == 'SKILLED'">
+                        <div class="select_form_intra" ng-show="formData.profileType == 'DRIVER'">
+                            <select ng-model="formData.vehicleTypePH" class="selectpicker" selectpicker>
+                                <option ng-repeat="type in vehicleTypes"
+                                        value="{{ type.id }}">{{type.name}}
+                                </option>
+                            </select>
+                            <span class="form-error" ng-show="formError.vehicleTypes">Select Vehicle Type</span>
+                        </div>
+                        <div class="select_form_intra" ng-show="formData.profileType == 'SKILLED'">
+                            <select ng-model="formData.machineTypePH">
+                                <option ng-repeat="type in machineTypes"
+                                        value="{{ type.id }}">{{type.name}}
+                                </option>
+                            </select>
+                            <span class="form-error" ng-show="formError.machineTypes">Select Machine Type</span>
+                        </div>
+                     </div>
+
+
+
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <select class="selectpicker" selectpicker ng-model="formData.employmentTypes">
+                                <option value=""> Employment Type <span> *</span></option>
+                                <option ng-repeat="e in employmentTypes" value="{{e.value}}">{{e.key}}</option>
+                            </select>
+                            <span class="form-error" ng-show="formError.employmentTypes">Select Employment Type</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <input type="text" class="input_ani" maxlength="2" required="" ng-model="formData.experience"
+                                   onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                            <label class="lbl_text2">Experience<span> *</span></label>
+                            <span class="form-error" ng-show="formError.experience">Enter Experience</span>
+                        </div>
+                    </div>  
+                  
+                   <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+                     <div class="blue_form_one" ng-show="formData.profileType == 'DRIVER'||formData.profileType == 'SKILLED'">
+                         <div class="col-lg-12 col-md-12 col-sm-9 col-xs-12">
+                            <div class="vehicle_main">
+                                <div class="vehicle_box">
+                                    <div class="vehicle_img_box"><img src="../images/vehicle.jpg" alt="logistiks logo"/>
+                                    </div>
+                                    <div class="vehicle_img_box_contain">
+                                        <span>Vehicle Dimensions *</span>
+                                        <span>20x8x12</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <select class="selectpicker" selectpicker ng-model="formData.salaryType">
+                                <option value=""> Salary Type <span> *</span></option>
+                                <option ng-repeat="e in salaryTypes" value="{{e.value}}">{{e.key}}</option>
+                            </select>
+                            <span class="form-error" ng-show="formError.salaryType">Select Salary Type</span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                      <div class="select_form_intra">
+                        <select class="selectpicker" selectpicker ng-model="formData.quotationType">
+                          <option value=""> Quotation Type <span> *</span></option>
+                          <option ng-repeat="e in quotationTypes" value="{{e.value}}">{{e.key}}</option>
+                        </select>
+                        <span class="form-error" ng-show="formError.quotationType">Enter Quotation Type</span>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                        <div class="select_form_intra">
+                            <input type="text" class="input_ani" maxlength="5" required="" ng-model="formData.salary"
+                                   onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                            <label class="lbl_text2">Salary<span> *</span></label>
+                            <span class="form-error" ng-show="formError.salary">Enter Proper Salary</span>
+                            <span class="form-error" ng-show="formError.salaryDigits">Enter Salary More than 100.</span>
+                        </div>
+                    </div>
+                  <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 margin_input">
+                      <div class="select_form_intra">
+                        <select class="selectpicker" selectpicker ng-model="formData.qualifications">
+                          <option value=""> Qualifications Type <span> *</span></option>
+                          <option ng-repeat="e in qualificationTypes" value="{{e.value}}">{{e.key}}</option>
+                        </select>
+                        <span class="form-error" ng-show="formError.qualifications">Enter Qualifications</span>
+                      </div>
+                    </div>
+                </div>
+                 
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="" ng-init="formData.post_type=0">
+                      <ul class="select_inline">
+                        <li>
+                          <input type="radio" ng-checked="true" ng-model="formData.privacy" name="post_type" value="PUBLIC" ng-click="showHideSellerList('public')">
+                          <label for="PostPublic" class="ab_c">Post Public</label>
+                          <span></span>
+                        </li>
+
+                        <li>
+                          <input type="radio" name="post_type" ng-model="formData.privacy" ng-click="showHideSellerList('private')" value="PRIVATE">
+                          <label for="PostPrivate" class="ab_c">Post Private</label>
+                          <span></span>
+                        </li>
+
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 padding-none" ng-show="formData.privacy=='PRIVATE'">
+                    <div class="clearfix">
+                      <span ng-repeat="seller in formData.sellers">
+                        <span class="search-close-btn" ng-click="removeSeller($index)">X</span> {{seller.first_name+' '+seller.last_name}}
+                      </span>
+                      <!-- <ul class="close_list_ul">
+                          <li ng-repeat="seller in formData.sellers" ng-click="removeSeller($index)">{{seller.first_name+' '+seller.last_name}}</li>
+                      </ul> -->
+                    </div>
+                    <div class="col-md-4 m-top-10 typeahed-search" ng-show="isSellerListVisible">
+                      <input type="text" class="form-control form-control1" ng-model="sellerPH"
+                      typeahead="seller.first_name+' '+ seller.last_name for seller in searchSeller($viewValue)" typeahead-on-select="selectSeller($item, $model, $label)" autocomplete="off"
+                      placeholder="Seller Name (Auto Search)" ng-required="formData.isPublic=='private'"/>
+                      <span ng-show="formError.sellers" class="form-error">Seller is required</span>
+                      <span ng-show="formError.sellerPH" class="form-error">Enter from list</span>
+                      <span ng-show="formError.sellerListPH" class="form-error">Please Enter from list</span>
+                    </div>
+                  </div>
+               
+                <div class="load_type_bbbpc">
+                    <div class="col-md-3 pull-right text-right">
+                        <input type="button" id="add_routes" ng-click="addMultiplePosts(formData)" value="Add" class="Add_Routes_btn" invalids="0">
+                    </div>                   
+                </div>
+                <div class="load_type_bbbpc" ng-if="multiplePosts.length">
+                  <table class="fetch_data">
+                   <thead>
+                      <tr>
+                          <th>Profile Type</th>
+                          <th>Experience</th>
+                          <th>Salary</th> 
+                          <th>Qualification</th>
+                          <th>Action</th>                               
+                      </tr>
+                   </thead>
+                   <tbody>
+                        <tr ng-repeat="s in multiplePosts">
+                            <td> {{ s.profileType }} </td>
+                            <td> {{ s.experience }} </td>       
+                            <td> {{ s.salary }} /-</td>
+                            <td> {{ s.qualifications }} </td>   
+                            <td> 
+                                <a href="javascript:void(0)" ng-click="editMultipleRate(s,$index)">
+                                    <i class="fa fa-edit"></i>
+                                </a>  
+                                &nbsp;&nbsp;
+                                <a href="javascript:void(0)" ng-click="deleteMultiplePosts($index)">
+                                    <i class="fa fa-trash"></i>
+                                </a>  
+                            </td>                        
+                        </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="load_type">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="post_public">
+                            <div class="admin_input">
+                                <input type="checkbox" id="Accept" class="check_box ng-pristine ng-untouched ng-valid">
+                                <label for="Accept">Accept Terms &amp; Conditions (Digital Contract)</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="div_btn">
+                            <input type="button" ng-click="post(multiplePosts,1)" id="save" ng-disabled="first !== true" value="Confirm" class="Confirm_post_btn">
+                            <input type="button" ng-click="post(multiplePosts,0)" ng-disabled="first !== true" id="draft" value="Save as Draft" class="Add_Routes_btn">
+                        </div>
+                    </div>
+                </div>
+              </div> <!--blue_form-->
+
+           <div class="modal fade" id="postConfirmationModal" tabindex="-1" role="dialog"
+             aria-labelledby="messageModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content statusText">
+                    <div class="modal-header">
+                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button> -->
+                    </div>
+                    <div class="modal-body" id="responsetext">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-right" data-type="" ng-click="closeConfirmationPopup()">OK</button>
+                    </div>
+                </div>
+            </div>
+         </div>
+
+        </div> <!--end of blue_section-->
+
+
+        <div class="space_100"></div>
+    </div>
+</div>
+
+
+<style>
+.load_type_bbbpc{
+    width: 100%;
+    float: left;
+    margin: 15px 0;
+}
+.fetch_data{ width:100%; float: left; }
+.fetch_data thead{width: 100%; background: #797979; font-size: 16px; color: #fff;}
+.fetch_data thead tr th{ padding: 10px 0 10px 10px; box-sizing: border-box;font-family: FuturaBT-Medium;text-transform: uppercase;font-weight: normal; }
+.fetch_data tbody tr{ border-bottom: 3px solid #f7f8f8; }
+.fetch_data tbody tr td{font-size: 18px;color: #797979;padding: 10px 0 10px 10px; box-sizing: border-box;}
+.select_form_intra .vichel_dimensin {width: 100%;float: left;}
+.select_form_intra .vichel_dimensin .v_images {width: 50px;height: 50px;float: left;border-radius: 50%;
+    margin-top: 3px;border: #dedede solid 1px;text-align: center;}
+.select_form_intra .vichel_dimensin .v_images img {border-radius:50%;text-align:center;width:100%;}
+.select_form_intra .vichel_dimensin .vi_text {float: left;padding: 7px 10px;}
+.select_form_intra .vichel_dimensin .vi_text .v_text {font-size: 16px;}
+</style>
+ 

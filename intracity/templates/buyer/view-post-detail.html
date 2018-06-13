@@ -1,0 +1,127 @@
+                        <div class="on_time filter-result" id="detail-{{ route.id+'-'+key }}" style="display:none;">
+                                <div class="detail-data-info" id="info-detail-data">
+                           <div class="col-md-12 padding-none moreDetails-toggle">
+                              <div class="col-md-12 data-div padding-none">
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                    <span class="data-head">POST FROM :</span>
+                                       <span class="data-value">
+                                          <img src="http://stagenew.logistiks.com/images/down-icon-1.png" alt="Seller Image" class="pull-left p-right-5">
+                                          <span ng-show="value.seller"> {{ value.seller.username }} </span>
+                                          <span ng-show="value.value[0]"> {{ value.value[0].seller.username }} </span>
+                                       </span>
+                                 </div>
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                    <span class="data-head">VALID FROM :</span>
+                                       <span class="data-value">
+                                          {{ route.valid_from == '0000-00-00' && 'N/A' || route.valid_from | dateStringFormat }}
+                                       </span>
+                                 </div>
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                    <span class="data-head">VALID TO :</span>
+                                       <span class="data-value">
+                                         {{ route.valid_to == '0000-00-00' && 'N/A' || route.valid_to | dateStringFormat }}
+                                       </span>
+                                 </div>
+                                 
+                                  <div class="col-md-3 padding-left-none data-fld">
+                                    <span class="data-head">RATE</span> 
+                                    <span class="data-value"> 
+                                        {{ 'RS '+route.base_distance*route.rate_base_distance +' /-' }}
+                                        <strike> </strike></span>
+                                 </div>
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                    <span class="data-head"> DISCOUNTED RATE</span>
+                                    <span class="data-value"> {{ 'RS '+route.base_distance*route.rate_base_distance +' /-' }}  </span> 
+                                 </div>
+                                <div class="check-location" ng-if="route.from_location && route.to_location">
+                                    <div class="col-md-3 padding-left-none data-fld">
+                                        <span class="data-head">FROM LOCATION</span>
+                                        <span class="data-value">Hyderabad</span>
+                                    </div>
+                                    <div class="col-md-3 padding-left-none data-fld">
+                                        <span class="data-head">TO LOCATION</span> 
+                                        <span class="data-value">Chennai</span>
+                                    </div>
+                                </div>
+                                <div class="check-location" ng-if="route.city">
+                                    <div class="col-md-3 padding-left-none data-fld">
+                                        <span class="data-head"> City </span> 
+                                        <span class="data-value"> {{ route.city.city_name }} </span>
+                                    </div>
+                                    
+                                </div>
+                                 
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                    <span class="data-head">VEHICLE TYPE :</span>
+                                       <span class="data-value" ng-if="route.vehicle_type">
+                                        {{ route.vehicle_type.vehicle_type }}
+                                       </span>
+                                       <span ng-if="!route.vehicle_type">
+                                           N/A
+                                       </span>
+                                 </div>
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                    <span class="data-head">TRANSIT DAYS :</span>
+                                       <span class="data-value" ng-if="route.city.transit_hour">                                        
+                                            {{ route.city.transit_hour+'Hrs' }}
+                                       </span>
+                                        <span class="data-value" ng-if="!route.city.transit_hour">                                        
+                                           N/A
+                                       </span>
+                                 </div>
+                                 
+                                  <div class="col-md-3 padding-left-none data-fld">
+                                    <span class="data-head">GUARANTEED DELIVERY :</span>
+                                       <span class="data-value">
+                                        YES
+                                       </span>
+                                 </div> 
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                     <span class="data-head">TRACKING</span>
+                                     <span class="data-value" ng-if="route.tracking" >YES</span> 
+                                     <span class="data-value" ng-if="!route.tracking" >N/A</span> 
+                                 </div>
+                                 <div class="col-md-3 padding-left-none data-fld">
+                                    <span class="data-head">LOAD TYPE</span>
+                                    <span class="data-value" ng-if="route.loads">
+                                        {{ route.loads }}
+                                    </span>
+                                     <span class="data-value" ng-if="!route.loads.length">
+                                        N/A
+                                    </span>
+                                 </div>                            
+                              </div>
+                           </div>
+                        </div>                        
+                        </div>
+                        <div class="detail-data-form-{{ route.id +'-'+key}}" style="display:none;">
+                            <form class="buyer_booknow_form buyer_booknow_form_1" novalidate method="post">
+                                
+                                 <div class="col-md-5 form-control-fld">
+                                       <div class="select_form_intra">
+                                          <span class="data-head  selectBorder">QUANTITY</span>
+                                          <input type="text" ng-model="route.qty" maxlength="10" class="clsFTLTQuantity form-control form-control1 js-placeholder  selectBorder" value="">
+                                       </div>
+                                 </div>
+                                 <div class="col-md-5 form-control-fld">
+                                    <div class="select_form_intra">
+                                       <span class="data-head">Material Type</span>                                   
+                                       <select ng-model="route.materialType" name="material_type" ng-options="y.name for (x,y) in materialType track by y.id">
+                                       <option value="">Material Type *</option>                                
+                                   </select>
+                                 </div>
+                                </div>
+                                 
+                                
+                                 <div class="col-md-2 form-control-fld pull-right">
+                                    <div class="detail-submit-btn">
+                                         <input type="submit" ng-click="bookNow(value.value[0],route,route.id)" class="button_serch pull-right buyer_book_now_inbound btn add-btn initial_quote_submit spnlable-btn" value="Submit" style="display:block">
+                                       </div>
+                                 </div>
+                                                     
+                            </form>
+                        </div>
+
+                        <style>
+                            .detail-submit-btn{ padding:33px 0 0 0; box-sizing: border-box; width: 100%; float:left;}
+                        </style>

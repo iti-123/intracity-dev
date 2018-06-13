@@ -1,0 +1,593 @@
+
+<div class="right_section right_section_community left_menu_space">
+        
+        <div class="col-md-12 col-sm-8 col-xs-12">
+        <div class="row">
+            <div class="right_serch_p titile_gray">
+                <div class="right_search_bar">
+                    <ul class="search_bar_tab">
+                        <li><a href="#community-profile">Community</a><span class="crum-2"><i class="fa  fa-angle-right"></i></span></li>
+                        <li><a href="javascript:void(0);">Jobs</a><span class="crum-2"><i class="fa  fa-angle-right"></i></span></li>
+                        <li><a href="javascript:void(0);" class="active_c" style="text-transform: capitalize;"> {{ employementType }} </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="row">
+                    <div class="right_serch_p">
+                        <div class="main-right">
+                            <!-- Search Block Starts Here -->
+                            <div class="search-block inner-block-bg">
+                                <div class="cell-1 cell-1-80 ">
+                                    <ul class="list-inline  m-bottom-0 m-top-5 font-bold-black">
+                                        <li><a href="#"> {{ employementType }} JOBS ({{ jobs.total }} )</a></li>
+                                    </ul>
+                                </div>
+                            
+                            </div>
+                            <div class="search-block inner-block-bg">
+                                <div class="cell-1 cell-1-80 displye">
+                                    <ul class="list-inline m-bottom-0 m-top-5 font-bold-black list-blue">
+                                        <li><a href="#">INDIVIDUAL</a></li>
+                                        <li><a href="#">INDUSTRY</a></li>
+                                        <li><a href="#">LOCATION</a></li>
+                                        <li><a href="#">POSTED FROM</a></li>
+                                        <li><a href="#">POSTED TO</a></li>
+                                        <li><a href="#">LEVEL SKILLS</a></li>
+                                        <li><a href="#">EDUCATIONAL</a></li>
+                                        <li><a href="#">QUALIFICATION</a></li>
+                                        <li><a href="#">TITLE</a></li>
+                                        <li><a href="#">COMPANY</a></li>
+
+
+                                    </ul>
+                                </div>
+                                <div class="cell-1">
+                                    <ul class="list-inline list-inline1 pull-right m-bottom-0 p-up-down">
+                                        <li> <a data-toggle="collapse" data-target="#filters" id="filters_click" class="link-zindex collapsed">Filters <i class="fa fa-bars"></i></a> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="list_blue_100">
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <div class="close_list_main">
+                                        <ul class="close_list_ul">
+                                            <li ng-show="filterData.location.city_name!=undefined" ng-click="removeLocation()">
+                                                {{filterData.location.city_name+', '+filterData.location.state_name}}
+                                            </li>
+                                            <li ng-repeat="t in filterData.profileType"
+                                                ng-click="removeElem(filterData.profileType, $index)">{{t | stringFormat}}
+                                            </li>
+                                            <li ng-repeat="t in filterData.vehicleType"
+                                                ng-click="removeElem(filterData.vehicleType, $index)">{{getVehicle(t)}}
+                                            </li>
+                                            <li ng-repeat="t in filterData.machineType"
+                                                ng-click="removeElem(filterData.machineType, $index)">{{getMachine(t)}}
+                                            </li>
+                                            <li ng-repeat="t in filterData.employmentType"
+                                                ng-click="removeElem(filterData.employmentType, $index)">{{t | stringFormat}}
+                                            </li>
+                                            <li ng-repeat="t in filterData.salaryType"
+                                                ng-click="removeElem(filterData.salaryType, $index)">{{t | stringFormat}}
+                                            </li>
+                                            <li ng-repeat="t in filterData.qualification"
+                                                ng-click="removeElem(filterData.qualification, $index)">{{t | stringFormat}}
+                                            </li>
+                                            <li ng-repeat="t in filterData.status" ng-click="removeElem(filterData.status, $index)">
+                                                {{t | stringFormat}}
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <div class="clear_right" ng-show="filClearValue" ng-click="clearAll()">Clear All</div>
+                                </div>
+                            </div>
+                <div class="white_bg" id="filters_show">
+                    <div class="scroller-div">
+                        <div class="fillter_div">
+                            <div class="scroll_div">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="">
+                                        <input type="text" id="buyer" class="input_ani" ng-model="filterData.locationPH"
+                                               typeahead="location.city_name+', '+ location.state_name for location in locationResults | filter:$viewValue"
+                                               typeahead-on-select="selectedLocation($item, $model, $label)"
+                                               autocomplete="off" ng-keyup="searchLocations()">
+                                        <label class="lbl_text2">SELECT LOCATION</label>
+                                        <span class="search_icon"><i class="fa fa-search"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scroll_div">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="select_form_intra">
+                                            <input type="text" id="buyer" class="input_ani d_to_location"
+                                                   autocomplete="off" ng-model="filterPlaceholder.profileType"
+                                                   required=""/>
+                                            <label class="lbl_text2">PROFILE TYPE</label>
+                                            <span class="search_icon"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <div class="filter_from_location">
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <ul class="post_inline">
+                                                        <li>
+                                                            <div class="admin_input"
+                                                                 ng-repeat="value in filterFiltersData(profileTypes, filterPlaceholder.profileType)">
+                                                                <input ng-click="addFilterData(filterData.profileType, value.value)"
+                                                                       autocomplete="off" type="checkbox"
+                                                                       id="profile_type_{{$index}}" class="check_box"
+                                                                       ng-checked="checkedFilterData(filterData.profileType, value.value)">
+                                                                <label for="profile_type_{{$index}}">{{ value.key
+                                                                    }}</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scroll_div">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="select_form_intra">
+                                            <input type="text" id="buyer" class="input_ani d_to_location"
+                                                   autocomplete="off" ng-model="filterPlaceholder.vehicleType"
+                                                   required=""/>
+                                            <label class="lbl_text2">VEHICLE TYPE</label>
+                                            <span class="search_icon"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <div class="filter_from_location">
+                                            <div class="sellers_det">
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <ul class="post_inline">
+                                                            <li>
+                                                                <div class="admin_input"
+                                                                     ng-repeat="value in filterVMFiltersData(vehicleTypes, filterPlaceholder.vehicleType)">
+                                                                    <input ng-click="addFilterData(filterData.vehicleType, value.id)"
+                                                                           autocomplete="off" type="checkbox"
+                                                                           id="vehicle_type_{{$index}}" class="check_box"
+                                                                           ng-checked="checkedFilterData(filterData.vehicleType, value.id)">
+                                                                    <label for="vehicle_type_{{$index}}">{{ value.name
+                                                                        }}</label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scroll_div">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="select_form_intra">
+                                            <input type="text" id="buyer" class="input_ani d_to_location"
+                                                   autocomplete="off" ng-model="filterPlaceholder.machineType"
+                                                   required=""/>
+                                            <label class="lbl_text2">MACHINE TYPE</label>
+                                            <span class="search_icon"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <div class="filter_from_location">
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <ul class="post_inline">
+                                                        <li>
+                                                            <div class="admin_input"
+                                                                 ng-repeat="value in filterVMFiltersData(machineTypes, filterPlaceholder.machineType)">
+                                                                <input ng-click="addFilterData(filterData.machineType, value.id)"
+                                                                       autocomplete="off" type="checkbox"
+                                                                       id="machine_type_{{$index}}" class="check_box"
+                                                                       ng-checked="checkedFilterData(filterData.machineType, value.id)">
+                                                                <label for="machine_type_{{$index}}">{{ value.name
+                                                                    }}</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scroll_div">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="select_form_intra">
+                                            <input type="text" id="buyer" class="input_ani d_to_location"
+                                                   autocomplete="off" ng-model="filterPlaceholder.employmentType"
+                                                   required=""/>
+                                            <label class="lbl_text2">EMPLOYMENT TYPE</label>
+                                            <span class="search_icon"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <div class="filter_from_location">
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <ul class="post_inline">
+                                                        <li>
+                                                            <div class="admin_input"
+                                                                 ng-repeat="value in filterFiltersData(employmentTypes, filterPlaceholder.employmentType)">
+                                                                <input ng-click="addFilterData(filterData.employmentType, value.value)"
+                                                                       autocomplete="off" type="checkbox"
+                                                                       id="employment_type_{{$index}}" class="check_box"
+                                                                       ng-checked="checkedFilterData(filterData.employmentType, value.value)">
+                                                                <label for="employment_type_{{$index}}">{{ value.key
+                                                                    }}</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scroll_div">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="select_form_intra">
+                                            <input type="text" id="buyer" class="input_ani d_to_location"
+                                                   autocomplete="off" ng-model="filterPlaceholder.salaryType"
+                                                   required=""/>
+                                            <label class="lbl_text2">SALARY TYPE</label>
+                                            <span class="search_icon"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <div class="filter_from_location">
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <ul class="post_inline">
+                                                        <li>
+                                                            <div class="admin_input"
+                                                                 ng-repeat="value in filterFiltersData(salaryTypes, filterPlaceholder.salaryType)">
+                                                                <input ng-click="addFilterData(filterData.salaryType, value.value)"
+                                                                       autocomplete="off" type="checkbox"
+                                                                       id="salary_type_{{$index}}" class="check_box"
+                                                                       ng-checked="checkedFilterData(filterData.salaryType, value.value)">
+                                                                <label for="salary_type_{{$index}}">{{ value.key
+                                                                    }}</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scroll_div">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="select_form_intra">
+                                            <input type="text" id="buyer" class="input_ani d_to_location"
+                                                   autocomplete="off" ng-model="filterPlaceholder.qualification"
+                                                   required=""/>
+                                            <label class="lbl_text2">QUALIFICATION</label>
+                                            <span class="search_icon"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <div class="filter_from_location">
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <ul class="post_inline">
+                                                        <li>
+                                                            <div class="admin_input"
+                                                                 ng-repeat="value in filterFiltersData(qualificationTypes, filterPlaceholder.qualification)">
+                                                                <input ng-click="addFilterData(filterData.qualification, value.value)"
+                                                                       autocomplete="off" type="checkbox"
+                                                                       id="qualification_type_{{$index}}"
+                                                                       class="check_box"
+                                                                       ng-checked="checkedFilterData(filterData.qualification, value.value)">
+                                                                <label for="qualification_type_{{$index}}">{{ value.key
+                                                                    }}</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scroll_div">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="select_form_intra">
+                                            <input type="text" id="buyer" class="input_ani d_to_location"
+                                                   autocomplete="off" ng-model="filterPlaceholder.status" required=""/>
+                                            <label class="lbl_text2">POST STATUS</label>
+                                            <span class="search_icon"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <div class="filter_from_location">
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                    <ul class="post_inline">
+                                                        <li>
+                                                            <div class="admin_input"
+                                                                 ng-repeat="value in filterFiltersData(statusTypes, filterPlaceholder.status)">
+                                                                <input ng-click="addFilterData(filterData.status, value.value)"
+                                                                       autocomplete="off" type="checkbox"
+                                                                       id="status_type_{{$index}}" class="check_box"
+                                                                       ng-checked="checkedFilterData(filterData.status, value.value)">
+                                                                <label for="status_type_{{$index}}">{{ value.key
+                                                                    }}</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            <div class="table_div_100">
+                                <div class="table_div_row" ng-repeat="(key,job) in jobs.data">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="consultants_box">
+                                            <div class="consul_pic">
+                                                <img src="../intracity/images/dinesh.png">
+                                            </div>
+                                            <div class="consul_contain">
+                                                <span class="consul_heading"> {{ job.posted_by.username }} </span>
+                                                <div class="grey">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <a href="javascript:void(0);" class="similar_link font-size-new">Logisticks Expert</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <div class="consultants_box font-size-new">
+                                            <span class="consul_small"> {{ job.city.city_name }}, {{ job.state.state_name }}</span>
+                                            <!-- <span class="consul_small"> {{ job.profile_type }} </span> -->
+                                            <!-- <span class="consul_small">Industry</span> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <div class="consultants_box font-size-new">
+                                            <span class="consul_small"> {{ job.created_at | date: 'dd/MM/yyyy' }} </span>
+                                            <!-- <span class="consul_small">Valid to</span> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                        <div class="consultants_box font-size-new">
+                                            <span class="consul_small"> {{ job.profile_type }} </span>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <div class="consultants_box text-center font-size-new">
+                                            <span class="consul_small">Recommend</span>
+                                            <span class="consul_small">1995</span>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <a href="#"><i class="fa fa-envelope-o log-icon"></i></a>
+
+                                        <div class="info-links font-size-new">
+                                            <a ng-if="getUserActiveRole == 'Buyer'" href="javascript: void(0)" ng-click="goToBookNow($index)">Apply</a>
+                                            <a href="javascript:void(0)" ng-click="postUrl('#/community-jobs/',job.id,job)" data-toggle="modal" data-target="#myModal">Share</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                          <!-- Table Starts Here -->
+                        </div>
+                    </div> <!--end of right_search_p-->
+                </div>
+            </div>
+        </div>
+    <div id="myModal" class="modal fade sharepost-popup" role="dialog">
+    <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Sharew Post on your timeline</h4>
+      </div>
+      <div class="modal-body">
+       <form method="post" name="shareForm">
+           <div class="form-group share_post_from">
+               <textarea name="commonPost" id="commonPost" ng-model="sharableData.commonPost" placeholder="about job"></textarea>
+           </div>
+       
+       <!-- <div class="post_image">
+           <img src="images/Community_left3.jpg">
+       </div> -->
+      <div class="modal-footer">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-xs-12">
+                <form>
+                    <div class="form-group select-share-option">
+                        <select name="commonConnect" id="commonConnect">
+                            <option value="Connection">Connection</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <button type="Submit" class="popup-btn share" ng-click="insertPost(sharableData)"> Share</button>
+                <button type="button" class="popup-btn cancel" data-miss="modal"> cancel</button>
+            </div>
+        </div>
+      </div>
+    </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#filters_click").click(function () {
+            $("#filters_show").toggle('fast');
+        });
+        $("#filters_click_1").click(function () {
+            $("#filters_show").toggle('fast');
+        });
+        $("#filters_click_2").click(function () {
+            $("#filters_show").toggle('fast');
+        });
+        $("#filters_click_3").click(function () {
+            $("#filters_show").toggle('fast');
+        });
+        $("#filters_click_4").click(function () {
+            $("#filters_show").toggle('fast');
+        });
+        $("#filters_click_5").click(function () {
+            $("#filters_show").toggle('fast');
+        });
+        $("#filters_click_6").click(function () {
+            $("#filters_show").toggle('fast');
+        });
+        $("#filters_click_7").click(function () {
+            $("#filters_show").toggle('fast');
+        });
+    });
+
+</script>
+<style>
+
+.close_list_ul {
+    padding: 0;
+    margin: 0;
+}
+
+.list_blue_100 .close_list_main li {
+    display: inline-block;
+    padding: 0px 15px 7px 20px;
+    float: left;
+    font-size: 17px;
+    color: #828282;
+    position: relative;
+    font-family: FuturaBT-Book;
+    cursor: pointer;
+}
+
+.close_list_main li {
+    display: inline-block;
+    padding: 0px 15px 7px 20px;
+    float: left;
+    font-size: 17px;
+    color: #828282;
+    position: relative;
+    font-family: FuturaBT-Book;
+    cursor: pointer;
+}
+
+.list_blue_100 .close_list_main li::before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 10px;
+    background: #939596;
+    top: 7px;
+    left: 9px;
+    -moz-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+
+.list_blue_100 .close_list_main li:after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 10px;
+    background: #939596;
+    top: 7px;
+    left: 9px;
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.sharepost-popup .modal-header{
+    background: #ddd;
+    color: #393939;
+    border-bottom: 1px solid #b3b3b3 !important;
+    text-transform: capitalize;
+}
+.sharepost-popup .modal-header .close {
+    margin-top: 3px;
+    background: #fff;
+    z-index: 999999999;
+    opacity: 1;
+    padding: 10px;
+    border-radius: 50%;
+    line-height: 25px;
+    color: #bbb8b8;
+}
+.share_post_from{
+    width: 100%; float: left;
+}
+.share_post_from textarea{
+    width: 100%;
+    float: left;
+    resize: none;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.sharepost-popup .post_image{
+       width: 100%;
+    float: left;
+    max-height: 260px;
+    overflow: hidden;
+    margin: 0 0 15px 0;
+}
+.sharepost-popup .post_image img{
+    width: 100%; 
+    height: 100%;
+}
+.sharepost-popup .popup-btn{
+    background: #fff;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    text-transform: capitalize;
+}
+.sharepost-popup .popup-btn.cancel:hover{
+    background:#fd4d4d;
+    color: #fff;
+}
+.sharepost-popup .popup-btn.share:hover{
+    background:#1d52a0;
+    color: #fff;
+}
+.sharepost-popup .select-share-option {
+    width: 100%;
+    float: left;
+}
+.sharepost-popup .select-share-option select{
+        padding: 12px 15px;
+    font-size: 17px;
+    background: #ddd;
+    border: none;
+}
+</style>
